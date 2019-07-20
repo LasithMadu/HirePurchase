@@ -3,17 +3,17 @@ import { BrowserRouter as Router, Route, Switch} from "react-router-dom"
 import axios from 'axios'
 import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
 
-import Customer from '../SubComponents/CustomerComponents/CustomerDetails'
-import CDetails from '../SubComponents/CustomerDetails/CustomerDetail'
-import Settings from '../SubComponents/SettingsComponent/Settings'
-import CAccount from '../SubComponents/CreateAdmin/Admin'
-import Users from '../SubComponents/CreateUsers/Users'
-import Profile from '../SubComponents/ProfileComponent/Profile'
-import NotFound from '../SubComponents/NotFound';
+import Customer from '../../../Customer/UI/CustomerComponents/CustomerDetails'
+import CDetails from '../../../Customer/UI/CustomerDetails/CustomerDetail'
+import Settings from '../../../Users/UI/SuperAdmin/SettingsComponent/Settings'
+import CAccount from '../../../Users/UI/Admin/Admin'
+import Users from '../../../Users/UI/Users/Users'
+import Profile from '../../../Users/UI/Admin/Profile/Profile'
+import NotFound from '../../../Main/UI/UniqueComponents/NotFound';
 
-import SlideBar from '../UniqueComponents/SlideBar'
-import TopBar from '../UniqueComponents/TopBar'
-import LocationBar from '../UniqueComponents/LocationBar'
+import SlideBar from '../../../Main/UI/UniqueComponents/SlideBar'
+import TopBar from '../../../Main/UI/UniqueComponents/TopBar'
+import LocationBar from '../../../Main/UI/UniqueComponents/LocationBar'
 
 const styleSheet = {
   body: {

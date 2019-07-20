@@ -14,7 +14,7 @@ import '../src/Assests/styles/style-responsive.css';
 import '../src/Assests/styles/zabuto_calendar.min.css';
 import '../src/Assests/styles/styles.css';
 
-import Login from './Component/SubComponents/loginComponent/loginPage';
+import Login from './Component/Main/UI/loginComponent/loginPage';
 
 function App() {
   return (

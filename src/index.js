@@ -5,8 +5,8 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom"
 
-import Login from './Component/SubComponents/loginComponent/loginPage';
-import NotFound from '../src/Component/UniqueComponents/Main';
+import Login from './Component/Main/UI/loginComponent/loginPage';
+import NotFound from '../src/Component/Main/UI/UniqueComponents/Main';
 
 const routing = (
     <Router>

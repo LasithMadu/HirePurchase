@@ -3,7 +3,7 @@ import $ from 'jquery';
 import axios from 'axios'
 import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
 
-import avatar from '../../../Assests/images/avatar/profile-pic.png'
+import avatar from '../../../../Assests/images/avatar/profile-pic.png'
 
 export default class LoginPage extends Component {
     constructor(props) {

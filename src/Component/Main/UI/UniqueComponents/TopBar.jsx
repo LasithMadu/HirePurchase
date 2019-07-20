@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import { MDBNavLink } from "mdbreact";
-import '../../Assests/styles/NavCss.css'
+import '../../../../Assests/styles/NavCss.css'
 
-import userProfile from '../../Assests/images/avatar/48.jpg'
+import userProfile from '../../../../Assests/images/avatar/48.jpg'
 
 const styleSheet = {
     dropContent: {
