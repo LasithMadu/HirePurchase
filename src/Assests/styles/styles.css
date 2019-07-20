@@ -1,0 +1,4 @@
+#sidebar{
+    min-height: clac(100% - 60px);
+    height: clac(100% - 60px);
+}
