@@ -1,41 +1,34 @@
 import React, { Component } from "react";
 import '@zendeskgarden/react-tabs/dist/styles.css';
-
 import { ThemeProvider } from '@zendeskgarden/react-theming';
 import { Tabs, TabPanel } from '@zendeskgarden/react-tabs';
 import 'simplebar'; // or "import SimpleBar from 'simplebar';" if you want to use it manually.
 import 'simplebar/dist/simplebar.css';
 
-import CreateForm from './CutomerForms/CreateCustomer'
-import EditCustomer from './CutomerForms/EditCustomer'
-import DeleteCutomer from './CutomerForms/DeleteCustomer'
+import Vehical from '../VehicalItem/UI/Vehical'
 
-export default class CustomerDetails extends Component {
-  
+export default class ItemComponent extends Component {
+
     render() {
       return (
         <div className='col-md-12'>
           <br/>
-            <ThemeProvider className='container'>
+            <ThemeProvider>
                 <Tabs>
-                    <TabPanel label="Add" key="tab-1">
+                    <TabPanel label="Vehicals" key="tab-1">
+                        <Vehical/>
+                    </TabPanel>
+                    <TabPanel label="Lands" key="tab-2">
                         <div data-simplebar>
                             <div class='edit'>
-                            <CreateForm/>
+                            
                             </div>
                         </div>
                     </TabPanel>
-                    <TabPanel label="Edit" key="tab-2">
+                    <TabPanel label="Other" key="tab-3">
                         <div data-simplebar>
                             <div class='edit'>
-                            <EditCustomer/>
-                            </div>
-                        </div>
-                    </TabPanel>
-                    <TabPanel label="Delete" key="tab-3">
-                        <div data-simplebar>
-                            <div class='edit'>
-                            <DeleteCutomer/>
+                            
                             </div>
                         </div>
                     </TabPanel>

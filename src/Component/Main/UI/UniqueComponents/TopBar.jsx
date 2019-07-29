@@ -28,7 +28,7 @@ export default class TopBar extends Component {
 
         const oprator = (
             <div className="dropdown-content" style={styleSheet.dropContent}>
-                <MDBNavLink to="/profile" className="dropdown-item text-white" onClick={()=>this.props.setLocation('Profile')}><i className="fa fa-user"></i>My Profile</MDBNavLink>
+                <MDBNavLink to="/userprofile" className="dropdown-item text-white" onClick={()=>this.props.setLocation('Profile')}><i className="fa fa-user"></i>My Profile</MDBNavLink>
                 <MDBNavLink to="/create" className="dropdown-item text-white" onClick={()=>this.props.setLocation('Customer')}><i className="fa fa-calendar"></i>Customer</MDBNavLink>
                 <li className="divider"></li>
                 <a href="/" className="dropdown-item text-white" onClick={this.clearCache}><i className="fa fa-key"></i>Log Out</a>

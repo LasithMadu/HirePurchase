@@ -1,48 +1,54 @@
-import React, {Component} from 'react';
-import { MDBContainer, MDBTabPane, MDBTabContent, MDBNav, MDBNavItem, MDBNavLink } from "mdbreact";
+import React, { Component } from "react";
 import '@zendeskgarden/react-tabs/dist/styles.css';
-
 import { ThemeProvider } from '@zendeskgarden/react-theming';
 import { Tabs, TabPanel } from '@zendeskgarden/react-tabs';
 import 'simplebar'; // or "import SimpleBar from 'simplebar';" if you want to use it manually.
 import 'simplebar/dist/simplebar.css';
 
-import CreateAdmin from './AdminForms/CreateAdmin'
-import EditAdmin from './AdminForms/EditAdmin'
-import DeleteAdmin from './AdminForms/DeleteAdmin'
+import VehicalAdd from './VehicalForms/VehicalAdd'
+import VehicalView from './VehicalForms/VehicalVew'
 
-export default class Admin extends Component {   
-  
+export default class Vehical extends Component {
+
     render() {
-        return (
-          <div className='col-md-12' style={{marginTop: '20px'}}>
-            
-            <ThemeProvider className='container'>
+      return (
+        <div className='col-md-12'>
+          <br/>
+            <ThemeProvider>
                 <Tabs>
                     <TabPanel label="Add" key="tab-1">
                         <div data-simplebar>
-                            <div class='edit'>
-                            <CreateAdmin/>
+                            <div class='vehical'>
+                            <VehicalAdd/>
                             </div>
                         </div>
                     </TabPanel>
                     <TabPanel label="Edit" key="tab-2">
                         <div data-simplebar>
-                            <div class='edit'>
-                            <EditAdmin/>
+                            <div class='vehical'>
+                            
                             </div>
                         </div>
                     </TabPanel>
                     <TabPanel label="Delete" key="tab-3">
                         <div data-simplebar>
-                            <div class='edit'>
-                            <DeleteAdmin/>
+                            <div class='vehical'>
+                            
+                            </div>
+                        </div>
+                    </TabPanel>
+                    <TabPanel label="View" key="tab-4">
+                        <div data-simplebar>
+                            <div class='vehical'>
+                                <div className='container'>
+                                <VehicalView/>
+                                </div>
                             </div>
                         </div>
                     </TabPanel>
                 </Tabs>
             </ThemeProvider>
-            </div>
-      );
-    }
+      </div>
+    );
+  }
 }

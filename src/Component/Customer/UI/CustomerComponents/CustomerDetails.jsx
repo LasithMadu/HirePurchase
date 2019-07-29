@@ -1,7 +1,24 @@
 import React, {Component} from 'react';
+import axios from 'axios'
 import $ from 'jquery'
+import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
 
 import Table from './CustomerTable'
+
+  function handleShow() {
+    $('.modal').show('slow');
+  }
+
+  function loadData(data){
+    setValue('#user', data.nameInitials)
+    setValue('#email', data.email)
+    setValue('#address', data.address)
+    setValue('#profile', 'Profile: ' +data.fullName)
+  }
+
+  function setValue(id, value){
+    $(id).html(value);
+  }
 
 export default class CustomerDetails extends Component {
 
@@ -9,17 +26,44 @@ export default class CustomerDetails extends Component {
       $('.modal').hide('slow');
     }
 
-    handleShow() {
-      $('.modal').show('slow');
-    }
-
     redirect() {
       window.location.href = "/create";
+    }
+
+    searchCustomer(){
+      if($('#inputName').val() === ''){
+        ToastsStore.warning("Enter Customer NIC or Passport No")
+      }else if($('#inputName').val().length < 9){
+        ToastsStore.warning("Invalid NIC No")
+      }else{
+        var path = 'http://localhost:8080/Customer/searchCutomer';
+
+        axios.post(path, {
+          data: $('#inputName').val()
+        })
+        .then(function (response) {
+          if(response.data.msg){
+              loadData(response.data.table.rows[0]);
+              ToastsStore.success("Sucessfuly Load Customer Data")
+          }else{
+            if(response.data.alert === 'fail'){
+              ToastsStore.warning("This Customer Is Not Registered Yet")
+              handleShow();
+            }else{
+              ToastsStore.error("Fail To Load Customer Data")
+            }
+          }
+        })
+        .catch(function (error) {
+          console.log(error)
+        });
+      }
     }
 
     render () {
       return (
             <div className="page-content">
+              <ToastsContainer store={ToastsStore} position={ToastsContainerPosition.BOTTOM_RIGHT} />
               <form action="#" className="form-horizontal">
                   <div className="form-body pal">
                       <div className="form-group">
@@ -31,7 +75,7 @@ export default class CustomerDetails extends Component {
                                 <input id="inputName" type="text" placeholder="Search by NIC/Passport No" className="form-control" />
                               </div>
                               <div className='col-md-2' style={{ height: '30px', paddingTop: '-50px'}}>
-                                <a href="#" className="btn btn-primary ml-5" id="searchBtn" onClick={this.handleShow}>Search</a>
+                                <a href="#" className="btn btn-primary ml-5" id="searchBtn" onClick={this.searchCustomer}>Search</a>
                               </div>
                             </div>
                           </div>
@@ -70,22 +114,22 @@ export default class CustomerDetails extends Component {
                   </div>
               <div className="col-lg-12">
                 <div className="row">
-                    <div className="col-md-12"><h2>Profile: John Doe</h2>
+                    <div className="col-md-12"><h2 id='profile'>Profile: </h2>
                         <div className="row mtl">
                             <div className="col-md-3">
                                 <table className="table table-striped table-hover">
                                     <tbody>
                                     <tr>
                                         <td>User Name</td>
-                                        <td>John Doe</td>
+                                        <td id='user'></td>
                                     </tr>
                                     <tr>
                                         <td>Email</td>
-                                        <td>name@example.com</td>
+                                        <td id='email'></td>
                                     </tr>
                                     <tr>
                                         <td>Address</td>
-                                        <td>Street 123, Avenue 45, Country</td>
+                                        <td id='address'></td>
                                     </tr>
                                     <tr>
                                         <td>Status</td>
@@ -97,7 +141,7 @@ export default class CustomerDetails extends Component {
                                     </tr>
                                     <tr>
                                         <td>Member Since</td>
-                                        <td> Jun 03, 2014</td>
+                                        <td>Jun 03, 2014</td>
                                     </tr>
                                     </tbody>
                                 </table>

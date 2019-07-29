@@ -4,7 +4,7 @@ import uuidv4 from 'uuid/v4'
 import axios from 'axios'
 import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
 
-export default class CreateAdmin extends Component{
+export default class EditAdmin extends Component{
 
     createAdmin(){
         var valid;
@@ -47,8 +47,25 @@ export default class CreateAdmin extends Component{
         return(
             <div className='container' style={{backgroundColor: '#ffffff'}}>
                 <ToastsContainer store={ToastsStore} position={ToastsContainerPosition.BOTTOM_RIGHT} />
-                <h3>Create Admin Account</h3>
+                <h3>Edit Admin Account</h3>
                 <hr/>
+                    <form action="#" className="form-horizontal">
+                        <div className="form-body pal">
+                            <div className="form-group">
+                                <div className='row'>
+                                    <label htmlFor="inputName" className="col-md-3 control-label">
+                                    Search :- </label>
+                                    <div className="input-icon col-md-6" style={{display: 'inline-block' }}>
+                                        <i className="fa fa-user"></i>
+                                        <input id="inputName" type="text" placeholder="Search by NIC/Passport No" className="form-control" />
+                                    </div>
+                                    <div className='col-md-2' style={{ height: '30px', paddingTop: '-50px'}}>
+                                        <a href="#" className="btn btn-primary ml-5" id="searchBtn" >Search</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 <form className='col-md-12'>
                     <div class="form-row">
                         <div class="form-group col-md-6">
@@ -71,13 +88,9 @@ export default class CreateAdmin extends Component{
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-11">
                         <label for="inputEmail">Email</label>
                         <input type="email" class="form-control" id="inputEmail" placeholder='Email Address'/>
-                        </div>
-                        <div class="form-group col-md-5">
-                        <label for="inputNic">NIC/Passport No</label>
-                        <input type="text" class="form-control" id="inputNic" placeholder='NIC No'/>
                         </div>
                     </div>
                     <div class="form-group col-md-11">
@@ -107,7 +120,7 @@ export default class CreateAdmin extends Component{
                     </div>
                     <div class="form-group col-md-6 row">
                         <div class='col-md-2'>
-                            <button type="button" class="btn btn-primary" onClick={this.createAdmin.bind(this)}>Save</button>
+                            <button type="button" class="btn btn-primary" onClick={this.createAdmin.bind(this)}>Update</button>
                         </div>
                         <div class='col-md-2'>
                             <button type="button" class="btn btn-light">Cancel</button>
@@ -115,7 +128,7 @@ export default class CreateAdmin extends Component{
                     </div>
                     
                 </form>
-            </div>
+         </div>
         )
     }
 }

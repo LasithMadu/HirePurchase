@@ -13,7 +13,11 @@ function loadData(data){
 }
 
 function setValue(id, value){
-    $(id).text(value);
+    $(id).val(value);
+}
+
+function handleClose(){
+    $('.modal').hide();
 }
 
 export default class Profile extends Component {
@@ -138,10 +142,93 @@ export default class Profile extends Component {
 
     }
 
+    showModel(){
+        $('.modal').show();
+    }
+
+    close(){
+        handleClose();
+    }
+
+    adminPermission(){
+        var path = 'http://localhost:8080/Admin/signin';
+        var values = [$('#inputAdminUser').val().toLowerCase(), $('#inputAdminPass').val(), localStorage.getItem('company')];
+
+        if(values[0] === '' || values[1] === ''){
+            ToastsStore.warning("Enter Username And Password")
+        }else{
+            axios.post(path, {
+                data: values
+                })
+                .then(function (response) {
+                    if(response.data.msg){
+                        if(response.data.alert === 'fail'){
+                            ToastsStore.warning("This Is Not The Admin Account")
+                        }else{
+                            $('.updateBtn').prop('disabled', false);
+                            handleClose();
+                            ToastsStore.success("You Can Change Your Account Settings")
+                        }
+                        
+                    }else{
+                        if(response.data.alert === 'fail'){
+                            ToastsStore.error("Username Or Password Incorrect")
+                        }else{
+                            ToastsStore.error("Connection Fail")
+                        }
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error)
+                });
+                $('#inputAdminUser').val('')
+                $('#inputAdminPass').val('')
+        }
+    }
+
     render(){
         return(
             <div>
                 <ToastsContainer store={ToastsStore} position={ToastsContainerPosition.BOTTOM_RIGHT} />
+                <div className="modal" role="dialog" style={{borderRadius: '50px'}}>
+                    <div className="modal-dialog" role="document">
+                      <div className="modal-content">
+                        <div className="modal-header">
+                          <h5 className="modal-title">Admin Permission</h5>
+                          <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={this.close}>
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div className="modal-body">
+                          <form>
+                            <div className="form-group"><label className="col-sm-3 control-label">Username</label>
+
+                                <div className="col-sm-9 controls">
+                                    <div className="row">
+                                        <div className="col-xs-9"><input type="text" id='inputAdminUser' placeholder="Username" className="form-control"/></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <div className="form-group"><label className="col-sm-3 control-label">Password</label>
+
+                                <div className="col-sm-9 controls">
+                                    <div className="row">
+                                        <div className="col-xs-9"><input type="password" id='inputAdminPass' placeholder="Password" className="form-control"/></div>
+                                    </div>
+                                </div>
+                            </div>
+                          </form>
+                        </div>
+                        <div className="modal-footer">
+                          <button type="button" className="btn btn-primary" onClick={this.adminPermission}>Ok</button>
+                          <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={this.close}>Cancel</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 <div data-simplebar>
                 <div className="page-content profile">
                     <div id="tab-general">
@@ -172,7 +259,7 @@ export default class Profile extends Component {
                             <div className="col-md-9">
                                 <div id="generalTabContent" className="tab-content">
                                     <div id="tab-edit" className="tab-pane fade in active">
-                                        <form action="#" className="form-horizontal"><h3>Account Setting</h3>
+                                        <form action="#" className="form-horizontal"><h3>Account Setting   <a onClick={this.showModel} style={{fontSize: '12px', color: '#006ae2', cursor: 'pointer'}}>  Edit</a></h3>
 
                                             <div className="form-group"><label className="col-sm-3 control-label">First Name</label>
 
@@ -208,7 +295,7 @@ export default class Profile extends Component {
                                             </div>
 
                                             <hr/>
-                                            <button type="button" onClick={this.updateData.bind(this)} className="btn btn-green btn-block">Update</button>
+                                            <button type="button" onClick={this.updateData.bind(this)} disabled className="btn btn-green btn-block updateBtn">Update</button>
                                         </form>
                                         <br/>
                                         <br/>

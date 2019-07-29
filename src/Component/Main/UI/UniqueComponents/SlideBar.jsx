@@ -39,6 +39,9 @@ export default class SlideBar extends Component {
         }
         if(tab == 4){
             this.higherShow();
+            this.setState({
+                activeItem: 5
+              }); 
         }else if(tab < 4 || tab > 4){
             this.higherHide();
         }
@@ -91,7 +94,7 @@ export default class SlideBar extends Component {
                         <li style={styleSheet.themColor} className={this.state.activeItem === "1" ? "active" : ""} onClick={this.toggle("1")} ><MDBNavLink to="/customer" onClick={()=>this.props.setLocation('Customer')}><i className="fa fa-tachometer fa-fw">
                             <div className="icon-bg bg-orange"></div>
                         </i><span className="menu-title">Customer</span></MDBNavLink></li>
-                        <li  style={styleSheet.themColor} className={this.state.activeItem === "2" ? "active" : ""} onClick={this.toggle("2")} ><MDBNavLink to="/fixed" onClick={()=>this.props.setLocation('Fixed Deposit')}><i className="fa fa-desktop fa-fw">
+                        {/* <li  style={styleSheet.themColor} className={this.state.activeItem === "2" ? "active" : ""} onClick={this.toggle("2")} ><MDBNavLink to="/fixed" onClick={()=>this.props.setLocation('Fixed Deposit')}><i className="fa fa-desktop fa-fw">
                             <div className="icon-bg bg-pink"></div>
                         </i><span className="menu-title">Fixed Deposit</span></MDBNavLink>
                         
@@ -100,14 +103,14 @@ export default class SlideBar extends Component {
                             <div className="icon-bg bg-green"></div>
                         </i><span className="menu-title">Gold Loans</span></MDBNavLink>
                         
-                        </li>
+                        </li> */}
                         <li style={styleSheet.themColor} className={this.state.activeItem === "4" ? "active" : ""} onClick={this.toggle("4")} ><MDBNavLink to="/higher" onClick={()=>this.props.setLocation('Higher Purchase')}><i className="fa fa-edit fa-fw">
                             <div className="icon-bg bg-violet"></div>
                         </i><span className="menu-title">Higher Purchase</span></MDBNavLink>
                         { this.state.higher ? dropMenu : ""}
                         </li>
                         
-                        <li style={styleSheet.themColor}><a href="/customer"><i className="fa fa-th-list fa-fw">
+                        {/* <li style={styleSheet.themColor}><a href="/customer"><i className="fa fa-th-list fa-fw">
                             <div className="icon-bg bg-blue"></div>
                         </i><span className="menu-title">Tables</span></a>
                             
@@ -144,7 +147,7 @@ export default class SlideBar extends Component {
                         </li>
                         <li style={styleSheet.themColor}><a href="Animation.html"><i className="fa fa-slack fa-fw">
                             <div className="icon-bg bg-green"></div>
-                        </i><span className="menu-title">Animations</span></a></li>
+                        </i><span className="menu-title">Animations</span></a></li> */}
                     </ul>
                 </div>
             </nav>

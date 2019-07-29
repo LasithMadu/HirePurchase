@@ -9,6 +9,8 @@ import Settings from '../../../Users/UI/SuperAdmin/SettingsComponent/Settings'
 import CAccount from '../../../Users/UI/Admin/Admin'
 import Users from '../../../Users/UI/Users/Users'
 import Profile from '../../../Users/UI/Admin/Profile/Profile'
+import Items from '../../../HigherPurchase/Items/UI/ItemComponent'
+import UserProfile from '../../../Users/UI/Users/Profile/Profile'
 import NotFound from '../../../Main/UI/UniqueComponents/NotFound';
 
 import SlideBar from '../../../Main/UI/UniqueComponents/SlideBar'
@@ -52,8 +54,10 @@ export default class Main extends Component {
                     <Switch>
                         <Route exact path="/customer" component={Customer} />
                         <Route exact path="/higher" component={Customer} />
+                        <Route exact path="/higher/items" component={Items} />
                         <Route exact path="/create" component={CDetails} />
                         <Route exact path="/profile" component={Profile} />
+                        <Route exact path="/userprofile" component={UserProfile} />
                         <Route exact path="/users" component={Users} />
                         <Route exact path="/settings" component={Settings} />
                         <Route exact path="/caccount" component={CAccount} />

@@ -6,12 +6,12 @@ import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toast
 
 export default class CreateAdmin extends Component{
 
-    createAdmin(){
+    createUser(){
         var valid;
-        let values= [uuidv4(), $('#inputFirst').val(), $('#inputLast').val(), $('#inputUser').val().toLowerCase(), $('#inputPass').val(), $('#inputEmail').val(), $('#inputNic').val(), $('#inputCompany').val(), $('#inputAddress').val(), $('#inputCity').val(), $('#inputState').val(), $('#inputZip').val(), 'Admin'];
-        let path = 'http://localhost:8080/superAdmin/create';
+        let values= [uuidv4(), $('#inputFirst').val(), $('#inputLast').val(), $('#inputUser').val().toLowerCase(), $('#inputPass').val(), $('#inputEmail').val(), $('#inputNic').val(), localStorage.getItem('company'), $('#inputAddress').val(), $('#inputCity').val(), $('#inputState').val(), $('#inputZip').val(), $('#inputLevel').val()];
+        let path = 'http://localhost:8080/Admin/create';
 
-        for(var i = 0; i<13; i++){
+        for(var i = 0; i<values.length; i++){
             if(values[i] === ''){
                 valid = false;
                 break;
@@ -46,9 +46,27 @@ export default class CreateAdmin extends Component{
     render(){
         return(
             <div className='container' style={{backgroundColor: '#ffffff'}}>
-                <ToastsContainer store={ToastsStore} position={ToastsContainerPosition.BOTTOM_RIGHT} />
-                <h3>Create Admin Account</h3>
+                    <ToastsContainer store={ToastsStore} position={ToastsContainerPosition.BOTTOM_RIGHT} />
+                    
+                <h3>Edit User Account</h3>
                 <hr/>
+                    <form action="#" className="form-horizontal">
+                        <div className="form-body pal">
+                            <div className="form-group">
+                                <div className='row'>
+                                    <label htmlFor="inputName" className="col-md-3 control-label">
+                                    Search :- </label>
+                                    <div className="input-icon col-md-6" style={{display: 'inline-block' }}>
+                                        <i className="fa fa-user"></i>
+                                        <input id="inputName" type="text" placeholder="Search by NIC/Passport No" className="form-control" />
+                                    </div>
+                                    <div className='col-md-2' style={{ height: '30px', paddingTop: '-50px'}}>
+                                        <a href="#" className="btn btn-primary ml-5" id="searchBtn" >Search</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 <form className='col-md-12'>
                     <div class="form-row">
                         <div class="form-group col-md-6">
@@ -81,8 +99,11 @@ export default class CreateAdmin extends Component{
                         </div>
                     </div>
                     <div class="form-group col-md-11">
-                        <label for="inputCompany">Company Name</label>
-                        <input type="text" class="form-control" id="inputCompany" placeholder="Company Name"/>
+                        <label for="inputLevel">User Level</label>
+                        <select id="inputLevel" class="form-control">
+                            <option value='Admin' selected>Admin</option>
+                            <option value='Oparator'>Oparator</option>
+                        </select>
                     </div>
                     <div class="form-group col-md-11">
                         <label for="inputAddress">Company Address</label>
@@ -107,7 +128,7 @@ export default class CreateAdmin extends Component{
                     </div>
                     <div class="form-group col-md-6 row">
                         <div class='col-md-2'>
-                            <button type="button" class="btn btn-primary" onClick={this.createAdmin.bind(this)}>Save</button>
+                            <button type="button" class="btn btn-primary" onClick={this.createUser.bind(this)}>Update</button>
                         </div>
                         <div class='col-md-2'>
                             <button type="button" class="btn btn-light">Cancel</button>
@@ -115,7 +136,7 @@ export default class CreateAdmin extends Component{
                     </div>
                     
                 </form>
-            </div>
+                </div>
         )
     }
 }

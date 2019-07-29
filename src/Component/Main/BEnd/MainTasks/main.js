@@ -5,7 +5,7 @@ module.exports={
         dbconfg.connect((err, db, done) =>{
             if(err){
                 console.log('Conection Error');
-                return console.log(err);
+                return response.json({msg: false, data: err})
             }
             else{
                 db.query('SELECT * FROM public."usersTable" WHERE "userName" = $1 AND "password" = $2',[...values], (err, table) => {
@@ -43,5 +43,30 @@ module.exports={
                 });
             }
         })
+    },
+
+    getTime: function() {
+
+        var date = new Date();
+    
+        var hour = date.getHours();
+        hour = (hour < 10 ? "0" : "") + hour;
+    
+        var min  = date.getMinutes();
+        min = (min < 10 ? "0" : "") + min;
+    
+        var sec  = date.getSeconds();
+        sec = (sec < 10 ? "0" : "") + sec;
+    
+        var year = date.getFullYear();
+    
+        var month = date.getMonth() + 1;
+        month = (month < 10 ? "0" : "") + month;
+    
+        var day  = date.getDate();
+        day = (day < 10 ? "0" : "") + day;
+    
+        return year + ":" + month + ":" + day + ":" + hour + ":" + min + ":" + sec;
+    
     }
 }

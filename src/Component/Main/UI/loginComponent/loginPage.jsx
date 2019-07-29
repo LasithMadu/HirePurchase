@@ -35,7 +35,10 @@ export default class LoginPage extends Component {
                     localStorage.setItem('userId', response.data.table.rows[0].userId);
                     localStorage.setItem('userLevel', response.data.table.rows[0].userLevel);
                     localStorage.setItem('username', response.data.table.rows[0].userName);
+                    localStorage.setItem('firstname', response.data.table.rows[0].firstName);
+                    localStorage.setItem('lastname', response.data.table.rows[0].lastName);
                     localStorage.setItem('company', response.data.table.rows[0].company);
+                    try{
                         axios.post('http://localhost:8080/getColor', {
                             company: localStorage.getItem('company')
                         })
@@ -51,13 +54,17 @@ export default class LoginPage extends Component {
                         .catch(function (error) {
                             ToastsStore.error(error)
                         });
+                    }catch(e){
+                        ToastsStore.error("Some Error")
+                    }   
                 }else{
+                    console.log(response.data)
                     ToastsStore.error("Login Fail")
                 }
               })
               .catch(function (error) {
                   console.log(error)
-                ToastsStore.error("Some Error")
+                ToastsStore.error("Username Or Password Incorrect")
             });
         }
     }
