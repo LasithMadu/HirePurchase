@@ -20,7 +20,7 @@ export default class LoginPage extends Component {
 
     signin(){
         var values = [$('#inputName').val().toLowerCase(), $('#inputPassword').val()];
-        let path = '/signin';
+        let path = 'https://money360.herokuapp.com/signin';
 
         if(values[0] === ''){
             ToastsStore.warning("Please Fill The Username Field")
@@ -39,7 +39,7 @@ export default class LoginPage extends Component {
                     localStorage.setItem('lastname', response.data.table.rows[0].lastName);
                     localStorage.setItem('company', response.data.table.rows[0].company);
                     try{
-                        axios.post('/getColor', {
+                        axios.post('https://money360.herokuapp.com/getColor', {
                             company: localStorage.getItem('company')
                         })
                         .then(function (response) {
