@@ -4,7 +4,7 @@ module.exports={
 
         dbconfg.connect((err, db, done) =>{
             if(err){
-                console.log('Conection Error');
+                console.log(err);
                 return response.json({msg: false, data: err})
             }
             else{

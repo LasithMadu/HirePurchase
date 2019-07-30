@@ -5,6 +5,8 @@ const pg = require('pg');
 const cors = require('cors');
 const PORT = 8080;
 
+const env = process.env.NODE_ENV || 'development';
+
 //import JS modules
 var superAdmin = require('../src/Component/Users/BEnd/SuperAdmin/SuperAdmin');
 var main = require('../src/Component/Main/BEnd/MainTasks/main');
@@ -14,14 +16,33 @@ var Vehicals = require('../src/Component/HigherPurchase/Items/VehicalItem/BEnd/V
 
 let app = express();
 
-let pool = new pg.Pool({
+const pool = new pg.Pool({
+    user: "lhhqkwktkgjxgt",
+    password: "912e59bc8f02e39c3390fb7a21ed2c2dd5553a4015837d2ca0e149a8c59f9756",
+    database: "d4ps461pnfeas8",
     port: 5432,
-    database: 'd65k4du9hki5be',
-    password: 'e23af610a0e35ebcf978134a8c627dd6f4405a3fdeca9cf4af2b4b3fd7b15aa7',
-    max: 10,
-    host: 'ec2-107-20-173-2.compute-1.amazonaws.com',
-    user: 'cianfeueooefwv'
-});
+    host: "ec2-23-21-177-102.compute-1.amazonaws.com",
+    ssl: true
+  });
+
+//   pool.connect();
+
+//   pool.query('SELECT * FROM public."usersTable"', (err, res) => {
+//     if (err) throw err;
+//     for (let row of res.rows) {
+//       console.log(JSON.stringify(row));
+//     }
+//     pool.end();
+//   });
+
+// let pool = new pg.Pool({
+//     port: 5432,
+//     database: 'd4ps461pnfeas8',
+//     password: '912e59bc8f02e39c3390fb7a21ed2c2dd5553a4015837d2ca0e149a8c59f9756',
+//     max: 10,
+//     host: 'ec2-23-21-177-102.compute-1.amazonaws.com',
+//     user: 'lhhqkwktkgjxgt'
+// });
 
 // let pool = new pg.Pool({
 //     port: 5432,
@@ -116,4 +137,4 @@ app.use(function(request, response, next){
     next();
 });
 
-app.listen(PORT, () => console.log('Listening on the '+PORT));
+ app.listen(PORT, () => console.log('Listening on the '+PORT));

@@ -33,7 +33,9 @@
     "uuid": "^3.3.2"
   },
   "scripts": {
-    "start": "react-scripts start"
+    "client": "react-scripts start && npm start",
+    "server": "node ./src/server.js && npm start",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "eslintConfig": {
     "extends": "react-app"
