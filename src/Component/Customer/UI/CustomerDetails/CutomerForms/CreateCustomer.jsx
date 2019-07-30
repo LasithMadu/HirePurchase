@@ -53,7 +53,7 @@ export default class CreateForm extends Component{
         }else if($('#inputNic').val().length < 9){
             ToastsStore.warning("Invalid NIC No")
         }else{
-            var path = 'http://localhost:8080/Customer/saveData';
+            var path = 'https://money360.herokuapp.com/Customer/saveData';
             
             axios.post(path, {
                 data: values

@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const pg = require('pg');
 const cors = require('cors');
+var router = express.Router();
 var inDev = process.env.NODE_ENV !== 'production';
 var PORT = inDev ? 8080 : process.env.PORT;
 
@@ -14,6 +15,10 @@ var Customer = require('../src/Component/Customer/BEnd/Customer/Customer');
 var Vehicals = require('../src/Component/HigherPurchase/Items/VehicalItem/BEnd/Vehicals');
 
 let app = express();
+
+router.get('/', function(req, res, next) {  
+    res.status(200).send("Hi, It works!")  
+});
 
 const pool = new pg.Pool({
     user: "lhhqkwktkgjxgt",
