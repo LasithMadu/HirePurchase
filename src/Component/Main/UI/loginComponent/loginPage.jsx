@@ -39,7 +39,7 @@ export default class LoginPage extends Component {
                     localStorage.setItem('lastname', response.data.table.rows[0].lastName);
                     localStorage.setItem('company', response.data.table.rows[0].company);
                     try{
-                        axios.post('http://localhost:8080/getColor', {
+                        axios.post('/getColor', {
                             company: localStorage.getItem('company')
                         })
                         .then(function (response) {

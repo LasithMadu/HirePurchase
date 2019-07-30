@@ -3,7 +3,8 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const pg = require('pg');
 const cors = require('cors');
-const PORT = process.env.PORT || 8080;
+var inDev = process.env.NODE_ENV !== 'production';
+var PORT = inDev ? 8080 : process.env.PORT;
 
 //import JS modules
 var superAdmin = require('../src/Component/Users/BEnd/SuperAdmin/SuperAdmin');

@@ -58,5 +58,5 @@
   "devDependencies": {
     "concurrently": "^4.1.1"
   },
-  "proxy": "http://localhost:8080"
+  "proxy": "https://money360.herokuapp.com"
 }
