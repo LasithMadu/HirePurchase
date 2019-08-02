@@ -5,7 +5,7 @@ const pg = require('pg');
 const cors = require('cors');
 var router = express.Router();
 var inDev = process.env.NODE_ENV !== 'production';
-var PORT = inDev ? 5000 : process.env.PORT;
+var PORT = inDev ? 8080 : process.env.PORT;
 const path = require('path');
 
 //import JS modules
