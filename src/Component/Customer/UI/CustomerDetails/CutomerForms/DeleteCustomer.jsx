@@ -29,7 +29,7 @@ function showModel(){
     $('.modal').show();
 }
 
-export default class CreateForm extends Component{
+export default class CreateForm extends Component{   
 
     constructor(props){
         super(props)
@@ -44,15 +44,17 @@ export default class CreateForm extends Component{
             for(var i=0; i<response.data.length; i++){
                 country += '<option value='+response.data[i].name+'>'+response.data[i].name+'</option>'
             }
-            $("#inputECountry").html(country);
+            $("#inputDCountry").html(country);
         })
         .catch(error => {
             ToastsStore.error("Countries Loaded Fail Please Refreash Page")
         });
     }
 
-    deleteCustomer(){
-        showModel();
+    showModel(){
+        if($('#inputDTitle').val() != 'Choose Title' || $('#inputDInitials').val() != '' || $('#inputDFullname').val() != ''){
+            $('.modal').show();
+        }
     }
 
     handleClose(){
@@ -81,6 +83,24 @@ export default class CreateForm extends Component{
           });
     }
 
+    deleteCustomer(){
+        var path = 'http://localhost:8080/Customer/deleteCutomer';
+
+        axios.post(path, {
+            data: cusid
+          })
+          .then(function (response) {
+            if(response.data.msg){
+                ToastsStore.success("Customer Deleted Sucessfull")
+            }else{
+                ToastsStore.error("Customer Deleted Fail")
+            }
+          })
+          .catch(function (error) {
+            console.log(error)
+          });
+    }
+
     render(){
         return(
             <div className='container' style={{backgroundColor: '#ffffff'}}>
@@ -98,7 +118,7 @@ export default class CreateForm extends Component{
                           Are you sure?
                         </div>
                         <div className="modal-footer">
-                          <button type="button" className="btn btn-primary" onClick={this.adminPermission}>Yes</button>
+                          <button type="button" className="btn btn-primary" onClick={this.deleteCustomer}>Yes</button>
                           <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={this.handleClose}>No</button>
                         </div>
                       </div>
@@ -117,7 +137,7 @@ export default class CreateForm extends Component{
                                         <input id="inputDNIC" type="text" placeholder="Search by NIC/Passport No" className="form-control" />
                                     </div>
                                     <div className='col-md-2' style={{ height: '30px', paddingTop: '-50px'}}>
-                                        <a href="#" className="btn btn-primary ml-5" id="searchBtn" onClick={this.searchCustomer}>Search</a>
+                                        <a href="#" className="btn btn-primary ml-5" id="searchBtn" onClick={this.searchCustomer.bind(this)}>Search</a>
                                     </div>
                                 </div>
                             </div>
@@ -195,7 +215,7 @@ export default class CreateForm extends Component{
                     </div>
                     <div class="form-group col-md-6 row">
                         <div class='col-md-2'>
-                            <button type="button" onClick={this.deleteCustomer.bind(this)} class="btn btn-danger">Delete</button>
+                            <button type="button" onClick={this.showModel.bind(this)} class="btn btn-danger">Delete</button>
                         </div>
                         <div class='col-md-2'>
                             <button type="button" class="btn btn-light">Cancel</button>

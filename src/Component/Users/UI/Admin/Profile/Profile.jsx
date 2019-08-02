@@ -13,7 +13,7 @@ function loadData(data){
 }
 
 function setValue(id, value){
-    $(id).text(value);
+    $(id).val(value);
 }
 
 export default class Profile extends Component {
@@ -23,8 +23,13 @@ export default class Profile extends Component {
         this.state = {
             currentPass: ""
         };
+        //this.getProfileData();
+    }
+
+    componentDidMount() {
         this.getProfileData();
     }
+    
     
 
     getProfileData(){
@@ -37,6 +42,7 @@ export default class Profile extends Component {
               })
               .then(function (response) {
                 if(response.data.msg){
+                    
                     loadData(response.data.table.rows[0])
                     self.setState({
                         currentPass: response.data.table.rows[0].password
@@ -113,7 +119,7 @@ export default class Profile extends Component {
         }
 
         if(valid){
-            var path = 'https://money360.herokuapp.com/Admin/updateData';
+            var path = 'http://localhost:8080/Admin/updateData';
 
             axios.post(path, {
                 data: values

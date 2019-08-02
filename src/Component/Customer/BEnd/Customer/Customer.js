@@ -14,7 +14,7 @@ module.exports={
                         }else{
                             if(table.rowCount === 0){
                                 try{
-                                    db.query('INSERT INTO public."customerTable"("cusId", title, "nameInitials", "fullName", nic, gender, occupation, address, "address 2", city, state, country, email, mobile) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)',[...values], (err, table) => {
+                                    db.query('INSERT INTO public."customerTable"("cusId", title, "nameInitials", "fullName", nic, gender, occupation, address, "address_2", city, state, country, email, mobile) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)',[...values], (err, table) => {
                                         db.end();
                                         if(err){
                                             response.json({msg: false, data: err})
@@ -80,6 +80,27 @@ module.exports={
                         }else{
                             response.json({msg: true, table:table})
                         }
+                    } 
+                });
+            }
+        });
+    }, 
+
+    deleteCutomer: function(request, response, dbconfg){
+        var value = request.body.data;
+
+        console.log(value)
+        dbconfg.connect((err, db, done) =>{
+            if(err){
+                console.log('Conection Error');
+                return console.log(err);
+            }else{
+                db.query('DELETE FROM public."customerTable" WHERE "cusId" = $1',[value], (err, table) => {
+                    db.end();
+                    if(err){
+                        response.json({msg: false, data: err})
+                    }else{
+                        response.json({msg: true, table:table})
                     } 
                 });
             }

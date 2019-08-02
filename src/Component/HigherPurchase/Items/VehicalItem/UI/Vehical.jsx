@@ -6,6 +6,8 @@ import 'simplebar'; // or "import SimpleBar from 'simplebar';" if you want to us
 import 'simplebar/dist/simplebar.css';
 
 import VehicalAdd from './VehicalForms/VehicalAdd'
+import VehicalEdit from './VehicalForms/VehicalEdit'
+import VehicalDelete from './VehicalForms/VehicalDelete'
 import VehicalView from './VehicalForms/VehicalVew'
 
 export default class Vehical extends Component {
@@ -26,14 +28,14 @@ export default class Vehical extends Component {
                     <TabPanel label="Edit" key="tab-2">
                         <div data-simplebar>
                             <div class='vehical'>
-                            
+                            <VehicalEdit/>
                             </div>
                         </div>
                     </TabPanel>
                     <TabPanel label="Delete" key="tab-3">
                         <div data-simplebar>
                             <div class='vehical'>
-                            
+                            <VehicalDelete/>
                             </div>
                         </div>
                     </TabPanel>

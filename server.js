@@ -83,6 +83,7 @@ app.get('/companyList', function(request, response){
 });
 
 
+
 //Admin Activity
 app.post('/Admin/create', function(request, response){
     Admin.createUser(request, response, pool);
@@ -119,6 +120,11 @@ app.post('/Customer/updateCustomer', function(request, response){
     Customer.updateCustomer(request, response, pool);
 });
 
+app.post('/Customer/deleteCutomer', function(request, response){
+    Customer.deleteCutomer(request, response, pool);
+});
+
+
 
 //Vehicals Activity
 app.post('/Vehicals/saveVehicals', function(request, response){
@@ -129,8 +135,20 @@ app.get('/Vehicals/getVehicals', function(request, response){
     Vehicals.getVehicals(request, response, pool);
 });
 
+app.post('/Vehicals/searchVehical', function(request, response){
+    Vehicals.searchVehical(request, response, pool);
+});
 
-//app.use(morgan('dev'));
+app.post('/Vehicals/updateVehicals', function(request, response){
+    Vehicals.updateVehicals(request, response, pool);
+});
+
+app.post('/Vehicals/deleteVehicals', function(request, response){
+    Vehicals.deleteVehicals(request, response, pool);
+});
+
+
+app.use(morgan('dev'));
 
 app.use(express.static("public"));
 
@@ -140,11 +158,4 @@ app.use(function(request, response, next){
     next();
 });
 
-// Serve any static files built by React
-app.use(express.static(path.join("http://localhost:3000")));
-
-app.get("/", function(req, res) {
-  res.sendFile(path.join("http://localhost:3000"));
-});
-
- app.listen(PORT, () => console.log('Listening on the '+PORT));
+app.listen(PORT, () => console.log('Listening on the '+PORT));

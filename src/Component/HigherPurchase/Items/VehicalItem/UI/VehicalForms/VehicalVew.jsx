@@ -1,99 +1,66 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
 import axios from 'axios'
-import { MDBDataTable } from 'mdbreact';
+import $ from 'jquery'
+import DataTable from 'datatables.net';
 
-var array = [new Array()];
+export default class VehicalView extends Component{
 
-var data = {
-  columns: [
-    {
-      label: 'Customer Name',
-      field: 'Customer Name',
-      sort: 'asc',
-      width: 150
-    },
-    {
-      label: 'Vehical No',
-      field: 'Vehical No',
-      sort: 'asc',
-      width: 270
-    },
-    {
-      label: 'Chassi No',
-      field: 'Chassi No',
-      sort: 'asc',
-      width: 200
-    },
-    {
-      label: 'Cylinder Capacity',
-      field: 'Cylinder Capacity',
-      sort: 'asc',
-      width: 100
-    },
-    {
-      label: 'Modal',
-      field: 'Modal',
-      sort: 'asc',
-      width: 150
+  constructor(props) {
+    super(props);
+    this.state = {
+      vehicles: []
     }
-  ],
-  rows: [
-    
-  ]
-}
+    this.getVehicals();
 
-function getName(nic){
-  var path = 'http://localhost:8080/Customer/searchCutomer';
+    $('#dtBasicExample').DataTable( {
+      paginate: true
+    } );
+  }
 
-  axios.post(path, {
-    data: nic
-  })
-  .then(function (response) {
-    if(response.data.msg){
-      //array.push ( {"name":response.data.table.rows[0].nameInitials} );
-    }else{
-        ToastsStore.error("Fail To Load Vehicals Data")
-    }
-  })
-  .catch(function (error) {
-    console.log(error)
-  });
-}
-
-function getVehicals(){
-    var path = 'http://localhost:8080/Vehicals/getVehicals';
-
-    axios.get(path, {
-      })
-      .then(function (response) {
+  getVehicals(){
+    var that = this;
+    axios.get('http://localhost:8080/Vehicals/getVehicals',{
+    })
+      .then((response) => {
         if(response.data.msg){
-            for(var i=0; i<response.data.table.rowCount; i++){
-              getName(response.data.table.rows[i].cusNic)
-            }
-            
-        }else{
-            ToastsStore.error("Fail To Load Vehicals Data")
+          that.setState({vehicles: response.data.table.rows});
         }
+        else{
+          console.log("Did");
+        }
+
       })
-      .catch(function (error) {
-        console.log(error)
-      });
+      //console.log(this.vehicles);
+  }
 
-     return data;   
+  render(){
+    let vehicles = this.state.vehicles;
+    return (
+      <div className='container' style={{backgroundColor: '#ffffff'}}>
+        <table id="dtBasicExample" className="table table-striped table-bordered table-sm" cellspacing="0" width="100%" style={{marginTop: '20px'}}>
+          <thead className="bg-success">
+              <tr>
+                  <th scope="col" class="th-sm">Customer Name</th>
+                  <th scope="col" class="th-sm">Vehical No</th>
+                  <th scope="col" class="th-sm">Chassis No</th>
+                  <th scope="col" class="th-sm">Cylinder Capcity</th>
+                  <th scope="col" class="th-sm">Modal</th>
+              </tr>
+          </thead>
+          <tbody>
+          {vehicles.map(vehicle =><tr scope="row" key={vehicle.vehiNo}>
+              <td>{vehicle.nameInitials}</td>
+              <td>{vehicle.vehiNo}</td>
+              <td>{vehicle.chassis}</td>
+              <td>{vehicle.capacity}</td>
+              <td>{vehicle.make+' '+vehicle.modal}</td>
+              {/* <td><button onClick={this.update.bind(this, vehicle.customer_id)}>Edit</button>|<button onClick={this.removeCountry.bind(this, vehicle.customer_id)}>Remove</button></td> */}
+          </tr>
+          )}
+          </tbody>
+        </table>
+      </div>
+    )
+  }
 }
-
-
-        const VehicalView = () => {
-
-          return (
-            <MDBDataTable
-              striped
-              bordered
-              pagination={true}
-              data={getVehicals()}
-            />
-          );
-        }
-
-        export default VehicalView;

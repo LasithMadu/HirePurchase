@@ -20,7 +20,7 @@ export default class VehicalAdd extends Component{
 
     searchCustomer(){
         var nic = $('#inputSeNic').val();
-
+        
         if(nic.length > 9){
             var path = 'http://localhost:8080/Customer/searchCutomer';
 
@@ -44,6 +44,7 @@ export default class VehicalAdd extends Component{
               });
         }
     }
+    
     saveVehicals(){
         var valid, cus = true;
         var customer = [$('#inputSeNic').val(), $('#user').text(), $('#email').text(), $('#address').text(), $('#gender').text(), $('#mobile').text()];
@@ -55,7 +56,7 @@ export default class VehicalAdd extends Component{
             }
         }
 
-        var vehicals = [uuidv4(), $('#inputRegistration').val(), $('#inputCassis').val(), $('#inputEngine').val(), $('#inputCapacity').val(), $('#inputMake').val(), $('#inputModal').val(), $('#inputFuel').val(), $('#inputYear').val()];
+        var vehicals = [uuidv4(), $('#inputRegistration').val().toUpperCase(), $('#inputCassis').val(), $('#inputEngine').val(), $('#inputCapacity').val(), $('#inputMake').val(), $('#inputModal').val(), $('#inputFuel').val(), $('#inputYear').val()];
 
         for(var i=0; i<vehicals.length; i++){
             if(vehicals[i] === ''){

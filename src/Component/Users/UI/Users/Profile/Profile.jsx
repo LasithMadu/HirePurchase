@@ -35,12 +35,15 @@ export default class Profile extends Component {
         var self = this;
         var path = 'http://localhost:8080/Admin/profileData';
 
+        console.log(localStorage.getItem('userId'))
+
         if(localStorage.getItem('userId') != ''){
             axios.post(path, {
                 data: localStorage.getItem('userId')
               })
               .then(function (response) {
                 if(response.data.msg){
+                    
                     loadData(response.data.table.rows[0])
                     self.setState({
                         currentPass: response.data.table.rows[0].password
@@ -117,7 +120,7 @@ export default class Profile extends Component {
         }
 
         if(valid){
-            var path = 'https://money360.herokuapp.com/Admin/updateData';
+            var path = 'http://localhost:8080/Admin/updateData';
 
             axios.post(path, {
                 data: values
@@ -151,7 +154,7 @@ export default class Profile extends Component {
     }
 
     adminPermission(){
-        var path = 'https://money360.herokuapp.com/Admin/signin';
+        var path = 'http://localhost:8080/Admin/signin';
         var values = [$('#inputAdminUser').val().toLowerCase(), $('#inputAdminPass').val(), localStorage.getItem('company')];
 
         if(values[0] === '' || values[1] === ''){
