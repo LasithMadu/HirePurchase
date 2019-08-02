@@ -15,7 +15,11 @@ var Admin = require('./src/Component/Users/BEnd/Admin/Admin');
 var Customer = require('./src/Component/Customer/BEnd/Customer/Customer');
 var Vehicals = require('./src/Component/HigherPurchase/Items/VehicalItem/BEnd/Vehicals/Vehicals');
 
-let app = express();
+let app = express().use(express.static(__dirname + 'public'))
+
+app.get('/', function(req, res){
+    res.sendFile(__dirname + '/public/index.html');
+});
 
 const pool = new pg.Pool({
     user: "avnadmin",
