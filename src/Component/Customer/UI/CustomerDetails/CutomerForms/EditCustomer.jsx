@@ -72,7 +72,7 @@ export default class CreateForm extends Component{
         }else if(!valid){
             ToastsStore.warning("Some Fields Are Empty")
         }else{
-            var path = 'https://money360.herokuapp.com/Customer/updateCustomer';
+            var path = 'http://localhost:8080/Customer/updateCustomer';
             
             axios.post(path, {
                 cusid: cusid,
@@ -92,7 +92,7 @@ export default class CreateForm extends Component{
     }
 
     searchCustomer(){
-        var path = 'https://money360.herokuapp.com/Customer/searchCutomer';
+        var path = 'http://localhost:8080/Customer/searchCutomer';
 
         axios.post(path, {
             data: $('#inputENIC').val()

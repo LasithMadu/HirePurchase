@@ -60,7 +60,7 @@ export default class CreateForm extends Component{
     }
 
     searchCustomer(){
-        var path = 'https://money360.herokuapp.com/Customer/searchCutomer';
+        var path = 'http://localhost:8080/Customer/searchCutomer';
 
         axios.post(path, {
             data: $('#inputDNIC').val()
