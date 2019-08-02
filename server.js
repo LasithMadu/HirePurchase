@@ -150,8 +150,6 @@ app.post('/Vehicals/deleteVehicals', function(request, response){
 
 app.use(morgan('dev'));
 
-app.use(express.static("public"));
-
 app.use(function(request, response, next){
     response.header("Access-Control-Allow-Origin", "*");
     response.header("Access-Control-Allow-Headers", "Origin, X-Requesred-With, Content-Type, Accept");
