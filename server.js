@@ -141,10 +141,10 @@ app.use(function(request, response, next){
 });
 
 // Serve any static files built by React
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join("http://localhost:3000")));
 
 app.get("/", function(req, res) {
-  res.sendFile(path.join(__dirname, "public", "http://localhost:3000"));
+  res.sendFile(path.join("http://localhost:3000"));
 });
 
  app.listen(PORT, () => console.log('Listening on the '+PORT));
