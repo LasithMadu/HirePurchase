@@ -5,13 +5,14 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom"
 
+import Login from '../src/Component/Main/UI/loginComponent/loginPage';
 import NotFound from '../src/Component/Main/UI/UniqueComponents/Main';
 
 const routing = (
     <Router>
       <div>
       <Switch>
-        <Route exact path="/" component={App} />
+        <Route exact path="/login" component={Login} />
         <Route component={NotFound} />
       </Switch>
       </div>
