@@ -62,7 +62,7 @@ export default class CreateForm extends Component{
     }
 
     searchCustomer(){
-        var path = 'http://localhost:8080/Customer/searchCutomer';
+        var path = 'https://money360-server.herokuapp.com/Customer/searchCutomer';
 
         axios.post(path, {
             data: $('#inputDNIC').val()
@@ -84,7 +84,7 @@ export default class CreateForm extends Component{
     }
 
     deleteCustomer(){
-        var path = 'http://localhost:8080/Customer/deleteCutomer';
+        var path = 'https://money360-server.herokuapp.com/Customer/deleteCutomer';
 
         axios.post(path, {
             data: cusid

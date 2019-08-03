@@ -33,7 +33,7 @@ export default class VehicalAdd extends Component{
         var vehi = $('#inputVehiNo').val().toUpperCase();
         
         if(vehi.length > 9){
-            var path = 'http://localhost:8080/Vehicals/searchVehical';
+            var path = 'https://money360-server.herokuapp.com/Vehicals/searchVehical';
 
             axios.post(path, {
                 data: vehi
@@ -72,7 +72,7 @@ export default class VehicalAdd extends Component{
         if(!valid){
             ToastsStore.warning("Some Fields Are Empty")
         }else{
-            var path = 'http://localhost:8080/Vehicals/updateVehicals';
+            var path = 'https://money360-server.herokuapp.com/Vehicals/updateVehicals';
 
             axios.post(path, {
                 vehiNo: $('#inputVehiNo').val().toUpperCase(),

@@ -30,7 +30,7 @@ export default class Settings extends Component {
             company = $("#inputCompany").val();
         }
         var values = [company, $('#color').val()];
-        var path = 'http://localhost:8080/setColor';
+        var path = 'https://money360-server.herokuapp.com/setColor';
 
         if(values[1] === ''){
             ToastsStore.warning("Color Not Set")
@@ -55,7 +55,7 @@ export default class Settings extends Component {
     }
 
     getCompanyList(){
-        var path = 'http://localhost:8080/companyList';
+        var path = 'https://money360-server.herokuapp.com/companyList';
 
         axios.get(path)
           .then(function (response) {

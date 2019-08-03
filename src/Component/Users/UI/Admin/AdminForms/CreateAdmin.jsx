@@ -9,7 +9,7 @@ export default class CreateAdmin extends Component{
     createAdmin(){
         var valid;
         let values= [uuidv4(), $('#inputFirst').val(), $('#inputLast').val(), $('#inputUser').val().toLowerCase(), $('#inputPass').val(), $('#inputEmail').val(), $('#inputNic').val(), $('#inputCompany').val(), $('#inputAddress').val(), $('#inputCity').val(), $('#inputState').val(), $('#inputZip').val(), 'Admin'];
-        let path = 'http://localhost:8080/superAdmin/create';
+        let path = 'https://money360-server.herokuapp.com/superAdmin/create';
 
         for(var i = 0; i<13; i++){
             if(values[i] === ''){
