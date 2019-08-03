@@ -6,7 +6,7 @@ const cors = require('cors');
 var inDev = process.env.NODE_ENV !== 'production';
 var PORT = inDev ? 8080 : process.env.PORT;
 const path = require('path');
-const targetBaseUrl = 'http://localhost:3000/login';
+const targetBaseUrl = 'https://money360.herokuapp.com/login';
 
 //import JS modules
 var superAdmin = require('./src/Component/Users/BEnd/SuperAdmin/SuperAdmin');
@@ -17,11 +17,11 @@ var Vehicals = require('./src/Component/HigherPurchase/Items/VehicalItem/BEnd/Ve
 
 const app = express();
 
-function handleRedirect(req, res) {
-    res.redirect(targetBaseUrl);
-  }
+// function handleRedirect(req, res) {
+//     res.redirect(targetBaseUrl);
+//   }
   
-app.get('/', handleRedirect);
+// app.get('/', handleRedirect);
 
 const pool = new pg.Pool({
     user: "avnadmin",
@@ -153,6 +153,13 @@ app.post('/Vehicals/deleteVehicals', function(request, response){
     Vehicals.deleteVehicals(request, response, pool);
 });
 
+if (process.env.NODE_ENV === 'production') {
+    // Serve any static files
+    app.use(express.static(path.join(__dirname, 'money360/build')));// Handle React routing, return all requests to React app
+    app.get('*', function(req, res) {
+      res.sendFile(path.join(__dirname, 'money360/build', 'index.html'));
+    });
+  }
 
 app.use(morgan('dev'));
 
