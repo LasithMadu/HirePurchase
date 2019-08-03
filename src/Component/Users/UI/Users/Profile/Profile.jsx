@@ -33,7 +33,7 @@ export default class Profile extends Component {
 
     getProfileData(){
         var self = this;
-        var path = '/Admin/profileData';
+        var path = 'https://money360-server.herokuapp.com/Admin/profileData';
 
         console.log(localStorage.getItem('userId'))
 
@@ -85,7 +85,7 @@ export default class Profile extends Component {
         }else if(newPass === pass){
             ToastsStore.warning("You Can't Use Previous Password As A New Password")
         }else{
-            var path = '/Admin/changePass';
+            var path = 'https://money360-server.herokuapp.com/Admin/changePass';
             var values = [localStorage.getItem('userId'), newPass]
 
             axios.post(path, {
@@ -120,7 +120,7 @@ export default class Profile extends Component {
         }
 
         if(valid){
-            var path = '/Admin/updateData';
+            var path = 'https://money360-server.herokuapp.com/Admin/updateData';
 
             axios.post(path, {
                 data: values
@@ -154,7 +154,7 @@ export default class Profile extends Component {
     }
 
     adminPermission(){
-        var path = '/Admin/signin';
+        var path = 'https://money360-server.herokuapp.com/Admin/signin';
         var values = [$('#inputAdminUser').val().toLowerCase(), $('#inputAdminPass').val(), localStorage.getItem('company')];
 
         if(values[0] === '' || values[1] === ''){

@@ -36,7 +36,7 @@ export default class CustomerDetails extends Component {
       }else if($('#inputName').val().length < 9){
         ToastsStore.warning("Invalid NIC No")
       }else{
-        var path = '/Customer/searchCutomer';
+        var path = 'https://money360-server.herokuapp.com/Customer/searchCutomer';
 
         axios.post(path, {
           data: $('#inputName').val()

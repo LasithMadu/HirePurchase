@@ -9,7 +9,7 @@ export default class CreateAdmin extends Component{
     createUser(){
         var valid;
         let values= [uuidv4(), $('#inputFirst').val(), $('#inputLast').val(), $('#inputUser').val().toLowerCase(), $('#inputPass').val(), $('#inputEmail').val(), $('#inputNic').val(), localStorage.getItem('company'), $('#inputAddress').val(), $('#inputCity').val(), $('#inputState').val(), $('#inputZip').val(), $('#inputLevel').val()];
-        let path = '/Admin/create';
+        let path = 'https://money360-server.herokuapp.com/Admin/create';
 
         for(var i = 0; i<values.length; i++){
             if(values[i] === ''){
