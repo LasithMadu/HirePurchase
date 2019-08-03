@@ -7256,6 +7256,9 @@ ul.chats li.out .message {
   body{
     overflow: hidden;
   }
+  .pofimage{
+    margin-left: 25%;
+  }
 }
 
 /* 
@@ -7269,6 +7272,9 @@ ul.chats li.out .message {
   }
   body{
     overflow: hidden;
+  }
+  .pofimage{
+    margin-left: 25%;
   }
 }
 
@@ -7294,6 +7300,15 @@ ul.chats li.out .message {
     min-height: 1040px;
     height: 1040px;
   }
+
+  .pofimage{
+    margin-left: 25%;
+  }
+
+  .profile{
+    min-height: 950px;
+    height: 950px;
+  }
 }
 
 /* 
@@ -7317,5 +7332,14 @@ ul.chats li.out .message {
   .vadd{
     min-height: 1040px;
     height: 1040px;
+  }
+
+  .pofimage{
+    margin-left: 25%;
+  }
+
+  .profile{
+    min-height: 950px;
+    height: 950px;
   }
 }
