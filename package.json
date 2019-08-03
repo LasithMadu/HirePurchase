@@ -40,10 +40,10 @@
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "proxy": "https://money360-server.herokuapp.com/",
   "eslintConfig": {
     "extends": "react-app"
   },
+  "proxy": "https://money360-server.herokuapp.com",
   "browserslist": {
     "production": [
       ">0.2%",
