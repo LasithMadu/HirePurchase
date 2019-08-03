@@ -62,7 +62,7 @@ export default class CreateForm extends Component{
     }
 
     searchCustomer(){
-        var path = 'https://money360-server.herokuapp.com/Customer/searchCutomer';
+        var path = '/Customer/searchCutomer';
 
         axios.post(path, {
             data: $('#inputDNIC').val()
@@ -84,7 +84,7 @@ export default class CreateForm extends Component{
     }
 
     deleteCustomer(){
-        var path = 'https://money360-server.herokuapp.com/Customer/deleteCutomer';
+        var path = '/Customer/deleteCutomer';
 
         axios.post(path, {
             data: cusid
@@ -130,13 +130,13 @@ export default class CreateForm extends Component{
                         <div className="form-body pal">
                             <div className="form-group">
                                 <div className='row'>
-                                    <label htmlFor="inputDNIC" className="col-md-3 control-label">
+                                    <label htmlFor="inputDNIC" className="col-xs-3 control-label">
                                     Search :- </label>
-                                    <div className="input-icon col-md-6" style={{display: 'inline-block' }}>
+                                    <div className="input-icon col-xs-6" style={{display: 'inline-block' }}>
                                         <i className="fa fa-user"></i>
                                         <input id="inputDNIC" type="text" placeholder="Search by NIC/Passport No" className="form-control" />
                                     </div>
-                                    <div className='col-md-2' style={{ height: '30px', paddingTop: '-50px'}}>
+                                    <div className='col-xs-2' style={{ height: '30px', paddingTop: '-50px'}}>
                                         <a href="#" className="btn btn-primary ml-5" id="searchBtn" onClick={this.searchCustomer.bind(this)}>Search</a>
                                     </div>
                                 </div>

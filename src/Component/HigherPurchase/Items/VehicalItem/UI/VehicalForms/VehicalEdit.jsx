@@ -33,7 +33,7 @@ export default class VehicalAdd extends Component{
         var vehi = $('#inputVehiNo').val().toUpperCase();
         
         if(vehi.length > 9){
-            var path = 'https://money360-server.herokuapp.com/Vehicals/searchVehical';
+            var path = '/Vehicals/searchVehical';
 
             axios.post(path, {
                 data: vehi
@@ -72,7 +72,7 @@ export default class VehicalAdd extends Component{
         if(!valid){
             ToastsStore.warning("Some Fields Are Empty")
         }else{
-            var path = 'https://money360-server.herokuapp.com/Vehicals/updateVehicals';
+            var path = '/Vehicals/updateVehicals';
 
             axios.post(path, {
                 vehiNo: $('#inputVehiNo').val().toUpperCase(),
@@ -97,25 +97,25 @@ export default class VehicalAdd extends Component{
                 <ToastsContainer store={ToastsStore} position={ToastsContainerPosition.BOTTOM_RIGHT} />
                 <h3>Edit Vehical</h3>
                 <hr/>
-                <div className='col-md-12'>
+                <div className='col-md-12 col-sm-7'>
                 <form action="#" className="form-horizontal">
                         <div className="form-body pal">
                             <div className="form-group">
                                 <div className='row'>
-                                    <label htmlFor="inputVehiNo" className="col-md-3 control-label">
+                                    <label htmlFor="inputVehiNo" className="col-xs-3 control-label">
                                     Search :- </label>
-                                    <div className="input-icon col-md-6" style={{display: 'inline-block' }}>
+                                    <div className="input-icon col-xs-5" style={{display: 'inline-block' }}>
                                         <i className="fa fa-car"></i>
                                         <input id="inputVehiNo" type="text" placeholder="Vehical No" className="form-control" />
                                     </div>
-                                    <div className='col-md-2' style={{ height: '30px', paddingTop: '-50px'}}>
+                                    <div className='col-xs-2' style={{ height: '30px', paddingTop: '-50px'}}>
                                         <a href="#" className="btn btn-primary ml-5" id="searchBtn" onClick={this.searchVehical}>Search</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </form>
-                    <div className="col-md-3">
+                    <div className="col-sm-12 col-md-3">
                         <table className="table table-striped table-hover">
                             <tbody>
                                 <tr>
@@ -145,53 +145,53 @@ export default class VehicalAdd extends Component{
                             </tbody>
                         </table>
                     </div>
-                    <form className='col-md-9'>
+                    <form className='col-sm-12 col-md-9'>
                     
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-sm-6">
                             <label for="inputERegistration">Registration No</label>
                             <input type="text" class="form-control" id="inputERegistration" placeholder="Registration No"/>
                             </div>
-                            <div class="form-group col-md-5">
+                            <div class="form-group col-sm-5">
                             <label for="inputECassis">Chassis No</label>
                             <input type="text" class="form-control" id="inputECassis" placeholder="Chassis No"/>
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-sm-6">
                             <label for="inputEEngine">Engine No</label>
                             <input type="text" class="form-control" id="inputEEngine" placeholder="Engine No"/>
                             </div>
-                            <div class="form-group col-md-5">
+                            <div class="form-group col-sm-5">
                             <label for="inputECapacity">Cylinder Capacity</label>
                             <input type="text" class="form-control" id="inputECapacity" placeholder="Cylinder Capacity"/>
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-sm-6">
                             <label for="inputEMake">Make</label>
                             <input type="text" class="form-control" id="inputEMake" placeholder='Make'/>
                             </div>
-                            <div class="form-group col-md-5">
+                            <div class="form-group col-sm-5">
                             <label for="inputEModal">Modal</label>
                             <input type="text" class="form-control" id="inputEModal" placeholder='Modal'/>
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-sm-6">
                                 <label for="inputEFuel">Fuel Type</label>
                                 <input type="text" class="form-control" id="inputEFuel" placeholder="Fuel Type"/>
                             </div>
-                            <div class="form-group col-md-5">
+                            <div class="form-group col-sm-5">
                                 <label for="inputEYear">Year Of Manifacturing</label>
                                 <input type="text" class="form-control" id="inputEYear" placeholder="Year Of Manifacturing"/>
                             </div>
                         </div>
-                        <div class="form-group col-md-6 row">
-                            <div class='col-md-3'>
+                        <div class="form-group col-sm-6 row">
+                            <div class='col-xs-6 col-md-3'>
                                 <button type="button" class="btn btn-primary" onClick={this.updateVehicals}>Update</button>
                             </div>
-                            <div class='col-md-3'>
+                            <div class='col-xs-6 col-md-3'>
                                 <button type="button" class="btn btn-light">Cancel</button>
                             </div>
                         </div>

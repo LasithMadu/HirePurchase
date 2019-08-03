@@ -36,7 +36,7 @@ export default class CustomerDetails extends Component {
       }else if($('#inputName').val().length < 9){
         ToastsStore.warning("Invalid NIC No")
       }else{
-        var path = 'https://money360-server.herokuapp.com/Customer/searchCutomer';
+        var path = '/Customer/searchCutomer';
 
         axios.post(path, {
           data: $('#inputName').val()
@@ -68,14 +68,14 @@ export default class CustomerDetails extends Component {
                   <div className="form-body pal">
                       <div className="form-group">
                         <div className='row'>
-                          <label htmlFor="inputName" className="col-md-3 control-label">
+                          <label htmlFor="inputName" className="col-xs-3 control-label">
                               Search :- </label>
-                              <div className="input-icon col-md-6" style={{display: 'inline-block' }}>
+                              <div className="input-icon col-xs-6" style={{display: 'inline-block' }}>
                                 <i className="fa fa-user"></i>
                                 <input id="inputName" type="text" placeholder="Search by NIC/Passport No" className="form-control" />
                               </div>
-                              <div className='col-md-2' style={{ height: '30px', paddingTop: '-50px'}}>
-                                <a href="#" className="btn btn-primary ml-5" id="searchBtn" onClick={this.searchCustomer}>Search</a>
+                              <div className='col-xs-2'>
+                                <a href="#" className="btn btn-primary xs-5" id="searchBtn" onClick={this.searchCustomer}>Search</a>
                               </div>
                             </div>
                           </div>

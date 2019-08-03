@@ -48,7 +48,7 @@ export default class Main extends Component {
 
               <div className='row'>
                     <SlideBar setLocation={this.setLocation.bind(this)}/>
-                <div style={styleSheet.body}>
+                <div className='components'>
                     <LocationBar currentLocation={this.state.currentLocation}/>
                     <div className='col-md-12'>
                     <Switch>

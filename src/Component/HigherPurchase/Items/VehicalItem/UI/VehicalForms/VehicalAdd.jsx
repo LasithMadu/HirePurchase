@@ -22,7 +22,7 @@ export default class VehicalAdd extends Component{
         var nic = $('#inputSeNic').val();
         
         if(nic.length > 9){
-            var path = 'https://money360-server.herokuapp.com/Customer/searchCutomer';
+            var path = '/Customer/searchCutomer';
 
             axios.post(path, {
                 data: nic
@@ -71,7 +71,7 @@ export default class VehicalAdd extends Component{
         }else if(!valid){
             ToastsStore.warning("Some Fields Are Empty")
         }else{
-            var path = 'https://money360-server.herokuapp.com/Vehicals/saveVehicals';
+            var path = '/Vehicals/saveVehicals';
 
             axios.post(path, {
                 nic: $('#inputSeNic').val(),
@@ -96,9 +96,9 @@ export default class VehicalAdd extends Component{
                 <ToastsContainer store={ToastsStore} position={ToastsContainerPosition.BOTTOM_RIGHT} />
                 <h3>Add New Vehical</h3>
                 <hr/>
-                <div className='col-md-12'>
-                    <div className="col-md-3">
-                        <div class="form-group col-md-12">
+                <div className='col-md-12 col-sm-7'>
+                    <div className="col-sm-12 col-md-3">
+                        <div class="form-group col-xs-12">
                             <label for="inputSeNic">Search</label>
                             <input type="text" class="form-control" id="inputSeNic" onChange={this.searchCustomer} placeholder="NIC/Passport No"/>
                         </div>
@@ -132,53 +132,53 @@ export default class VehicalAdd extends Component{
                             </tbody>
                         </table>
                     </div>
-                    <form className='col-md-9'>
+                    <form className='col-sm-12 col-md-9'>
                     
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-sm-6">
                             <label for="inputRegistration">Registration No</label>
                             <input type="text" class="form-control" id="inputRegistration" placeholder="Registration No"/>
                             </div>
-                            <div class="form-group col-md-5">
+                            <div class="form-group col-sm-5">
                             <label for="inputCassis">Chassis No</label>
                             <input type="text" class="form-control" id="inputCassis" placeholder="Chassis No"/>
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-sm-6">
                             <label for="inputEngine">Engine No</label>
                             <input type="text" class="form-control" id="inputEngine" placeholder="Engine No"/>
                             </div>
-                            <div class="form-group col-md-5">
+                            <div class="form-group col-sm-5">
                             <label for="inputCapacity">Cylinder Capacity</label>
                             <input type="text" class="form-control" id="inputCapacity" placeholder="Cylinder Capacity"/>
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-sm-6">
                             <label for="inputMake">Make</label>
                             <input type="text" class="form-control" id="inputMake" placeholder='Make'/>
                             </div>
-                            <div class="form-group col-md-5">
+                            <div class="form-group col-sm-5">
                             <label for="inputModal">Modal</label>
                             <input type="text" class="form-control" id="inputModal" placeholder='Modal'/>
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-sm-6">
                                 <label for="inputFuel">Fuel Type</label>
                                 <input type="text" class="form-control" id="inputFuel" placeholder="Fuel Type"/>
                             </div>
-                            <div class="form-group col-md-5">
+                            <div class="form-group col-sm-5">
                                 <label for="inputYear">Year Of Manifacturing</label>
                                 <input type="text" class="form-control" id="inputYear" placeholder="Year Of Manifacturing"/>
                             </div>
                         </div>
-                        <div class="form-group col-md-6 row">
-                            <div class='col-md-2'>
+                        <div class="form-group col-sm-6 row">
+                            <div class='col-xs-6 col-md-3'>
                                 <button type="button" class="btn btn-primary" onClick={this.saveVehicals}>Save</button>
                             </div>
-                            <div class='col-md-2'>
+                            <div class='col-xs-6 col-md-3'>
                                 <button type="button" class="btn btn-light">Cancel</button>
                             </div>
                         </div>

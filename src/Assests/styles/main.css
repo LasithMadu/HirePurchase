@@ -6,6 +6,10 @@ body{
   overflow: hidden;
 }
 
+.components{
+  margin-left: 250px;
+}
+
 .alert{
   padding: 0;
   margin: 0;
@@ -20,8 +24,8 @@ body{
 }
 
 .panel {
-  height: calc(100vh - 50px);
-  max-height: calc(100vh - 50px);
+  /* height: calc(100vh - 50px);
+  max-height: calc(100vh - 50px); */
   display: inline-block;
 }
 
@@ -7239,7 +7243,79 @@ ul.chats li.out .message {
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
-.fill { 
-  min-height: 100%;
-  height: 100%;
+
+/* 
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .panel{
+    margin-left: 11%;
+  }
+  body{
+    overflow: hidden;
+  }
+}
+
+/* 
+  ##Device = Tablets, Ipads (landscape)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  .panel{
+    margin-left: 11%;
+  }
+  body{
+    overflow: hidden;
+  }
+}
+
+/* 
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .img-responsive{
+    display: none;
+  }
+  .components{
+    margin-left: 0;
+  }
+  body{
+    min-width: 100%;
+    width: 100%;
+    overflow-y: scroll;
+  }
+
+  .vadd{
+    min-height: 1040px;
+    height: 1040px;
+  }
+}
+
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .img-responsive{
+    display: none;
+  }
+  .components{
+    margin-left: 0;
+  }
+  body{
+    min-width: 100%;
+    width: 100%;
+    overflow-y: scroll;
+  }
+
+  .vadd{
+    min-height: 1040px;
+    height: 1040px;
+  }
 }

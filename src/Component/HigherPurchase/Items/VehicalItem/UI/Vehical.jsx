@@ -14,27 +14,27 @@ export default class Vehical extends Component {
 
     render() {
       return (
-        <div className='col-md-12'>
+        <div className='col-sm-12'>
           <br/>
             <ThemeProvider>
                 <Tabs>
                     <TabPanel label="Add" key="tab-1">
                         <div data-simplebar>
-                            <div class='vehical'>
+                            <div class='vehical vadd'>
                             <VehicalAdd/>
                             </div>
                         </div>
                     </TabPanel>
                     <TabPanel label="Edit" key="tab-2">
                         <div data-simplebar>
-                            <div class='vehical'>
+                            <div class='vehical vadd'>
                             <VehicalEdit/>
                             </div>
                         </div>
                     </TabPanel>
                     <TabPanel label="Delete" key="tab-3">
                         <div data-simplebar>
-                            <div class='vehical'>
+                            <div class='vehical vadd'>
                             <VehicalDelete/>
                             </div>
                         </div>

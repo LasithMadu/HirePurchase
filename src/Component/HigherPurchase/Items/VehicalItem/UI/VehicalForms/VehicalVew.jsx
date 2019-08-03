@@ -20,7 +20,7 @@ export default class VehicalView extends Component{
 
   getVehicals(){
     var that = this;
-    axios.get('https://money360-server.herokuapp.com/Vehicals/getVehicals',{
+    axios.get('/Vehicals/getVehicals',{
     })
       .then((response) => {
         if(response.data.msg){
@@ -37,7 +37,7 @@ export default class VehicalView extends Component{
   render(){
     let vehicles = this.state.vehicles;
     return (
-      <div className='container' style={{backgroundColor: '#ffffff'}}>
+      <div className='container col-sm-12' style={{backgroundColor: '#ffffff'}}>
         <table id="dtBasicExample" className="table table-striped table-bordered table-sm" cellspacing="0" width="100%" style={{marginTop: '20px'}}>
           <thead className="bg-success">
               <tr>

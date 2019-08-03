@@ -33,7 +33,7 @@ export default class Profile extends Component {
 
     getProfileData(){
         var self = this;
-        var path = 'https://money360-server.herokuapp.com/Admin/profileData';
+        var path = '/Admin/profileData';
 
         console.log(localStorage.getItem('userId'))
 
@@ -53,7 +53,7 @@ export default class Profile extends Component {
                 }
               })
               .catch(function (error) {
-                ToastsStore.error(error)
+                ToastsStore.error('Connection Fail')
               });
         }else{
             ToastsStore.error("Current User Is Unavalable")
@@ -85,7 +85,7 @@ export default class Profile extends Component {
         }else if(newPass === pass){
             ToastsStore.warning("You Can't Use Previous Password As A New Password")
         }else{
-            var path = 'https://money360-server.herokuapp.com/Admin/changePass';
+            var path = '/Admin/changePass';
             var values = [localStorage.getItem('userId'), newPass]
 
             axios.post(path, {
@@ -102,7 +102,7 @@ export default class Profile extends Component {
                 }
               })
               .catch(function (error) {
-                console.log(error)
+                ToastsStore.error("Connection Fail")
               });
         }
     }
@@ -120,7 +120,7 @@ export default class Profile extends Component {
         }
 
         if(valid){
-            var path = 'https://money360-server.herokuapp.com/Admin/updateData';
+            var path = '/Admin/updateData';
 
             axios.post(path, {
                 data: values
@@ -137,7 +137,7 @@ export default class Profile extends Component {
                 }
               })
               .catch(function (error) {
-                console.log(error)
+                ToastsStore.error("Connection Fail")
               });
         }else{
             ToastsStore.error("Some Fields Are Empty")
@@ -154,7 +154,7 @@ export default class Profile extends Component {
     }
 
     adminPermission(){
-        var path = 'https://money360-server.herokuapp.com/Admin/signin';
+        var path = '/Admin/signin';
         var values = [$('#inputAdminUser').val().toLowerCase(), $('#inputAdminPass').val(), localStorage.getItem('company')];
 
         if(values[0] === '' || values[1] === ''){

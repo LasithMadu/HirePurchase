@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import $ from 'jquery';
 import axios from 'axios'
 import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
+import 'simplebar'; // or "import SimpleBar from 'simplebar';" if you want to use it manually.
+import 'simplebar/dist/simplebar.css';
 
 import avatar from '../../../../Assests/images/avatar/profile-pic.png'
 
@@ -20,7 +22,7 @@ export default class LoginPage extends Component {
 
     signin(){
         var values = [$('#inputName').val().toLowerCase(), $('#inputPassword').val()];
-        let path = 'https://money360-server.herokuapp.com/signin';
+        let path = '/signin';
 
         if(values[0] === ''){
             ToastsStore.warning("Please Fill The Username Field")
@@ -39,7 +41,7 @@ export default class LoginPage extends Component {
                     localStorage.setItem('lastname', response.data.table.rows[0].lastName);
                     localStorage.setItem('company', response.data.table.rows[0].company);
                     try{
-                        axios.post('https://money360-server.herokuapp.com/getColor', {
+                        axios.post('/getColor', {
                             company: localStorage.getItem('company')
                         })
                         .then(function (response) {
@@ -71,11 +73,11 @@ export default class LoginPage extends Component {
 
     render () {
       return (
-        <div className='container fill' style={{backgroundColor: this.state.bgColor, minWidth: '100%', minHeight: '100%', height: '100%'}}>
+        <div className='container'>
             <ToastsContainer store={ToastsStore} position={ToastsContainerPosition.BOTTOM_RIGHT} />
             <div class="page-form" >
-                <div class="panel panel-blue">
-                    <div class="panel-body pan">
+                <div class="panel panel-blue col-md-12">
+                    <div class="panel-body pan" >
                         <form action="#" class="form-horizontal">
                         <div class="form-body pal">
                             <div class="col-md-12 text-center panel-title">

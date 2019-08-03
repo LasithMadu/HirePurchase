@@ -33,7 +33,7 @@ export default class VehicalAdd extends Component{
         var vehi = $('#inputDVehiNo').val().toUpperCase();
 
         if(vehi.length > 9){
-            var path = 'https://money360-server.herokuapp.com/Vehicals/searchVehical';
+            var path = '/Vehicals/searchVehical';
 
             axios.post(path, {
                 data: vehi
@@ -72,7 +72,7 @@ export default class VehicalAdd extends Component{
         if(!valid){
             ToastsStore.warning("Vehical Details Are Not Found")
         }else{
-            var path = 'https://money360-server.herokuapp.com/Vehicals/deleteVehicals';
+            var path = '/Vehicals/deleteVehicals';
 
             axios.post(path, {
                 vehiNo: $('#inputDVehiNo').val().toUpperCase()
@@ -109,7 +109,7 @@ export default class VehicalAdd extends Component{
                       <div className="modal-content">
                         <div className="modal-header">
                           <h5 className="modal-title">Delete This Customer</h5>
-                          <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={this.handleClose}>
+                          <button type="button" className="close" data-dimdiss="modal" aria-label="Close" onClick={this.handleClose}>
                             <span aria-hidden="true">&times;</span>
                           </button>
                         </div>
@@ -118,32 +118,32 @@ export default class VehicalAdd extends Component{
                         </div>
                         <div className="modal-footer">
                           <button type="button" className="btn btn-primary" onClick={this.deleteVehical}>Yes</button>
-                          <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={this.handleClose}>No</button>
+                          <button type="button" className="btn btn-secondary" data-dimdiss="modal" onClick={this.handleClose}>No</button>
                         </div>
                       </div>
                     </div>
                   </div>
                 <h3>Delete Vehical</h3>
                 <hr/>
-                <div className='col-md-12'>
+                <div className='col-md-12 col-sm-7'>
                 <form action="#" className="form-horizontal">
                         <div className="form-body pal">
                             <div className="form-group">
                                 <div className='row'>
-                                    <label htmlFor="inputDVehiNo" className="col-md-3 control-label">
+                                    <label htmlFor="inputDVehiNo" className="col-xs-3 control-label">
                                     Search :- </label>
-                                    <div className="input-icon col-md-6" style={{display: 'inline-block' }}>
+                                    <div className="input-icon col-xs-5" style={{display: 'inline-block' }}>
                                         <i className="fa fa-car"></i>
                                         <input id="inputDVehiNo" type="text" placeholder="Vehical No" className="form-control" />
                                     </div>
-                                    <div className='col-md-2' style={{ height: '30px', paddingTop: '-50px'}}>
+                                    <div className='col-xs-2' style={{ height: '30px', paddingTop: '-50px'}}>
                                         <a href="#" className="btn btn-primary ml-5" id="searchBtn" onClick={this.searchVehical}>Search</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </form>
-                    <div className="col-md-3">
+                    <div className="col-sm-12 col-md-3">
                         <table className="table table-striped table-hover">
                             <tbody>
                                 <tr>
@@ -173,53 +173,53 @@ export default class VehicalAdd extends Component{
                             </tbody>
                         </table>
                     </div>
-                    <form className='col-md-9'>
+                    <form className='col-sm-12 col-md-9'>
                     
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-sm-6">
                             <label for="inputDRegistration">Registration No</label>
                             <input type="text" class="form-control" id="inputDRegistration" disabled placeholder="Registration No"/>
                             </div>
-                            <div class="form-group col-md-5">
+                            <div class="form-group col-sm-5">
                             <label for="inputDCassis">Chassis No</label>
                             <input type="text" class="form-control" id="inputDCassis" disabled placeholder="Chassis No"/>
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-sm-6">
                             <label for="inputDDngine">Dngine No</label>
                             <input type="text" class="form-control" id="inputDEngine" disabled placeholder="Dngine No"/>
                             </div>
-                            <div class="form-group col-md-5">
+                            <div class="form-group col-sm-5">
                             <label for="inputDCapacity">Cylinder Capacity</label>
                             <input type="text" class="form-control" id="inputDCapacity" disabled placeholder="Cylinder Capacity"/>
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-sm-6">
                             <label for="inputDMake">Make</label>
                             <input type="text" class="form-control" id="inputDMake" disabled placeholder='Make'/>
                             </div>
-                            <div class="form-group col-md-5">
+                            <div class="form-group col-sm-5">
                             <label for="inputDModal">Modal</label>
                             <input type="text" class="form-control" id="inputDModal" disabled placeholder='Modal'/>
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-sm-6">
                                 <label for="inputDFuel">Fuel Type</label>
                                 <input type="text" class="form-control" id="inputDFuel" disabled placeholder="Fuel Type"/>
                             </div>
-                            <div class="form-group col-md-5">
+                            <div class="form-group col-sm-5">
                                 <label for="inputDYear">Year Of Manifacturing</label>
                                 <input type="text" class="form-control" id="inputDYear" disabled placeholder="Year Of Manifacturing"/>
                             </div>
                         </div>
-                        <div class="form-group col-md-6 row">
-                            <div class='col-md-3'>
+                        <div class="form-group col-sm-6 row">
+                            <div class='col-xs-6 col-md-3'>
                                 <button type="button" class="btn btn-danger" onClick={this.showModel.bind(this)}>Delete</button>
                             </div>
-                            <div class='col-md-3'>
+                            <div class='col-xs-6 col-md-3'>
                                 <button type="button" class="btn btn-light">Cancel</button>
                             </div>
                         </div>
