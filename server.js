@@ -6,7 +6,7 @@ const cors = require('cors');
 var inDev = process.env.NODE_ENV !== 'production';
 var PORT = inDev ? 8080 : process.env.PORT;
 const path = require('path');
-const targetBaseUrl = ' https://money360.herokuapp.com/';
+const targetBaseUrl = 'https://money360.herokuapp.com/';
 
 //import JS modules
 var superAdmin = require('./src/Component/Users/BEnd/SuperAdmin/SuperAdmin');
