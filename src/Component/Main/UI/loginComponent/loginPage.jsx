@@ -59,12 +59,12 @@ export default class LoginPage extends Component {
                     }   
                 }else{
                     console.log(response.data)
-                    ToastsStore.error("Login Fail")
+                    ToastsStore.error("Username or Password Incorrect")
                 }
               })
               .catch(function (error) {
                   console.log(error)
-                ToastsStore.error("Username Or Password Incorrect")
+                ToastsStore.error("Network Error")
             });
         }
     }

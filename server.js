@@ -3,10 +3,10 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const pg = require('pg');
 const cors = require('cors');
-var router = express.Router();
 var inDev = process.env.NODE_ENV !== 'production';
 var PORT = inDev ? 8080 : process.env.PORT;
 const path = require('path');
+const targetBaseUrl = 'http://localhost:3000/';
 
 //import JS modules
 var superAdmin = require('./src/Component/Users/BEnd/SuperAdmin/SuperAdmin');
@@ -15,11 +15,13 @@ var Admin = require('./src/Component/Users/BEnd/Admin/Admin');
 var Customer = require('./src/Component/Customer/BEnd/Customer/Customer');
 var Vehicals = require('./src/Component/HigherPurchase/Items/VehicalItem/BEnd/Vehicals/Vehicals');
 
-let app = express().use(express.static(__dirname + 'public'))
+const app = express();
 
-app.get('/', function(req, res){
-    res.sendFile(__dirname + '/public/index.html');
-});
+function handleRedirect(req, res) {
+    res.redirect(targetBaseUrl);
+  }
+  
+app.get('/', handleRedirect);
 
 const pool = new pg.Pool({
     user: "avnadmin",
