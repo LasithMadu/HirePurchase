@@ -7311,7 +7311,12 @@ ul.chats li.out .message {
   }
 
   .navbar-toggle{
-    display: none;
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 999;
+    cursor: pointer;
   }
 
   .mobileDrop{
@@ -7319,12 +7324,16 @@ ul.chats li.out .message {
     top: 0;
     right: 0;
     margin-right: 5%;
-    z-index: 999;
+    z-index: 700;
     width: 175px;
   }
 
   #side-menu{
     display: none;
+  }
+
+  .sidehigh{
+    display: block;
   }
 }
 
@@ -7361,7 +7370,12 @@ ul.chats li.out .message {
   }
 
   .navbar-toggle{
-    display: none;
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 999;
+    cursor: pointer;
   } 
    
   .mobileDrop{
@@ -7369,11 +7383,15 @@ ul.chats li.out .message {
     top: 0;
     right: 0;
     margin-right: 5%;
-    z-index: 999;
+    z-index: 700;
     width: 175px;
   }
 
   #side-menu{
     display: none;
+  }
+
+  .sidehigh{
+    display: block;
   }
 }

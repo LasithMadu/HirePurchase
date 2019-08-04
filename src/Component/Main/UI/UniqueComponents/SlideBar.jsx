@@ -29,7 +29,6 @@ export default class SlideBar extends Component {
         activeItem: "1",
         higher: false
     };
-    
   
     toggle = tab => e => {
         if (this.state.activeItem !== tab) {
@@ -62,7 +61,7 @@ export default class SlideBar extends Component {
     render () {
 
         const dropMenu = (
-            <ul id="side-menu" className="nav">
+            <ul className="nav sidehigh">
                 <div className="clearfix"></div>
                 <li style={styleSheet.themColor} className={this.state.activeItem === "5" ? "active" : ""} onClick={this.toggle("5")}><MDBNavLink to="/higher/items" style={{paddingLeft: '35px'}} onClick={()=>this.props.setLocation('Items')}><i className="fa fa-edit fa-fw">
                     <div className="icon-bg bg-violet"></div>
