@@ -8,7 +8,7 @@ import 'filepond/dist/filepond.min.css';
 const styleSheet = {
     dropzone: {
         backgroundColor: '#b8b8b8',
-        height: '120px',
+        height: '140px',
         color: '#000000',
         borderRadius: '10px',
         margin: '10px'
@@ -78,10 +78,10 @@ export default class Settings extends Component {
 
     render(){
         return(
-            <div>
+            <div class="container">
                 <br/>
                 <form>
-                    <div class="form-group col-md-8" >
+                    <div class="form-group col-sm-8" >
                         <label for="inputCompany">Select Company</label>
                         <select id="inputCompany" class="form-control">
                             <option selected>Choose Company</option>
@@ -89,21 +89,21 @@ export default class Settings extends Component {
                     </div>
                 </form>
                 <br/>
-                <div className='row' style={{marginTop: '20px', marginLeft: '5px'}}>
+                <div className='row justify-content-md-center' style={{marginTop: '20px'}}>
                     <ToastsContainer store={ToastsStore} position={ToastsContainerPosition.BOTTOM_RIGHT} />
-                    <div className='col-md-5' style={styleSheet.dropzone}>
+                    <div className='col-md-5 col-sm-6 col-xs-11' style={styleSheet.dropzone}>
                         <h4 className='text-center'>Upload Logo</h4>
                         <FilePond />
                     </div>
-                    <div className='col-md-5' style={styleSheet.dropzone}>
+                    <div className='col-md-5 col-sm-6 col-xs-11' style={styleSheet.dropzone}>
                         <h4 className='text-center'>Change Theme</h4>
                         <div className='row'>
-                            <div className='col-md-10'>
+                            <div className='col-sm-12 col-xs-12'>
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="color" placeholder="#b8b8b8"/>
                                 </div>
                             </div>
-                            <div className='col-md-2'>
+                            <div className='col-sm-2 col-xs-2'>
                                 <button type="button" class="btn btn-primary" onClick={this.changeTheme}>Save</button>
                             </div>
                         </div>

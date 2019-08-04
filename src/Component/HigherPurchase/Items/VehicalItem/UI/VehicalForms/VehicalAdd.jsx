@@ -19,7 +19,7 @@ function setValue(id, value){
 export default class VehicalAdd extends Component{
 
     searchCustomer(){
-        var nic = $('#inputSeNic').val();
+        var nic = $('#inputSeNic').val().toUpperCase();
         
         if(nic.length > 9){
             var path = 'https://money360-server.herokuapp.com/Customer/searchCutomer';
@@ -47,7 +47,7 @@ export default class VehicalAdd extends Component{
     
     saveVehicals(){
         var valid, cus = true;
-        var customer = [$('#inputSeNic').val(), $('#user').text(), $('#email').text(), $('#address').text(), $('#gender').text(), $('#mobile').text()];
+        var customer = [$('#inputSeNic').val().toUpperCase(), $('#user').text(), $('#email').text(), $('#address').text(), $('#gender').text(), $('#mobile').text()];
 
         for(var i=0; i<customer.length; i++){
             if(customer[i] === ''){

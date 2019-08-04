@@ -95,7 +95,7 @@ export default class CreateForm extends Component{
         var path = 'https://money360-server.herokuapp.com/Customer/searchCutomer';
 
         axios.post(path, {
-            data: $('#inputENIC').val()
+            data: $('#inputENIC').val().toUpperCase()
           })
           .then(function (response) {
             if(response.data.msg){

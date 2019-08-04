@@ -31,7 +31,7 @@ export default class CreateForm extends Component{
         var title = $('#inputTitle').val();
         var gender = $('#inputGender').val();
         var country = $('#inputCountry').val();
-        var values = [uuidv4(), title, $('#inputInitials').val(), $('#inputFullname').val(), $('#inputNic').val(), gender, $('#inputOccupation').val(), $('#inputAddress').val(), $('#inputAddress2').val(), $('#inputCity').val(), $('#inputState').val(), country, $('#inputEmail').val(), $('#inputMobile').val()];
+        var values = [uuidv4(), title, $('#inputInitials').val(), $('#inputFullname').val(), $('#inputNic').val().toUpperCase(), gender, $('#inputOccupation').val(), $('#inputAddress').val(), $('#inputAddress2').val(), $('#inputCity').val(), $('#inputState').val(), country, $('#inputEmail').val(), $('#inputMobile').val()];
 
         for(var i=0; i<values.length; i++){
             if(values[i] === ''){

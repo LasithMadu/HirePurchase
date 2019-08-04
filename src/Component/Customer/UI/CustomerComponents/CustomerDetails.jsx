@@ -39,7 +39,7 @@ export default class CustomerDetails extends Component {
         var path = 'https://money360-server.herokuapp.com/Customer/searchCutomer';
 
         axios.post(path, {
-          data: $('#inputName').val()
+          data: $('#inputName').val().toUpperCase()
         })
         .then(function (response) {
           if(response.data.msg){

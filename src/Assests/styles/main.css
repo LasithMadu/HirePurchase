@@ -7309,6 +7309,23 @@ ul.chats li.out .message {
     min-height: 950px;
     height: 950px;
   }
+
+  .navbar-toggle{
+    display: none;
+  }
+
+  .mobileDrop{
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: 5%;
+    z-index: 999;
+    width: 175px;
+  }
+
+  #side-menu{
+    display: none;
+  }
 }
 
 /* 
@@ -7341,5 +7358,22 @@ ul.chats li.out .message {
   .profile{
     min-height: 950px;
     height: 950px;
+  }
+
+  .navbar-toggle{
+    display: none;
+  } 
+   
+  .mobileDrop{
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: 5%;
+    z-index: 999;
+    width: 175px;
+  }
+
+  #side-menu{
+    display: none;
   }
 }

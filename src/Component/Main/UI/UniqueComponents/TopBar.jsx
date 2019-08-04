@@ -58,10 +58,9 @@ export default class TopBar extends Component {
             <div id="header-topbar-option-demo" className="page-header-topbar">
                     <nav id="topbar" role="navigation" style={styleSheet.dropContent} data-step="3" className="navbar navbar-default navbar-static-top">
                     <div className="navbar-header" style={{marginRight: '-20px'}}>
-                        <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" className="navbar-toggle"><span className="sr-only">Toggle navigation</span><span className="icon-bar"></span><span className="icon-bar"></span><span className="icon-bar"></span></button>
                         <a id="logo" style={styleSheet.dropContent} href="index.html" className="navbar-brand"><span className="fa fa-rocket"></span><span className="logo-text">Money360</span><span style={{display: 'none'}} className="logo-text-icon">µ</span></a></div>
-                    <div className="topbar-main"><a id="menu-toggle" href="#" className="hidden-xs"><i className="fa fa-bars"></i></a>
-                        <ul className="nav navbar navbar-top-links navbar-right mbn">
+                    <div className="topbar-main">
+                        <ul className="nav navbar navbar-top-links navbar-right mbn mobileDrop ">
                             <li className="dropdown topbar-user"><a data-hover="dropdown" className="dropdown-toggle"><img src={userProfile} alt="" className="img-responsive img-circle"/>&nbsp;<span className="hidden-xs">{localStorage.getItem('username').toUpperCase()}</span>&nbsp;<span className="caret"></span></a>
                             { this.state.userLevel === 'Super Admin' ? superadmin : ""}
                             { this.state.userLevel === 'Admin' ? admin : ""}
