@@ -152,7 +152,7 @@ export default class Profile extends Component {
                 <div className="page-content profile">
                     <div id="tab-general">
                         <div className="row mbl">
-                            <div className="col-lg-12">
+                            <div className="col-sm-12">
                                 
                                             <div className="col-md-12">
                                                 <div id="area-chart-spline">
@@ -161,62 +161,60 @@ export default class Profile extends Component {
                                 
                             </div>
 
-                            <div className="col-lg-12">
+                            <div className="col-sm-12">
                               
                                     
                               <div className="row">
-                    <div className="col-md-12"><h2>Profile :- {localStorage.getItem('firstname')+" "+localStorage.getItem('lastname')}</h2>
+                    <div className="col-md-12 col-sm-12 col-xs-12"><h2>Profile :- {localStorage.getItem('firstname')+" "+localStorage.getItem('lastname')}</h2>
 
                         <div className="row mtl">
-                            <div className="col-md-3">
+                            <div className="col-md-3 col-sm-6 col-xs-6 pofimage">
                                 <div className="form-group">
                                     <div className="text-center mbl"><img src="http://lorempixel.com/640/480/business/1/" alt="" className="img-responsive"/></div>
                                     <div className="text-center mbl"><a href="#" className="btn btn-green"><i className="fa fa-upload"></i>&nbsp;
                                         Upload</a></div>
                                 </div>
                             </div>
-                            <div className="col-md-9">
+                            <div className="col-md-9 col-sm-12 col-xs-12">
                                 <div id="generalTabContent" className="tab-content">
                                     <div id="tab-edit" className="tab-pane fade in active">
                                         <form action="#" className="form-horizontal"><h3>Account Setting</h3>
 
                                             <div className="form-group"><label className="col-sm-3 control-label">First Name</label>
 
-                                            <div className="col-sm-9 controls">
+                                            <div className="col-sm-9 col-xs-12 controls">
                                                 <div className="row">
-                                                    <div className="col-xs-9"><input type="text" id='inputFirst' placeholder="first name" className="form-control"/></div>
+                                                    <div className="col-xs-9 col-xs-12"><input type="text" id='inputFirst' placeholder="first name" className="form-control"/></div>
                                                 </div>
                                             </div>
                                             </div>
                                             <div className="form-group"><label className="col-sm-3 control-label">Last Name</label>
 
-                                            <div className="col-sm-9 controls">
+                                            <div className="col-sm-9 col-xs-12 controls">
                                                 <div className="row">
-                                                    <div className="col-xs-9"><input type="text" id='inputLast' placeholder="last name" className="form-control"/></div>
+                                                    <div className="col-xs-9 col-xs-12"><input type="text" id='inputLast' placeholder="last name" className="form-control"/></div>
                                                 </div>
                                             </div>
                                             </div>
                                             <div className="form-group"><label className="col-sm-3 control-label">Email</label>
 
-                                                <div className="col-sm-9 controls">
+                                                <div className="col-sm-9 col-xs-12 controls">
                                                     <div className="row">
-                                                        <div className="col-xs-9"><input type="email" id="inputEmail" placeholder="email@yourcompany.com" className="form-control"/></div>
+                                                        <div className="col-xs-9 col-xs-12"><input type="email" id="inputEmail" placeholder="email@yourcompany.com" className="form-control"/></div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div className="form-group"><label className="col-sm-3 control-label">Username</label>
 
-                                                <div className="col-sm-9 controls">
+                                                <div className="col-sm-9 col-xs-12 controls">
                                                     <div className="row">
-                                                        <div className="col-xs-9"><input type="text" id='inputUser' placeholder="username" className="form-control"/></div>
+                                                        <div className="col-xs-9 col-xs-12"><input type="text" id='inputUser' placeholder="username" className="form-control"/></div>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <hr/>
                                             <button type="button" onClick={this.updateData.bind(this)} className="btn btn-green btn-block">Update</button>
                                         </form>
-                                        <br/>
                                         <br/>
                                         <hr/>
                                         <form className="form-horizontal"><h3>Security Setting</h3>
@@ -224,7 +222,7 @@ export default class Profile extends Component {
 
                                             <div className="col-sm-9 controls">
                                                 <div className="row">
-                                                    <div className="col-xs-4"><input type="password" id='inputCurrent' placeholder="Current Password" className="form-control"/></div>
+                                                    <div className="col-xs-12 col-sm-9"><input type="password" id='inputCurrent' placeholder="Current Password" className="form-control"/></div>
                                                 </div>
                                             </div>
                                             </div>
@@ -233,7 +231,7 @@ export default class Profile extends Component {
 
                                                 <div className="col-sm-9 controls">
                                                     <div className="row">
-                                                        <div className="col-xs-4"><input type="password" id='inputNew' placeholder="New Password" className="form-control"/></div>
+                                                        <div className="col-xs-12 col-sm-9"><input type="password" id='inputNew' placeholder="New Password" className="form-control"/></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -241,12 +239,11 @@ export default class Profile extends Component {
 
                                                 <div className="col-sm-9 controls">
                                                     <div className="row">
-                                                        <div className="col-xs-4"><input type="password" id='inputConfirm' placeholder="Confirm Password" className="form-control"/></div>
+                                                        <div className="col-xs-12 col-sm-9"><input type="password" id='inputConfirm' placeholder="Confirm Password" className="form-control"/></div>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <hr/>
                                             <button type="button" onClick={this.changePassword.bind(this)} className="btn btn-primary btn-block">Change</button>
                                         </form>
                                     </div>

@@ -130,21 +130,21 @@ export default class CreateForm extends Component{
                         <div className="form-body pal">
                             <div className="form-group">
                                 <div className='row'>
-                                    <label htmlFor="inputDNIC" className="col-xs-3 control-label">
+                                    <label htmlFor="inputDNIC" className="col-md-3 col-sm-2 col-xs-3 control-label">
                                     Search :- </label>
-                                    <div className="input-icon col-xs-6" style={{display: 'inline-block' }}>
+                                    <div className="input-icon col-md-6 col-sm-4 col-xs-6" style={{display: 'inline-block' }}>
                                         <i className="fa fa-user"></i>
                                         <input id="inputDNIC" type="text" placeholder="Search by NIC/Passport No" className="form-control" />
                                     </div>
-                                    <div className='col-xs-2' style={{ height: '30px', paddingTop: '-50px'}}>
+                                    <div className='col-md-2 col-sm-1 col-xs-2' style={{ height: '30px', paddingTop: '-50px'}}>
                                         <a href="#" className="btn btn-primary ml-5" id="searchBtn" onClick={this.searchCustomer.bind(this)}>Search</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </form>
-                <form className='col-md-12'>
-                    <div class="form-group col-md-11">
+                <form className='col-sm-12 col-xs-12'>
+                    <div class="form-group col-md-11 col-sm-7 col-xs-12">
                         <label for="inputDTitle">Title</label>
                         <select id="inputDTitle" disabled class="form-control">
                             <option selected>Choose Title</option>
@@ -157,16 +157,16 @@ export default class CreateForm extends Component{
                             <option value="Ma'am. ">Ma'am. </option>
                         </select>
                     </div>
-                    <div class="form-group col-md-11">
+                    <div class="form-group col-md-11 col-sm-7 col-xs-12">
                         <label for="inputDInitials">Name With Initials</label>
                         <input type="text" class="form-control" disabled id="inputDInitials" placeholder="M.D.S Something"/>
                     </div>
-                    <div class="form-group col-md-11">
+                    <div class="form-group col-md-11 col-sm-7 col-xs-12">
                         <label for="inputDFullname">Full Name</label>
                         <input type="text" class="form-control" disabled id="inputDFullname" placeholder="Michael Dennis Stocks Something"/>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-5">
+                        <div class="form-group col-md-5 col-sm-7 col-xs-12">
                         <label for="inputDGender">Gender</label>
                         <select id="inputDGender" disabled class="form-control">
                             <option selected>Choose Gender</option>
@@ -174,29 +174,29 @@ export default class CreateForm extends Component{
                             <option>Female</option>
                         </select>
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-6 col-sm-7 col-xs-12">
                         <label for="inputDOccupation">Occupation</label>
                         <input type="text" class="form-control" disabled id="inputDOccupation"/>
                         </div>
                     </div>
-                    <div class="form-group col-md-11">
+                    <div class="form-group col-md-11 col-sm-7 col-xs-12">
                         <label for="inputDAddress">Address</label>
                         <input type="text" class="form-control" disabled id="inputDAddress" placeholder="1234 Main St"/>
                     </div>
-                    <div class="form-group col-md-11">
+                    <div class="form-group col-md-11 col-sm-7 col-xs-12">
                         <label for="inputDAddress2">Address 2</label>
                         <input type="text" class="form-control" disabled id="inputDAddress2" placeholder="Apartment, studio, or floor"/>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-4 col-sm-7 col-xs-12">
                         <label for="inputDCity">City</label>
                         <input type="text" class="form-control" disabled id="inputDCity"/>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-4 col-sm-7 col-xs-12">
                         <label for="inputDState">State</label>
                         <input type="text" class="form-control" disabled id="inputDState"/>
                         </div>
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-3 col-sm-7 col-xs-12">
                         <label for="inputDCountry">Country</label>
                         <select id="inputDCountry" disabled class="form-control">
                             <option selected>Choose Country</option>
@@ -204,20 +204,20 @@ export default class CreateForm extends Component{
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-6 col-sm-7 col-xs-12">
                         <label for="inputDEmail">Email</label>
                         <input type="text" disabled class="form-control" id="inputDEmail"/>
                         </div>
-                        <div class="form-group col-md-5">
+                        <div class="form-group col-md-5 col-sm-7 col-xs-12">
                         <label for="inputDMobile">Mobile No</label>
                         <input type="text" disabled class="form-control" id="inputDMobile"/>
                         </div>
                     </div>
-                    <div class="form-group col-md-6 row">
-                        <div class='col-md-2'>
+                    <div class="form-group col-sm-6 col-md-4 row">
+                        <div class='col-sm-3 col-xs-6'>
                             <button type="button" onClick={this.showModel.bind(this)} class="btn btn-danger">Delete</button>
                         </div>
-                        <div class='col-md-2'>
+                        <div class='col-sm-3 col-xs-6'>
                             <button type="button" class="btn btn-light">Cancel</button>
                         </div>
                     </div>

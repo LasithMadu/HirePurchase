@@ -7312,7 +7312,7 @@ ul.chats li.out .message {
 
   .navbar-toggle{
     display: block;
-    position: fixed;
+    position: absolute;
     top: 0;
     right: 0;
     z-index: 999;
@@ -7371,7 +7371,7 @@ ul.chats li.out .message {
 
   .navbar-toggle{
     display: block;
-    position: fixed;
+    position: absolute;
     top: 0;
     right: 0;
     z-index: 999;

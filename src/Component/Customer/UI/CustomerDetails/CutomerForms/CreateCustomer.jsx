@@ -81,8 +81,8 @@ export default class CreateForm extends Component{
                 <ToastsContainer store={ToastsStore} position={ToastsContainerPosition.BOTTOM_RIGHT} />
                 <h3>Customer Register</h3>
                 <hr/>
-                <form className='col-md-12'>
-                    <div class="form-group col-md-11">
+                <form className='col-md-12 col-xs-12'>
+                    <div class="form-group col-md-11 col-sm-7 col-xs-12">
                         <label for="inputTitle">Title</label>
                         <select id="inputTitle" class="form-control">
                             <option selected>Choose Title</option>
@@ -95,20 +95,20 @@ export default class CreateForm extends Component{
                             <option value="Ma'am. ">Ma'am. </option>
                         </select>
                     </div>
-                    <div class="form-group col-md-11">
+                    <div class="form-group col-md-11 col-sm-7 col-xs-12">
                         <label for="inputInitials">Name With Initials</label>
                         <input type="text" class="form-control" id="inputInitials" placeholder="M.D.S Something"/>
                     </div>
-                    <div class="form-group col-md-11">
+                    <div class="form-group col-md-11 col-sm-7 col-xs-12">
                         <label for="inputFullname">Full Name</label>
                         <input type="text" class="form-control" id="inputFullname" placeholder="Michael Dennis Stocks Something"/>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-4 col-sm-7 col-xs-12">
                         <label for="inputNic">NIC/Passport No</label>
                         <input type="text" class="form-control" id="inputNic"/>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-4 col-sm-7 col-xs-12">
                         <label for="inputGender">Gender</label>
                         <select id="inputGender" class="form-control">
                             <option selected>Choose Gender</option>
@@ -116,29 +116,29 @@ export default class CreateForm extends Component{
                             <option>Female</option>
                         </select>
                         </div>
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-3 col-sm-7 col-xs-12">
                         <label for="inputOccupation">Occupation</label>
                         <input type="text" class="form-control" id="inputOccupation"/>
                         </div>
                     </div>
-                    <div class="form-group col-md-11">
+                    <div class="form-group col-md-11 col-sm-7 col-xs-12">
                         <label for="inputAddress">Address</label>
                         <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St"/>
                     </div>
-                    <div class="form-group col-md-11">
+                    <div class="form-group col-md-11 col-sm-7 col-xs-12">
                         <label for="inputAddress2">Address 2</label>
                         <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor"/>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-4 col-sm-7 col-xs-12">
                         <label for="inputCity">City</label>
                         <input type="text" class="form-control" id="inputCity"/>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-4 col-sm-7 col-xs-12">
                         <label for="inputState">State</label>
                         <input type="text" class="form-control" id="inputState"/>
                         </div>
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-3 col-sm-7 col-xs-12">
                         <label for="inputCountry">Country</label>
                         <select id="inputCountry" class="form-control">
                             <option selected>Choose Country</option>
@@ -146,20 +146,20 @@ export default class CreateForm extends Component{
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-6 col-sm-7 col-xs-12">
                         <label for="inputEmail">Email</label>
                         <input type="text" class="form-control" id="inputEmail"/>
                         </div>
-                        <div class="form-group col-md-5">
+                        <div class="form-group col-md-5 col-sm-7 col-xs-12">
                         <label for="inputMobile">Mobile No</label>
                         <input type="text" class="form-control" id="inputMobile"/>
                         </div>
                     </div>
-                    <div class="form-group col-md-6 row">
-                        <div class='col-md-2'>
+                    <div class="form-group col-sm-6 col-md-4 row">
+                        <div class='col-sm-3 col-xs-6'>
                             <button type="button" onClick={this.saveCustomer.bind(this)} class="btn btn-primary">Save</button>
                         </div>
-                        <div class='col-md-2'>
+                        <div class='col-sm-3 col-xs-6'>
                             <button type="button" class="btn btn-light">Cancel</button>
                         </div>
                     </div>
