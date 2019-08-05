@@ -66,7 +66,9 @@ export default class VehicalAdd extends Component{
             }
         }
 
-        if(!cus){
+        if($('#inputRegistration').val().length < 10){
+            ToastsStore.warning("Vehical Number Is Invalid. Put Like This.\n Ex :- WP VS-1439")
+        }else if(!cus){
             ToastsStore.error("Customer Details Not Filed")
         }else if(!valid){
             ToastsStore.warning("Some Fields Are Empty")

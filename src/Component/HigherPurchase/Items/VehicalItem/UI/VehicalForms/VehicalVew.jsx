@@ -20,7 +20,7 @@ export default class VehicalView extends Component{
 
   getVehicals(){
     var that = this;
-    axios.get('https://money360-server.herokuapp.comVehicals/getVehicals',{
+    axios.get('https://money360-server.herokuapp.com/Vehicals/getVehicals',{
     })
       .then((response) => {
         if(response.data.msg){
@@ -31,7 +31,7 @@ export default class VehicalView extends Component{
         }
 
       })
-      //console.log(this.vehicles);
+      console.log(this.vehicles);
   }
 
   render(){
