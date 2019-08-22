@@ -26,6 +26,15 @@ export default class CustomerDetails extends Component {
       $('.modal').hide('slow');
     }
 
+    componentDidUpdate(){
+      window.onpopstate  = (e) => {
+        if(window.location.href === 'http://localhost:3000/customer'){
+          window.location.href = '/customer'
+        }
+      }
+    
+    }
+
     redirect() {
       window.location.href = "/create";
     }
@@ -65,17 +74,17 @@ export default class CustomerDetails extends Component {
             <div className="page-content">
               <ToastsContainer store={ToastsStore} position={ToastsContainerPosition.BOTTOM_RIGHT} />
               <form action="#" className="form-horizontal">
-                  <div className="form-body pal">
+                  <div className="form-body container-full">
                       <div className="form-group">
                         <div className='row'>
-                          <label htmlFor="inputName" className="col-xs-3 control-label">
-                              Search :- </label>
-                              <div className="input-icon col-xs-6" style={{display: 'inline-block' }}>
+                          <label htmlFor="inputName" className="col-lg-1 col-md-1 col-sm-1 col-xs-3 control-label">
+                              Search : </label>
+                              <div className="input-icon col-lg-10 col-md-10 col-sm-10 col-xs-6" style={{display: 'inline-block' }}>
                                 <i className="fa fa-user"></i>
                                 <input id="inputName" type="text" placeholder="Search by NIC/Passport No" className="form-control" />
                               </div>
-                              <div className='col-xs-2'>
-                                <a href="#" className="btn btn-primary xs-5" id="searchBtn" onClick={this.searchCustomer}>Search</a>
+                              <div className='col-lg-1 col-md-1 col-sm-1 col-xs-2'>
+                                <a href="#" className="btn btn-primary" id="searchBtn" onClick={this.searchCustomer}><i class="fa fa-search" aria-hidden="true"></i></a>
                               </div>
                             </div>
                           </div>

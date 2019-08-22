@@ -71,7 +71,7 @@ export default class TopBar extends Component {
             <div id="header-topbar-option-demo" className="page-header-topbar">
                     <nav id="topbar" role="navigation" style={styleSheet.dropContent} data-step="3" className="navbar navbar-default navbar-static-top">
                     <div className="navbar-header" style={{marginRight: '-20px'}}>
-                        <a id="logo" style={styleSheet.dropContent} href="index.html" className="navbar-brand"><span className="fa fa-rocket"></span><span className="logo-text">Money360</span><span style={{display: 'none'}} className="logo-text-icon">µ</span></a></div>
+                        <MDBNavLink id="logo" style={styleSheet.dropContent} to="/customer" className="navbar-brand"><span className="fa fa-rocket"></span><span className="logo-text">Money360</span><span style={{display: 'none'}} className="logo-text-icon">µ</span></MDBNavLink></div>
                         <div id="mydiv" class="navbar-toggle" onClick={this.mouse}><i className="fa fa-bars"></i></div>
                     <div className="topbar-main">
                         <ul className="nav navbar navbar-top-links navbar-right mbn mobileDrop">

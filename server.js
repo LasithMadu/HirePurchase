@@ -14,6 +14,7 @@ var main = require('./src/Component/Main/BEnd/MainTasks/main');
 var Admin = require('./src/Component/Users/BEnd/Admin/Admin');
 var Customer = require('./src/Component/Customer/BEnd/Customer/Customer');
 var Vehicals = require('./src/Component/HigherPurchase/Items/VehicalItem/BEnd/Vehicals/Vehicals');
+var Agreement = require('./src/Component/HigherPurchase/Agreement/BEnd/Agreement/Agreement');
 
 const app = express();
 
@@ -151,6 +152,11 @@ app.post('/Vehicals/updateVehicals', function(request, response){
 
 app.post('/Vehicals/deleteVehicals', function(request, response){
     Vehicals.deleteVehicals(request, response, pool);
+});
+
+//Agreement Activity
+app.post('/Agreement/getData', function(request, response){
+    Agreement.getData(request, response, pool);
 });
 
 if (process.env.NODE_ENV === 'production') {

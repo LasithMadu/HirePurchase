@@ -10,6 +10,18 @@ body{
   margin-left: 250px;
 }
 
+.checkButton{
+  display: none;
+}
+
+.rightButton{
+  float: right !important;
+}
+
+.centerText{
+  text-align: center;
+}
+
 .alert{
   padding: 0;
   margin: 0;
@@ -23,6 +35,11 @@ body{
   max-height: calc(100vh - 100px);
 }
 
+.pdf {
+  height: calc(100vh - 170px);
+  max-height: calc(100vh - 170px);
+}
+
 .panel {
   /* height: calc(100vh - 50px);
   max-height: calc(100vh - 50px); */
@@ -32,6 +49,12 @@ body{
 .edit{
   height: calc(100vh - 200px);
   max-height: calc(100vh - 200px);
+  display: inline-block;
+}
+
+.agreement{
+  height: calc(100vh - 150px);
+  max-height: calc(100vh - 150px);
   display: inline-block;
 }
 
@@ -7335,6 +7358,10 @@ ul.chats li.out .message {
   .sidehigh{
     display: block;
   }
+
+  .rightButton{
+    float: left !important;
+  }
 }
 
 /* 
@@ -7393,5 +7420,9 @@ ul.chats li.out .message {
 
   .sidehigh{
     display: block;
+  }
+
+  .rightButton{
+    float: left !important;
   }
 }

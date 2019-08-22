@@ -16,6 +16,15 @@ export default class LoginPage extends Component {
         }
     }
 
+    componentDidMount(){
+        
+        if(localStorage.getItem('userId') === null){
+        }else{
+            window.history.go(-1);
+            //window.location.href = '/customer'
+        }
+    }
+
     backgroundColor(){
         this.setState = { bgColor: '#2ecc71' }
     }

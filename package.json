@@ -4,6 +4,9 @@
   "private": true,
   "dependencies": {
     "@bumaga/tabs": "^0.1.1",
+    "@progress/kendo-drawing": "^1.5.12",
+    "@progress/kendo-react-pdf": "^3.2.2",
+    "@react-pdf/renderer": "^1.6.4",
     "@zendeskgarden/react-tabs": "^6.2.0",
     "@zendeskgarden/react-theming": "^6.2.0",
     "antd": "^3.20.3",
@@ -15,9 +18,11 @@
     "datatables.net": "^1.10.19",
     "express": "^4.17.1",
     "filepond": "^4.4.11",
+    "generate-unique-id": "^2.0.0",
     "jquery": "^3.4.1",
     "mdbreact": "^4.18.0",
     "morgan": "^1.9.1",
+    "pdfmake": "^0.1.58",
     "pg": "^7.11.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
@@ -31,6 +36,7 @@
     "simplebar": "^4.1.0",
     "slideout": "^1.0.1",
     "styled-components": "^4.3.2",
+    "unique-number": "^2.0.1",
     "uuid": "^3.3.2"
   },
   "scripts": {
