@@ -54,7 +54,7 @@ export default class Agreement extends Component{
     getAgreement(){
         localStorage.setItem('agreement', null);
         var agreeNo = $('#inputAgrrNo').val().toUpperCase();
-        var path = 'http://localhost:8080/Agreement/getData';
+        var path = 'https://money360-server.herokuapp.com/Agreement/getData';
 
         if(agreeNo.length > 9){
             axios.post(path, {
@@ -82,7 +82,7 @@ export default class Agreement extends Component{
 
     render(){
         return(
-            <div className="page-content">
+            <div className="page-content">f
                 <ToastsContainer store={ToastsStore} position={ToastsContainerPosition.BOTTOM_RIGHT} />
                 <div data-simplebar>
                     <div className="col-md-12 col-sm-12 col-xs-12 agreement profile">
