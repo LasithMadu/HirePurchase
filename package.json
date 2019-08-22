@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "npm": "10.15.3"
+    "npm": "6.9.0"
   },
   "dependencies": {
     "@bumaga/tabs": "^0.1.1",
