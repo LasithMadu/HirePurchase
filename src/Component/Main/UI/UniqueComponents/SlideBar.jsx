@@ -71,7 +71,7 @@ export default class SlideBar extends Component {
                     <div className="icon-bg bg-violet"></div>
                     </i><span className="menu-title">Agreement</span></MDBNavLink>
                 </li>
-                <li style={styleSheet.themColor} className={this.state.activeItem === "7" ? "active" : ""} onClick={this.toggle("7")}><MDBNavLink to="/higher/payement" style={{paddingLeft: '35px'}} onClick={()=>this.props.setLocation('Payment')}><i className="fa fa-edit fa-fw">
+                <li style={styleSheet.themColor} className={this.state.activeItem === "7" ? "active" : ""} onClick={this.toggle("7")}><MDBNavLink to="/higher/payment" style={{paddingLeft: '35px'}} onClick={()=>this.props.setLocation('Payment')}><i className="fa fa-edit fa-fw">
                     <div className="icon-bg bg-violet"></div>
                     </i><span className="menu-title">Payment</span></MDBNavLink>
                 </li>

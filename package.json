@@ -16,6 +16,7 @@
     "connect": "^3.7.0",
     "cors": "^2.8.5",
     "datatables.net": "^1.10.19",
+    "date-and-time": "^0.9.0",
     "express": "^4.17.1",
     "filepond": "^4.4.11",
     "generate-unique-id": "^2.0.0",
@@ -42,10 +43,10 @@
   "scripts": {
     "client-install": "npm install --prefix client",
     "start": "react-scripts start",
-    "server": "nodemon ./src/server.js",
+    "server": "nodemon server.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=true npm install --prefix client && npm run build --prefix client",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "eslintConfig": {

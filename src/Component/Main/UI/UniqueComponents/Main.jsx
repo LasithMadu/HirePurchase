@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom"
-import axios from 'axios'
 import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
 
 import Customer from '../../../Customer/UI/CustomerComponents/CustomerDetails'
@@ -13,18 +12,13 @@ import Items from '../../../HigherPurchase/Items/UI/ItemComponent'
 import UserProfile from '../../../Users/UI/Users/Profile/Profile'
 import Login from '../../../Main/UI/loginComponent/loginPage';
 import Agreement from '../../../HigherPurchase/Agreement/UI/Agreement';
+import Payment from '../../../HigherPurchase/Payment/UI/Payment/Payment';
 import AgreementPDF from '../../../HigherPurchase/Agreement/UI/AgreementPDF';
 import NotFound from '../../../Main/UI/UniqueComponents/NotFound';
 
 import SlideBar from '../../../Main/UI/UniqueComponents/SlideBar'
 import TopBar from '../../../Main/UI/UniqueComponents/TopBar'
 import LocationBar from '../../../Main/UI/UniqueComponents/LocationBar'
-
-const styleSheet = {
-  body: {
-    marginLeft: '250px'
-  }
-}
 
 export default class Main extends Component {
 
@@ -56,13 +50,13 @@ export default class Main extends Component {
                     <LocationBar currentLocation={this.state.currentLocation}/>
                     <div className='col-md-12'>
                     <Switch>
-                        <Route exact path="/" component={Login} />
                         <Route exact path="/customer" component={Customer} />
                         <Route exact path="/higher" component={Customer} />
                         <Route exact path="/higher/items" component={Items} />
                         <Route exact path="/higher/agreement" render={()=><Agreement/>} />
                         <Route exact path="/create" component={CDetails} />
                         <Route exact path="/profile" component={Profile} />
+                        <Route exact path="/higher/payment" component={Payment} />
                         <Route exact path="/userprofile" component={UserProfile} />
                         <Route exact path="/users" component={Users} />
                         <Route exact path="/settings" component={Settings} />

@@ -6,6 +6,8 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom"
 
 import Login from '../src/Component/Main/UI/loginComponent/loginPage';
+import ForgetPassword from '../src/Component/Main/UI/ForgetPassword/ForgetPassword';
+import ChangePassword from '../src/Component/Main/UI/ChangePassword/ChangePassword';
 import NotFound from '../src/Component/Main/UI/UniqueComponents/Main';
 
 const routing = (
@@ -13,6 +15,8 @@ const routing = (
       <div>
       <Switch>
         <Route exact path="/" component={Login} />
+        <Route exact path="/fogetpass" component={ForgetPassword} />
+        <Route exact path="/changepass" component={ChangePassword} />
         <Route component={NotFound} />
       </Switch>
       </div>

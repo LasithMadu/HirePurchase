@@ -5,14 +5,23 @@ import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toast
 import 'simplebar'; // or "import SimpleBar from 'simplebar';" if you want to use it manually.
 import 'simplebar/dist/simplebar.css';
 
-import avatar from '../../../../Assests/images/avatar/profile-pic.png'
+import logo from '../../../../Assests/images/logo/hire logo.png'
+import company from '../../../../Assests/images/logo/logo.png'
+
+let atempts = 1;
+
+function reset(){
+    $('.msgu').text('');
+    $('.msgp').text('');
+}
 
 export default class LoginPage extends Component {
     constructor(props) {
         super(props)
         this.state = { 
             bgColor: '',
-            fontColor: '#2e4053'
+            fontColor: '#2e4053',
+            show: true
         }
     }
 
@@ -30,52 +39,117 @@ export default class LoginPage extends Component {
     }
 
     signin(){
-        var values = [$('#inputName').val().toLowerCase(), $('#inputPassword').val()];
-        let path = 'https://money360-server.herokuapp.com/signin';
+        reset();
+        let path = 'http://localhost:8080/signin';
+        var locked = false;
 
-        if(values[0] === ''){
-            ToastsStore.warning("Please Fill The Username Field")
-        }else if(values[1] === ''){
-            ToastsStore.warning("Please Fill The Password Field")
+        if($('#inputName').val().toLowerCase() === ''){
+            $('.msgu').text('Please enter username');
+        }else if($('#inputPassword').val() === ''){
+            $('.msgp').text('Please enter password');
         }else{
             axios.post(path, {
-                data: values
+                username: $('#inputName').val().toLowerCase(),
+                password:  $('#inputPassword').val()
               })
               .then(function (response) {
                 if(response.data.msg){
-                    localStorage.setItem('userId', response.data.table.rows[0].userId);
-                    localStorage.setItem('userLevel', response.data.table.rows[0].userLevel);
-                    localStorage.setItem('username', response.data.table.rows[0].userName);
-                    localStorage.setItem('firstname', response.data.table.rows[0].firstName);
-                    localStorage.setItem('lastname', response.data.table.rows[0].lastName);
-                    localStorage.setItem('company', response.data.table.rows[0].company);
-                    try{
-                        axios.post('https://money360-server.herokuapp.com/getColor', {
-                            company: localStorage.getItem('company')
-                        })
-                        .then(function (response) {
-                            if(response.data.msg){
-                                localStorage.setItem('bgColor', response.data.table.rows[0].color);
-                                localStorage.setItem('fontColor', '#eeeeee');
-                                window.location.href = "/customer";
+                    if(response.data.table != null){
+                        locked = response.data.table.isLock;
+                    }
+                    if(!response.data.user && !response.data.pass){
+                        $('.msgp').text('Invalid username and password, try again');
+                    }else if(!response.data.user){
+                        $('.msgu').text('Invalid user name, try again');
+                    }else if(!response.data.pass){
+                            localStorage.setItem('atempts', atempts++);
+                            if((4-atempts) <= -1){
+                                axios.post('http://localhost:8080/lock',{
+                                    data: response.data.table.userId
+                                })
+                                .then(function (response) {
+                                    $('.msgp').text('Your account is locked.');
+                                })
+                                .catch(function (error) {
+                                    console.log(error)
+                                });
                             }else{
-                                ToastsStore.error("Color Not Loaded")
+                                $('.msgp').text('Invalid password, try again. You have '+ (4 - parseInt(localStorage.getItem('atempts'))) +' chances.');
                             }
-                        })
-                        .catch(function (error) {
-                            ToastsStore.error(error)
-                        });
-                    }catch(e){
-                        ToastsStore.error("Some Error")
-                    }   
+                    }else if(response.data.user && response.data.pass){
+                        if(locked){
+                            $('.msgp').text('Your account is locked.');
+                        }else{
+                            atempts = 1;
+                            localStorage.setItem('userId', response.data.table.userId);
+                            localStorage.setItem('userLevel', response.data.table.userLevel);
+                            localStorage.setItem('username', response.data.table.userName);
+                            localStorage.setItem('firstname', response.data.table.firstName);
+                            localStorage.setItem('lastname', response.data.table.lastName);
+                            localStorage.setItem('company', response.data.table.company);
+                            try{
+                                axios.post('https://money360-server.herokuapp.com/getColor', {
+                                    company: localStorage.getItem('company')
+                                })
+                                .then(function (response) {
+                                    if(response.data.msg){
+                                        localStorage.setItem('bgColor', response.data.table.rows[0].color);
+                                        localStorage.setItem('fontColor', '#eeeeee');
+                                        window.location.href = "/customer";
+                                    }else{
+                                        ToastsStore.error("Color Not Loaded")
+                                    }
+                                })
+                                .catch(function (error) {
+                                    ToastsStore.error(error)
+                                });
+                            }catch(e){
+                                ToastsStore.error("Some Error")
+                            }   
+                        }
+                    }
                 }else{
-                    console.log(response.data)
                     ToastsStore.error("Username or Password Incorrect")
                 }
               })
               .catch(function (error) {
-                  console.log(error)
-                ToastsStore.error("Network Error")
+                console.log(error)
+            });
+        }
+    }
+
+    showPass(){
+        this.setState({ show: !this.state.show})
+        if(this.state.show){
+            $("#inputPassword").attr("type", "text");
+        }else{
+            $("#inputPassword").attr("type", "password");
+        }
+    }
+
+    forgetPass(){
+        reset();
+        var username = $('#inputName').val();
+        if(username == ''){
+            $('.msgu').text('Please enter username');
+        }else{
+            axios.post('http://localhost:8080/getUsername',{
+                username: username
+            })
+            .then(function (response) {
+                if(response.data.username[1]){
+                    $('.msgp').text('Your account is locked.');
+                }else{
+                    if(response.data.username.length == 0){
+                        $('.msgu').text('Invalid user name. Type the right user name to change password');
+                    }else{
+                        localStorage.setItem('username', response.data.username);
+                        //window.location.href = "/fogetpass";
+                    }
+                }
+            })
+            .catch(function (error) {
+                console.log(error)
             });
         }
     }
@@ -89,43 +163,49 @@ export default class LoginPage extends Component {
                     <div class="panel-body pan" >
                         <form action="#" class="form-horizontal">
                         <div class="form-body pal">
-                            <div class="col-md-12 text-center panel-title">
+                            <div class="col-md-12 col-sm-12 text-center panel-title">
+                                <div class="col-md-8 col-sm-8">
+                                    <img src={logo} style={{marginTop: '-220px', marginLeft: '90px'}} class="img-responsive"/>
+                                </div>
                                 <h1 style={{marginTop: '-90px', fontSize: '48px', fontColor: this.state.fontColor}}>
-                                    Money 360 Login</h1>
+                                    Hire Purchase</h1>
                                 <br />
                             </div>
                             <div class="form-group">
-                                <div class="col-md-3">
-                                    <img src={avatar} class="img-responsive" style={{marginTop: '-35px'}}/>
+                                <div class="col-md-3 col-sm-3 mt-sm-5">
+                                    <img src={logo} class="img-responsive"/>
                                 </div>
                                 <div class="col-md-9 text-center">
-                                    <h1>
-                                        Hold on, please.</h1>
+                                    <h1>Login</h1>
                                     <br />
-                                    <p>
-                                        Just sign in and we’ll send you on your way</p>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputName" class="col-md-3 control-label">
                                     Username:</label>
                                 <div class="col-md-9">
-                                    <div class="input-icon right">
+                                    <div class="input-icon left">
                                         <i class="fa fa-user"></i>
-                                        <input id="inputName" type="text" placeholder="" class="form-control" /></div>
+                                        <input id="inputName" type="text" placeholder="" class="form-control" />
+                                        <span class="text-danger msgu"></span></div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputPassword" class="col-md-3 control-label">
                                     Password:</label>
                                 <div class="col-md-9">
-                                    <div class="input-icon right">
+                                    <div class="input-icon left">
                                         <i class="fa fa-lock"></i>
-                                        <input id="inputPassword" type="password" placeholder="" class="form-control" /></div>
+                                        {!this.state.show 
+                                        ? <i class="fa fa-eye-slash passicon" onClick={this.showPass.bind(this)} style={{right: '8px'}} aria-hidden="true"></i>
+                                        : <i class="fa fa-eye passicon" onClick={this.showPass.bind(this)} style={{right: '8px'}} aria-hidden="true"></i>
+                                        }
+                                        <input id="inputPassword" type="password" placeholder="" class="form-control" />
+                                        <span class="text-danger msgp"></span></div>
                                 </div>
                             </div>
                             <div class="col-lg-12 text-right">
-                                <p>
+                                <p className="forgetpass" onClick={this.forgetPass.bind(this)}>
                                     Forgot Password ?
                                 </p>
                             </div>
@@ -137,7 +217,7 @@ export default class LoginPage extends Component {
                                         </div>
                                         <div class="col-lg-9">
                                             <button onClick={this.signin} type="submit" class="btn btn-default">
-                                                Sign In</button>
+                                                Login</button>
                                         </div>
                                     </div>
                                 </div>
@@ -145,6 +225,13 @@ export default class LoginPage extends Component {
                         </div>
                         </form>
                     </div>
+                </div>
+            </div>
+            <div id="footer">
+                <div className="row d-flex justify-content-center">
+                    <div className="copyright">
+                        <img src={company} class="img-responsive clogo text-center"/><a href="http://i-threesixty.co.uk/"><p className="text-center copytext">© Copyright 2019 by ithreesixty. All rights reserved.</p></a>
+                    </div>   
                 </div>
             </div>
         </div>

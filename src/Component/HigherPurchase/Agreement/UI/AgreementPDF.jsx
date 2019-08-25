@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
 import { PDFExport, savePDF } from '@progress/kendo-react-pdf';
+import axios from 'axios'
 import $ from 'jquery'
+import date from 'date-and-time';
+import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
+import 'simplebar'; // or "import SimpleBar from 'simplebar';" if you want to use it manually.
+import 'simplebar/dist/simplebar.css';
+
+const now = new Date();
 
 function loadData(data){
+    $('#ceated').text(date.format(now, 'YYYY/MM/DD'));
     $('#name').text(data.title+" "+data.nameInitials);
     $('#nic').text(data.nic);
     $('#address').text(data.address+" "+data.address_2);
@@ -171,6 +179,21 @@ export default class AgreementPDF extends Component {
     }
 
     exportPDFWithComponent = () => {
-        this.pdfExportComponent.save();
+        var retrievedObject = JSON.parse(localStorage.getItem('agreement'));
+        var path = 'http://localhost:8080/Agreement/saveData';
+        var agreementData = [localStorage.getItem('agreeid'), date.format(now, 'YYYY/MM/DD'), $('#expire').val(), $('#version').val(), retrievedObject.vehiNo];
+
+        axios.post(path, {
+            data: agreementData
+          })
+          .then(function (response) {
+            if(response.data.msg){
+                this.pdfExportComponent.save();
+                ToastsStore.success("Agreement Data saved")
+            }
+          })
+          .catch(function (error) {
+            ToastsStore.error('Connection Fail')
+          });
     }
 }

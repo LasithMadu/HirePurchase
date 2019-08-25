@@ -85,6 +85,22 @@ app.post('/signin', function(request, response){
     main.signin(request, response, pool);
 });
 
+app.post('/savePassword', function(request, response){
+    main.savePassword(request, response, pool);
+});
+
+app.post('/getUsername', function(request, response){
+    main.getUsername(request, response, pool);
+});
+
+app.post('/getSecurity', function(request, response){
+    main.getSecurity(request, response, pool);
+});
+
+app.post('/lock', function(request, response){
+    main.setLock(request, response, pool);
+});
+
 app.get('/companyList', function(request, response){
     main.companyList(request, response, pool);
 });
@@ -157,6 +173,10 @@ app.post('/Vehicals/deleteVehicals', function(request, response){
 //Agreement Activity
 app.post('/Agreement/getData', function(request, response){
     Agreement.getData(request, response, pool);
+});
+
+app.post('/Agreement/saveData', function(request, response){
+    Agreement.saveData(request, response, pool);
 });
 
 if (process.env.NODE_ENV === 'production') {

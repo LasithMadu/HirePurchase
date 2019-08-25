@@ -1,6 +1,12 @@
 module.exports={
     signin: function(request, response, dbconfg){
-        let values = request.body.data;
+        var username = request.body.username;
+        var password = request.body.password;
+        var user = true;
+        var pass = true;
+        var row = -1;
+        var count = -1;
+        var values = [];
 
         dbconfg.connect((err, db, done) =>{
             if(err){
@@ -8,13 +14,162 @@ module.exports={
                 return response.json({msg: false, data: err})
             }
             else{
-                db.query('SELECT * FROM public."usersTable" WHERE "userName" = $1 AND "password" = $2',[...values], (err, table) => {
+                db.query('SELECT * FROM public."usersTable"', (err, table) => {
                     done();
                     if(err){
                         response.json({msg: false, data: err})
                     }
                     else{
-                        response.json({msg: true, table:table});
+                        for(var i=0; i<table.rowCount; i++){
+                            if(table.rows[i].userName == username){
+                                count = i;
+                                user = true;
+                                break;
+                            }else{
+                                count = -1;
+                                user = false;
+                            }
+                        }
+
+                        if(count == -1){
+                            pass = false;
+                        }else{
+                            if(table.rows[count].password == password){
+                                pass = true;
+                            }else{
+                                pass = false;
+                            }
+                        }
+                        
+
+                        for(var i=0; i<table.rowCount; i++){
+                            if(table.rows[i].userName == username && table.rows[i].password == password){
+                                row = i;
+                                break;
+                            }else{
+                                row = -1
+                            }
+                        }
+
+                        if(!user && !pass){
+                            values = null;
+                        }else if(user && !pass){
+                            values = table.rows[count];
+                        }else{
+                            values = table.rows[row];
+                        }
+
+                        response.json({msg: true, pass: pass, user: user, table: values});
+                    }
+                });
+            }
+        })
+    },
+
+    setLock: function(request, response, dbconfg){
+        var userId = request.body.data;
+        var values = [userId, true];
+
+        dbconfg.connect((err, db, done) =>{
+            if(err){
+                console.log(err);
+                return response.json({msg: false, data: err})
+            }
+            else{
+                db.query('UPDATE public."usersTable" SET "isLock"= $2 WHERE "userId" = $1',[...values], (err, table) => {
+                    done();
+                    if(err){
+                        response.json({msg: false, data: err})
+                    }else{
+                        response.json({msg: true, table: table.rows[0]});
+                    }
+                });
+            }
+        })
+    },
+
+    getUsername: function(request, response, dbconfg){
+        var username = request.body.username;
+        var user = [];
+
+        dbconfg.connect((err, db, done) =>{
+            if(err){
+                console.log(err);
+                return response.json({msg: false, data: err})
+            }
+            else{
+                db.query('SELECT * FROM public."usersTable"', (err, table) => {
+                    done();
+                    if(err){
+                        response.json({msg: false, data: err})
+                    }else{
+                        for(var i=0; i<table.rowCount; i++){
+                            if(table.rows[i].userName == username){
+                                user = [table.rows[i].userName, table.rows[i].isLock];
+                                break;
+                            }else{
+                                user = [];
+                            }
+                        }
+                        response.json({msg: true, username: user});
+                    }
+                });
+            }
+        })
+    },
+
+    getSecurity: function(request, response, dbconfg){
+        var username = request.body.username;
+        var question1 = '';
+        var question2 = '';
+        var answer1 = '';
+        var answer2 = '';
+
+        console.log(username)
+
+        dbconfg.connect((err, db, done) =>{
+            if(err){
+                console.log(err);
+                return response.json({msg: false, data: err})
+            }
+            else{
+                db.query('SELECT * FROM public."usersTable"', (err, table) => {
+                    done();
+                    if(err){
+                        response.json({msg: false, data: err})
+                    }else{
+                        for(var i=0; i<table.rowCount; i++){
+                            if(table.rows[i].userName == username){
+                                question1 = table.rows[i].que1;
+                                question2 = table.rows[i].que2;
+                                answer1 = table.rows[i].answer1;
+                                answer2 = table.rows[i].answer2;
+                                break;
+                            }
+                        }
+                        response.json({msg: true, values: [question1, question2, answer1, answer2]});
+                    }
+                });
+            }
+        })
+    },
+
+    savePassword: function(request, response, dbconfg){
+        var username = request.body.username;
+        var password = request.body.password;
+
+        dbconfg.connect((err, db, done) =>{
+            if(err){
+                console.log(err);
+                return response.json({msg: false, data: err})
+            }
+            else{
+                db.query('UPDATE public."usersTable" SET password=$2 WHERE "userName" = $1',[username, password] , (err, table) => {
+                    done();
+                    if(err){
+                        response.json({msg: false, data: err})
+                    }else{
+                        response.json({msg: true, table: table});
                     }
                 });
             }

@@ -14,6 +14,37 @@ body{
   display: none;
 }
 
+.clogo{
+  margin-bottom: -24px;
+  width: 150px;
+  height: 40px;
+  margin-left: 35%;
+}
+
+.passicon{
+  cursor: pointer;
+}
+
+.forgetpass{
+  cursor: pointer;
+}
+
+.copytext{
+  margin-left: 9%;
+}
+
+.copyright{
+  padding: 5px 5px;
+}
+
+.sec{
+  padding: 20px;
+}
+
+.genarate{
+  display: none;
+}
+
 .rightButton{
   float: right !important;
 }
@@ -63,6 +94,7 @@ body{
   max-height: calc(100vh - 280px);
   display: inline-block;
 }
+
 
 .icon-spin {
   display: inline-block;
@@ -1244,7 +1276,7 @@ background: #303030; /* Old browsers */
   position: fixed;
   width: 100%;
   bottom: 0px;
-  padding: 15px 20px;
+  left: 0px;
   background: #FFFFFF;
 }
 #theme-setting {

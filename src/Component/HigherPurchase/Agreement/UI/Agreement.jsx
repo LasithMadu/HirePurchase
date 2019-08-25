@@ -67,6 +67,7 @@ export default class Agreement extends Component{
                     }
                     localStorage.setItem('agreement', JSON.stringify(response.data.table.rows[0]));
                     loadData(response.data.table.rows[0])
+                    $('.genarate').css('display','block')
                 }else{
                     ToastsStore.error("User Data Is Not Found")
                 }
@@ -82,7 +83,7 @@ export default class Agreement extends Component{
 
     render(){
         return(
-            <div className="page-content">f
+            <div className="page-content">
                 <ToastsContainer store={ToastsStore} position={ToastsContainerPosition.BOTTOM_RIGHT} />
                 <div data-simplebar>
                     <div className="col-md-12 col-sm-12 col-xs-12 agreement profile">
@@ -232,7 +233,7 @@ export default class Agreement extends Component{
                                     <button type="button" class="btn btn-primary">Next</button>
                                 </div>
                             </div>
-                            <div class="form-group col-sm-7 col-md-3 col-xs-7 row rightButton">
+                            <div class="form-group col-sm-7 col-md-3 col-xs-7 row rightButton genarate">
                                 <div class='col-sm-3 col-xs-6'>
                                     <button type="button" class="btn btn-primary">Edit</button>
                                 </div>
