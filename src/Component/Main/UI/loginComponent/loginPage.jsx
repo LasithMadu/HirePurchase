@@ -93,9 +93,9 @@ export default class LoginPage extends Component {
                                 })
                                 .then(function (response) {
                                     if(response.data.msg){
-                                        localStorage.setItem('bgColor', response.data.table.rows[0].color);
-                                        localStorage.setItem('fontColor', '#eeeeee');
-                                        window.location.href = "/customer";
+                                        localStorage.setItem('bgColor', response.data.table.rows[0].backColor);
+                                        localStorage.setItem('fontColor', response.data.table.rows[0].fontColor);
+                                        window.location.replace('/customer');
                                     }else{
                                         ToastsStore.error("Color Not Loaded")
                                     }
@@ -165,17 +165,14 @@ export default class LoginPage extends Component {
                         <div class="form-body pal">
                             <div class="col-md-12 col-sm-12 text-center panel-title">
                                 <div class="col-md-8 col-sm-8">
-                                    <img src={logo} style={{marginTop: '-220px', marginLeft: '90px'}} class="img-responsive"/>
+                                    <img src={logo} style={{marginTop: '-180px', marginLeft: '90px'}} class="img-responsive"/>
                                 </div>
-                                <h1 style={{marginTop: '-90px', fontSize: '48px', fontColor: this.state.fontColor}}>
-                                    Hire Purchase</h1>
-                                <br />
                             </div>
                             <div class="form-group">
                                 <div class="col-md-3 col-sm-3 mt-sm-5">
                                     <img src={logo} class="img-responsive"/>
                                 </div>
-                                <div class="col-md-9 text-center">
+                                <div class="col-md-9 text-left">
                                     <h1>Login</h1>
                                     <br />
                                 </div>

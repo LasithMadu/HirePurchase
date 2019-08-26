@@ -51,7 +51,7 @@ export default class TopBar extends Component {
         const admin = (
             <div className="dropdown-content" style={styleSheet.dropContent}>
                 <MDBNavLink to="/profile" className="dropdown-item text-white" onClick={()=>this.props.setLocation('Profile')}><i className="fa fa-user"></i>My Profile</MDBNavLink>
-                <MDBNavLink to="/users" className="dropdown-item text-white" onClick={()=>this.props.setLocation('Users')}><i className="fa fa-calendar"></i> Users</MDBNavLink>
+                <MDBNavLink to="/users" className="dropdown-item text-white" onClick={()=>this.props.setLocation('Users')}><i className="fa fa-calendar"></i> Create Account</MDBNavLink>
                 <MDBNavLink to="/users" className="dropdown-item text-white" onClick={()=>this.props.setLocation('Settings')}><i className="fa fa-calendar"></i> Settings</MDBNavLink>
                 <li className="divider"></li>
                 <a href="/" className="dropdown-item text-white" onClick={this.clearCache}><i className="fa fa-key"></i>Log Out</a>
@@ -76,7 +76,7 @@ export default class TopBar extends Component {
                         <div id="mydiv" class="navbar-toggle" onClick={this.mouse}><i className="fa fa-bars"></i></div>
                     <div className="topbar-main">
                         <ul className="nav navbar navbar-top-links navbar-right mbn mobileDrop">
-                            <li className="dropdown topbar-user"><a data-hover="dropdown" className="dropdown-toggle"><img src={userProfile} alt="" className="img-responsive img-circle"/>&nbsp;<span className="hidden-xs">{localStorage.getItem('username').toUpperCase()}</span>&nbsp;<span className="caret"></span></a>
+                            <li className="dropdown topbar-user"><a data-hover="dropdown" className="dropdown-toggle"><span className="hidden-xs username">{localStorage.getItem('username').toUpperCase()}</span>&nbsp;<span className="caret"></span></a>
                             { this.state.userLevel === 'Super Admin' ? superadmin : ""}
                             { this.state.userLevel === 'Admin' ? admin : ""}
                             { this.state.userLevel === 'Oparator' ? oprator : ""}

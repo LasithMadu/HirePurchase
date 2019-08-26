@@ -81,15 +81,64 @@ module.exports={
         });
     },
 
+    uploadLogo: function(request, response, dbconfg){
+        let company = request.body.company;
+        console.log(request.body.data.url)
+
+        // dbconfg.connect((err, db, done) =>{
+        //     if(err){
+        //         console.log('Conection Error');
+        //         return console.log(err);
+        //     }else{
+        //         db.query('SELECT * FROM public."themeTable" WHERE "companyName" = $1',[company], (err, table) => {
+        //             done();
+        //             if(err){
+        //                 response.json({msg: false, data: err})
+        //             }else{
+        //                 response.json({msg: true, table: table});
+        //             }
+        //         });
+        //     }
+        // });
+    },
+
     setColor: function(request, response, dbconfg){
-        let values = request.body.data;
+        var bgColor = request.body.backColor;
+        var company = request.body.company;
+
+        console.log(bgColor)
+        console.log(company)
 
         dbconfg.connect((err, db, done) =>{
             if(err){
                 console.log('Conection Error');
                 return console.log(err);
             }else{
-                db.query('UPDATE public."themeTable" SET color=$2 WHERE "companyName"=$1',[values[0],values[1]], (err, table) => {
+                db.query('UPDATE public."themeTable" SET "backColor"=$2 WHERE "companyName" = $1',[company,bgColor], (err, table) => {
+                    done();
+                    if(err){
+                        response.json({msg: false, data: err})
+                    }else{
+                        response.json({msg: true, table: table});
+                    }
+                });
+            }
+        });
+    },
+
+    setFontColor: function(request, response, dbconfg){
+        var fontColor = request.body.fontColor;
+        var company = request.body.company;
+
+        console.log(fontColor)
+        console.log(company)
+
+        dbconfg.connect((err, db, done) =>{
+            if(err){
+                console.log('Conection Error');
+                return console.log(err);
+            }else{
+                db.query('UPDATE public."themeTable" SET "fontColor"=$2 WHERE "companyName" = $1',[company,fontColor], (err, table) => {
                     done();
                     if(err){
                         response.json({msg: false, data: err})

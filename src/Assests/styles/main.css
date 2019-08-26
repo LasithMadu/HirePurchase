@@ -4,6 +4,7 @@ body{
   min-height: 100vh;
   height: 100vh;
   overflow: hidden;
+  font-family: 'Montserrat';
 }
 
 .components{
@@ -37,8 +38,103 @@ body{
   padding: 5px 5px;
 }
 
+.username{
+  margin-left: 25px;
+}
+
 .sec{
   padding: 20px;
+}
+
+.logoTitle{
+  margin-top: 10px;
+  margin-left: -15px;
+  margin-right: -15px;
+  border-bottom: #007451 solid 1px;
+  border-radius: 0px;
+  cursor: pointer;
+  background-color: #d0fedf;
+}
+
+.uploadTitle{
+  padding-left: 15px;
+  padding-top: 5px;
+  height: 30px;
+  display: inline-block;
+}
+
+.bgcolor{
+  border: #007451 solid 1px;
+  border-radius: 0px 0px 5px 5px;
+  cursor: pointer;
+  background-color: #d0fedf;
+}
+
+.logoupload{
+  margin-top: 25px;
+  border: #007451 solid 1px;
+  border-radius: 5px 5px 0px 0px;
+  cursor: pointer;
+  background-color: #d0fedf;
+}
+
+.dropzone{
+  margin: 0px -15px 0px -15px;
+}
+
+.themechange{
+  margin: 0px -15px 0px -15px;
+  background-color: #fcfcfc;
+  height: 250px;
+  color: #000000;
+  border-radius: 0px 0px 5px 5px;
+}
+
+.bgcolorSet{
+  margin: 20px;
+}
+
+.colorrow{
+  padding-top: 10px;
+}
+
+.testbgcolor{
+  margin: 15px;
+  margin-left: 35px;
+  height: 50px;
+}
+
+.arrowicon{
+  position: relative;
+  display: inline;
+  margin-left: 15px;
+}
+
+.imageuplo{
+  padding: 30px;
+}
+
+.plusbtn{
+  margin: 35px;
+  font-size: 24px;
+}
+
+.ant-upload-text{
+  font-size: 16px;
+  margin-left: -13px;
+}
+
+.avatar-uploader > .ant-upload {
+  width: 370px !important;
+  height: 128px !important;
+  border: #00A2FF solid 2px;
+  border-style: dotted;
+}
+
+.saveicon{
+  padding-top: 8px;
+  z-index: 999;
+  text-align: right;
 }
 
 .genarate{

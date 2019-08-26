@@ -70,12 +70,20 @@ app.post('/superAdmin/create', function(request, response){
     superAdmin.createAdmin(request, response, pool);
 });
 
+app.post('/uploadimage', function(request, response){
+    superAdmin.uploadLogo(request, response, pool);
+});
+
 app.post('/getColor', function(request, response){
     superAdmin.getColor(request, response, pool);
 });
 
-app.post('/setColor', function(request, response){
+app.post('/saveBackground', function(request, response){
     superAdmin.setColor(request, response, pool);
+});
+
+app.post('/saveFont', function(request, response){
+    superAdmin.setFontColor(request, response, pool);
 });
 
 
