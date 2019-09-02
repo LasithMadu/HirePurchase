@@ -12,6 +12,7 @@
     "@zendeskgarden/react-theming": "^6.2.0",
     "antd": "^3.20.3",
     "antd-img-crop": "^2.1.1",
+    "array-unique": "^0.3.2",
     "axios": "^0.19.0",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.3.1",
@@ -49,9 +50,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
-    "heroku-postbuid" : "cross-env NODE_ENV=production WEBPACK_CONFIG=browser_prod,server_prod webpack --colors",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "heroku-prebuild": "export NPM_CONFIG_PRODUCTION=false; export NODE_ENV=; NPM_CONFIG_PRODUCTION=false NODE_ENV=development npm install --only=dev --dev",
+    "heroku-postbuild": "export NPM_CONFIG_PRODUCTION=true; export NODE_ENV=production;"
   },
   "eslintConfig": {
     "extends": "react-app"
