@@ -76,6 +76,6 @@
     "concurrently": "^4.1.1"
   },
   "routes": {
-    "/**": "index.html"
+    "/**": "public/index.html"
   }
 }
