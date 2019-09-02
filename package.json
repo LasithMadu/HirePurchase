@@ -50,6 +50,7 @@
   "scripts": {
     "start": "react-scripts start",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
+    "heroku-postbuid" : "cross-env NODE_ENV=production WEBPACK_CONFIG=browser_prod,server_prod webpack --colors",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "eslintConfig": {
