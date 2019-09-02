@@ -11,7 +11,7 @@ import LogoUpload from './SubSettings/LogoUpload'
 import ChangeTheme from './SubSettings/ChangeTheme'
 
 export default class Settings extends Component {
-    
+
     constructor(props){
         super(props)
         this.state = {
@@ -23,7 +23,7 @@ export default class Settings extends Component {
     }
 
     componentDidMount(){
-        
+
     }
 
     handleBackground = (color, event) => {
@@ -42,7 +42,7 @@ export default class Settings extends Component {
             company = $("#inputCompany").val();
         }
         var values = [company, $('#color').val()];
-        var path = 'https://money360-server.herokuapp.com/setColor';
+        var path = 'http://localhost:8080/setColor';
 
         if(values[1] === ''){
             ToastsStore.warning("Color Not Set")
@@ -110,7 +110,7 @@ export default class Settings extends Component {
         }
 
         if(this.state.bgColor != '' || this.state.font != ''){
-            axios.post('https://money360-server.herokuapp.com/getColor', {
+            axios.post('http://localhost:8080/getColor', {
                 company: localStorage.getItem('company')
             })
             .then(function (response) {
@@ -153,7 +153,7 @@ export default class Settings extends Component {
                             </div>
                         </div>
                     </div>
-                    {this.state.logo 
+                    {this.state.logo
                         ? <LogoUpload/>
                         : ""
                     }
@@ -179,7 +179,7 @@ export default class Settings extends Component {
                             </div>
                         </div>
                     </div>
-                    {this.state.background 
+                    {this.state.background
                         ? <ChangeTheme
                             background = {this.state.bgColor}
                             font = {this.state.font}

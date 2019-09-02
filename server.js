@@ -21,17 +21,27 @@ const app = express();
 // function handleRedirect(req, res) {
 //     res.redirect(targetBaseUrl);
 //   }
-  
+
 // app.get('/', handleRedirect);
 
-const pool = new pg.Pool({
-    user: "avnadmin",
-    password: "ibwxq0baui4aaxqn",
-    database: "defaultdb",
-    port: 15003,
-    host: "pg-1f9d942d-project-2adf.aivencloud.com",
-    ssl: true
-  });
+// const pool = new pg.Pool({
+//     user: "avnadmin",
+//     password: "ibwxq0baui4aaxqn",
+//     database: "defaultdb",
+//     port: 15003,
+//     host: "pg-1f9d942d-project-2adf.aivencloud.com",
+//     ssl: true
+//   });
+
+  const pool = new pg.Pool({
+      user: "jkmhepxyoiqbni",
+      password: "3bde8a5f1e104c10db501365973a2c6137b8295864772318e7e1ebe309cf238b",
+      database: "d6lsngqnhulrcb",
+      port: 5432,
+      max: 20,
+      host: "ec2-174-129-242-183.compute-1.amazonaws.com",
+      ssl: true
+    });
 
 //   pool.connect();
 
@@ -78,6 +88,10 @@ app.post('/getColor', function(request, response){
     superAdmin.getColor(request, response, pool);
 });
 
+app.get('/getTheme', function(request, response){
+    superAdmin.getTheme(request, response, pool);
+});
+
 app.post('/saveBackground', function(request, response){
     superAdmin.setColor(request, response, pool);
 });
@@ -118,6 +132,14 @@ app.get('/companyList', function(request, response){
 //Admin Activity
 app.post('/Admin/create', function(request, response){
     Admin.createUser(request, response, pool);
+});
+
+app.get('/Admin/getUsers', function(request, response){
+    Admin.getUsers(request, response, pool);
+});
+
+app.post('/Admin/changeStatus', function(request, response){
+    Admin.changeStatus(request, response, pool);
 });
 
 app.post('/Admin/profileData', function(request, response){
@@ -178,6 +200,7 @@ app.post('/Vehicals/deleteVehicals', function(request, response){
     Vehicals.deleteVehicals(request, response, pool);
 });
 
+
 //Agreement Activity
 app.post('/Agreement/getData', function(request, response){
     Agreement.getData(request, response, pool);
@@ -185,6 +208,10 @@ app.post('/Agreement/getData', function(request, response){
 
 app.post('/Agreement/saveData', function(request, response){
     Agreement.saveData(request, response, pool);
+});
+
+app.post('/Agreement/getAgree', function(request, response){
+    Agreement.getAgree(request, response, pool);
 });
 
 if (process.env.NODE_ENV === 'production') {

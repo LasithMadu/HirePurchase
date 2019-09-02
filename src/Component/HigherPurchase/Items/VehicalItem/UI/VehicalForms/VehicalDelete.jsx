@@ -33,7 +33,7 @@ export default class VehicalAdd extends Component{
         var vehi = $('#inputDVehiNo').val().toUpperCase();
 
         if(vehi.length > 9){
-            var path = 'https://money360-server.herokuapp.com/Vehicals/searchVehical';
+            var path = 'http://localhost:8080/Vehicals/searchVehical';
 
             axios.post(path, {
                 data: vehi
@@ -72,7 +72,7 @@ export default class VehicalAdd extends Component{
         if(!valid){
             ToastsStore.warning("Vehical Details Are Not Found")
         }else{
-            var path = 'https://money360-server.herokuapp.com/Vehicals/deleteVehicals';
+            var path = 'http://localhost:8080/Vehicals/deleteVehicals';
 
             axios.post(path, {
                 vehiNo: $('#inputDVehiNo').val().toUpperCase()
@@ -174,7 +174,7 @@ export default class VehicalAdd extends Component{
                         </table>
                     </div>
                     <form className='col-sm-12 col-md-9'>
-                    
+
                         <div class="form-row">
                             <div class="form-group col-sm-6">
                             <label for="inputDRegistration">Registration No</label>
@@ -223,7 +223,7 @@ export default class VehicalAdd extends Component{
                                 <button type="button" class="btn btn-light">Cancel</button>
                             </div>
                         </div>
-                        
+
                     </form>
                 </div>
             </div>

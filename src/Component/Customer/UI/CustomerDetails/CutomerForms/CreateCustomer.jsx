@@ -15,7 +15,7 @@ export default class CreateForm extends Component{
         var country;
         axios.get('https://restcountries.eu/rest/v2/all')
         .then(response => {
-            country = '<option selected>Choose Country</option>';   
+            country = '<option selected>Choose Country</option>';
             for(var i=0; i<response.data.length; i++){
                 country += '<option value='+response.data[i].name+'>'+response.data[i].name+'</option>'
             }
@@ -53,8 +53,8 @@ export default class CreateForm extends Component{
         }else if($('#inputNic').val().length < 9){
             ToastsStore.warning("Invalid NIC No")
         }else{
-            var path = 'https://money360-server.herokuapp.com/Customer/saveData';
-            
+            var path = 'http://localhost:8080/Customer/saveData';
+
             axios.post(path, {
                 data: values
               })
@@ -163,7 +163,7 @@ export default class CreateForm extends Component{
                             <button type="button" class="btn btn-light">Cancel</button>
                         </div>
                     </div>
-                    
+
                 </form>
             </div>
         )

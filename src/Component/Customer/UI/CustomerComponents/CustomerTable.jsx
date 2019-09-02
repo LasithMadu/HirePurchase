@@ -1,39 +1,55 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 
-const BasicTable = props => {
-  return (
-    <MDBTable>
-      <MDBTableHead color="primary-color" textDark>
-        <tr>
-          <th>#</th>
-          <th>Name</th>
-          <th>NIC/Passport No</th>
-          <th>Previous</th>
-        </tr>
-      </MDBTableHead>
-      <MDBTableBody>
-        <tr>
-          <td>1</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo,@fdgg</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
-        </tr>
-      </MDBTableBody>
-    </MDBTable>
-  );
-}
+export default class Viewagreement extends Component{
 
-export default BasicTable;
+  rowSelected(id){
+    var data = this.props.agrrement;
+    for(var i=0; i<data.length; i++){
+      if (data[i].agreeId == id) {
+        localStorage.setItem('agreement', JSON.stringify(data[i]));
+        window.location.href = '/agreementPDF'
+      }
+    }
+  }
+
+  render(){
+    let agreementData = this.props.agrrement;
+    return (
+      <div>
+        {
+          agreementData != null
+          ? (<div>
+              <table class="table">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">NIC/Passport No</th>
+                    <th scope="col">Vehical No</th>
+                    <th scope="col">Cassis No</th>
+                    <th scope="col">Agreement ID</th>
+                    <th scope="col">Version</th>
+                    <th scope="col">Created Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {agreementData.map(agreement =><tr scope="row" key={agreement.agreeId} onClick={() => this.rowSelected(agreement.agreeId)}>
+                      <td>{agreement.name}</td>
+                      <td>{agreement.nic}</td>
+                      <td>{agreement.vehiNo}</td>
+                      <td>{agreement.chassis}</td>
+                      <td>{agreement.agreeId}</td>
+                      <td>{agreement.version}</td>
+                      <td>{agreement.created}</td>
+                  </tr>
+                  )}
+                </tbody>
+              </table>
+              </div>
+          ):
+          (<div><h3>Loading</h3></div>)
+          }
+          </div>
+    );
+  }
+}

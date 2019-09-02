@@ -18,20 +18,33 @@ function reset(){
 export default class LoginPage extends Component {
     constructor(props) {
         super(props)
-        this.state = { 
+        this.state = {
             bgColor: '',
             fontColor: '#2e4053',
             show: true
         }
     }
 
-    componentDidMount(){
-        
+    componentDidMount(){ 
+
         if(localStorage.getItem('userId') === null){
         }else{
             window.history.go(-1);
             //window.location.href = '/customer'
         }
+
+        axios.get('http://localhost:8080/getTheme')
+        .then(function (response) {
+            if(response.data.msg){
+                localStorage.setItem('bgColor', response.data.table.rows[0].backColor);
+                localStorage.setItem('fontColor', response.data.table.rows[0].fontColor);
+            }else{
+                ToastsStore.error("Color Not Loaded")
+            }
+        })
+        .catch(function (error) {
+            ToastsStore.error(error)
+        });
     }
 
     backgroundColor(){
@@ -88,7 +101,7 @@ export default class LoginPage extends Component {
                             localStorage.setItem('lastname', response.data.table.lastName);
                             localStorage.setItem('company', response.data.table.company);
                             try{
-                                axios.post('https://money360-server.herokuapp.com/getColor', {
+                                axios.post('http://localhost:8080/getColor', {
                                     company: localStorage.getItem('company')
                                 })
                                 .then(function (response) {
@@ -105,7 +118,7 @@ export default class LoginPage extends Component {
                                 });
                             }catch(e){
                                 ToastsStore.error("Some Error")
-                            }   
+                            }
                         }
                     }
                 }else{
@@ -157,7 +170,6 @@ export default class LoginPage extends Component {
     render () {
       return (
         <div className='container'>
-            <ToastsContainer store={ToastsStore} position={ToastsContainerPosition.BOTTOM_RIGHT} />
             <div class="page-form" >
                 <div class="panel panel-blue col-md-12">
                     <div class="panel-body pan" >
@@ -193,7 +205,7 @@ export default class LoginPage extends Component {
                                 <div class="col-md-9">
                                     <div class="input-icon left">
                                         <i class="fa fa-lock"></i>
-                                        {!this.state.show 
+                                        {!this.state.show
                                         ? <i class="fa fa-eye-slash passicon" onClick={this.showPass.bind(this)} style={{right: '8px'}} aria-hidden="true"></i>
                                         : <i class="fa fa-eye passicon" onClick={this.showPass.bind(this)} style={{right: '8px'}} aria-hidden="true"></i>
                                         }
@@ -228,12 +240,10 @@ export default class LoginPage extends Component {
                 <div className="row d-flex justify-content-center">
                     <div className="copyright">
                         <img src={company} class="img-responsive clogo text-center"/><a href="http://i-threesixty.co.uk/"><p className="text-center copytext">© Copyright 2019 by ithreesixty. All rights reserved.</p></a>
-                    </div>   
+                    </div>
                 </div>
             </div>
         </div>
       )
     }
   }
-  
-

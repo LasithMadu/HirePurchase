@@ -29,12 +29,12 @@ export default class Profile extends Component {
     componentDidMount() {
         this.getProfileData();
     }
-    
-    
+
+
 
     getProfileData(){
         var self = this;
-        var path = 'https://money360-server.herokuapp.com/Admin/profileData';
+        var path = 'http://localhost:8080/Admin/profileData';
 
         if(localStorage.getItem('userId') != ''){
             axios.post(path, {
@@ -42,7 +42,7 @@ export default class Profile extends Component {
               })
               .then(function (response) {
                 if(response.data.msg){
-                    
+
                     loadData(response.data.table.rows[0])
                     self.setState({
                         currentPass: response.data.table.rows[0].password
@@ -84,7 +84,7 @@ export default class Profile extends Component {
         }else if(newPass === pass){
             ToastsStore.warning("You Can't Use Previous Password As A New Password")
         }else{
-            var path = 'https://money360-server.herokuapp.com/Admin/changePass';
+            var path = 'http://localhost:8080/Admin/changePass';
             var values = [localStorage.getItem('userId'), newPass]
 
             axios.post(path, {
@@ -119,7 +119,7 @@ export default class Profile extends Component {
         }
 
         if(valid){
-            var path = 'https://money360-server.herokuapp.com/Admin/updateData';
+            var path = 'http://localhost:8080/Admin/updateData';
 
             axios.post(path, {
                 data: values
@@ -153,17 +153,17 @@ export default class Profile extends Component {
                     <div id="tab-general">
                         <div className="row mbl">
                             <div className="col-sm-12">
-                                
+
                                             <div className="col-md-12">
                                                 <div id="area-chart-spline">
                                                 </div>
                                             </div>
-                                
+
                             </div>
 
                             <div className="col-sm-12">
-                              
-                                    
+
+
                               <div className="row">
                     <div className="col-md-12 col-sm-12 col-xs-12"><h2>Profile :- {localStorage.getItem('firstname')+" "+localStorage.getItem('lastname')}</h2>
 
@@ -226,7 +226,7 @@ export default class Profile extends Component {
                                                 </div>
                                             </div>
                                             </div>
-                                            
+
                                             <div className="form-group"><label className="col-sm-3 control-label">Password</label>
 
                                                 <div className="col-sm-9 controls">
@@ -252,12 +252,12 @@ export default class Profile extends Component {
                         </div>
                     </div>
                 </div>
-                              
+
                                 </div>
-                                
-                            
-                     
-                            
+
+
+
+
                         </div>
                     </div>
                 </div>

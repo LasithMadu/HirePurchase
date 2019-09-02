@@ -3,40 +3,33 @@ import { PDFExport, savePDF } from '@progress/kendo-react-pdf';
 import axios from 'axios'
 import $ from 'jquery'
 import date from 'date-and-time';
+import generateUniqueId from 'generate-unique-id'
 import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
 import 'simplebar'; // or "import SimpleBar from 'simplebar';" if you want to use it manually.
 import 'simplebar/dist/simplebar.css';
 
 const now = new Date();
 
-function loadData(data){
-    $('#ceated').text(date.format(now, 'YYYY/MM/DD'));
-    $('#name').text(data.title+" "+data.nameInitials);
-    $('#nic').text(data.nic);
-    $('#address').text(data.address+" "+data.address_2);
-    $('#occ').text(data.occupation);
-    $('#city').text(data.city);
-    $('#state').text(data.state);
-    $('#country').text(data.country);
-    $('#email').text(data.email);
-    $('#mobile').text(data.mobile);
-    $('#vahical').text(data.vehiNo);
-    $('#cassis').text(data.chassis);
-    $('#engine').text(data.engineNo);
-    $('#capacity').text(data.capacity);
-    $('#modal').text(data.make+" "+data.modal);
-    $('#feul').text(data.fuel);
-    $('#year').text(data.year);
-}
-
 export default class AgreementPDF extends Component {
 
+    state = {
+      values: [],
+      agreeid: null
+    }
+
     componentDidMount(){
+        var id = generateUniqueId({
+          length: 10,
+          useLetters: false,
+          useNumbers: true
+        });
         var retrievedObject = JSON.parse(localStorage.getItem('agreement'));
-        loadData(retrievedObject);
+        this.setState({values: retrievedObject, agreeid: id})
+        console.log(retrievedObject);
     }
 
     render(){
+      var data = this.state.values;
         return(
             <div className="col-md-12 col-sm-12 col-xs-12" style={{marginTop: '3%', backgroundColor: '#ffffff'}}>
                 <div data-simplebar>
@@ -52,10 +45,10 @@ export default class AgreementPDF extends Component {
                                     <hr/>
                                     <div className="row ml-5">
                                         <div className="col-md-6 col-sm-7 col-xs-12">
-                                            <p>Agreement ID :- <span id="agreeid">{localStorage.getItem('agreeid')}</span></p>
+                                            <p>Agreement ID :- <span id="agreeid">{data.length == 0 ? "" : this.state.agreeid}</span></p>
                                         </div>
                                         <div className="col-md-6 col-sm-6 col-xs-12">
-                                            <p>Created Date :- <span id="ceated"></span></p>
+                                            <p>Created Date :- <span id="ceated">{date.format(now, 'YYYY/MM/DD')}</span></p>
                                         </div>
                                     </div>
                                     <div className="row ml-5">
@@ -63,77 +56,77 @@ export default class AgreementPDF extends Component {
                                             <p>Expire Date :- <span id="expire"></span></p>
                                         </div>
                                         <div className="col-md-6 col-sm-6 col-xs-12">
-                                            <p>Version :- <span id="version"></span></p>
+                                            <p>Version :- <span id="version">{localStorage.getItem('version') == '' ? "" : localStorage.getItem('version')}</span></p>
                                         </div>
                                     </div>
                                     <h5 className="text-dark">Customer Details</h5>
                                     <hr/>
                                     <div className="row ml-5">
                                         <div className="col-md-6 col-sm-7 col-xs-12">
-                                            <p>Name :- <span id="name"></span></p>
+                                            <p>Name :- <span id="name">{data.length == 0 ? "" : data.title+" "+data.nameInitials}</span></p>
                                         </div>
                                         <div className="col-md-6 col-sm-6 col-xs-12">
-                                            <p>NIC :- <span id="nic"></span></p>
-                                        </div>
-                                    </div>
-                                    <div className="row ml-5">
-                                        <div className="col-md-6 col-sm-6 col-xs-12">
-                                            <p>Address :- <span id="address"></span></p>
-                                        </div>
-                                        <div className="col-md-6 col-sm-6 col-xs-12">
-                                            <p>Occupation :- <span id="occ"></span></p>
+                                            <p>NIC :- <span id="nic">{data.length == 0 ? "" : data.nic}</span></p>
                                         </div>
                                     </div>
                                     <div className="row ml-5">
                                         <div className="col-md-6 col-sm-6 col-xs-12">
-                                            <p>City :- <span id="city"></span></p>
+                                            <p>Address :- <span id="address">{data.length == 0 ? "" : data.address+" "+data.address_2}</span></p>
                                         </div>
                                         <div className="col-md-6 col-sm-6 col-xs-12">
-                                            <p>State :- <span id="state"></span></p>
-                                        </div>
-                                    </div>
-                                    <div className="row ml-5">
-                                        <div className="col-md-6 col-sm-6 col-xs-12">
-                                            <p>Country :- <span id="country"></span></p>
-                                        </div>
-                                        <div className="col-md-6 col-sm-6 col-xs-12">
-                                            <p>Email :- <span id="email"></span></p>
+                                            <p>Occupation :- <span id="occ">{data.length == 0 ? "" : data.occupation}</span></p>
                                         </div>
                                     </div>
                                     <div className="row ml-5">
                                         <div className="col-md-6 col-sm-6 col-xs-12">
-                                            <p>Mobile :- <span id="mobile"></span></p>
+                                            <p>City :- <span id="city">{data.length == 0 ? "" : data.city}</span></p>
+                                        </div>
+                                        <div className="col-md-6 col-sm-6 col-xs-12">
+                                            <p>State :- <span id="state">{data.length == 0 ? "" : data.state}</span></p>
+                                        </div>
+                                    </div>
+                                    <div className="row ml-5">
+                                        <div className="col-md-6 col-sm-6 col-xs-12">
+                                            <p>Country :- <span id="country">{data.length == 0 ? "" : data.country}</span></p>
+                                        </div>
+                                        <div className="col-md-6 col-sm-6 col-xs-12">
+                                            <p>Email :- <span id="email">{data.length == 0 ? "" : data.email}</span></p>
+                                        </div>
+                                    </div>
+                                    <div className="row ml-5">
+                                        <div className="col-md-6 col-sm-6 col-xs-12">
+                                            <p>Mobile :- <span id="mobile">{data.length == 0 ? "" : data.mobile}</span></p>
                                         </div>
                                     </div>
                                     <h5 className="text-dark">Vehical Details</h5>
                                     <hr/>
                                     <div className="row ml-5">
                                         <div className="col-md-6 col-sm-7 col-xs-12">
-                                            <p>Vehical No :- <span id="vahical"></span></p>
+                                            <p>Vehical No :- <span id="vahical">{data.length == 0 ? "" : data.vehiNo}</span></p>
                                         </div>
                                         <div className="col-md-6 col-sm-6 col-xs-12">
-                                            <p>Cassis No :- <span id="cassis"></span></p>
-                                        </div>
-                                    </div>
-                                    <div className="row ml-5">
-                                        <div className="col-md-6 col-sm-6 col-xs-12">
-                                            <p>Engine No :- <span id="engine"></span></p>
-                                        </div>
-                                        <div className="col-md-6 col-sm-6 col-xs-12">
-                                            <p>Capacity :- <span id="capacity"></span></p>
+                                            <p>Cassis No :- <span id="cassis">{data.length == 0 ? "" : data.chassis}</span></p>
                                         </div>
                                     </div>
                                     <div className="row ml-5">
                                         <div className="col-md-6 col-sm-6 col-xs-12">
-                                            <p>Modal :- <span id="modal"></span></p>
+                                            <p>Engine No :- <span id="engine">{data.length == 0 ? "" : data.engineNo}</span></p>
                                         </div>
                                         <div className="col-md-6 col-sm-6 col-xs-12">
-                                            <p>Feul type :- <span id="feul"></span></p>
+                                            <p>Capacity :- <span id="capacity">{data.length == 0 ? "" : data.capacity}</span></p>
                                         </div>
                                     </div>
                                     <div className="row ml-5">
                                         <div className="col-md-6 col-sm-6 col-xs-12">
-                                            <p>Year :- <span id="year"></span></p>
+                                            <p>Modal :- <span id="modal">{data.length == 0 ? "" : data.make+" "+data.modal}</span></p>
+                                        </div>
+                                        <div className="col-md-6 col-sm-6 col-xs-12">
+                                            <p>Feul type :- <span id="feul">{data.length == 0 ? "" : data.fuel}</span></p>
+                                        </div>
+                                    </div>
+                                    <div className="row ml-5">
+                                        <div className="col-md-6 col-sm-6 col-xs-12">
+                                            <p>Year :- <span id="year">{data.length == 0 ? "" : data.year}</span></p>
                                         </div>
                                     </div>
                                     <h5 className="text-dark">Payment Details</h5>
@@ -171,25 +164,29 @@ export default class AgreementPDF extends Component {
                             <button className="btn btn-primary" onClick={this.exportPDFWithComponent}>Save</button>
                         </div>
                     </div>
-                    
+
                 </div>
-                
+
              </div>
         )
     }
 
     exportPDFWithComponent = () => {
-        var retrievedObject = JSON.parse(localStorage.getItem('agreement'));
+        var self = this;
         var path = 'http://localhost:8080/Agreement/saveData';
-        var agreementData = [localStorage.getItem('agreeid'), date.format(now, 'YYYY/MM/DD'), $('#expire').val(), $('#version').val(), retrievedObject.vehiNo];
 
         axios.post(path, {
-            data: agreementData
+            vehiNo: this.state.values.vehiNo,
+            created: date.format(now, 'YYYY/MM/DD'),
+            agreementData: this.state.values,
+            nic: this.state.values.nic,
+            agreementNo: this.state.agreeid
           })
           .then(function (response) {
             if(response.data.msg){
-                this.pdfExportComponent.save();
+                self.pdfExportComponent.save();
                 ToastsStore.success("Agreement Data saved")
+                console.log(response);
             }
           })
           .catch(function (error) {

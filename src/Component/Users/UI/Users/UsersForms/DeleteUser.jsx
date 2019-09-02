@@ -9,7 +9,7 @@ export default class CreateAdmin extends Component{
     createUser(){
         var valid;
         let values= [uuidv4(), $('#inputFirst').val(), $('#inputLast').val(), $('#inputUser').val().toLowerCase(), $('#inputPass').val(), $('#inputEmail').val(), $('#inputNic').val(), localStorage.getItem('company'), $('#inputAddress').val(), $('#inputCity').val(), $('#inputState').val(), $('#inputZip').val(), $('#inputLevel').val()];
-        let path = 'https://money360-server.herokuapp.com/Admin/create';
+        let path = 'http://localhost:8080/Admin/create';
 
         for(var i = 0; i<values.length; i++){
             if(values[i] === ''){
@@ -19,7 +19,7 @@ export default class CreateAdmin extends Component{
                 valid = true;
             }
         }
-        
+
         if(valid){
             axios.post(path, {
                 data: values
@@ -45,11 +45,7 @@ export default class CreateAdmin extends Component{
 
     render(){
         return(
-            <div className='container' style={{backgroundColor: '#ffffff'}}>
-                    <ToastsContainer store={ToastsStore} position={ToastsContainerPosition.BOTTOM_RIGHT} />
-                    
-                <h3>Delete User Account</h3>
-                <hr/>
+            <div>
                     <form action="#" className="form-horizontal">
                         <div className="form-body pal">
                             <div className="form-group">
@@ -134,7 +130,7 @@ export default class CreateAdmin extends Component{
                             <button type="button" class="btn btn-light">Cancel</button>
                         </div>
                     </div>
-                    
+
                 </form>
                 </div>
         )

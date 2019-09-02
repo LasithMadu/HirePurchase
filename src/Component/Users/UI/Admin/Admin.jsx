@@ -11,12 +11,13 @@ import CreateAdmin from './AdminForms/CreateAdmin'
 import EditAdmin from './AdminForms/EditAdmin'
 import DeleteAdmin from './AdminForms/DeleteAdmin'
 
-export default class Admin extends Component {   
-  
+export default class Admin extends Component {
+
     render() {
         return (
           <div className='col-md-12 col-sm-12 col-xs-12' style={{marginTop: '20px'}}>
-            
+
+
             <ThemeProvider className='container'>
                 <Tabs>
                     <TabPanel label="Add" key="tab-1">

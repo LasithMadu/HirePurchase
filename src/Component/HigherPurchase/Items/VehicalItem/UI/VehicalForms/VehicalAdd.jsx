@@ -20,9 +20,9 @@ export default class VehicalAdd extends Component{
 
     searchCustomer(){
         var nic = $('#inputSeNic').val().toUpperCase();
-        
+
         if(nic.length > 9){
-            var path = 'https://money360-server.herokuapp.com/Customer/searchCutomer';
+            var path = 'http://localhost:8080/Customer/searchCutomer';
 
             axios.post(path, {
                 data: nic
@@ -44,7 +44,7 @@ export default class VehicalAdd extends Component{
               });
         }
     }
-    
+
     saveVehicals(){
         var valid, cus = true;
         var customer = [$('#inputSeNic').val().toUpperCase(), $('#user').text(), $('#email').text(), $('#address').text(), $('#gender').text(), $('#mobile').text()];
@@ -73,7 +73,7 @@ export default class VehicalAdd extends Component{
         }else if(!valid){
             ToastsStore.warning("Some Fields Are Empty")
         }else{
-            var path = 'https://money360-server.herokuapp.com/Vehicals/saveVehicals';
+            var path = 'http://localhost:8080/Vehicals/saveVehicals';
 
             axios.post(path, {
                 nic: $('#inputSeNic').val(),
@@ -135,7 +135,7 @@ export default class VehicalAdd extends Component{
                         </table>
                     </div>
                     <form className='col-sm-12 col-md-9'>
-                    
+
                         <div class="form-row">
                             <div class="form-group col-sm-6">
                             <label for="inputRegistration">Registration No</label>
@@ -184,7 +184,7 @@ export default class VehicalAdd extends Component{
                                 <button type="button" class="btn btn-light">Cancel</button>
                             </div>
                         </div>
-                        
+
                     </form>
                 </div>
             </div>

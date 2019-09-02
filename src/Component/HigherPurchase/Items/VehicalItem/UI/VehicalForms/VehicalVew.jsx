@@ -31,7 +31,6 @@ export default class VehicalView extends Component{
         }
 
       })
-      console.log(this.vehicles);
   }
 
   render(){

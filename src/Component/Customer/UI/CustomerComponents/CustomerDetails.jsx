@@ -9,18 +9,12 @@ import Table from './CustomerTable'
     $('.modal').show('slow');
   }
 
-  function loadData(data){
-    setValue('#user', data.nameInitials)
-    setValue('#email', data.email)
-    setValue('#address', data.address)
-    setValue('#profile', 'Profile: ' +data.fullName)
-  }
-
-  function setValue(id, value){
-    $(id).html(value);
-  }
-
 export default class CustomerDetails extends Component {
+
+    state = {
+      values: [],
+      agreement: []
+    }
 
     handleClose() {
       $('.modal').hide('slow');
@@ -32,7 +26,7 @@ export default class CustomerDetails extends Component {
           window.location.href = '/customer'
         }
       }
-    
+
     }
 
     redirect() {
@@ -40,19 +34,18 @@ export default class CustomerDetails extends Component {
     }
 
     searchCustomer(){
+      var self = this;
       if($('#inputName').val() === ''){
         ToastsStore.warning("Enter Customer NIC or Passport No")
       }else if($('#inputName').val().length < 9){
         ToastsStore.warning("Invalid NIC No")
       }else{
-        var path = 'https://money360-server.herokuapp.com/Customer/searchCutomer';
-
-        axios.post(path, {
+        axios.post('http://localhost:8080/Agreement/getAgree', {
           data: $('#inputName').val().toUpperCase()
         })
         .then(function (response) {
           if(response.data.msg){
-              loadData(response.data.table.rows[0]);
+              self.setState({values: response.data.table.rows})
               ToastsStore.success("Sucessfuly Load Customer Data")
           }else{
             if(response.data.alert === 'fail'){
@@ -70,6 +63,7 @@ export default class CustomerDetails extends Component {
     }
 
     render () {
+      let data = this.state.values;
       return (
             <div className="page-content">
               <ToastsContainer store={ToastsStore} position={ToastsContainerPosition.BOTTOM_RIGHT} />
@@ -84,7 +78,7 @@ export default class CustomerDetails extends Component {
                                 <input id="inputName" type="text" placeholder="Search by NIC/Passport No" className="form-control" />
                               </div>
                               <div className='col-lg-1 col-md-1 col-sm-1 col-xs-2'>
-                                <a href="#" className="btn btn-primary" id="searchBtn" onClick={this.searchCustomer}><i class="fa fa-search" aria-hidden="true"></i></a>
+                                <a href="#" className="btn btn-primary" id="searchBtn" onClick={this.searchCustomer.bind(this )}><i class="fa fa-search" aria-hidden="true"></i></a>
                               </div>
                             </div>
                           </div>
@@ -113,9 +107,9 @@ export default class CustomerDetails extends Component {
 
 
                 <div className="row mbl">
-                  
+
                   <div className="col-lg-12">
-                    
+
                     <div className="col-md-12">
                       <div id="area-chart-spline" style={{ display: 'none'}}>
                       </div>
@@ -123,22 +117,22 @@ export default class CustomerDetails extends Component {
                   </div>
               <div className="col-lg-12">
                 <div className="row">
-                    <div className="col-md-12"><h2 id='profile'>Profile: </h2>
+                    <div className="col-md-12"><h2 id='profile'>Profile: {data.length == 0 ? "" : data[0].fullName}</h2>
                         <div className="row mtl">
                             <div className="col-md-3">
                                 <table className="table table-striped table-hover">
                                     <tbody>
                                     <tr>
                                         <td>User Name</td>
-                                        <td id='user'></td>
+                                        <td id='user'>{data.length == 0 ? "" : data[0].nameInitials}</td>
                                     </tr>
                                     <tr>
                                         <td>Email</td>
-                                        <td id='email'></td>
+                                        <td id='email'>{data.length == 0 ? "" : data[0].email}</td>
                                     </tr>
                                     <tr>
                                         <td>Address</td>
-                                        <td id='address'></td>
+                                        <td id='address'>{data.length == 0 ? "" : data[0].address}</td>
                                     </tr>
                                     <tr>
                                         <td>Status</td>
@@ -156,16 +150,14 @@ export default class CustomerDetails extends Component {
                                 </table>
                             </div>
                             <div className="col-md-9">
-                                  <Table/>
+                                  <Table agrrement = {this.state.values}/>
                                 </div>
                               </div>
                     </div>
                 </div>
-            </div>                           
+            </div>
           </div>
         </div>
       )
     }
   }
-  
-

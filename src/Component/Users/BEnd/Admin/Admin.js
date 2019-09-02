@@ -32,7 +32,7 @@ module.exports={
                                 users = true;
                                 tableData = table;
                             }
-                        } 
+                        }
                     });
                     db.query('SELECT * FROM public."themeTable" WHERE "companyName" = $1',[values[7]], (err, table) => {
                         if(err){
@@ -54,7 +54,7 @@ module.exports={
                             }else{
                                 response.json({msg: true, alert: alert, table:tableData});
                             }
-                        } 
+                        }
                     });
                 }catch(Exception){
                     console.log('Error')
@@ -77,7 +77,7 @@ module.exports={
                         response.json({msg: false, data: err})
                     }else{
                         response.json({msg: true, table:table})
-                    } 
+                    }
                 });
             }
         });
@@ -97,9 +97,9 @@ module.exports={
                         response.json({msg: false, data: err})
                     }else{
                         response.json({msg: true, table:table})
-                    } 
+                    }
                 });
-                
+
             }
         });
     },
@@ -118,12 +118,60 @@ module.exports={
                         response.json({msg: false, data: err})
                     }else{
                         response.json({msg: true, table:table})
-                    } 
+                    }
                 });
-                
+
             }
         });
-        
+
+    },
+
+    getUsers: function(request, response, dbconfg){
+
+        dbconfg.connect((err, db, done) =>{
+            if(err){
+                console.log('Conection Error');
+                return console.log(err);
+            }else{
+                db.query('SELECT * FROM public."usersTable"', (err, table) => {
+                    db.end();
+                    if(err){
+                        response.json({msg: false, data: err})
+                    }else{
+                        response.json({msg: true, table:table})
+                    }
+                });
+            }
+        });
+
+    },
+
+    changeStatus: function(request, response, dbconfg){
+      var userid = request.body.uid;
+      var state = request.body.state;
+
+        dbconfg.connect((err, db, done) =>{
+            if(err){
+                console.log('Conection Error');
+                return console.log(err);
+            }else{
+                db.query('UPDATE public."usersTable" SET "isLock"=$2 WHERE "userId"=$1',[userid, state], (err, table) => {
+                    if(err){
+                        response.json({msg: false, data: err})
+                    }else{
+                      db.query('SELECT * FROM public."usersTable"', (err, table) => {
+                          db.end();
+                          if(err){
+                              response.json({msg: false, data: err})
+                          }else{
+                              response.json({msg: true, table:table})
+                          }
+                      });
+                    }
+                });
+            }
+        });
+
     },
 
     signin: function(request, response, dbconfg){
@@ -148,11 +196,11 @@ module.exports={
                         }else{
                             response.json({msg: false, alert: 'fail', data: err})
                         }
-                    } 
+                    }
                 });
-                
+
             }
         });
-        
+
     }
 }

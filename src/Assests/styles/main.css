@@ -16,10 +16,16 @@ body{
 }
 
 .clogo{
-  margin-bottom: -24px;
+  margin-bottom: -30px;
   width: 150px;
   height: 40px;
   margin-left: 35%;
+  display: inline-block;
+}
+
+.formBtn{
+  margin-right: 35px;
+  cursor: pointer;
 }
 
 .passicon{
@@ -31,11 +37,12 @@ body{
 }
 
 .copytext{
-  margin-left: 9%;
+  margin-left: 10%;
+  color: #000;
 }
 
 .copyright{
-  padding: 5px 5px;
+  padding: 3px 3px 3px -3px;
 }
 
 .username{
@@ -174,8 +181,8 @@ body{
 }
 
 .edit{
-  height: calc(100vh - 200px);
-  max-height: calc(100vh - 200px);
+  height: calc(100vh - 220px);
+  max-height: calc(100vh - 220px);
   display: inline-block;
 }
 
@@ -1369,6 +1376,7 @@ background: #303030; /* Old browsers */
   min-height: 100%;
 }
 #footer {
+  border-top: #500 solid 1px;
   position: fixed;
   width: 100%;
   bottom: 0px;

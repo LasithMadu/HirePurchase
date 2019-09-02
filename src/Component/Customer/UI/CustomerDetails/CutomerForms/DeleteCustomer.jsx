@@ -29,7 +29,7 @@ function showModel(){
     $('.modal').show();
 }
 
-export default class CreateForm extends Component{   
+export default class CreateForm extends Component{
 
     constructor(props){
         super(props)
@@ -40,7 +40,7 @@ export default class CreateForm extends Component{
         var country;
         axios.get('https://restcountries.eu/rest/v2/all')
         .then(response => {
-            country = '<option selected>Choose Country</option>';   
+            country = '<option selected>Choose Country</option>';
             for(var i=0; i<response.data.length; i++){
                 country += '<option value='+response.data[i].name+'>'+response.data[i].name+'</option>'
             }
@@ -62,7 +62,7 @@ export default class CreateForm extends Component{
     }
 
     searchCustomer(){
-        var path = 'https://money360-server.herokuapp.com/Customer/searchCutomer';
+        var path = 'http://localhost:8080/Customer/searchCutomer';
 
         axios.post(path, {
             data: $('#inputDNIC').val().toUpperCase()
@@ -84,7 +84,7 @@ export default class CreateForm extends Component{
     }
 
     deleteCustomer(){
-        var path = 'https://money360-server.herokuapp.com/Customer/deleteCutomer';
+        var path = 'http://localhost:8080/Customer/deleteCutomer';
 
         axios.post(path, {
             data: cusid
@@ -221,7 +221,7 @@ export default class CreateForm extends Component{
                             <button type="button" class="btn btn-light">Cancel</button>
                         </div>
                     </div>
-                    
+
                 </form>
             </div>
         )

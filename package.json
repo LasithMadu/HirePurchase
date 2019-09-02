@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@angular/core": "^8.2.4",
     "@bumaga/tabs": "^0.1.1",
     "@progress/kendo-drawing": "^1.5.12",
     "@progress/kendo-react-pdf": "^3.2.2",
@@ -24,18 +25,22 @@
     "jquery": "^3.4.1",
     "mdbreact": "^4.18.0",
     "morgan": "^1.9.1",
+    "ngx-malihu-scrollbar": "^8.0.0",
     "pdfmake": "^0.1.58",
+    "perfect-scrollbar": "^1.4.0",
     "pg": "^7.11.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.9",
     "react-color": "^2.17.3",
+    "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.8.6",
     "react-filepond": "^7.0.1",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
     "react-slide-out": "^0.1.4",
     "react-toasts": "^3.0.3",
+    "semantic-ui-react": "^0.88.0",
     "simplebar": "^4.1.0",
     "slideout": "^1.0.1",
     "styled-components": "^4.3.2",
@@ -43,11 +48,7 @@
     "uuid": "^3.3.2"
   },
   "scripts": {
-    "client-install": "npm install --prefix client",
     "start": "react-scripts start",
-    "server": "nodemon server.js",
-    "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -68,5 +69,8 @@
   },
   "devDependencies": {
     "concurrently": "^4.1.1"
+  },
+  "routes": {
+    "/**": "index.html"
   }
 }

@@ -19,6 +19,7 @@ import NotFound from '../../../Main/UI/UniqueComponents/NotFound';
 import SlideBar from '../../../Main/UI/UniqueComponents/SlideBar'
 import TopBar from '../../../Main/UI/UniqueComponents/TopBar'
 import LocationBar from '../../../Main/UI/UniqueComponents/LocationBar'
+import Footer from '../../../Main/UI/UniqueComponents/Footer'
 
 export default class Main extends Component {
 
@@ -65,6 +66,7 @@ export default class Main extends Component {
                         <Route component={NotFound} />
                     </Switch>
                     </div>
+                    <Footer/>
                   </div>
               </div>
           </div>

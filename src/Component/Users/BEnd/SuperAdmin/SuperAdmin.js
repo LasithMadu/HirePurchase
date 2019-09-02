@@ -81,6 +81,25 @@ module.exports={
         });
     },
 
+    getTheme: function(request, response, dbconfg){
+
+        dbconfg.connect((err, db, done) =>{
+            if(err){
+                console.log('Conection Error');
+                return console.log(err);
+            }else{
+                db.query('SELECT * FROM public."themeTable"', (err, table) => {
+                    done();
+                    if(err){
+                        response.json({msg: false, data: err})
+                    }else{
+                        response.json({msg: true, table: table});
+                    }
+                });
+            }
+        });
+    },
+
     uploadLogo: function(request, response, dbconfg){
         let company = request.body.company;
         console.log(request.body.data.url)
