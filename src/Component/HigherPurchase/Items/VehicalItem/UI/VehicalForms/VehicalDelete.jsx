@@ -102,8 +102,7 @@ export default class VehicalAdd extends Component{
 
     render(){
         return(
-            <div className='container' style={{backgroundColor: '#ffffff'}}>
-                <ToastsContainer store={ToastsStore} position={ToastsContainerPosition.BOTTOM_RIGHT} />
+            <div>
                 <div className="modal" role="dialog" style={{borderRadius: '50px', marginTop: '75px'}}>
                     <div className="modal-dialog" role="document">
                       <div className="modal-content">
@@ -123,8 +122,6 @@ export default class VehicalAdd extends Component{
                       </div>
                     </div>
                   </div>
-                <h3>Delete Vehical</h3>
-                <hr/>
                 <div className='col-md-12 col-sm-7'>
                 <form action="#" className="form-horizontal">
                         <div className="form-body pal">

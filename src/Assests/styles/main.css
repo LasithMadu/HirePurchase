@@ -53,7 +53,26 @@ body{
   padding: 20px;
 }
 
+.bodyLogo{
+  background-color: #ffffff;
+  margin-left: -15px;
+  margin-right: -15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  color: #000;
+}
+
 .logoTitle{
+  margin-top: 10px;
+  margin-left: -15px;
+  margin-right: -15px;
+  border-bottom: #007451 solid 1px;
+  border-radius: 0px;
+  cursor: pointer;
+  background-color: #d0fedf;
+}
+
+.itemTitle{
   margin-top: 10px;
   margin-left: -15px;
   margin-right: -15px;
@@ -77,10 +96,32 @@ body{
   background-color: #d0fedf;
 }
 
+.middelItem{
+  border: #007451 solid 1px;
+  border-bottom: none;
+  border-radius: 0px 0px 0px 0px;
+  cursor: pointer;
+  background-color: #d0fedf;
+}
+
 .logoupload{
-  margin-top: 25px;
   border: #007451 solid 1px;
   border-radius: 5px 5px 0px 0px;
+  cursor: pointer;
+  background-color: #d0fedf;
+}
+
+.topItem{
+  border: #007451 solid 1px;
+  border-radius: 5px 5px 0px 0px;
+  border-bottom: none;
+  cursor: pointer;
+  background-color: #d0fedf;
+}
+
+.bottemItem{
+  border: #007451 solid 1px;
+  border-radius: 0px 0px 5px 5px;
   cursor: pointer;
   background-color: #d0fedf;
 }

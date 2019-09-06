@@ -93,10 +93,7 @@ export default class VehicalAdd extends Component{
 
     render(){
         return(
-            <div className='container' style={{backgroundColor: '#ffffff'}}>
-                <ToastsContainer store={ToastsStore} position={ToastsContainerPosition.BOTTOM_RIGHT} />
-                <h3>Edit Vehical</h3>
-                <hr/>
+            <div>
                 <div className='col-md-12 col-sm-7'>
                 <form action="#" className="form-horizontal">
                         <div className="form-body pal">

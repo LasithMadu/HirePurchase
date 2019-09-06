@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
 import axios from 'axios'
 import $ from 'jquery'
-import DataTable from 'datatables.net';
 
 export default class VehicalView extends Component{
 

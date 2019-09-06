@@ -45,10 +45,7 @@ export default class CreateAdmin extends Component{
 
     render(){
         return(
-            <div className='container' style={{backgroundColor: '#ffffff'}}>
-                <ToastsContainer store={ToastsStore} position={ToastsContainerPosition.BOTTOM_RIGHT} />
-                <h3>Create Admin Account</h3>
-                <hr/>
+            <div>
                 <form className='col-md-12 col-sm-12 col-xs-12'>
                     <div class="form-row">
                         <div class="form-group col-md-6 col-sm-7 col-xs-12">
