@@ -22,10 +22,6 @@ export default class Settings extends Component {
         }
     }
 
-    componentDidMount(){
-
-    }
-
     handleBackground = (color, event) => {
         this.setState({ bgColor: color.hex });
     };

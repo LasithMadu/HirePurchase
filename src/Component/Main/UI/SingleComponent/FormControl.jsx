@@ -10,8 +10,8 @@ const FormControl = ({titles, startPos, createBtn, editBtn, deleteBtn, viewBtn, 
 
     switch(count){
         case 1:
-            title = titles[4];
-            component = components[4];
+            title = titles[3];
+            component = components[3];
             break;
         case 2:
             title = titles[0];

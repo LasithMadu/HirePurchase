@@ -11,8 +11,33 @@ body{
   margin-left: 250px;
 }
 
+.sInput{
+  border-radius: 0;
+}
+
 .checkButton{
   display: none;
+}
+
+.border{
+  border: 2px solid #106BA3;
+  margin: 0;
+  padding: 0;
+}
+
+.fullWidth{
+  width: 100%;
+}
+
+.removeRound{
+  border: #000;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border-radius: 0 !important;
+  -webkit-border-radius: 0;
+border-radius: 0;
+-webkit-box-shadow: none;
+box-shadow: none;
 }
 
 .clogo{
@@ -23,6 +48,19 @@ body{
   display: inline-block;
 }
 
+.sInput::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color:  #343434 ;
+  opacity: 0.7; /* Firefox */
+}
+
+.sInput:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color:  #343434 ;
+}
+
+.sInput::-ms-input-placeholder { /* Microsoft Edge */
+  color:  #343434 ;
+}
+
 .formBtn{
   margin-right: 35px;
   cursor: pointer;
@@ -30,6 +68,34 @@ body{
 
 .passicon{
   cursor: pointer;
+}
+
+.dataRow{
+  margin-bottom: 15px;
+}
+
+.icon{
+  margin-left: 15px;
+  padding-bottom: -10px;
+}
+
+.agreeTable{
+  margin-left: 10px;
+}
+
+.proTable{
+  margin-top: 5px;
+  margin-bottom: 8px;
+}
+
+.gap{
+  padding: -12px;
+  margin: 0;
+}
+
+.profileValue{
+  margin-left: 15px;
+  display: inline-table;
 }
 
 .forgetpass{
@@ -47,6 +113,18 @@ body{
 
 .username{
   margin-left: 25px;
+}
+
+.titlediv{
+  background-color: #000;
+  color: #fff;
+  margin: 0;
+}
+
+.title{
+  color: #fff;
+  font-size: 28px;
+  padding: 10px;
 }
 
 .sec{
@@ -1089,11 +1167,10 @@ hr {
   background-color: #097992;
 }
 
-.navbar-static-side ul li.active a {
-  background: #303030; /* Old browsers */
-  transition: 0.2s all ease-in-out;
-  outline: none;
-  color:#FFF;
+.navbar-static-side ul li.active a { /* Old browsers */
+  transition:' 0.2s all ease-in-out';
+  outline: 'none';
+  color:'#FFF';
 }
 .navbar-static-side ul li a {
   color: #d9d9d9;
@@ -4215,22 +4292,22 @@ body.sidebar-icons #wrapper #page-wrapper {
 .introjs-helperNumberLayer {
   line-height: 13px;
 }
-textarea:focus,
-input[type="text"]:focus,
-input[type="password"]:focus,
-input[type="datetime"]:focus,
-input[type="datetime-local"]:focus,
-input[type="date"]:focus,
-input[type="month"]:focus,
-input[type="time"]:focus,
-input[type="week"]:focus,
-input[type="number"]:focus,
-input[type="email"]:focus,
-input[type="url"]:focus,
-input[type="search"]:focus,
-input[type="tel"]:focus,
-input[type="color"]:focus,
-.uneditable-input:focus {
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+.uneditable-input {
   border-color: #999999;
   box-shadow: none;
   outline: 0 none;

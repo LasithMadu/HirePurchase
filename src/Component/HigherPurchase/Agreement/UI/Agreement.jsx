@@ -150,7 +150,7 @@ export default class Agreement extends Component{
                         </div>
                     </div>
                         {this.state.expArr[3]
-                            ? <CustomerDetails/>
+                            ? ""
                             : ""
                         }
                 </div>

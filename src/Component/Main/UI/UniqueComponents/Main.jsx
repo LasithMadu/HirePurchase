@@ -66,7 +66,7 @@ export default class Main extends Component {
                         <Route component={NotFound} />
                     </Switch>
                     </div>
-                    <Footer/>
+                    {/* <Footer/> */}
                   </div>
               </div>
           </div>

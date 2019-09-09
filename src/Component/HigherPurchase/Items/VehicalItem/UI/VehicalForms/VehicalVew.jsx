@@ -10,10 +10,6 @@ export default class VehicalView extends Component{
       vehicles: []
     }
     this.getVehicals();
-
-    $('#dtBasicExample').DataTable( {
-      paginate: true
-    } );
   }
 
   getVehicals(){

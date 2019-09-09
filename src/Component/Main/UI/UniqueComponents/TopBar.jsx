@@ -3,12 +3,10 @@ import { MDBNavLink } from "mdbreact";
 import $ from 'jquery'
 import '../../../../Assests/styles/NavCss.css'
 
-import userProfile from '../../../../Assests/images/avatar/48.jpg'
-
 const styleSheet = {
     dropContent: {
         marginBottom: 0,
-        backgroundColor: localStorage.getItem('bgColor')
+        backgroundColor: '#1f1f1f'
     }
 }
 

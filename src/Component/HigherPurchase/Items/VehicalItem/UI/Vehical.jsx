@@ -16,7 +16,7 @@ export default class Vehical extends Component {
       return (
         <FormControl
             titles = {title}
-            startPos = {4}
+            startPos = {3}
             components = {com}
             viewBtn = {true}
             editBtn = {true}
