@@ -66,4 +66,4 @@ const FormControl = ({titles, startPos, createBtn, editBtn, deleteBtn, viewBtn, 
     )
 }
 
-export defaul
+export default FormControl;

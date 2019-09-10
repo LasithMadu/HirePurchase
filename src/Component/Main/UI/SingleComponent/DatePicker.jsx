@@ -6,7 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 const DatePickerCom = ({size, id, classN, label, placeholder, msg}) => {
 
-    var Todate = new Date();
+    var Todate = placeholder;
     var day = Todate.getDate();
     var month = Todate.getMonth();
     var year = Todate.getFullYear();

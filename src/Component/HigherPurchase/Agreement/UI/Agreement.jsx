@@ -16,7 +16,7 @@ export default class Agreement extends Component{
         this.state = {
           values: [],
           isSearch: false,
-          saveIcon: [false, false, true, false],
+          saveIcon: [false, false, false, false],
           expArr: [false, false, false, false]
         }
     }

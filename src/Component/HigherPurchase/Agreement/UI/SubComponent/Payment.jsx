@@ -1,8 +1,6 @@
 import React, {Component} from 'react'
 import uniqueid from 'uniqueid';
 import $ from 'jquery'
-import { DateInput } from "@blueprintjs/datetime";
-
 
 import Input from '../../../../Main/UI/SingleComponent/InputField'
 import DatePicker from '../../../../Main/UI/SingleComponent/DatePicker'
@@ -12,33 +10,32 @@ export default class CustomerDetails extends Component{
     state = {
         values: [],
         show: false,
-        startDate: new Date()
-    }
-
-    handleChange(date) {
-        this.setState({
-            startDate: date,
-        });
+        startDate: new Date(),
+        endDate: null,
+        showDate: false
     }
 
     componentDidMount(){
         var self = this;
         var first = uniqueid('i360-00');
-        console.log(first());
-        console.log(first());
-        console.log(first());
-
-        $(document).on("focusout","#InputFRental",function(){
-            self.setState({show: false});
-        });
-    
-        $(document).on("focusin","#InputFRental",function(){
-            self.setState({show: true});
-        });
     }
 
     saveAgreement(){
         console.log($('#InputCapital').val());
+    }
+
+    getPeriod(){
+        var self = this;
+        var x = parseInt($('#InputPeriod').val()); //or whatever offset
+        if(x == null){
+            setTimeout(function(){ self.setState({showDate: false}); }, 30);
+        }else{
+            setTimeout(function(){ self.setState({showDate: true}); }, 30);
+        }
+        var CurrentDate = new Date();
+        CurrentDate.setMonth(CurrentDate.getMonth() + x);
+        this.setState({endDate: CurrentDate});
+        this.setState({showDate: false});
     }
       
 
@@ -79,6 +76,7 @@ export default class CustomerDetails extends Component{
                                 label = "Period"
                                 placeholder = "Period"
                                 msg = "Please Input period"
+                                handleChange = {this.getPeriod.bind(this)}
                             />
                         </div>
                         <div class="form-row">
@@ -102,17 +100,28 @@ export default class CustomerDetails extends Component{
                                 size = {[6, 6, 6, 12]}
                                 id = "InputFRental"
                                 label = "First Rentaldate"
-                                placeholder = "Please Input first rental date"
+                                placeholder = {this.state.startDate}
                                 msg = "Please Input first rental date"
                                 onChange={this.handleChange}
                             />
-                            <Input
-                                size = {[6, 6, 6, 12]}
-                                id = "InputLRental"
-                                label = "Last Rentaldate"
-                                placeholder = "Last Rentaldate"
-                                msg = "Please Input last rental date"
-                            />
+                            {
+                                this.state.showDate ?
+                                <DatePicker
+                                    size = {[6, 6, 6, 12]}
+                                    id = "InputLRental"
+                                    label = "Last Rentaldate"
+                                    placeholder = {this.state.endDate}
+                                    msg = "Please Input last rental date"
+                                /> : 
+                                <Input
+                                    size = {[6, 6, 6, 12]}
+                                    id = "InputLRental"
+                                    label = "Last Rentaldate"
+                                    placeholder = "Last Rentaldate"
+                                    msg = "Please Input last rental date"
+                                />
+                            }
+                            
                         </div>
                         <div class="form-group col-sm-6 row">
                             <div className='col-xs-6 col-md-3'>

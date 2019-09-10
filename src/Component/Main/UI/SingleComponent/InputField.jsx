@@ -1,16 +1,16 @@
 import React, {useState} from 'react'
 import $ from 'jquery'
 
-const InputField = ({size, id, classN, label, placeholder, disable, msg}) => {
+const InputField = ({size, id, classN, label, placeholder, disable, msg, handleChange}) => {
 
     const [empty, setEmpty] = useState(true);
 
-    function handleChange(){
+    function msgChange(){
         if($("#"+id).val() == ''){
             setEmpty(false);
         }else{
             setEmpty(true);
-        }      
+        }     
     }
 
     $(document).on("focusout","#"+id,function(){
@@ -29,7 +29,7 @@ const InputField = ({size, id, classN, label, placeholder, disable, msg}) => {
                 {
                     disable ? 
                     <input className={"bp3-input bp3-fill modifier sInput"+classN} disabled={true} id={id} style={{border: '1px solid black', borderRadius: '0px'}} type="text" placeholder={placeholder} dir="auto" /> :
-                    <input className={"bp3-input bp3-fill modifier sInput"+classN} onChange={handleChange} id={id} style={{ border: '1px solid black', borderRadius: '0px'}} type="text" placeholder={placeholder} dir="auto" />
+                    <input className={"bp3-input bp3-fill modifier sInput"+classN} onChange={(e) => {handleChange($("#"+id).val()); msgChange()}} id={id} style={{ border: '1px solid black', borderRadius: '0px'}} type="text" placeholder={placeholder} dir="auto" />
                 }
                 <div>{
                     empty ?
