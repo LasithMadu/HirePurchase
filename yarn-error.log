@@ -1,0 +1,123 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js install
+
+PATH: 
+  C:\Users\Acer\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\Acer\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\Git\cmd;C:\Program Files\nodejs;C:\Program Files (x86)\Yarn\bin;C:\Users\Acer\AppData\Local\Microsoft\WindowsApps;C:\Users\Acer\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Acer\AppData\Roaming\npm;C:\Users\Acer\AppData\Local\Yarn\bin;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
+
+Yarn version: 
+  1.17.3
+
+Node version: 
+  10.16.3
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/date-fns/-/date-fns-2.1.0.tgz: ESOCKETTIMEDOUT
+      at ClientRequest.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:141091:19)
+      at Object.onceWrapper (events.js:286:20)
+      at ClientRequest.emit (events.js:198:13)
+      at TLSSocket.emitRequestTimeout (_http_client.js:662:40)
+      at Object.onceWrapper (events.js:286:20)
+      at TLSSocket.emit (events.js:198:13)
+      at TLSSocket.Socket._onTimeout (net.js:442:8)
+      at ontimeout (timers.js:436:11)
+      at tryOnTimeout (timers.js:300:5)
+      at listOnTimeout (timers.js:263:5)
+
+npm manifest: 
+  {
+    "name": "money360",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+      "@angular/core": "^8.2.4",
+      "@blueprintjs/core": "^3.18.0",
+      "@blueprintjs/datetime": "^3.9.2",
+      "@bumaga/tabs": "^0.1.1",
+      "@progress/kendo-drawing": "^1.5.12",
+      "@progress/kendo-react-pdf": "^3.2.2",
+      "@react-pdf/renderer": "^1.6.4",
+      "@zendeskgarden/react-tabs": "^6.2.0",
+      "@zendeskgarden/react-theming": "^6.2.0",
+      "antd": "^3.20.3",
+      "antd-img-crop": "^2.1.1",
+      "array-unique": "^0.3.2",
+      "axios": "^0.19.0",
+      "body-parser": "^1.19.0",
+      "bootstrap": "^4.3.1",
+      "connect": "^3.7.0",
+      "cors": "^2.8.5",
+      "datatables.net": "^1.10.19",
+      "date-and-time": "^0.9.0",
+      "express": "^4.17.1",
+      "filepond": "^4.4.11",
+      "generate-unique-id": "^2.0.0",
+      "jquery": "^3.4.1",
+      "mdbreact": "^4.18.0",
+      "morgan": "^1.9.1",
+      "ngx-malihu-scrollbar": "^8.0.0",
+      "pdfmake": "^0.1.58",
+      "perfect-scrollbar": "^1.4.0",
+      "pg": "^7.11.0",
+      "prop-types": "^15.7.2",
+      "react": "^16.9.0",
+      "react-bootstrap": "^1.0.0-beta.9",
+      "react-calendar": "^2.19.2",
+      "react-color": "^2.17.3",
+      "react-custom-scrollbars": "^4.2.1",
+      "react-datepicker": "^2.9.6",
+      "react-dom": "^16.9.0",
+      "react-filepond": "^7.0.1",
+      "react-modern-datepicker": "^1.1.0",
+      "react-router-dom": "^5.0.1",
+      "react-scripts": "3.1.1",
+      "react-slide-out": "^0.1.4",
+      "react-toasts": "^3.0.3",
+      "semantic-ui-react": "^0.88.0",
+      "simplebar": "^4.1.0",
+      "slideout": "^1.0.1",
+      "styled-components": "^4.3.2",
+      "tiny-date-picker": "^3.2.8",
+      "unique-number": "^2.0.1",
+      "uuid": "^3.3.2"
+    },
+    "scripts": {
+      "client-install": "npm install --prefix client",
+      "start": "node server.js | react-scripts start",
+      "server": "nodemon server.js",
+      "client": "npm start --prefix client",
+      "dev": "concurrently \"npm run server\" \"npm run client\"",
+      "heroku-prebuild": "export NPM_CONFIG_PRODUCTION=false; export NODE_ENV=; NPM_CONFIG_PRODUCTION=false NODE_ENV=development npm install --only=dev --dev",
+      "heroku-postbuild": "export NPM_CONFIG_PRODUCTION=true; export NODE_ENV=production;"
+    },
+    "eslintConfig": {
+      "extends": "react-app"
+    },
+    "browserslist": {
+      "production": [
+        ">0.2%",
+        "not dead",
+        "not op_mini all"
+      ],
+      "development": [
+        "last 1 chrome version",
+        "last 1 firefox version",
+        "last 1 safari version"
+      ]
+    },
+    "devDependencies": {
+      "concurrently": "^4.1.1",
+      "uniqueid": "^1.0.0"
+    },
+    "routes": {
+      "/**": "public/index.html"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

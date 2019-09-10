@@ -33,13 +33,15 @@ export default class CustomerDetails extends Component{
         return(
             <div className="bodyLogo">
                 <div className="container">
-                    <Search
-                        id = "vehiNo"
-                        icon = "fa fa-user"
-                        placeholder = "Search by Agreement No/Vehical No"
-                        btnId = "searchBtn"
-                        handleChange = {this.searchVehicle.bind(this)}
-                    />
+                    <div className="col-lg-11 col-md-11 col-sm-11 col-xs-12">
+                        <Search
+                            id = "vehiNo"
+                            icon = "fa fa-user"
+                            placeholder = "Search by Agreement No/Vehical No"
+                            btnId = "searchBtn"
+                            handleChange = {this.searchVehicle.bind(this)}
+                        />
+                    </div>
                     <hr/>
                     <div className="row ml-5">
                         <div className="col-lg-6 col-ms-6 col-sm-6 col-xs-12">

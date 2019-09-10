@@ -33,13 +33,16 @@ export default class CustomerDetails extends Component{
         return(
             <div className="bodyLogo">
                 <div className="container">
-                    <Search
-                    id = "cusNic"
-                    icon = "fa fa-user"
-                    placeholder = "Search by NIC/Passport No"
-                    btnId = "searchBtn"
-                    handleChange = {this.searchCustomer.bind(this)}
-                    />
+                    <div className="col-lg-11 col-md-11 col-sm-11 col-xs-12">
+                        <Search
+                            id = "cusNic"
+                            icon = "fa fa-user"
+                            placeholder = "Search by NIC/Passport No"
+                            btnId = "searchBtn"
+                            handleChange = {this.searchCustomer.bind(this)}
+                        />
+                    </div>
+                    
                     <hr/>
                     <div className="row ml-5">
                         <div className="col-lg-6 col-ms-6 col-sm-6 col-xs-12">
@@ -48,7 +51,7 @@ export default class CustomerDetails extends Component{
                                 <DataRow 
                                     icon = "fa fa-user"
                                     label = "Name"
-                                    value = {data.length == 0 ? "Not Specified" : data.nameIntials}
+                                    value = {data.length == 0 ? "Not Specified" : data.nameInitials}
                                 />
                                 <DataRow 
                                     icon = "fa fa-envelope"

@@ -47,6 +47,7 @@ export default class CustomerDetails extends Component{
             <div className="bodyLogo">
                 <div className="container">
                     <hr/>
+                    <div className="col-lg-11 col-md-11 col-sm-11 col-xs-12">
                     <form className='col-sm-12 col-md-12'>
                         <div class="form-row">
                             <Input
@@ -123,6 +124,7 @@ export default class CustomerDetails extends Component{
                         </div>
                         
                     </form>
+                    </div>
                 </div>
             </div>
         )

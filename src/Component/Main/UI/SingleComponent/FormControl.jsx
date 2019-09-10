@@ -28,11 +28,11 @@ const FormControl = ({titles, startPos, createBtn, editBtn, deleteBtn, viewBtn, 
     }
 
     return (
-        <div className='col-md-12 col-sm-12 col-xs-12' style={{marginTop: '20px'}}>
-            <div className='container edit profile formTitle' MalihuScrollbarModule style={{backgroundColor: '#ffffff'}}>
+        <div className='col-md-12 col-sm-12 col-xs-12'>
+            <div className='container edit profile formTitle' MalihuScrollbarModule >
                 {/* <ToastsContainer store={ToastsStore} position={ToastsContainerPosition.BOTTOM_RIGHT} /> */}
-                <div className="row">
-                    <h3 className="col-md-9 col-sm-5 col-xs-10">{title}</h3>
+                <div className="row col-lg-12" style={{backgroundColor: '#000000', color: '#ffffff', padding: '10px', marginLeft: '-50px'}}>
+                    {/* <h3 className="col-md-9 col-sm-5 col-xs-10">{title}</h3> */}
                     <div className="col-md-3 col-sm-6 col-xs-2">
                         {
                             viewBtn ?
@@ -66,4 +66,4 @@ const FormControl = ({titles, startPos, createBtn, editBtn, deleteBtn, viewBtn, 
     )
 }
 
-export default FormControl;
+export defaul
