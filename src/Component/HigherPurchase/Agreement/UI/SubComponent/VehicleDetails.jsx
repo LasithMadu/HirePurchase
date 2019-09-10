@@ -2,6 +2,9 @@ import React, {Component} from 'react'
 import axios from 'axios'
 import $ from 'jquery'
 
+import Search from '../../../../Main/UI/SingleComponent/Search'
+import DataRow from '../../../../Main/UI/SingleComponent/DataCell'
+
 export default class CustomerDetails extends Component{
 
     state = {
@@ -30,52 +33,61 @@ export default class CustomerDetails extends Component{
         return(
             <div className="bodyLogo">
                 <div className="container">
-                    <form action="#" className="form-horizontal">
-                        <div className="form-body pal">
-                            <div className="form-group">
-                                <div className='row'>
-                                <label htmlFor="vehiNo" className="col-xs-3 control-label">
-                                    Search :- </label>
-                                    <div className="input-icon col-xs-6" style={{display: 'inline-block' }}>
-                                        <i className="fa fa-user"></i>
-                                        <input id="vehiNo" type="text" placeholder="Search by Agreement No/Vehical No" className="form-control" />
-                                    </div>
-                                    <div className='col-xs-2'>
-                                        <a href="#" className="btn btn-primary xs-5" id="searchBtn" onClick={this.searchVehicle.bind(this)}>Search</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                    <h5 className="text-dark">Vehical Details</h5>
+                    <Search
+                        id = "vehiNo"
+                        icon = "fa fa-user"
+                        placeholder = "Search by Agreement No/Vehical No"
+                        btnId = "searchBtn"
+                        handleChange = {this.searchVehicle.bind(this)}
+                    />
                     <hr/>
                     <div className="row ml-5">
-                        <div className="col-md-6 col-sm-7 col-xs-12">
-                            <p>Vehical No :- <span id="vahical">{data.length == 0 ? "" : data.vehiNo}</span></p>
+                        <div className="col-lg-6 col-ms-6 col-sm-6 col-xs-12">
+                            <table className="proTable">
+                                <tbody>
+                                <DataRow 
+                                    icon = "fa fa-user"
+                                    label = "Vehical No"
+                                    value = {data.length == 0 ? "Not Specified" : data.vehiNo}
+                                />
+                                <DataRow 
+                                    icon = "fa fa-envelope"
+                                    label = "Engine No"
+                                    value = {data.length == 0 ? "Not Specified" : data.engineNo}
+                                />
+                                <DataRow 
+                                    icon = "fa fa-map-marker"
+                                    label = "Modal"
+                                    value = {data.length == 0 ? "Not Specified" : data.make+" "+data.modal}
+                                />
+                                <DataRow 
+                                    icon = "fa address-card"
+                                    label = "Year"
+                                    value = {data.length == 0 ? "Not Specified" : data.year}
+                                />
+                                </tbody>
+                            </table>
                         </div>
-                        <div className="col-md-6 col-sm-6 col-xs-12">
-                            <p>Cassis No :- <span id="cassis">{data.length == 0 ? "" : data.chassis}</span></p>
-                        </div>
-                    </div>
-                    <div className="row ml-5">
-                        <div className="col-md-6 col-sm-6 col-xs-12">
-                            <p>Engine No :- <span id="engine">{data.length == 0 ? "" : data.engineNo}</span></p>
-                        </div>
-                        <div className="col-md-6 col-sm-6 col-xs-12">
-                            <p>Capacity :- <span id="capacity">{data.length == 0 ? "" : data.capacity}</span></p>
-                        </div>
-                    </div>
-                    <div className="row ml-5">
-                        <div className="col-md-6 col-sm-6 col-xs-12">
-                            <p>Modal :- <span id="modal">{data.length == 0 ? "" : data.make+" "+data.modal}</span></p>
-                        </div>
-                        <div className="col-md-6 col-sm-6 col-xs-12">
-                            <p>Feul type :- <span id="feul">{data.length == 0 ? "" : data.fuel}</span></p>
-                        </div>
-                    </div>
-                    <div className="row ml-5">
-                        <div className="col-md-6 col-sm-6 col-xs-12">
-                            <p>Year :- <span id="year">{data.length == 0 ? "" : data.year}</span></p>
+                        <div className="col-lg-6 col-ms-6 col-sm-6 col-xs-12">
+                            <table className="proTable">
+                                <tbody>
+                                <DataRow 
+                                    icon = "fa fa-user"
+                                    label = "Cassis No"
+                                    value = {data.length == 0 ? "Not Specified" : data.chassis}
+                                />
+                                <DataRow 
+                                    icon = "fa fa-envelope"
+                                    label = "Capacity"
+                                    value = {data.length == 0 ? "Not Specified" : data.capacity}
+                                />
+                                <DataRow 
+                                    icon = "fa fa-map-marker"
+                                    label = "Feul type"
+                                    value = {data.length == 0 ? "Not Specified" : data.fuel}
+                                />
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

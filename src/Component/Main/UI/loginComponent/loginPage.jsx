@@ -169,63 +169,63 @@ export default class LoginPage extends Component {
 
     render () {
       return (
-        <div className='container'>
-            <div class="page-form" >
-                <div class="panel panel-blue col-md-12">
-                    <div class="panel-body pan" >
-                        <form action="#" class="form-horizontal">
-                        <div class="form-body pal">
-                            <div class="col-md-12 col-sm-12 text-center panel-title">
-                                <div class="col-md-8 col-sm-8">
-                                    <img src={logo} style={{marginTop: '-180px', marginLeft: '90px'}} class="img-responsive"/>
+        <div className='container loginBg'>
+            <div className="page-form" >
+                <div className="panel panel-blue col-md-12">
+                    <div className="panel-body pan" >
+                        <form action="#" className="form-horizontal">
+                        <div className="form-body pal">
+                            <div className="col-md-12 col-sm-12 text-center panel-title">
+                                <div className="col-md-8 col-sm-8">
+                                    <img src={logo} style={{marginTop: '-180px', marginLeft: '90px'}} className="img-responsive"/>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="col-md-3 col-sm-3 mt-sm-5">
-                                    <img src={logo} class="img-responsive"/>
+                            <div className="form-group">
+                                <div className="col-md-3 col-sm-3 mt-sm-5">
+                                    <img src={logo} className="img-responsive"/>
                                 </div>
-                                <div class="col-md-9 text-left">
+                                <div className="col-md-9 text-left">
                                     <h1>Login</h1>
                                     <br />
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="inputName" class="col-md-3 control-label">
+                            <div className="form-group">
+                                <label htmlFor="inputName" className="col-md-3 control-label">
                                     Username:</label>
-                                <div class="col-md-9">
-                                    <div class="input-icon left">
-                                        <i class="fa fa-user"></i>
-                                        <input id="inputName" type="text" placeholder="" class="form-control" />
-                                        <span class="text-danger msgu"></span></div>
+                                <div className="col-md-9">
+                                    <div className="input-icon left">
+                                        <i className="fa fa-user"></i>
+                                        <input id="inputName" type="text" placeholder="" className="form-control" />
+                                        <span className="text-danger msgu"></span></div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="inputPassword" class="col-md-3 control-label">
+                            <div className="form-group">
+                                <label htmlFor="inputPassword" className="col-md-3 control-label">
                                     Password:</label>
-                                <div class="col-md-9">
-                                    <div class="input-icon left">
-                                        <i class="fa fa-lock"></i>
+                                <div className="col-md-9">
+                                    <div className="input-icon left">
+                                        <i className="fa fa-lock"></i>
                                         {!this.state.show
-                                        ? <i class="fa fa-eye-slash passicon" onClick={this.showPass.bind(this)} style={{right: '8px'}} aria-hidden="true"></i>
-                                        : <i class="fa fa-eye passicon" onClick={this.showPass.bind(this)} style={{right: '8px'}} aria-hidden="true"></i>
+                                        ? <i className="fa fa-eye-slash passicon" onClick={this.showPass.bind(this)} style={{right: '8px'}} aria-hidden="true"></i>
+                                        : <i className="fa fa-eye passicon" onClick={this.showPass.bind(this)} style={{right: '8px'}} aria-hidden="true"></i>
                                         }
-                                        <input id="inputPassword" type="password" placeholder="" class="form-control" />
-                                        <span class="text-danger msgp"></span></div>
+                                        <input id="inputPassword" type="password" placeholder="" className="form-control" />
+                                        <span className="text-danger msgp"></span></div>
                                 </div>
                             </div>
-                            <div class="col-lg-12 text-right">
+                            <div className="col-lg-12 text-right">
                                 <p className="forgetpass" onClick={this.forgetPass.bind(this)}>
                                     Forgot Password ?
                                 </p>
                             </div>
-                            <div class="form-group mbn">
-                                <div class="col-lg-12" align="right">
-                                    <div class="form-group mbn">
-                                        <div class="col-lg-3">
+                            <div className="form-group mbn">
+                                <div className="col-lg-12" align="right">
+                                    <div className="form-group mbn">
+                                        <div className="col-lg-3">
                                             &nbsp;
                                         </div>
-                                        <div class="col-lg-9">
-                                            <button onClick={this.signin} type="submit" class="btn btn-default">
+                                        <div className="col-lg-9">
+                                            <button onClick={this.signin} type="submit" className="btn btn-default">
                                                 Login</button>
                                         </div>
                                     </div>
@@ -239,7 +239,7 @@ export default class LoginPage extends Component {
             <div id="footer">
                 <div className="row d-flex justify-content-center">
                     <div className="copyright">
-                        <img src={company} class="img-responsive clogo text-center"/><a href="http://i-threesixty.co.uk/"><p className="text-center copytext">© Copyright 2019 by ithreesixty. All rights reserved.</p></a>
+                        <img src={company} className="img-responsive clogo text-center"/><a href="http://i-threesixty.co.uk/"><p className="text-center copytext">© Copyright 2019 by ithreesixty. All rights reserved.</p></a>
                     </div>
                 </div>
             </div>

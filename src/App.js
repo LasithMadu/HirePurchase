@@ -13,6 +13,9 @@ import '../src/Assests/styles/pace.css';
 import '../src/Assests/styles/style-responsive.css';
 import '../src/Assests/styles/zabuto_calendar.min.css';
 import '../src/Assests/styles/styles.css';
+import '../src/Assests/styles/blueprint.css';
+import '../src/Assests/styles/normalize.css';
+import '../src/Assests/styles/blueprint-datetime.css';
 
 import Login from './Component/Main/UI/loginComponent/loginPage';
 

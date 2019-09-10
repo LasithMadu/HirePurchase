@@ -20,8 +20,8 @@ export default class Viewagreement extends Component{
         {
           agreementData != null
           ? (<div>
-              <table class="table">
-                <thead class="thead-light">
+              <table className="table">
+                <thead className="thead-light">
                   <tr>
                     <th scope="col">Vehical No</th>
                     <th scope="col">Cassis No</th>

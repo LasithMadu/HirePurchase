@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import uniqueid from 'uniqueid';
 import $ from 'jquery'
+import { DateInput } from "@blueprintjs/datetime";
+
 
 import Input from '../../../../Main/UI/SingleComponent/InputField'
 import DatePicker from '../../../../Main/UI/SingleComponent/DatePicker'
@@ -9,7 +11,14 @@ export default class CustomerDetails extends Component{
 
     state = {
         values: [],
-        show: false
+        show: false,
+        startDate: new Date()
+    }
+
+    handleChange(date) {
+        this.setState({
+            startDate: date,
+        });
     }
 
     componentDidMount(){
@@ -37,10 +46,8 @@ export default class CustomerDetails extends Component{
         return(
             <div className="bodyLogo">
                 <div className="container">
-                    <h5 className="text-dark">Payment Details</h5>
                     <hr/>
                     <form className='col-sm-12 col-md-12'>
-                    
                         <div class="form-row">
                             <Input
                                 size = {[6, 6, 6, 12]}
@@ -94,10 +101,10 @@ export default class CustomerDetails extends Component{
                                 size = {[6, 6, 6, 12]}
                                 id = "InputFRental"
                                 label = "First Rentaldate"
-                                placeholder = "First Rentaldate"
+                                placeholder = "Please Input first rental date"
                                 msg = "Please Input first rental date"
+                                onChange={this.handleChange}
                             />
-                            
                             <Input
                                 size = {[6, 6, 6, 12]}
                                 id = "InputLRental"

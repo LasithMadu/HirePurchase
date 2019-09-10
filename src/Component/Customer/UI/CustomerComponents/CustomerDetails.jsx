@@ -71,13 +71,7 @@ export default class CustomerDetails extends Component {
       return (
             <div className="page-content">
               <ToastsContainer store={ToastsStore} position={ToastsContainerPosition.BOTTOM_RIGHT} />
-                <Search
-                  id = "inputName"
-                  icon = "fa fa-user"
-                  placeholder = "Search by NIC/Passport No"
-                  btnId = "searchBtn"
-                  handleChange = {this.searchCustomer.bind(this)}
-                />
+                
                 <div className="modal" role="dialog" style={{borderRadius: '50px'}}>
                   <div className="modal-dialog" role="document">
                     <div className="modal-content">
@@ -100,16 +94,24 @@ export default class CustomerDetails extends Component {
 
 
                 <div className="row mbl">
+                <Search
+                  id = "inputName"
+                  icon = "fa fa-user"
+                  placeholder = "Search by NIC/Passport No"
+                  btnId = "searchBtn"
+                  handleChange = {this.searchCustomer.bind(this)}
+                />
               <div className="col-lg-12">
                 <div className="row">
                     <div className="col-md-11">
                         <div className="row mtl">
                             <div className="col-lg-3 col-md-3 col-sm-3 col-xs-12 border">
                               <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 titlediv">
-                                <span class="align-middle title">Profile</span>
+                                <span className="align-middle title">Profile</span>
                               </div>
                               <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 item row" >
                                 <table className="proTable">
+                                  <tbody>
                                   <DataRow 
                                       icon = "fa fa-user"
                                       label = "Name"
@@ -140,6 +142,7 @@ export default class CustomerDetails extends Component {
                                       label = "User Rating"
                                       value = {data.length == 0 ? "Not Specified" : "Not Specified"}
                                   />
+                                  </tbody>
                                 </table>
                               </div>
                               
@@ -147,7 +150,7 @@ export default class CustomerDetails extends Component {
                             <div className="col-md-9">
                               <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 border">
                                 <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 titlediv">
-                                  <span class="align-middle title">Agreement</span>
+                                  <span className="align-middle title">Agreement</span>
                                 </div>
                                 <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 item row agreeTable" >
                                   <Table agrrement = {this.state.values}/>

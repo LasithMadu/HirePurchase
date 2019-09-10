@@ -17,16 +17,8 @@ const InputField = ({size, id, classN, label, placeholder, disable, msg}) => {
         $("#"+id).css('border', '1px solid black')
     });
 
-    $(document).on("focusin","#"+id,function(){      
-        $("#"+id).css('border', '0')
-    });
-
-    $(document).on("mouseover","#"+id,function(){
-        $("#"+id).css('border', '1px solid #106BA3')
-    });
-
-    $(document).on("mouseout","#"+id,function(){      
-        $("#"+id).css('border', '1px solid #106BA3')
+    $(document).on("focusin","#"+id,function(){
+        $("#"+id).css('border', '0px')
     });
 
     return(
@@ -36,8 +28,8 @@ const InputField = ({size, id, classN, label, placeholder, disable, msg}) => {
                 <br/>
                 {
                     disable ? 
-                    <input className={"bp3-input bp3-fill modifier sInput"+classN} disabled={true} id={id} style={{borderRadius: 0, border: '1px solid black'}} type="text" placeholder={placeholder} dir="auto" /> :
-                    <input className={"bp3-input bp3-fill modifier sInput"+classN} onChange={handleChange} id={id} style={{borderRadius: 0, border: '1px solid black'}} type="text" placeholder={placeholder} dir="auto" />
+                    <input className={"bp3-input bp3-fill modifier sInput"+classN} disabled={true} id={id} style={{border: '1px solid black', borderRadius: '0px'}} type="text" placeholder={placeholder} dir="auto" /> :
+                    <input className={"bp3-input bp3-fill modifier sInput"+classN} onChange={handleChange} id={id} style={{ border: '1px solid black', borderRadius: '0px'}} type="text" placeholder={placeholder} dir="auto" />
                 }
                 <div>{
                     empty ?

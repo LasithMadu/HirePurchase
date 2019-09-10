@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom"
 import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
+import { Scrollbars } from 'react-custom-scrollbars';
 
 import Customer from '../../../Customer/UI/CustomerComponents/CustomerDetails'
 import CDetails from '../../../Customer/UI/CustomerDetails/CustomerDetail'
@@ -26,7 +27,7 @@ export default class Main extends Component {
   constructor(props){
     super(props)
     this.state = {
-      currentLocation: 'Customer',
+      currentLocation: 'CUSTOMERS',
       agreementData: []
     }
   }
@@ -50,21 +51,23 @@ export default class Main extends Component {
                 <div className='components'>
                     <LocationBar currentLocation={this.state.currentLocation}/>
                     <div className='col-md-12'>
-                    <Switch>
-                        <Route exact path="/customer" component={Customer} />
-                        <Route exact path="/higher" component={Customer} />
-                        <Route exact path="/higher/items" component={Items} />
-                        <Route exact path="/higher/agreement" render={()=><Agreement/>} />
-                        <Route exact path="/create" component={CDetails} />
-                        <Route exact path="/profile" component={Profile} />
-                        <Route exact path="/higher/payment" component={Payment} />
-                        <Route exact path="/userprofile" component={UserProfile} />
-                        <Route exact path="/users" component={Users} />
-                        <Route exact path="/settings" component={Settings} />
-                        <Route exact path="/caccount" component={CAccount} />
-                        <Route exact path="/agreementPDF" render={()=><AgreementPDF agreementData={this.state.agreementData}/>} />
-                        <Route component={NotFound} />
-                    </Switch>
+                    <Scrollbars visibility-x={false} style={{height: 'calc(100vh - 120px)', display: 'inline-block', overflowX: 'hidden'}}>
+                      <Switch>
+                          <Route exact path="/customer" component={Customer} />
+                          <Route exact path="/higher" component={Customer} />
+                          <Route exact path="/higher/items" component={Items} />
+                          <Route exact path="/higher/agreement" render={()=><Agreement/>} />
+                          <Route exact path="/create" component={CDetails} />
+                          <Route exact path="/profile" component={Profile} />
+                          <Route exact path="/higher/payment" component={Payment} />
+                          <Route exact path="/userprofile" component={UserProfile} />
+                          <Route exact path="/users" component={Users} />
+                          <Route exact path="/settings" component={Settings} />
+                          <Route exact path="/caccount" component={CAccount} />
+                          <Route exact path="/agreementPDF" render={()=><AgreementPDF agreementData={this.state.agreementData}/>} />
+                          <Route component={NotFound} />
+                      </Switch>
+                    </Scrollbars>
                     </div>
                     {/* <Footer/> */}
                   </div>

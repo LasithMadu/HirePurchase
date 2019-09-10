@@ -49,8 +49,8 @@ export default class Agreement extends Component{
       var data = this.state.values;
         return(
             <div className="page-content" style={{paddingBottom: '100px'}}>
-                <Scrollbars visibility-x={false} style={{height: 'calc(100vh - 170px)', display: 'inline-block', overflowX: 'hidden'}}>
-                <div className="col-md-12 col-sm-12 col-xs-12 topItem text-dark">
+                
+                <div className="col-md-12 col-sm-12 col-xs-12 topItem">
                     <div className="itemTitle" onClick={() => this.logoShow(1)}>
                         <div className="row">
                             <div className="col-md-10 col-sm-10 col-xs-10">
@@ -76,7 +76,8 @@ export default class Agreement extends Component{
                             : ""
                         }
                 </div>
-                <div className="col-md-12 col-sm-12 col-xs-12 middelItem text-dark">
+                <br/>
+                <div className="col-md-12 col-sm-12 col-xs-12 topItem">
                     <div className="itemTitle" onClick={() => this.logoShow(2)}>
                         <div className="row">
                             <div className="col-md-10 col-sm-10 col-xs-10">
@@ -102,7 +103,7 @@ export default class Agreement extends Component{
                             : ""
                         }
                 </div>
-                <div className="col-md-12 col-sm-12 col-xs-12 middelItem text-dark">
+                <div className="col-md-12 col-sm-12 col-xs-12 topItem">
                     <div className="itemTitle" onClick={() => this.logoShow(3)}>
                         <div className="row">
                             <div className="col-md-10 col-sm-10 col-xs-10">
@@ -128,7 +129,7 @@ export default class Agreement extends Component{
                             : ""
                         }
                 </div>
-                <div className="col-md-12 col-sm-12 col-xs-12 bottemItem text-dark">
+                <div className="col-md-12 col-sm-12 col-xs-12 topItem">
                     <div className="itemTitle" onClick={() => this.logoShow(4)}>
                         <div className="row">
                             <div className="col-md-10 col-sm-10 col-xs-10">
@@ -154,7 +155,6 @@ export default class Agreement extends Component{
                             : ""
                         }
                 </div>
-                </Scrollbars>
             </div>
         )
     }

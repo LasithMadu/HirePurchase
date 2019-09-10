@@ -41,7 +41,7 @@ export default class TopBar extends Component {
             <div className="dropdown-content" style={styleSheet.dropContent}>
                 <MDBNavLink to="/userprofile" className="dropdown-item text-white" onClick={()=>this.props.setLocation('Profile')}><i className="fa fa-user"></i>My Profile</MDBNavLink>
                 <MDBNavLink to="/create" className="dropdown-item text-white" onClick={()=>this.props.setLocation('Customer')}><i className="fa fa-calendar"></i>Customer</MDBNavLink>
-                <li className="divider"></li>
+                <div className="divider"></div>
                 <a href="/" className="dropdown-item text-white" onClick={this.clearCache}><i className="fa fa-key"></i>Log Out</a>
             </div>
         );
@@ -51,7 +51,7 @@ export default class TopBar extends Component {
                 <MDBNavLink to="/profile" className="dropdown-item text-white" onClick={()=>this.props.setLocation('Profile')}><i className="fa fa-user"></i>My Profile</MDBNavLink>
                 <MDBNavLink to="/users" className="dropdown-item text-white" onClick={()=>this.props.setLocation('Users')}><i className="fa fa-calendar"></i> Create Account</MDBNavLink>
                 <MDBNavLink to="/users" className="dropdown-item text-white" onClick={()=>this.props.setLocation('Settings')}><i className="fa fa-calendar"></i> Settings</MDBNavLink>
-                <li className="divider"></li>
+                <div className="divider"></div>
                 <a href="/" className="dropdown-item text-white" onClick={this.clearCache}><i className="fa fa-key"></i>Log Out</a>
             </div>
         );
@@ -60,7 +60,7 @@ export default class TopBar extends Component {
             <div className="dropdown-content" style={styleSheet.dropContent}>
                 <MDBNavLink to="/settings" className="dropdown-item text-white" onClick={()=>this.props.setLocation('Settings')}><i className="fa fa-user"></i>Settings</MDBNavLink>
                 <MDBNavLink to="/caccount" className="dropdown-item text-white" onClick={()=>this.props.setLocation('Create Account')}><i className="fa fa-calendar"></i>Create Account</MDBNavLink>
-                <li className="divider"></li>
+                <div className="divider"></div>
                 <a href="/" className="dropdown-item text-white" onClick={this.clearCache}><i className="fa fa-key"></i>Log Out</a>
             </div>
         );
@@ -71,13 +71,15 @@ export default class TopBar extends Component {
                     <nav id="topbar" role="navigation" style={styleSheet.dropContent} data-step="3" className="navbar navbar-default navbar-static-top">
                     <div className="navbar-header" style={{marginRight: '-20px'}}>
                         <MDBNavLink id="logo" style={styleSheet.dropContent} to="/customer" className="navbar-brand"><span className="fa fa-rocket"></span><span className="logo-text">Money360</span><span style={{display: 'none'}} className="logo-text-icon">µ</span></MDBNavLink></div>
-                        <div id="mydiv" class="navbar-toggle" onClick={this.mouse}><i className="fa fa-bars"></i></div>
+                        <div id="mydiv" className="navbar-toggle" onClick={this.mouse}><i className="fa fa-bars"></i></div>
                     <div className="topbar-main">
                         <ul className="nav navbar navbar-top-links navbar-right mbn mobileDrop">
                             <li className="dropdown topbar-user"><a data-hover="dropdown" className="dropdown-toggle"><span className="hidden-xs username">{localStorage.getItem('username').toUpperCase()}</span>&nbsp;<span className="caret"></span></a>
-                            { this.state.userLevel === 'Super Admin' ? superadmin : ""}
-                            { this.state.userLevel === 'Admin' ? admin : ""}
-                            { this.state.userLevel === 'Oparator' ? oprator : ""}
+                            <div>
+                                { this.state.userLevel === 'Super Admin' ? superadmin : ""}
+                                { this.state.userLevel === 'Admin' ? admin : ""}
+                                { this.state.userLevel === 'Oparator' ? oprator : ""}
+                            </div>
                             </li>
                         </ul>
                     </div>
