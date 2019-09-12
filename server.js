@@ -127,6 +127,10 @@ app.get('/companyList', function(request, response){
     main.companyList(request, response, pool);
 });
 
+app.post('/changePass', function(request, response){
+    main.changePass(request, response, pool);
+});
+
 
 
 //Admin Activity
@@ -212,6 +216,14 @@ app.post('/Agreement/saveData', function(request, response){
 
 app.post('/Agreement/getAgree', function(request, response){
     Agreement.getAgree(request, response, pool);
+});
+
+app.post('/Agreement/savePayment', function(request, response){
+    Agreement.savePayment(request, response, pool);
+});
+
+app.get('/Agreement/getPayement', function(request, response){
+    Agreement.getPayement(request, response, pool);
 });
 
 if (process.env.NODE_ENV === 'production') {

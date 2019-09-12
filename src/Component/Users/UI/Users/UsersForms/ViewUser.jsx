@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { Table } from 'semantic-ui-react'
 import axios from 'axios'
 
 export default class ViewUser extends Component {
@@ -22,7 +21,7 @@ export default class ViewUser extends Component {
       .then((response) => {
         if(response.data.msg){
           for(var i=0; i<response.data.table.rowCount; i++){
-            if(response.data.table.rows[i].nic != ''){
+            if(response.data.table.rows[i].nic !== ''){
               values.push(response.data.table.rows[i]);
             }
           }
@@ -44,7 +43,7 @@ export default class ViewUser extends Component {
       .then((response) => {
         if(response.data.msg){
           for(var i=0; i<response.data.table.rowCount; i++){
-            if(response.data.table.rows[i].nic != ''){
+            if(response.data.table.rows[i].nic !== ''){
               values.push(response.data.table.rows[i]);
             }
           }

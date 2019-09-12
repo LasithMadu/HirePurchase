@@ -36,22 +36,22 @@ export default class ForgetPassword extends Component {
     }
 
     checkAnswers(){
-        var ans1 = $('#inputAnswer1').val();
-        var ans2 = $('#inputAnswer2').val();
+        var ans1 = $('#inputAnswer1').val().toLocaleLowerCase();
+        var ans2 = $('#inputAnswer2').val().toLocaleLowerCase();
 
         $('.msgans1').text('');
         $('.msgans2').text('');
 
-        if(ans1 == ''){
+        if(ans1 === ''){
             $('.msgans1').text('Please answer the question');
-        }else if(ans2 == ''){
+        }else if(ans2 === ''){
             $('.msgans2').text('Please answer the question');
         }else{
-            if(ans1 != this.state.ans1 && ans2 != this.state.ans2){
+            if(ans1 !== this.state.ans1 && ans2 != this.state.ans2){
                 $('.msgans2').text('Both answers are wrong. try again');
-            }else if(ans1 != this.state.ans1){
+            }else if(ans1 !== this.state.ans1){
                 $('.msgans1').text('This is wrong answer. try again');
-            }else if(ans2 != this.state.ans2){
+            }else if(ans2 !== this.state.ans2){
                 $('.msgans2').text('This is wrong answer. try again');
             }else{
                 window.location.href = "/changepass";

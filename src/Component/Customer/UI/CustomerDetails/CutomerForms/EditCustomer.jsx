@@ -130,7 +130,7 @@ export default class CreateForm extends Component{
                                         <input id="inputENIC" type="text" placeholder="Search by NIC/Passport No" className="form-control" />
                                     </div>
                                     <div className='col-md-2 col-sm-1 col-xs-2' style={{ height: '30px', paddingTop: '-50px'}}>
-                                        <a href="#" className="btn btn-primary ml-5" id="searchBtn" onClick={this.searchCustomer}>Search</a>
+                                        <button className="btn btn-primary ml-5" id="searchBtn" onClick={this.searchCustomer}>Search</button>
                                     </div>
                                 </div>
                             </div>

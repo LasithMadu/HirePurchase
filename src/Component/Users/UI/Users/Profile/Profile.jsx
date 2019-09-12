@@ -37,7 +37,7 @@ export default class Profile extends Component {
 
         console.log(localStorage.getItem('userId'))
 
-        if(localStorage.getItem('userId') != ''){
+        if(localStorage.getItem('userId') !== ''){
             axios.post(path, {
                 data: localStorage.getItem('userId')
               })

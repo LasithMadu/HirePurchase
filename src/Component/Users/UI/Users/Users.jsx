@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { Scrollbars } from 'react-custom-scrollbars';
 
 import CreateUser from './UsersForms/CreateUser'
 import EditUser from './UsersForms/EditUser'

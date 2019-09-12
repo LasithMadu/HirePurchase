@@ -115,32 +115,32 @@ export default class CustomerDetails extends Component {
                                   <DataRow 
                                       icon = "fa fa-user"
                                       label = "Name"
-                                      value = {data.length == 0 ? "Not Specified" : data[0].nameInitials}
+                                      value = {data.length === 0 ? "Not Specified" : data[0].nameInitials}
                                   />
                                   <DataRow 
                                       icon = "fa fa-envelope"
                                       label = "Email"
-                                      value = {data.length == 0 ? "Not Specified" : data[0].email}
+                                      value = {data.length === 0 ? "Not Specified" : data[0].email}
                                   />
                                   <DataRow 
                                       icon = "fa fa-map-marker"
                                       label = "Address"
-                                      value = {data.length == 0 ? "Not Specified" : data[0].address}
+                                      value = {data.length === 0 ? "Not Specified" : data[0].address}
                                   />
                                   <DataRow 
                                       icon = "fa address-card"
                                       label = "NIC/Passport No"
-                                      value = {data.length == 0 ? "Not Specified" : data[0].nic}
+                                      value = {data.length === 0 ? "Not Specified" : data[0].nic}
                                   />
                                   <DataRow 
                                       icon = "fa fa-unlock"
                                       label = "Status"
-                                      value = {data.length == 0 ? "Not Specified" : <span className="label label-success">Active</span>}
+                                      value = {data.length === 0 ? "Not Specified" : <span className="label label-success">Active</span>}
                                   />
                                   <DataRow 
                                       icon = "fa fa-star-half"
                                       label = "User Rating"
-                                      value = {data.length == 0 ? "Not Specified" : "Not Specified"}
+                                      value = {data.length === 0 ? "Not Specified" : "Not Specified"}
                                   />
                                   </tbody>
                                 </table>

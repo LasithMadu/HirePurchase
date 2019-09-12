@@ -200,6 +200,32 @@ module.exports={
         })
     },
 
+    changePass: function(request, response, dbconfg){
+        var userId = request.body.userId;
+        var que1 = request.body.q1;
+        var que2 = request.body.q2;
+        var ans1 = request.body.an1;
+        var ans2 = request.body.an2;
+        var pass = request.body.pass;
+
+        dbconfg.connect((err, db, done) =>{
+            if(err){
+                console.log(err);
+                return response.json({msg: false, data: err})
+            }
+            else{
+                db.query('UPDATE public."usersTable" SET password=$6, que1=$2, que2=$3, answer1=$4, answer2=$5, "isLog"=$7 WHERE "userId" = $1',[userId, que1, que2, ans1, ans2, pass, true] , (err, table) => {
+                    done();
+                    if(err){
+                        response.json({msg: false, data: err})
+                    }else{
+                        response.json({msg: true, table: table});
+                    }
+                });
+            }
+        })
+    },
+
     getTime: function() {
 
         var date = new Date();

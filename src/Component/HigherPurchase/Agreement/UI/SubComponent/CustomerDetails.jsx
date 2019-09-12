@@ -14,13 +14,14 @@ export default class CustomerDetails extends Component{
         })
         .then(function (response) {
         if(response.data.msg){
+            self.props.changeCustomer(response.data.table.rows[0])
             self.setState({values: response.data.table.rows[0]})          
         }else{
             
         }
         })
         .catch(function (error) {
-        console.log(error);
+            console.log(error);
         });
     }
 

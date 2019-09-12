@@ -14,15 +14,17 @@ export default class Vehical extends Component {
         const com = [<VehicalAdd/>, <VehicalEdit/>, <VehicalDelete/>, <VehicalView/>];
 
       return (
-        <FormControl
-            titles = {title}
-            startPos = {3}
-            components = {com}
-            viewBtn = {true}
-            editBtn = {true}
-            createBtn = {true}
-            deleteBtn = {true}
-        />
+        <div className="container-full" style={{margin: 0, padding: 0}}>
+            <FormControl
+              titles = {title}
+              startPos = {3}
+              components = {com}
+              viewBtn = {true}
+              editBtn = {true}
+              createBtn = {true}
+              deleteBtn = {true}
+          />
+        </div>
     );
   }
 }

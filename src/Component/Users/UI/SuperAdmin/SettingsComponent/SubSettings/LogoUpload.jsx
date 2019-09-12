@@ -1,7 +1,4 @@
 import React, {Component} from 'react';
-import $ from 'jquery';
-import axios from 'axios'
-import ReactDOM from "react-dom";
 import ImgCrop from "antd-img-crop";
 import { Upload, Icon, message } from "antd";
 import "antd/dist/antd.css";
@@ -33,10 +30,6 @@ function getBase64(img, callback) {
   }
 
 export default class LogoUpload extends Component {
-    
-    constructor(props){
-        super(props)
-    }
 
     state = {
         loading: false,

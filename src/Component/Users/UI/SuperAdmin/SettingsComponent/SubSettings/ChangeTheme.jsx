@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import $ from 'jquery';
-import axios from 'axios'
 import { TwitterPicker } from 'react-color';
 
 export default class ChangeTheme extends Component {

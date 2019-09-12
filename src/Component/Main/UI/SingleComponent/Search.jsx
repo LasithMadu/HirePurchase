@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import $ from 'jquery'
 
 const Search = ({id, classN, btnId, icon, placeholder, state, handleChange}) => {
@@ -20,7 +20,7 @@ const Search = ({id, classN, btnId, icon, placeholder, state, handleChange}) => 
                         <input id={id} type="text" placeholder={placeholder} style={{border: '1px solid black', borderRadius: '0px'}} className="bp3-input bp3-fill modifier sInput" autoFocus/>
                     </div>
                     <div className='col-lg-1 col-md-1 col-sm-1 col-xs-2' style={{width: '35px', height: '16px', marginTop: '-2px'}}>
-                        <a href="#" style={{padding: '5px', width: '30px'}} className={"btn btn-primary "+classN} id={btnId} onClick={() => handleChange($("#"+id).val())}><i className="fa fa-search" style={{fontSize: '11px'}} aria-hidden="true"></i></a>
+                        <button href="#" style={{padding: '5px', width: '30px'}} className={"btn btn-primary "+classN} id={btnId} onClick={() => handleChange($("#"+id).val())}><i className="fa fa-search" style={{fontSize: '11px'}} aria-hidden="true"></i></button>
                     </div>
                 </div>
             </div>

@@ -90,6 +90,7 @@ export default class LoginPage extends Component {
                                 $('.msgp').text('Invalid password, try again. You have '+ (4 - parseInt(localStorage.getItem('atempts'))) +' chances.');
                             }
                     }else if(response.data.user && response.data.pass){
+                        var isLog;
                         if(locked){
                             $('.msgp').text('Your account is locked.');
                         }else{
@@ -100,6 +101,7 @@ export default class LoginPage extends Component {
                             localStorage.setItem('firstname', response.data.table.firstName);
                             localStorage.setItem('lastname', response.data.table.lastName);
                             localStorage.setItem('company', response.data.table.company);
+                            isLog = response.data.table.isLog;
                             try{
                                 axios.post('http://localhost:8080/getColor', {
                                     company: localStorage.getItem('company')
@@ -108,7 +110,11 @@ export default class LoginPage extends Component {
                                     if(response.data.msg){
                                         localStorage.setItem('bgColor', response.data.table.rows[0].backColor);
                                         localStorage.setItem('fontColor', response.data.table.rows[0].fontColor);
-                                        window.location.replace('/customer');
+                                        if(isLog || isLog !== null){
+                                            window.location.replace('/customer');
+                                        }else{
+                                            window.location.replace('/firstLog');
+                                        }
                                     }else{
                                         ToastsStore.error("Color Not Loaded")
                                     }
@@ -156,8 +162,8 @@ export default class LoginPage extends Component {
                     if(response.data.username.length == 0){
                         $('.msgu').text('Invalid user name. Type the right user name to change password');
                     }else{
-                        localStorage.setItem('username', response.data.username);
-                        //window.location.href = "/fogetpass";
+                        localStorage.setItem('username', response.data.username[0]);
+                        window.location.href = "/fogetpass";
                     }
                 }
             })

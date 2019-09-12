@@ -1,13 +1,9 @@
 import React, {Component} from 'react'
 import axios from 'axios'
-import $ from 'jquery'
-import { Scrollbars } from 'react-custom-scrollbars';
 
 import CustomerDetails from './SubComponent/CustomerDetails'
 import VehicleDetails from './SubComponent/VehicleDetails'
 import Payment from './SubComponent/Payment'
-
-
 
 export default class Agreement extends Component{
 
@@ -17,22 +13,58 @@ export default class Agreement extends Component{
           values: [],
           isSearch: false,
           saveIcon: [false, false, false, false],
-          expArr: [false, false, false, false]
+          expArr: [false, false, false, false],
+          cusDetails: null,
+          vehiDetails: null,
+          payDetails: null
         }
+
+        this.changeCustomer = this.changeCustomer.bind(this);
+        this.changeVehicle = this.changeVehicle.bind(this);
+        this.changePayment = this.changePayment.bind(this);
     }
 
-    setAgreement(data){
-        this.setState({
-          agreementData: data,
-          agreeid: null,
-          created: null,
-          version: null,
-        })
+    changeCustomer(value){
+        this.setState({cusDetails: [value.title+" "+value.nameInitials, value.nic, value.address+" "+value.address_2, value.occupation, value.city, value.state, value.country, value.email, value.mobile]})
     }
 
+    changeVehicle(value){
+        this.setState({vehiDetails: [value.vehiNo, value.chassis, value.engineNo, value.capacity, value.make+" "+value.modal, value.fuel, value.year]})
+    }
 
-    componentDidMount(){
-        localStorage.setItem('agreement', null);
+    changePayment(value){
+        this.setState({payDetails: value})
+    }
+
+    saveAgreement(){
+        var self = this;
+        if(this.state.cusDetails === null){
+            alert('Please choose a customer');
+        }else if(this.state.vehiDetails === null){
+            alert('Please choose a vehicle');
+        }else if(this.state.payDetails === null){
+            alert('Please add payment plan');
+        }else{
+            axios.post('http://localhost:8080/Agreement/saveData', {
+                cusDetails: self.state.cusDetails,
+                vehiDetails: self.state.vehiDetails,
+                payDetails: self.state.payDetails
+            })
+            .then(function (response) {
+                if(response.data.msg){
+                    self.setState({cusDetails: null})
+                    self.setState({vehiDetails: null})
+                    self.setState({payDetails: null})
+                    window.location.replace('/agreementPDF');
+                }else{
+                    console.log('Agrrement has a error');
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        }
+        //
     }
 
     logoShow(value){
@@ -46,7 +78,6 @@ export default class Agreement extends Component{
     }
 
     render(){
-      var data = this.state.values;
         return(
             <div className="page-content" style={{paddingBottom: '100px'}}>
                 
@@ -72,7 +103,7 @@ export default class Agreement extends Component{
                         </div>
                     </div>
                         {this.state.expArr[0]
-                            ? <CustomerDetails/>
+                            ? <CustomerDetails changeCustomer={this.changeCustomer}/>
                             : ""
                         }
                 </div>
@@ -99,7 +130,7 @@ export default class Agreement extends Component{
                         </div>
                     </div>
                         {this.state.expArr[1]
-                            ? <VehicleDetails/>
+                            ? <VehicleDetails changeVehicle={this.changeVehicle}/>
                             : ""
                         }
                 </div>
@@ -125,7 +156,7 @@ export default class Agreement extends Component{
                         </div>
                     </div>
                         {this.state.expArr[2]
-                            ? <Payment/>
+                            ? <Payment changePayment={this.changePayment}/>
                             : ""
                         }
                 </div>
@@ -154,6 +185,12 @@ export default class Agreement extends Component{
                             ? ""
                             : ""
                         }
+                </div>
+                <div className="row">
+                    <div className="col-lg-10"></div>
+                    <div className="col-lg-1" style={{paddingTop: '20px'}}>
+                        <button className="btn btn-success" onClick={this.saveAgreement.bind(this)}>Genarate PDF</button>
+                    </div>
                 </div>
             </div>
         )

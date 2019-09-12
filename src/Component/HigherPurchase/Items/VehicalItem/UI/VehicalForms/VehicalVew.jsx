@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import $ from 'jquery'
 
 export default class VehicalView extends Component{
 
@@ -14,7 +13,7 @@ export default class VehicalView extends Component{
 
   getVehicals(){
     var that = this;
-    axios.get('https://money360-server.herokuapp.com/Vehicals/getVehicals',{
+    axios.get('http://localhost:8080/Vehicals/getVehicals',{
     })
       .then((response) => {
         if(response.data.msg){
@@ -31,8 +30,8 @@ export default class VehicalView extends Component{
     let vehicles = this.state.vehicles;
     return (
       <div className='container col-sm-12' style={{backgroundColor: '#ffffff'}}>
-        <table id="dtBasicExample" className="table table-striped table-bordered table-sm" cellspacing="0" width="100%" style={{marginTop: '20px'}}>
-          <thead className="bg-success">
+        <table class="table">
+            <thead class="thead-light">
               <tr>
                   <th scope="col" class="th-sm">Customer Name</th>
                   <th scope="col" class="th-sm">Vehical No</th>
@@ -42,7 +41,7 @@ export default class VehicalView extends Component{
               </tr>
           </thead>
           <tbody>
-          {vehicles.map(vehicle =><tr scope="row" key={vehicle.vehiNo}>
+          {vehicles.map(vehicle =><tr key={vehicle.vehiNo}>
               <td>{vehicle.nameInitials}</td>
               <td>{vehicle.vehiNo}</td>
               <td>{vehicle.chassis}</td>

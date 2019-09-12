@@ -9,9 +9,8 @@ import Settings from '../../../Users/UI/SuperAdmin/SettingsComponent/Settings'
 import CAccount from '../../../Users/UI/Admin/Admin'
 import Users from '../../../Users/UI/Users/Users'
 import Profile from '../../../Users/UI/Admin/Profile/Profile'
-import Items from '../../../HigherPurchase/Items/UI/ItemComponent'
+import Vehicle from '../../../HigherPurchase/Items/VehicalItem/UI/Vehical'
 import UserProfile from '../../../Users/UI/Users/Profile/Profile'
-import Login from '../../../Main/UI/loginComponent/loginPage';
 import Agreement from '../../../HigherPurchase/Agreement/UI/Agreement';
 import Payment from '../../../HigherPurchase/Payment/UI/Payment/Payment';
 import AgreementPDF from '../../../HigherPurchase/Agreement/UI/AgreementPDF';
@@ -20,7 +19,6 @@ import NotFound from '../../../Main/UI/UniqueComponents/NotFound';
 import SlideBar from '../../../Main/UI/UniqueComponents/SlideBar'
 import TopBar from '../../../Main/UI/UniqueComponents/TopBar'
 import LocationBar from '../../../Main/UI/UniqueComponents/LocationBar'
-import Footer from '../../../Main/UI/UniqueComponents/Footer'
 
 export default class Main extends Component {
 
@@ -55,7 +53,7 @@ export default class Main extends Component {
                       <Switch>
                           <Route exact path="/customer" component={Customer} />
                           <Route exact path="/higher" component={Customer} />
-                          <Route exact path="/higher/items" component={Items} />
+                          <Route exact path="/higher/items" component={Vehicle} />
                           <Route exact path="/higher/agreement" render={()=><Agreement/>} />
                           <Route exact path="/create" component={CDetails} />
                           <Route exact path="/profile" component={Profile} />

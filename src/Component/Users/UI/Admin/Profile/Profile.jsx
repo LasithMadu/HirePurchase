@@ -36,7 +36,7 @@ export default class Profile extends Component {
         var self = this;
         var path = 'http://localhost:8080/Admin/profileData';
 
-        if(localStorage.getItem('userId') != ''){
+        if(localStorage.getItem('userId') !== ''){
             axios.post(path, {
                 data: localStorage.getItem('userId')
               })
@@ -75,9 +75,9 @@ export default class Profile extends Component {
             ToastsStore.warning("New Password Is Required")
         }else if(confirmPass === ''){
             ToastsStore.warning("Confirm Password Is Required")
-        }else if(newPass != confirmPass){
+        }else if(newPass !== confirmPass){
             ToastsStore.warning("Confirm Password Is Miss Match")
-        }else if(pass != this.state.currentPass){
+        }else if(pass !== this.state.currentPass){
             ToastsStore.warning("Current Password Is Miss Match")
         }else if(newPass.length <=5){
             ToastsStore.warning("New Password Must More Than 5 Letters")
@@ -171,8 +171,8 @@ export default class Profile extends Component {
                             <div className="col-md-3 col-sm-6 col-xs-6 pofimage">
                                 <div className="form-group">
                                     <div className="text-center mbl"><img src="http://lorempixel.com/640/480/business/1/" alt="" className="img-responsive"/></div>
-                                    <div className="text-center mbl"><a href="#" className="btn btn-green"><i className="fa fa-upload"></i>&nbsp;
-                                        Upload</a></div>
+                                    <div className="text-center mbl"><button className="btn btn-green"><i className="fa fa-upload"></i>&nbsp;
+                                        Upload</button></div>
                                 </div>
                             </div>
                             <div className="col-md-9 col-sm-12 col-xs-12">

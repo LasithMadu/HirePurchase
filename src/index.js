@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Route, Switch} from "react-router-dom"
 import Login from '../src/Component/Main/UI/loginComponent/loginPage';
 import ForgetPassword from '../src/Component/Main/UI/ForgetPassword/ForgetPassword';
 import ChangePassword from '../src/Component/Main/UI/ChangePassword/ChangePassword';
+import Firstlog from '../src/Component/Main/UI/FirstLog Component/Firstlog';
 import NotFound from '../src/Component/Main/UI/UniqueComponents/Main';
 
 const routing = (
@@ -17,6 +18,7 @@ const routing = (
         <Route exact path="/" component={Login} />
         <Route exact path="/fogetpass" component={ForgetPassword} />
         <Route exact path="/changepass" component={ChangePassword} />
+        <Route exact path="/firstLog" component={Firstlog} />
         <Route component={NotFound} />
       </Switch>
       </div>

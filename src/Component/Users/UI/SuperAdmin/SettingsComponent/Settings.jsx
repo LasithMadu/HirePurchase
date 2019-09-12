@@ -1,11 +1,7 @@
 import React, {Component} from 'react';
-import { FilePond } from 'react-filepond';
 import $ from 'jquery';
 import axios from 'axios'
-import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
 import 'simplebar'; // or "import SimpleBar from 'simplebar';" if you want to use it manually.
-import 'simplebar/dist/simplebar.css';
-import 'filepond/dist/filepond.min.css';
 
 import LogoUpload from './SubSettings/LogoUpload'
 import ChangeTheme from './SubSettings/ChangeTheme'
@@ -33,7 +29,7 @@ export default class Settings extends Component {
     changeTheme(){
         var company;
         if($("#inputCompany").prop('selectedIndex') === 0){
-            ToastsStore.warning("Select The Company")
+            alert("Select The Company")
         }else{
             company = $("#inputCompany").val();
         }
@@ -41,23 +37,23 @@ export default class Settings extends Component {
         var path = 'http://localhost:8080/setColor';
 
         if(values[1] === ''){
-            ToastsStore.warning("Color Not Set")
+            alert("Color Not Set")
         }else{
             axios.post(path, {
                 data: values
               })
               .then(function (response) {
                 if(response.data.msg){
-                    ToastsStore.success("Theme Color Changed")
+                    alert("Theme Color Changed")
                     localStorage.setItem('bgColor', values[1]);
 
                     window.location.href = "/settings";
                 }else{
-                    ToastsStore.error("Theme Color Changed Fail")
+                    alert("Theme Color Changed Fail")
                 }
               })
               .catch(function (error) {
-                ToastsStore.error("Connection Error")
+                  console.log("Connection Error");
               });
         }
     }
@@ -72,7 +68,7 @@ export default class Settings extends Component {
 
     changeColor(){
         this.setState({background: true});
-        if(this.state.bgColor != ''){
+        if(this.state.bgColor !== ''){
             axios.post('http://localhost:8080/saveBackground', {
                 backColor: this.state.bgColor,
                 company: localStorage.getItem('company')
@@ -88,7 +84,7 @@ export default class Settings extends Component {
                 //ToastsStore.error("Connection Fail")
             });
         }
-        if(this.state.font != ''){
+        if(this.state.font !== ''){
             axios.post('http://localhost:8080/saveFont', {
                 fontColor: this.state.font,
                 company: localStorage.getItem('company')
@@ -105,7 +101,7 @@ export default class Settings extends Component {
             });
         }
 
-        if(this.state.bgColor != '' || this.state.font != ''){
+        if(this.state.bgColor !== '' || this.state.font != ''){
             axios.post('http://localhost:8080/getColor', {
                 company: localStorage.getItem('company')
             })

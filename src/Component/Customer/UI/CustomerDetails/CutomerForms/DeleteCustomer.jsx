@@ -25,10 +25,6 @@ function setValue(id, value){
     $(id).val(value);
 }
 
-function showModel(){
-    $('.modal').show();
-}
-
 export default class CreateForm extends Component{
 
     constructor(props){

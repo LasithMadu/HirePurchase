@@ -17,8 +17,6 @@ import '../src/Assests/styles/blueprint.css';
 import '../src/Assests/styles/normalize.css';
 import '../src/Assests/styles/blueprint-datetime.css';
 
-import Login from './Component/Main/UI/loginComponent/loginPage';
-
 function App() {
   return (
     <div className="App" style={{minWidth: 'calc(100% - 30px)', width: 'calc(100% - 30px)'}}>

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { NavLink } from 'react-router-dom'
 
 export default class LocationBar extends Component {
 
@@ -11,8 +12,8 @@ export default class LocationBar extends Component {
                             {this.props.currentLocation}</div>
                     </div>
                     <ol className="breadcrumb page-breadcrumb pull-right">
-                        <li><i className="fa fa-home"></i>&nbsp;<a href="dashboard.html">Home</a>&nbsp;&nbsp;<i className="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                        <li className="hidden"><a href="#">{this.props.currentLocation}</a>&nbsp;&nbsp;<i className="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                        <li><i className="fa fa-home"></i>&nbsp;<NavLink to="/customer">Home</NavLink>&nbsp;&nbsp;<i className="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                        <li className="hidden">&nbsp;&nbsp;<i className="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                         <li className="active">{this.props.currentLocation}</li>
                     </ol>
                     <div className="clearfix">

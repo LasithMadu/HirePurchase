@@ -49,11 +49,11 @@ export default class ForgetPassword extends Component {
             strength++;
         });
 
-        if(strength == 6){
+        if(strength === 6){
             $('.msgnew').text('');
         }
 
-        if(pass.length == 0){
+        if(pass.length === 0){
             $('.msgnew').text('Please input your password.');
         }
     }
@@ -63,11 +63,11 @@ export default class ForgetPassword extends Component {
 
         var confirm = $('#inputConPass').val();
 
-        if(confirm.length == 0){
+        if(confirm.length === 0){
             $('.msgcon').text('Please confirm your password.');
         }
 
-        if(confirm == $('#inputNewPass').val()){
+        if(confirm === $('#inputNewPass').val()){
             $('.msgcon').text('');
         }
     }
@@ -76,13 +76,13 @@ export default class ForgetPassword extends Component {
         var newPass = $('#inputNewPass').val();
         var conPass = $('#inputConPass').val();
 
-        if(newPass == '' && conPass == ''){
+        if(newPass === '' && conPass === ''){
             $('.msgcon').text('Please input your new password and confirm password.');
-        }else if(newPass == ''){
+        }else if(newPass === ''){
             $('.msgnew').text('Please input your new password.');
-        }else if(conPass == ''){
+        }else if(conPass === ''){
             $('.msgcon').text('Please input your confirm password.');
-        }else if(newPass != conPass){
+        }else if(newPass !== conPass){
             $('.msgcon').text('Two passwords that you enter are inconsistent!');
         }else{
             var strength = 1;
@@ -97,7 +97,7 @@ export default class ForgetPassword extends Component {
                 strength++;
             });
 
-            if(strength == 6){
+            if(strength === 6){
                 axios.post('http://localhost:8080/savePassword',{
                     username: localStorage.getItem('username'),
                     password: newPass
@@ -123,7 +123,7 @@ export default class ForgetPassword extends Component {
                             <form action="#" class="form-horizontal sec">
                                 <div class="col-md-12 col-sm-12 text-center panel-title">
                                     <div class="col-md-8 col-sm-8">
-                                        <img src={logo} style={{marginTop: '-220px', marginLeft: '90px'}} class="img-responsive"/>
+                                        <img src={logo} alt="logo" style={{marginTop: '-220px', marginLeft: '90px'}} class="img-responsive"/>
                                     </div>
                                     <h4 style={{marginTop: '-90px', fontSize: '32px'}}>
                                         Change your password</h4>
@@ -182,7 +182,7 @@ export default class ForgetPassword extends Component {
                 <div id="footer">
                     <div className="row d-flex justify-content-center">
                         <div className="copyright">
-                            <img src={company} class="img-responsive clogo text-center"/><a href="http://i-threesixty.co.uk/"><p className="text-center copytext">© Copyright 2019 by ithreesixty. All rights reserved.</p></a>
+                            <img src={company} alt="company" class="img-responsive clogo text-center"/><a href="http://i-threesixty.co.uk/"><p className="text-center copytext">© Copyright 2019 by ithreesixty. All rights reserved.</p></a>
                         </div>   
                     </div>
                 </div>

@@ -1,9 +1,13 @@
 import React, {Component} from 'react'
-import uniqueid from 'uniqueid';
 import $ from 'jquery'
+import axios from 'axios'
 
 import Input from '../../../../Main/UI/SingleComponent/InputField'
 import DatePicker from '../../../../Main/UI/SingleComponent/DatePicker'
+
+var day = new Date().getDate();
+var month = new Date().getMonth();
+var year = new Date().getFullYear();
 
 export default class CustomerDetails extends Component{
 
@@ -12,22 +16,32 @@ export default class CustomerDetails extends Component{
         show: false,
         startDate: new Date(),
         endDate: null,
-        showDate: false
+        showDate: false,
+        agreeId : 'i360-1',
+        created: day + '-' + ++month + '-' + year
     }
 
     componentDidMount(){
         var self = this;
-        var first = uniqueid('i360-00');
-    }
-
-    saveAgreement(){
-        console.log($('#InputCapital').val());
+        axios.get('http://localhost:8080/Agreement/getPayement')
+        .then(function (response) {
+            if(response.data.msg){
+                self.setState({agreeId: response.data.table.rows[0].agreeId});
+                var newStr = self.state.agreeId.split("-");
+                self.setState({agreeId: newStr[0]+"-"+(++newStr[1])});
+            }else{
+                console.log('Agreement id has a error');
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
     }
 
     getPeriod(){
         var self = this;
         var x = parseInt($('#InputPeriod').val()); //or whatever offset
-        if(x == null){
+        if(x === null){
             setTimeout(function(){ self.setState({showDate: false}); }, 30);
         }else{
             setTimeout(function(){ self.setState({showDate: true}); }, 30);
@@ -36,6 +50,42 @@ export default class CustomerDetails extends Component{
         CurrentDate.setMonth(CurrentDate.getMonth() + x);
         this.setState({endDate: CurrentDate});
         this.setState({showDate: false});
+    }
+
+    getValue(){
+        
+    }
+
+    saveAgreement(){
+        var valid;
+        var self = this;
+        var values = [this.state.agreeId, this.state.created, $('#InputCapital').val(), $('#InputPeriod').val(), 3, $('#InputRepayment').val(), $('#InputFRental').val(), $('#InputLRental').val()]
+        for(var i=0; i<values.length; i++){
+            if(values[i] === ''){
+                valid = false
+                break;
+            }else{
+                valid = true;
+            }
+        }
+
+        if(valid){
+            axios.post('http://localhost:8080/Agreement/savePayment', {
+                data: values
+            })
+            .then(function (response) {
+                if(response.data.msg){
+                    self.props.changePayment(values)
+                }else{
+                    console.log('Payment has a error');
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        }else{
+            alert('Empty fields')
+        }
     }
       
 
@@ -51,14 +101,14 @@ export default class CustomerDetails extends Component{
                                 size = {[6, 6, 6, 12]}
                                 id = "InputAgreeId"
                                 label = "Agreement ID"
-                                placeholder = "Agreement No"
+                                placeholder = {this.state.agreeId}
                                 disable = {true}
                             />
                             <Input
                                 size = {[6, 6, 6, 12]}
                                 id = "InputDate"
                                 label = "Created Date"
-                                placeholder = "Created Date"
+                                placeholder = {this.state.created}
                                 disable = {true}
                             />
                         </div>
@@ -69,6 +119,7 @@ export default class CustomerDetails extends Component{
                                 label = "Capital"
                                 placeholder = "Capital"
                                 msg = "Please Input capital amount"
+                                handleChange = {this.getValue.bind(this)}
                             />
                             <Input
                                 size = {[6, 6, 6, 12]}
@@ -84,8 +135,12 @@ export default class CustomerDetails extends Component{
                                 size = {[6, 6, 6, 12]}
                                 id = "InputIntrest"
                                 label = "Intrest"
-                                placeholder = "Intrest"
+                                placeholder = "3%"
+                                disable = {true}
+                                editBtn = {true}
+                                btnText = "Edit"
                                 msg = "Please Input intrest"
+                                handleChange = {this.getValue.bind(this)}
                             />
                             <Input
                                 size = {[6, 6, 6, 12]}
@@ -93,6 +148,7 @@ export default class CustomerDetails extends Component{
                                 label = "Repayment Period"
                                 placeholder = "Repayment Period"
                                 msg = "Please Input repayment period"
+                                handleChange = {this.getValue.bind(this)}
                             />
                         </div>
                         <div class="form-row">
@@ -100,6 +156,7 @@ export default class CustomerDetails extends Component{
                                 size = {[6, 6, 6, 12]}
                                 id = "InputFRental"
                                 label = "First Rentaldate"
+                                dpId = "fdate"
                                 placeholder = {this.state.startDate}
                                 msg = "Please Input first rental date"
                                 onChange={this.handleChange}
@@ -110,6 +167,7 @@ export default class CustomerDetails extends Component{
                                     size = {[6, 6, 6, 12]}
                                     id = "InputLRental"
                                     label = "Last Rentaldate"
+                                    dpId = "ldate"
                                     placeholder = {this.state.endDate}
                                     msg = "Please Input last rental date"
                                 /> : 
@@ -119,13 +177,14 @@ export default class CustomerDetails extends Component{
                                     label = "Last Rentaldate"
                                     placeholder = "Last Rentaldate"
                                     msg = "Please Input last rental date"
+                                    handleChange = {this.getValue.bind(this)}
                                 />
                             }
                             
                         </div>
                         <div class="form-group col-sm-6 row">
                             <div className='col-xs-6 col-md-3'>
-                                <button type="button" class="btn btn-primary" onClick={this.saveAgreement}>Save</button>
+                                <button type="button" class="btn btn-primary" onClick={this.saveAgreement.bind(this)}>Save</button>
                             </div>
                             <div className='col-xs-6 col-md-3'>
                                 <button type="button" class="btn btn-light">Cancel</button>
