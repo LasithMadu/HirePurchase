@@ -18,10 +18,12 @@ export default class Viewagreement extends Component{
 
   render(){
     let agreementData = this.props.agrrement;
+    console.log();
+    
     return (
       <div>
         {
-          agreementData != null
+          agreementData !== null
           ? (<div>
               <table className="table">
                 <thead className="thead-light">
@@ -32,10 +34,11 @@ export default class Viewagreement extends Component{
                     <th scope="col">Created Date</th>
                     <th scope="col">Expire Date</th>
                     <th scope="col">Status</th>
+                    <th scope="col">PDF</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {agreementData.map(agreement =><tr scope="row" key={agreement.agreeId} onClick={() => this.rowSelected(agreement.agreeId)}>
+                  {agreementData.map(agreement =><tr scope="row" key={agreement.agreeId}>
                       <td>{agreement.agreeId}</td>
                       <td>{agreement.vehiNo}</td>
                       <td>{agreement.chassis}</td>
@@ -48,13 +51,16 @@ export default class Viewagreement extends Component{
                           <span className="label label-danger">Expire</span>
                         }
                       </td>
+                      <td>
+                        <span className="label label-warning" style={{cursor: 'pointer'}} onClick={() => this.rowSelected(agreement.agreeId)}>Genrate PDF</span>
+                      </td>
                   </tr>
                   )}
                 </tbody>
               </table>
               </div>
           ):
-          (<div><h3>Loading</h3></div>)
+          ("")
           }
           </div>
     );

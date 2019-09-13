@@ -3,6 +3,8 @@ import { MDBNavLink } from "mdbreact";
 import $ from 'jquery'
 import '../../../../Assests/styles/NavCss.css'
 
+import logo from '../../../../Assests/images/logo/i360 white.png'
+
 const styleSheet = {
     dropContent: {
         marginBottom: 0,
@@ -69,8 +71,8 @@ export default class TopBar extends Component {
         <div>
             <div id="header-topbar-option-demo" className="page-header-topbar">
                     <nav id="topbar" role="navigation" style={styleSheet.dropContent} data-step="3" className="navbar navbar-default navbar-static-top">
-                    <div className="navbar-header" style={{marginRight: '-20px'}}>
-                        <MDBNavLink id="logo" style={styleSheet.dropContent} to="/customer" className="navbar-brand"><span className="fa fa-rocket"></span><span className="logo-text">Money360</span><span style={{display: 'none'}} className="logo-text-icon">µ</span></MDBNavLink></div>
+                    <div className="navbar-header"style={{marginLeft: '5px', paddingTop: '8px'}}>
+                        <MDBNavLink style={styleSheet.dropContent} to="/customer"><img src={logo} alt="logo" style={{width: '170px', padding: 0, margin: 0}}/></MDBNavLink></div>
                         <div id="mydiv" className="navbar-toggle" onClick={this.mouse}><i className="fa fa-bars"></i></div>
                     <div className="topbar-main">
                         <ul className="nav navbar navbar-top-links navbar-right mbn mobileDrop">

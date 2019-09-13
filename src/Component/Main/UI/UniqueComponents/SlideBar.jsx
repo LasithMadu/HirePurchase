@@ -17,9 +17,6 @@ const styleSheet = {
             background: "#fff000"
         },
 
-    },
-    active:{
-        
     }
 }
 
@@ -44,20 +41,20 @@ export default class SlideBar extends Component {
             activeItem: tab
           }); 
         }
-        if(tab == 4){
+        if(tab === "4"){
             this.higherShow();
             this.itemShow();
             this.setState({
                 activeItem: 9
               }); 
-        }else if(tab == 5){
+        }else if(tab === "5"){
             this.itemShow();
             this.setState({
                 activeItem: 9
               }); 
         }
 
-        if(tab == 1){
+        if(tab === "1"){
             this.itemHide();
             this.higherHide();
         }
@@ -103,15 +100,15 @@ export default class SlideBar extends Component {
         const subMenu = (
             <ul className="nav sidehigh">
                 <div className="clearfix"></div>
-                <li style={styleSheet.themColor} className={this.state.activeItem === "9" ? "active" : ""} onClick={this.toggle("9")}><NavLink to="/higher/items" style={{paddingLeft: '70px'}} activeStyle={{ background: localStorage.getItem('bgColor') }}  onClick={()=>this.props.setLocation('ITEMS > VEHICLE')}><i className="fa fa-edit fa-fw">
+                <li style={styleSheet.themColor} className={this.state.activeItem === "9" ? "active" : ""} onClick={this.toggle("9")}><NavLink to="/higher/items" style={{paddingLeft: '70px'}} activeStyle={{ background: localStorage.getItem('bgColor') }}  onClick={()=>this.props.setLocation('VEHICLE')}><i className="fa fa-edit fa-fw">
                     <div className="icon-bg bg-violet"></div>
-                    </i><span className="menu-title">Vehicle</span></NavLink>
+                    </i><span className="menu-title">Vehicles</span></NavLink>
                 </li>
-                <li style={styleSheet.themColor} className={this.state.activeItem === "10" ? "active" : ""} onClick={this.toggle("10")}><NavLink to="/higher/lands" style={{paddingLeft: '70px'}} activeStyle={{ background: localStorage.getItem('bgColor') }}  onClick={()=>this.props.setLocation('ITEMS > LANDS')}><i className="fa fa-edit fa-fw">
+                <li style={styleSheet.themColor} className={this.state.activeItem === "10" ? "active" : ""} onClick={this.toggle("10")}><NavLink to="/higher/lands" style={{paddingLeft: '70px'}} activeStyle={{ background: localStorage.getItem('bgColor') }}  onClick={()=>this.props.setLocation('LAND')}><i className="fa fa-edit fa-fw">
                     <div className="icon-bg bg-violet"></div>
                     </i><span className="menu-title">Lands</span></NavLink>
                 </li>
-                <li style={styleSheet.themColor} className={this.state.activeItem === "11" ? "active" : ""} onClick={this.toggle("11")}><NavLink to="/higher/other" style={{paddingLeft: '70px'}} activeStyle={{ background: localStorage.getItem('bgColor') }}  onClick={()=>this.props.setLocation('ITEMS > OTHER')}><i className="fa fa-edit fa-fw">
+                <li style={styleSheet.themColor} className={this.state.activeItem === "11" ? "active" : ""} onClick={this.toggle("11")}><NavLink to="/higher/other" style={{paddingLeft: '70px'}} activeStyle={{ background: localStorage.getItem('bgColor') }}  onClick={()=>this.props.setLocation('OTHER')}><i className="fa fa-edit fa-fw">
                     <div className="icon-bg bg-violet"></div>
                     </i><span className="menu-title">Other</span></NavLink>
                 </li>
@@ -121,18 +118,26 @@ export default class SlideBar extends Component {
         const dropMenu = (
             <ul className="nav sidehigh">
                 <div className="clearfix"></div>
-                <li style={styleSheet.themColor} className={this.state.activeItem === "5" ? "" : ""} onClick={this.toggle("5")}><NavLink to="/higher/items" style={{paddingLeft: '35px'}} activeStyle={{ background: localStorage.getItem('bgColor') }}  onClick={()=>this.props.setLocation('ITEMS > VEHICLE')}><i className="fa fa-edit fa-fw">
+                <li style={styleSheet.themColor} className={this.state.activeItem === "5" ? "" : ""} onClick={this.toggle("5")}><NavLink to="/higher/items" style={{paddingLeft: '35px'}}  onClick={()=>this.props.setLocation('VEHICLE')}><i className="fa fa-edit fa-fw">
                     <div className="icon-bg bg-violet"></div>
                     </i><span className="menu-title">Items</span></NavLink>
                     { this.state.items ? subMenu : ""}
                 </li>
                 <li style={styleSheet.themColor} className={this.state.activeItem === "6" ? "active" : ""} onClick={this.toggle("6")}><NavLink to="/higher/agreement" style={{paddingLeft: '35px'}} activeStyle={{ background: localStorage.getItem('bgColor') }}  onClick={()=>this.props.setLocation('AGREEMENT')}><i className="fa fa-edit fa-fw">
                     <div className="icon-bg bg-violet"></div>
-                    </i><span className="menu-title">Agreement</span></NavLink>
+                    </i><span className="menu-title">Agreements</span></NavLink>
                 </li>
-                <li style={styleSheet.themColor} className={this.state.activeItem === "8" ? "active" : ""} onClick={this.toggle("8")}><NavLink to="/higher/report" style={{paddingLeft: '35px'}} activeStyle={{ background: localStorage.getItem('bgColor') }}  onClick={()=>this.props.setLocation('REPORT')}><i className="fa fa-edit fa-fw">
+                <li style={styleSheet.themColor} className={this.state.activeItem === "12" ? "active" : ""} onClick={this.toggle("12")}><NavLink to="/higher/payment" style={{paddingLeft: '35px'}} activeStyle={{ background: localStorage.getItem('bgColor') }}  onClick={()=>this.props.setLocation('PAYMENT')}><i className="fa fa-edit fa-fw">
                     <div className="icon-bg bg-violet"></div>
-                    </i><span className="menu-title">Report</span></NavLink>
+                    </i><span className="menu-title">Payments</span></NavLink>
+                </li>
+                <li style={styleSheet.themColor} className={this.state.activeItem === "13" ? "active" : ""} onClick={this.toggle("13")}><NavLink to="/higher/reminder" style={{paddingLeft: '35px'}} activeStyle={{ background: localStorage.getItem('bgColor') }}  onClick={()=>this.props.setLocation('REMINDER')}><i className="fa fa-edit fa-fw">
+                    <div className="icon-bg bg-violet"></div>
+                    </i><span className="menu-title">Reminders</span></NavLink>
+                </li>
+                <li style={styleSheet.themColor} className={this.state.activeItem === "8" ? "active" : ""} onClick={this.toggle("8")}><NavLink to="/higher/report" style={{paddingLeft: '35px'}} activeStyle={{ background: localStorage.getItem('bgColor') }}  onClick={()=>this.props.setLocation('REPORTS')}><i className="fa fa-edit fa-fw">
+                    <div className="icon-bg bg-violet"></div>
+                    </i><span className="menu-title">Reports</span></NavLink>
                 </li>
             </ul>
         )
@@ -158,7 +163,7 @@ export default class SlideBar extends Component {
                         </i><span className="menu-title">Gold Loans</span></NavLink>
                         
                         </li> */}
-                        <li style={styleSheet.themColor} className={this.state.activeItem === "4" ? "" : ""} onClick={this.toggle("4")} ><NavLink to="/higher/items" onClick={()=>this.props.setLocation('ITEMS > VEHICLE')}><i className="fa fa-edit fa-fw">
+                        <li style={styleSheet.themColor} className={this.state.activeItem === "4" ? "" : ""} onClick={this.toggle("4")} ><NavLink to="/higher/items" onClick={()=>this.props.setLocation('VEHICLE')}><i className="fa fa-edit fa-fw">
                             <div className="icon-bg bg-violet"></div>
                         </i><span className="menu-title">Hire Purchase</span></NavLink>
                         { this.state.higher ? dropMenu : ""}

@@ -12,7 +12,7 @@ import Profile from '../../../Users/UI/Admin/Profile/Profile'
 import Vehicle from '../../../HigherPurchase/Items/VehicalItem/UI/Vehical'
 import UserProfile from '../../../Users/UI/Users/Profile/Profile'
 import Agreement from '../../../HigherPurchase/Agreement/UI/Agreement';
-import Payment from '../../../HigherPurchase/Payment/UI/Payment/Payment';
+import Payment from '../../../HigherPurchase/Payment/UI/Payment/PaymentForms/PaymentAdd';
 import AgreementPDF from '../../../HigherPurchase/Agreement/UI/AgreementPDF';
 import NotFound from '../../../Main/UI/UniqueComponents/NotFound';
 
@@ -25,7 +25,7 @@ export default class Main extends Component {
   constructor(props){
     super(props)
     this.state = {
-      currentLocation: 'CUSTOMERS',
+      currentLocation: 'CUSTOMER',
       agreementData: []
     }
   }

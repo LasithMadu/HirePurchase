@@ -192,6 +192,10 @@ app.get('/Vehicals/getVehicals', function(request, response){
     Vehicals.getVehicals(request, response, pool);
 });
 
+app.post('/Vehicals/getByNicVehical', function(request, response){
+    Vehicals.getByNicVehical(request, response, pool);
+});
+
 app.post('/Vehicals/searchVehical', function(request, response){
     Vehicals.searchVehical(request, response, pool);
 });
@@ -210,6 +214,10 @@ app.post('/Agreement/getData', function(request, response){
     Agreement.getData(request, response, pool);
 });
 
+app.post('/Agreement/getAgreeData', function(request, response){
+    Agreement.getAgreeData(request, response, pool);
+});
+
 app.post('/Agreement/saveData', function(request, response){
     Agreement.saveData(request, response, pool);
 });
@@ -220,6 +228,10 @@ app.post('/Agreement/getAgree', function(request, response){
 
 app.post('/Agreement/savePayment', function(request, response){
     Agreement.savePayment(request, response, pool);
+});
+
+app.post('/Agreement/saveOther', function(request, response){
+    Agreement.saveOther(request, response, pool);
 });
 
 app.get('/Agreement/getPayement', function(request, response){

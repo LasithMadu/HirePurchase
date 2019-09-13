@@ -9,7 +9,8 @@ export default class LocationBar extends Component {
             <div id="title-breadcrumb-option-demo" className="page-title-breadcrumb">
                     <div className="page-header pull-left">
                         <div className="page-title">
-                            {this.props.currentLocation}</div>
+                          <strong>{this.props.currentLocation.toUpperCase()}</strong>
+                        </div>
                     </div>
                     <ol className="breadcrumb page-breadcrumb pull-right">
                         <li><i className="fa fa-home"></i>&nbsp;<NavLink to="/customer">Home</NavLink>&nbsp;&nbsp;<i className="fa fa-angle-right"></i>&nbsp;&nbsp;</li>

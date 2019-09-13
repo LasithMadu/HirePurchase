@@ -105,9 +105,9 @@ export default class CustomerDetails extends Component {
                 <div className="row">
                     <div className="col-md-11">
                         <div className="row mtl">
-                            <div className="col-lg-3 col-md-3 col-sm-3 col-xs-12 border">
+                            <div className="col-lg-3 col-md-3 col-sm-3 col-xs-12 border" style={{border: '2px solid '+localStorage.getItem('bgColor')}}>
                               <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 titlediv">
-                                <span className="align-middle title">Profile</span>
+                                <span className="align-middle title">PROFILE</span>
                               </div>
                               <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 item row" >
                                 <table className="proTable">
@@ -148,9 +148,9 @@ export default class CustomerDetails extends Component {
                               
                             </div>
                             <div className="col-md-9">
-                              <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 border">
+                              <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 border" style={{border: '2px solid '+localStorage.getItem('bgColor')}}>
                                 <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 titlediv">
-                                  <span className="align-middle title">Agreement</span>
+                                  <span className="align-middle title">AGREEMENT</span>
                                 </div>
                                 <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 item row agreeTable" >
                                   <Table agrrement = {this.state.values}/>

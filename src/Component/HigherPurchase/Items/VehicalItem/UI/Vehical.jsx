@@ -14,7 +14,7 @@ export default class Vehical extends Component {
         const com = [<VehicalAdd/>, <VehicalEdit/>, <VehicalDelete/>, <VehicalView/>];
 
       return (
-        <div className="container-full" style={{margin: 0, padding: 0}}>
+        <div style={{margin: 0, padding: 0}}>
             <FormControl
               titles = {title}
               startPos = {3}

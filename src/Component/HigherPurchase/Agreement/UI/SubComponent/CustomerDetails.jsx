@@ -15,6 +15,7 @@ export default class CustomerDetails extends Component{
         .then(function (response) {
         if(response.data.msg){
             self.props.changeCustomer(response.data.table.rows[0])
+            self.props.setNic($('#cusNic').val().toUpperCase());
             self.setState({values: response.data.table.rows[0]})          
         }else{
             

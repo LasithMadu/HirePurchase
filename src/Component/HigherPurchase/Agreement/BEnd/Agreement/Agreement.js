@@ -24,6 +24,31 @@ module.exports = {
         });
     },
 
+    getAgreeData: function(request, response, dbconfg){
+        var agreeId = request.body.data;
+
+        dbconfg.connect((err, db, done) =>{
+            if(err){
+                console.log('Conection Error');
+                return console.log(err);
+            }else{
+                try{
+                    db.query('SELECT * FROM public."agreementData" WHERE "agreeId" = $1',[agreeId], (err, table) => {
+                        db.end();
+                        if(err){
+                            console.log(err);
+                            response.json({msg: false, data: err})
+                        }else{
+                            response.json({msg: true, table:table})
+                        }
+                    });
+                }catch(err){
+                    console.log(err)
+                }
+            }
+        });
+    },
+
     saveData: function(request, response, dbconfg){
         var cusDeatils = request.body.cusDetails;
         var vehiDetails = request.body.vehiDetails;
@@ -100,6 +125,31 @@ module.exports = {
             }else{
                 try{
                     db.query('INSERT INTO public."paymentTable"("agreeId", created, capital, period, intrest, repayment, "firstRenatl", "lastRental") VALUES ($1, $2, $3, $4, $5, $6, $7, $8)',[...values], (err, table) => {
+                        db.end();
+                        if(err){
+                            console.log(err);
+                            response.json({msg: false, data: err})
+                        }else{
+                            response.json({msg: true, table:table})
+                        }
+                    });
+                }catch(err){
+                    console.log(err)
+                }
+            }
+        });
+    },
+
+    saveOther: function(request, response, dbconfg){
+        var values = request.body.data;
+
+        dbconfg.connect((err, db, done) =>{
+            if(err){
+                console.log('Conection Error'+err);
+                return console.log(err);
+            }else{
+                try{
+                    db.query('INSERT INTO public."cusOtherTable"("agreeId", nic, name, mobile) VALUES ($1, $2, $3, $4)',[...values], (err, table) => {
                         db.end();
                         if(err){
                             console.log(err);

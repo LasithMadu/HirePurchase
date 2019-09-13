@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import { Scrollbars } from 'react-custom-scrollbars';
 
 const FormControl = ({titles, startPos, createBtn, editBtn, deleteBtn, viewBtn, components}) => {
 
@@ -29,10 +28,12 @@ const FormControl = ({titles, startPos, createBtn, editBtn, deleteBtn, viewBtn, 
 
     return (
         <div className='col-md-12 col-sm-12 col-xs-12'>
-            <div className='container edit profile formTitle' >
+            <div className='formTitle' >
                 {/* <ToastsContainer store={ToastsStore} position={ToastsContainerPosition.BOTTOM_RIGHT} /> */}
-                <div className="row col-lg-12" style={{backgroundColor: '#000000', color: '#ffffff', padding: '10px', width: '107%'}}>
-                    {/* <h3 className="col-md-9 col-sm-5 col-xs-10">{title}</h3> */}
+                <div className="row col-lg-12" style={{backgroundColor: '#000000', color: '#ffffff', paddingTop: '10px', paddingBottom: '-10px', width: '100%'}}>
+                    <div className="col-md-9 col-sm-5 col-xs-10">
+                        <p style={{color: '#ffffff', fontSize: '20px', marginBottom: '10px'}}>{title.toUpperCase()}</p>
+                    </div>
                     <div className="col-md-3 col-sm-6 col-xs-2">
                         {
                             viewBtn ?
@@ -58,11 +59,9 @@ const FormControl = ({titles, startPos, createBtn, editBtn, deleteBtn, viewBtn, 
                 </div>
                 
                 <hr/>
-                <Scrollbars visibility-x={false} style={{height: 'calc(100vh - 250px)', display: 'inline-block', overflowX: 'hidden'}}>
-                    <div style={{marginTop: '35px'}}>
+                    <div style={{marginTop: '75px'}}>
                         {component}
                     </div>
-                </Scrollbars>
             </div>
         </div>
     )

@@ -71,7 +71,7 @@ export default class LoginPage extends Component {
                         locked = response.data.table.isLock;
                     }
                     if(!response.data.user && !response.data.pass){
-                        $('.msgp').text('Invalid username and password, try again');
+                        $('.msgp').text('Invalid username, try again');
                     }else if(!response.data.user){
                         $('.msgu').text('Invalid user name, try again');
                     }else if(!response.data.pass){
@@ -87,7 +87,7 @@ export default class LoginPage extends Component {
                                     console.log(error)
                                 });
                             }else{
-                                $('.msgp').text('Invalid password, try again. You have '+ (4 - parseInt(localStorage.getItem('atempts'))) +' chances.');
+                                $('.msgp').text('Invalid password, try again. You have '+ (4 - parseInt(localStorage.getItem('atempts'))) +' atempts.');
                             }
                     }else if(response.data.user && response.data.pass){
                         var isLog;
@@ -160,7 +160,7 @@ export default class LoginPage extends Component {
                     $('.msgp').text('Your account is locked.');
                 }else{
                     if(response.data.username.length == 0){
-                        $('.msgu').text('Invalid user name. Type the right user name to change password');
+                        $('.msgu').text('Invalid user name. Type the right username to change password');
                     }else{
                         localStorage.setItem('username', response.data.username[0]);
                         window.location.href = "/fogetpass";
