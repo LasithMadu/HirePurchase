@@ -14,11 +14,14 @@ export default class Settings extends Component {
             logo: false,
             background: false,
             bgColor: localStorage.getItem('bgColor'),
-            font: '#0072bb'
+            font: '#0072bb',
+            saveIcon: [false, false],
+            expArr: [false, false],
         }
+        this.handleBackground = this.handleBackground.bind(this)
     }
 
-    handleBackground = (color, event) => {
+    handleBackground(color){
         this.setState({ bgColor: color.hex });
     };
 
@@ -58,79 +61,87 @@ export default class Settings extends Component {
         }
     }
 
-    logoShow(){
-        this.setState({logo: !this.state.logo});
+    logoShow(value){
+        if(this.state.expArr[value-1]){
+           this.state.expArr[value-1] = false;
+            this.forceUpdate()
+        }else{
+            this.state.expArr[value-1] = true;
+            this.forceUpdate()
+        }        
     }
 
     backgroundShow(){
         this.setState({background: !this.state.background});
     }
 
-    changeColor(){
-        this.setState({background: true});
-        if(this.state.bgColor !== ''){
+    changeColor(bgColor){
+        this.setState({bgColor: bgColor.hex});
+        if(bgColor.hex !== ''){
             axios.post('http://localhost:8080/saveBackground', {
-                backColor: this.state.bgColor,
+                backColor: bgColor.hex,
                 company: localStorage.getItem('company')
             })
             .then(function (response) {
                 if(response.data.msg){
-                    localStorage.setItem('bgColor', this.state.bgColor);
-                }else{
-                    //ToastsStore.error("Update Fail")
-                }
-            })
-            .catch(function (error) {
-                //ToastsStore.error("Connection Fail")
-            });
-        }
-        if(this.state.font !== ''){
-            axios.post('http://localhost:8080/saveFont', {
-                fontColor: this.state.font,
-                company: localStorage.getItem('company')
-            })
-            .then(function (response) {
-                if(response.data.msg){
-                    localStorage.setItem('fontColor', this.state.bgColor);
-                }else{
-                    //ToastsStore.error("Update Fail")
-                }
-            })
-            .catch(function (error) {
-                //ToastsStore.error("Connection Fail")
-            });
-        }
-
-        if(this.state.bgColor !== '' || this.state.font != ''){
-            axios.post('http://localhost:8080/getColor', {
-                company: localStorage.getItem('company')
-            })
-            .then(function (response) {
-                if(response.data.msg){
-                    localStorage.setItem('bgColor', response.data.table.rows[0].backColor);
-                    localStorage.setItem('fontColor', response.data.table.rows[0].fontColor);
+                    console.log(response);
+                    localStorage.setItem('bgColor', bgColor.hex);
                     window.location.replace('/settings');
-                    //window.location.href = "";
                 }else{
-                    //ToastsStore.error("Color Not Loaded")
+                    //ToastsStore.error("Update Fail")
                 }
             })
             .catch(function (error) {
-                //ToastsStore.error(error)
-            })
+                //ToastsStore.error("Connection Fail")
+            });
         }
+        // if(this.state.font !== ''){
+        //     axios.post('http://localhost:8080/saveFont', {
+        //         fontColor: this.state.font,
+        //         company: localStorage.getItem('company')
+        //     })
+        //     .then(function (response) {
+        //         if(response.data.msg){
+        //             localStorage.setItem('fontColor', this.state.fontColor);
+        //         }else{
+        //             //ToastsStore.error("Update Fail")
+        //         }
+        //     })
+        //     .catch(function (error) {
+        //         //ToastsStore.error("Connection Fail")
+        //     });
+        // }
+
+        // if(self.state.bgColor !== '' || self.state.font != ''){
+        //     axios.post('http://localhost:8080/getColor', {
+        //         company: localStorage.getItem('company')
+        //     })
+        //     .then(function (response) {
+        //         if(response.data.msg){
+        //             localStorage.setItem('bgColor', response.data.table.rows[0].backColor);
+        //             localStorage.setItem('fontColor', response.data.table.rows[0].fontColor);
+        //             window.location.replace('/settings');
+        //             //window.location.href = "";
+        //         }else{
+        //             //ToastsStore.error("Color Not Loaded")
+        //         }
+        //     })
+        //     .catch(function (error) {
+        //         //ToastsStore.error(error)
+        //     })
+        // }
     }
 
     render(){
         return(
-            <div className="container">
-                <div className="col-md-12 col-sm-12 col-xs-12 logoupload text-dark">
-                    <div className="logoTitle" onClick={this.logoShow.bind(this)}>
+            <div className="container" style={{marginTop: '20px'}}>
+                <div className="col-md-12 col-sm-12 col-xs-12 topItem" style={{border: '2px solid '+localStorage.getItem('bgColor')}}>
+                    <div className="itemTitle" onClick={() => this.logoShow(1)}>
                         <div className="row">
                             <div className="col-md-10 col-sm-10 col-xs-10">
-                                {!this.state.logo
-                                    ? <i class="fa fa-angle-right arrowicon" style={{fontSize: '20px'}}></i>
-                                    : <i class="fa fa-angle-down arrowicon" style={{fontSize: '20px'}}></i>
+                                {this.state.expArr[0]
+                                    ? <i class="fa fa-angle-down arrowicon" style={{fontSize: '20px'}}></i>
+                                    : <i class="fa fa-angle-right arrowicon" style={{fontSize: '20px'}}></i>
                                 }
                                 <h4 className="uploadTitle">Upload logo</h4>
                             </div>
@@ -138,25 +149,26 @@ export default class Settings extends Component {
 
                             </div>
                             <div className="col-md-1 col-sm-1 col-xs-1">
-                                {this.state.logo
+                                {this.state.saveIcon[0] && this.state.expArr[0]
                                     ? <i className="fa fa-save saveicon" style={{fontSize: '20px'}}></i>
                                     : ""
                                 }
                             </div>
                         </div>
                     </div>
-                    {this.state.logo
-                        ? <LogoUpload/>
-                        : ""
-                    }
+                        {this.state.expArr[0]
+                            ? <LogoUpload changeCustomer={this.changeCustomer} setNic={this.setNic}/>
+                            : ""
+                        }
                 </div>
-                <div className="col-md-12 col-sm-12 col-xs-12 bgcolor text-dark">
-                    <div className="logoTitle" onClick={this.backgroundShow.bind(this)}>
+                <br/>
+                <div className="col-md-12 col-sm-12 col-xs-12 topItem" style={{border: '2px solid '+localStorage.getItem('bgColor')}}>
+                    <div className="itemTitle" onClick={() => this.logoShow(2)}>
                         <div className="row">
                             <div className="col-md-10 col-sm-10 col-xs-10">
-                                {!this.state.background
-                                    ? <i class="fa fa-angle-right arrowicon" style={{fontSize: '20px'}}></i>
-                                    : <i class="fa fa-angle-down arrowicon" style={{fontSize: '20px'}}></i>
+                                {this.state.expArr[1]
+                                    ? <i class="fa fa-angle-down arrowicon" style={{fontSize: '20px'}}></i>
+                                    : <i class="fa fa-angle-right arrowicon" style={{fontSize: '20px'}}></i>
                                 }
                                 <h4 className="uploadTitle">Change Theme</h4>
                             </div>
@@ -164,22 +176,24 @@ export default class Settings extends Component {
 
                             </div>
                             <div className="col-md-1 col-sm-1 col-xs-1">
-                                {this.state.background
-                                    ? <i className="fa fa-save saveicon" onClick={this.changeColor.bind(this)} style={{fontSize: '20px'}}></i>
+                                {this.state.saveIcon[1] && this.state.expArr[1]
+                                    ? <i className="fa fa-save saveicon" style={{fontSize: '20px'}}></i>
                                     : ""
                                 }
                             </div>
                         </div>
                     </div>
-                    {this.state.background
-                        ? <ChangeTheme
-                            background = {this.state.bgColor}
-                            font = {this.state.font}
-                            handleBackground = {this.handleBackground}
-                            handleFont = {this.handleFont}
-                        />
-                        : ""
-                    }
+                        {this.state.expArr[1]
+                            ? <ChangeTheme
+                                background = {this.state.bgColor}
+                                font = {this.state.font}
+                                handleBackground = {this.handleBackground}
+                                handleFont = {this.handleFont}
+                                changeColor = {this.changeColor}
+                                handleBackground = {this.handleBackground}
+                            />
+                            : ""
+                        }
                 </div>
             </div>
         )

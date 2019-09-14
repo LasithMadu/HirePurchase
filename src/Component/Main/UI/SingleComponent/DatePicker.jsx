@@ -4,14 +4,9 @@ import { DatePicker } from "@blueprintjs/datetime";
 
 const DatePickerCom = ({size, id, classN, label, placeholder, msg, dpId}) => {
 
-    var Todate = placeholder;
-    var day = Todate.getDate();
-    var month = Todate.getMonth();
-    var year = Todate.getFullYear();
-
     const [empty, setEmpty] = useState(true);
     const [show, setShow] = useState(false);
-    const [date, setDate] = useState(day + '-' + ++month + '-' + year);
+    const [date, setDate] = useState(placeholder);
 
     function handleChange(){
         if($("#"+id).val() === ''){

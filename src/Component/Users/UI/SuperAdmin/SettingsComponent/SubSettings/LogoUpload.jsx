@@ -75,9 +75,9 @@ export default class LogoUpload extends Component {
           const { imageUrl } = this.state;
 
         return(
-            <div className="bg-white">
-                <div className='dropzone bg-white' style={styleSheet.dropzone}>
-                    <div className="imageuplo">
+            <div>
+                <div className='dropzone bg-white' style={{margin: '20px'}}>
+                    <div className="imageupload">
                         <ImgCrop width={250} height={75}>
                             <Upload
                                 name="avatar"

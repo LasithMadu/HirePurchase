@@ -5,6 +5,16 @@ import $ from 'jquery'
 import Search from '../../../../Main/UI/SingleComponent/Search'
 import DataRow from '../../../../Main/UI/SingleComponent/DataCell'
 
+import nameIcon from '../../../../../Assests/images/gjoiconset/name.png'
+import emailIcon from '../../../../../Assests/images/gjoiconset/email.png'
+import addressIcon from '../../../../../Assests/images/gjoiconset/address.png'
+import nicIcon from '../../../../../Assests/images/gjoiconset/NIC.png'
+import statusIcon from '../../../../../Assests/images/gjoiconset/state.png'
+import countryIcon from '../../../../../Assests/images/gjoiconset/country.png'
+import mobileIcon from '../../../../../Assests/images/gjoiconset/mobile.png'
+import cityIcon from '../../../../../Assests/images/gjoiconset/city.png'
+import occupationIcon from '../../../../../Assests/images/gjoiconset/Occupation.png'
+
 export default class CustomerDetails extends Component{
 
     searchCustomer(){
@@ -51,27 +61,27 @@ export default class CustomerDetails extends Component{
                             <table className="proTable">
                                 <tbody>
                                 <DataRow 
-                                    icon = "fa fa-user"
+                                    icon = {nameIcon}
                                     label = "Name"
                                     value = {data.length == 0 ? "Not Specified" : data.nameInitials}
                                 />
                                 <DataRow 
-                                    icon = "fa fa-envelope"
+                                    icon = {addressIcon}
                                     label = "Address"
                                     value = {data.length == 0 ? "Not Specified" : data.address+" "+data.address_2}
                                 />
                                 <DataRow 
-                                    icon = "fa fa-map-marker"
+                                    icon = {cityIcon}
                                     label = "City"
                                     value = {data.length == 0 ? "Not Specified" : data.city}
                                 />
                                 <DataRow 
-                                    icon = "fa address-card"
+                                    icon = {countryIcon}
                                     label = "Country"
                                     value = {data.length == 0 ? "Not Specified" : data.country}
                                 />
                                 <DataRow 
-                                    icon = "fa fa-unlock"
+                                    icon = {mobileIcon}
                                     label = "Mobile"
                                     value = {data.length == 0 ? "Not Specified" : data.mobile}
                                 />
@@ -82,22 +92,22 @@ export default class CustomerDetails extends Component{
                             <table className="proTable">
                                 <tbody>
                                 <DataRow 
-                                    icon = "fa fa-user"
+                                    icon = {nicIcon}
                                     label = "NIC"
                                     value = {data.length == 0 ? "Not Specified" : data.nic}
                                 />
                                 <DataRow 
-                                    icon = "fa fa-envelope"
+                                    icon = {occupationIcon}
                                     label = "Occupation"
                                     value = {data.length == 0 ? "Not Specified" : data.occupation}
                                 />
                                 <DataRow 
-                                    icon = "fa fa-map-marker"
+                                    icon = {statusIcon}
                                     label = "State"
                                     value = {data.length == 0 ? "Not Specified" : data.state}
                                 />
                                 <DataRow 
-                                    icon = "fa address-card"
+                                    icon = {emailIcon}
                                     label = "Email"
                                     value = {data.length == 0 ? "Not Specified" : data.email}
                                 />

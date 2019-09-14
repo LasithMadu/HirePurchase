@@ -115,10 +115,7 @@ export default class CreateForm extends Component{
 
     render(){
         return(
-            <div className='container' style={{backgroundColor: '#ffffff'}}>
-                <ToastsContainer store={ToastsStore} position={ToastsContainerPosition.BOTTOM_RIGHT} />
-                <h3>Edit Customer</h3>
-                <hr/>
+            <div className='container'>
                     <form action="#" className="form-horizontal">
                         <div className="form-body pal">
                             <div className="form-group">

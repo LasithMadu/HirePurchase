@@ -9,39 +9,26 @@ import 'simplebar/dist/simplebar.css';
 import CreateForm from './CutomerForms/CreateCustomer'
 import EditCustomer from './CutomerForms/EditCustomer'
 import DeleteCutomer from './CutomerForms/DeleteCustomer'
+import FormControl from '../../../Main/UI/SingleComponent/FormControl'
 
 export default class CustomerDetails extends Component {
   
     render() {
+
+        const title = ['Customer Register', 'Edit Customer', 'Delete Customer'];
+        const com = [<CreateForm/>, <EditCustomer/>, <DeleteCutomer/>];
+
       return (
-        <div className='col-md-12 col-sm-12 col-xs-12'>
-          <br/>
-            <ThemeProvider className='container'>
-                <Tabs>
-                    <TabPanel label="Add" key="tab-1">
-                        <div data-simplebar>
-                            <div class='edit profile'>
-                            <CreateForm/>
-                            </div>
-                        </div>
-                    </TabPanel>
-                    <TabPanel label="Edit" key="tab-2">
-                        <div data-simplebar>
-                            <div class='edit profile'>
-                            <EditCustomer/>
-                            </div>
-                        </div>
-                    </TabPanel>
-                    <TabPanel label="Delete" key="tab-3">
-                        <div data-simplebar>
-                            <div class='edit profile'>
-                            <DeleteCutomer/>
-                            </div>
-                        </div>
-                    </TabPanel>
-                </Tabs>
-            </ThemeProvider>
-      </div>
+        <div style={{margin: 0, padding: 0}}>
+            <FormControl
+                titles = {title}
+                startPos = {0}
+                components = {com}
+                editBtn = {true}
+                createBtn = {true}
+                deleteBtn = {true}
+            />
+        </div>
     );
   }
 }

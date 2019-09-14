@@ -39,10 +39,10 @@ export default class VehicalView extends Component{
               <thead class="thead-light">
                 <tr>
                     <th scope="col" class="th-sm">Customer Name</th>
-                    <th scope="col" class="th-sm">Vehical No</th>
+                    <th scope="col" class="th-sm">Vehicle No</th>
                     <th scope="col" class="th-sm">Chassis No</th>
                     <th scope="col" class="th-sm">Cylinder Capcity</th>
-                    <th scope="col" class="th-sm">Modal</th>
+                    <th scope="col" class="th-sm">Model</th>
                 </tr>
               </thead>
               <tbody>

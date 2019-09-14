@@ -29,8 +29,8 @@ export default class Viewagreement extends Component{
                 <thead className="thead-light">
                   <tr>
                     <th scope="col">Agreement ID</th>
-                    <th scope="col">Vehical No</th>
-                    <th scope="col">Cassis No</th>
+                    <th scope="col">Vehicle No</th>
+                    <th scope="col">Chassis No</th>
                     <th scope="col">Created Date</th>
                     <th scope="col">Expire Date</th>
                     <th scope="col">Status</th>

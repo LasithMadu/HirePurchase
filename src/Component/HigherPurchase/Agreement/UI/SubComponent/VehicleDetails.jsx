@@ -3,6 +3,14 @@ import axios from 'axios'
 
 import DataRow from '../../../../Main/UI/SingleComponent/DataCell'
 
+import vehiIcon from '../../../../../Assests/images/gjoiconset/Vehiclw NO.2.png'
+import cassisIcon from '../../../../../Assests/images/gjoiconset/Chassi no.png'
+import engineIcon from '../../../../../Assests/images/gjoiconset/Engine  No.png'
+import capacityIcon from '../../../../../Assests/images/gjoiconset/Capacity.png'
+import modalIcon from '../../../../../Assests/images/gjoiconset/Model.png'
+import fuelIcon from '../../../../../Assests/images/gjoiconset/Fuel type.png'
+import yearIcon from '../../../../../Assests/images/gjoiconset/Year.png'
+
 export default class CustomerDetails extends Component{
 
     state = {
@@ -68,19 +76,21 @@ export default class CustomerDetails extends Component{
                                     <thead className="thead-light">
                                         <tr>
                                         <th scope="col" class="th-sm">Customer Name</th>
-                                        <th scope="col" class="th-sm">Vehical No</th>
+                                        <th scope="col" class="th-sm">Vehicle No</th>
                                         <th scope="col" class="th-sm">Chassis No</th>
                                         <th scope="col" class="th-sm">Cylinder Capcity</th>
-                                        <th scope="col" class="th-sm">Modal</th>
+                                        <th scope="col" class="th-sm">Model</th>
+                                        <th scope="col" class="th-sm">View</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {vehicles.map(vehicle =><tr scope="row" key={vehicle.agreeId} onClick={()=>this.searchVehicle(vehicle.agreeId)}>
+                                        {vehicles.map(vehicle =><tr scope="row" key={vehicle.agreeId}>
                                             <td>{vehicle.nameInitials}</td>
                                             <td>{vehicle.vehiNo}</td>
                                             <td>{vehicle.chassis}</td>
                                             <td>{vehicle.capacity}</td>
                                             <td>{vehicle.make+' '+vehicle.modal}</td>
+                                            <button className="btn btn-success" onClick={()=>this.searchVehicle(vehicle.agreeId)}>Details</button>
                                         </tr>
                                         )}
                                     </tbody>
@@ -91,22 +101,22 @@ export default class CustomerDetails extends Component{
                                 <table className="proTable">
                                     <tbody>
                                     <DataRow 
-                                        icon = "fa fa-user"
-                                        label = "Vehical No"
+                                        icon = {vehiIcon}
+                                        label = "Vehicle No"
                                         value = {data.length == 0 ? "Not Specified" : data.vehiNo}
                                     />
                                     <DataRow 
-                                        icon = "fa fa-envelope"
+                                        icon = {engineIcon}
                                         label = "Engine No"
                                         value = {data.length == 0 ? "Not Specified" : data.engineNo}
                                     />
                                     <DataRow 
-                                        icon = "fa fa-map-marker"
-                                        label = "Modal"
+                                        icon = {modalIcon}
+                                        label = "Model"
                                         value = {data.length == 0 ? "Not Specified" : data.make+" "+data.modal}
                                     />
                                     <DataRow 
-                                        icon = "fa address-card"
+                                        icon = {yearIcon}
                                         label = "Year"
                                         value = {data.length == 0 ? "Not Specified" : data.year}
                                     />
@@ -117,18 +127,18 @@ export default class CustomerDetails extends Component{
                                 <table className="proTable">
                                     <tbody>
                                     <DataRow 
-                                        icon = "fa fa-user"
-                                        label = "Cassis No"
+                                        icon = {cassisIcon}
+                                        label = "Chassis No"
                                         value = {data.length == 0 ? "Not Specified" : data.chassis}
                                     />
                                     <DataRow 
-                                        icon = "fa fa-envelope"
+                                        icon = {capacityIcon}
                                         label = "Capacity"
                                         value = {data.length == 0 ? "Not Specified" : data.capacity}
                                     />
                                     <DataRow 
-                                        icon = "fa fa-map-marker"
-                                        label = "Feul type"
+                                        icon = {fuelIcon}
+                                        label = "Fuel type"
                                         value = {data.length == 0 ? "Not Specified" : data.fuel}
                                     />
                                     </tbody>

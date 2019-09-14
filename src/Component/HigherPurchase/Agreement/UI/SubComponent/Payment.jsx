@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import $ from 'jquery'
 import axios from 'axios'
+import date from 'date-and-time';
 
 import Input from '../../../../Main/UI/SingleComponent/InputField'
 import DatePicker from '../../../../Main/UI/SingleComponent/DatePicker'
@@ -8,35 +9,46 @@ import DatePicker from '../../../../Main/UI/SingleComponent/DatePicker'
 var day = new Date().getDate();
 var month = new Date().getMonth();
 var year = new Date().getFullYear();
+var newMonth = month+2;
+
+const now = new Date();
+const fdate = new Date()
+fdate.setMonth(month + 1);
 
 export default class CustomerDetails extends Component{
 
     state = {
         values: [],
         show: false,
-        startDate: new Date(),
+        startDate: date.format(fdate, 'YYYY/MM/DD'),
         endDate: null,
         showDate: false,
         created: day + '-' + ++month + '-' + year,
         intrest: "3"
     }
 
-    getPeriod(){
+    getPeriod(value){
         var self = this;
-        var x = parseInt($('#InputPeriod').val()); //or whatever offset
-        if(x === null){
+        
+        var x = parseInt(value); //or whatever offset
+        if(x === null || x === ''){
+            self.setState({endDate: date.format(now, 'YYYY/MM/DD')});
             setTimeout(function(){ self.setState({showDate: false}); }, 30);
         }else{
             setTimeout(function(){ self.setState({showDate: true}); }, 30);
+            now.setMonth(month + x);
+            this.setState({endDate: date.format(now, 'YYYY/MM/DD')});
+            this.setState({showDate: false});
         }
-        var CurrentDate = new Date();
-        CurrentDate.setMonth(CurrentDate.getMonth() + x);
-        this.setState({endDate: CurrentDate});
-        this.setState({showDate: false});
     }
 
     getValue(){
         
+    }
+
+    changeExpire(value){
+        console.log(value);
+        this.setState({endDate: day + '-' + newMonth + '-' + year})
     }
 
     getIntrest(){

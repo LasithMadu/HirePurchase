@@ -7,6 +7,13 @@ import Table from './CustomerTable'
 import Search from '../../../Main/UI/SingleComponent/Search'
 import DataRow from '../../../Main/UI/SingleComponent/DataCell'
 
+import nameIcon from '../../../../Assests/images/gjoiconset/name.png'
+import emailIcon from '../../../../Assests/images/gjoiconset/email.png'
+import addressIcon from '../../../../Assests/images/gjoiconset/address.png'
+import nicIcon from '../../../../Assests/images/gjoiconset/NIC.png'
+import statusIcon from '../../../../Assests/images/gjoiconset/status.png'
+import ratingIcon from '../../../../Assests/images/gjoiconset/user rating.png'
+
   function handleShow() {
     $('.modal').show('slow');
   }
@@ -113,32 +120,32 @@ export default class CustomerDetails extends Component {
                                 <table className="proTable">
                                   <tbody>
                                   <DataRow 
-                                      icon = "fa fa-user"
+                                      icon = {nameIcon}
                                       label = "Name"
                                       value = {data.length === 0 ? "Not Specified" : data[0].nameInitials}
                                   />
                                   <DataRow 
-                                      icon = "fa fa-envelope"
+                                      icon = {emailIcon}
                                       label = "Email"
                                       value = {data.length === 0 ? "Not Specified" : data[0].email}
                                   />
                                   <DataRow 
-                                      icon = "fa fa-map-marker"
+                                      icon = {addressIcon}
                                       label = "Address"
                                       value = {data.length === 0 ? "Not Specified" : data[0].address}
                                   />
                                   <DataRow 
-                                      icon = "fa address-card"
+                                      icon = {nicIcon}
                                       label = "NIC/Passport No"
                                       value = {data.length === 0 ? "Not Specified" : data[0].nic}
                                   />
                                   <DataRow 
-                                      icon = "fa fa-unlock"
+                                      icon = {statusIcon}
                                       label = "Status"
                                       value = {data.length === 0 ? "Not Specified" : <span className="label label-success">Active</span>}
                                   />
                                   <DataRow 
-                                      icon = "fa fa-star-half"
+                                      icon = {ratingIcon}
                                       label = "User Rating"
                                       value = {data.length === 0 ? "Not Specified" : "Not Specified"}
                                   />

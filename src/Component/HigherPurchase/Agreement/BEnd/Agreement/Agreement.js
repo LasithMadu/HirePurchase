@@ -55,8 +55,6 @@ module.exports = {
         var payDetails = request.body.payDetails;
         var arr = [...payDetails, ...cusDeatils, ...vehiDetails];
 
-        console.log(arr)
-
         dbconfg.connect((err, db, done) =>{
             if(err){
                 console.log('Conection Error');
@@ -142,6 +140,7 @@ module.exports = {
 
     saveOther: function(request, response, dbconfg){
         var values = request.body.data;
+        var isNot = true;
 
         dbconfg.connect((err, db, done) =>{
             if(err){
@@ -149,15 +148,35 @@ module.exports = {
                 return console.log(err);
             }else{
                 try{
-                    db.query('INSERT INTO public."cusOtherTable"("agreeId", nic, name, mobile) VALUES ($1, $2, $3, $4)',[...values], (err, table) => {
-                        db.end();
+                    db.query('SELECT * FROM public."cusOtherTable"', (err, table) => {
                         if(err){
                             console.log(err);
                             response.json({msg: false, data: err})
                         }else{
-                            response.json({msg: true, table:table})
+                            for(var i=0; i<table.rowCount; i++){
+                                if(table.rows[i].agreeId === values[0]){
+                                    isNot = false;
+                                    break;
+                                }else{
+                                    isNot = true;
+                                }
+                            }
+                            if(isNot){
+                                db.query('INSERT INTO public."cusOtherTable"("agreeId", nic, name, mobile) VALUES ($1, $2, $3, $4)',[...values], (err, table) => {
+                                    db.end();
+                                    if(err){
+                                        console.log(err);
+                                        response.json({msg: false, data: err})
+                                    }else{
+                                        response.json({msg: true, table:table})
+                                    }
+                                });
+                            }else{
+                                response.json({msg: true, dub: true})
+                            }
                         }
                     });
+                    
                 }catch(err){
                     console.log(err)
                 }

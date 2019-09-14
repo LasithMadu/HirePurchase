@@ -32,7 +32,8 @@ export default class SlideBar extends Component {
     state = {
         activeItem: "1",
         higher: false,
-        items: false
+        items: false,
+        reminder: false
     };
   
     toggle = tab => e => {
@@ -45,21 +46,26 @@ export default class SlideBar extends Component {
             this.higherShow();
             this.itemShow();
             this.setState({
-                activeItem: 9
+                activeItem: '9'
               }); 
         }else if(tab === "5"){
             this.itemShow();
             this.setState({
-                activeItem: 9
+                activeItem: '9'
               }); 
+        }else if(tab === "13"){
+            this.itemHide();
+            this.reminderShow();
+            this.setState({
+                activeItem: '14'
+              });
         }
 
         if(tab === "1"){
             this.itemHide();
             this.higherHide();
+            this.reminderHide();
         }
-
-        console.log(tab);
         
         // if(tab == 5  || tab == 4){
         //     this.itemShow();
@@ -95,7 +101,41 @@ export default class SlideBar extends Component {
         });
     }
 
+    reminderShow(){
+        this.setState({
+            reminder: true
+        });
+    }
+
+    reminderHide(){
+        this.setState({
+            reminder: false
+        });
+    }
+
     render () {
+
+        const reminders = (
+            <ul className="nav sidehigh">
+                <div className="clearfix"></div>
+                <li style={styleSheet.themColor} className={this.state.activeItem === "14" ? "active" : ""} onClick={this.toggle("14")}><NavLink to="/higher/firstr" style={{paddingLeft: '70px'}}  onClick={()=>this.props.setLocation('First Reminder')}><i className="fa fa-edit fa-fw">
+                    <div className="icon-bg bg-violet"></div>
+                    </i><span className="menu-title">First Reminder</span></NavLink>
+                </li>
+                <li style={styleSheet.themColor} className={this.state.activeItem === "15" ? "active" : ""} onClick={this.toggle("15")}><NavLink to="/higher/finalr" style={{paddingLeft: '70px'}} activeStyle={{ background: localStorage.getItem('bgColor') }}  onClick={()=>this.props.setLocation('Final Reminder')}><i className="fa fa-edit fa-fw">
+                    <div className="icon-bg bg-violet"></div>
+                    </i><span className="menu-title">Final Reminder</span></NavLink>
+                </li>
+                <li style={styleSheet.themColor} className={this.state.activeItem === "16" ? "active" : ""} onClick={this.toggle("16")}><NavLink to="/higher/notist" style={{paddingLeft: '70px'}} activeStyle={{ background: localStorage.getItem('bgColor') }}  onClick={()=>this.props.setLocation('Notice Of Termination')}><i className="fa fa-edit fa-fw">
+                    <div className="icon-bg bg-violet"></div>
+                    </i><span className="menu-title">Notice Of Termination</span></NavLink>
+                </li>
+                <li style={styleSheet.themColor} className={this.state.activeItem === "16" ? "active" : ""} onClick={this.toggle("16")}><NavLink to="/higher/terml" style={{paddingLeft: '70px'}} activeStyle={{ background: localStorage.getItem('bgColor') }}  onClick={()=>this.props.setLocation('Termination Letter')}><i className="fa fa-edit fa-fw">
+                    <div className="icon-bg bg-violet"></div>
+                    </i><span className="menu-title">Termination Letter</span></NavLink>
+                </li>
+            </ul>
+        )
 
         const subMenu = (
             <ul className="nav sidehigh">
@@ -131,9 +171,10 @@ export default class SlideBar extends Component {
                     <div className="icon-bg bg-violet"></div>
                     </i><span className="menu-title">Payments</span></NavLink>
                 </li>
-                <li style={styleSheet.themColor} className={this.state.activeItem === "13" ? "active" : ""} onClick={this.toggle("13")}><NavLink to="/higher/reminder" style={{paddingLeft: '35px'}} activeStyle={{ background: localStorage.getItem('bgColor') }}  onClick={()=>this.props.setLocation('REMINDER')}><i className="fa fa-edit fa-fw">
+                <li style={styleSheet.themColor} className={this.state.activeItem === "13" ? "" : ""} onClick={this.toggle("13")}><NavLink to="/higher/reminder" style={{paddingLeft: '35px'}} activeStyle={{ background: localStorage.getItem('bgColor') }}  onClick={()=>this.props.setLocation('REMINDER')}><i className="fa fa-edit fa-fw">
                     <div className="icon-bg bg-violet"></div>
                     </i><span className="menu-title">Reminders</span></NavLink>
+                    {/* { this.state.reminder ? reminders : ""} */}
                 </li>
                 <li style={styleSheet.themColor} className={this.state.activeItem === "8" ? "active" : ""} onClick={this.toggle("8")}><NavLink to="/higher/report" style={{paddingLeft: '35px'}} activeStyle={{ background: localStorage.getItem('bgColor') }}  onClick={()=>this.props.setLocation('REPORTS')}><i className="fa fa-edit fa-fw">
                     <div className="icon-bg bg-violet"></div>

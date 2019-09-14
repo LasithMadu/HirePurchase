@@ -46,7 +46,9 @@ export default class CustomerDetails extends Component{
         .then(function (response) {
             if(response.data.msg){
                 self.props.changeOther(values);
-                self.setState({show: false})
+                if(response.data.dub){
+                    self.setState({show: false})
+                }
             }else{
                 console.log('Other has a error');
             }
@@ -69,8 +71,6 @@ export default class CustomerDetails extends Component{
                         (
                             <div className="bodyLogo">
                                 <div className="container">
-                                <span className="text-danger">No other details click save button.</span>
-                                <hr/>
                                 <div className="col-lg-11 col-md-11 col-sm-11 col-xs-12">
                                 <form className='col-sm-12 col-md-12'>
                                     <div class="form-row">
@@ -108,7 +108,7 @@ export default class CustomerDetails extends Component{
                                             handleChange = {this.getValue.bind(this)}
                                         />
                                     </div>
-                                    <div class="form-group col-sm-6 row">
+                                    <div class="form-group col-sm-4 row">
                                         <div className='col-xs-6 col-md-3'>
                                             <button type="button" class="btn btn-primary" onClick={this.saveOther.bind(this)}>Save</button>
                                         </div>

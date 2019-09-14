@@ -242,8 +242,8 @@ export default class VehicalAdd extends Component{
                                             size = {[12, 12, 12, 12]}
                                             id = "inputAmount"
                                             label = "Amount"
-                                            placeholder = "Agreement No"
-                                            msg = "Please Input agreement no"
+                                            placeholder = "Amount"
+                                            msg = "Please Input amount"
                                             handleChange = {this.getValue.bind(this)}
                                         />
                                     </div>

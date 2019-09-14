@@ -99,8 +99,7 @@ export default class CreateForm extends Component{
 
     render(){
         return(
-            <div className='container' style={{backgroundColor: '#ffffff'}}>
-                <ToastsContainer store={ToastsStore} position={ToastsContainerPosition.BOTTOM_RIGHT} />
+            <div className='container'>
                 <div className="modal" role="dialog" style={{borderRadius: '50px', marginTop: '75px'}}>
                     <div className="modal-dialog" role="document">
                       <div className="modal-content">
@@ -120,8 +119,6 @@ export default class CreateForm extends Component{
                       </div>
                     </div>
                   </div>
-                <h3>Delete Customer</h3>
-                <hr/>
                     <form action="#" className="form-horizontal">
                         <div className="form-body pal">
                             <div className="form-group">
