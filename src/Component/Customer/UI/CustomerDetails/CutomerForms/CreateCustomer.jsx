@@ -113,15 +113,29 @@ export default class CreateForm extends Component{
                         type = "text"
                         save = {this.state.save}
                     />
-                    <div class="form-group col-md-11 col-sm-7 col-xs-12">
-                        <label for="inputFullname">Full Name</label>
-                        <input type="text" class="form-control" id="inputFullname" placeholder="Michael Dennis Stocks Something"/>
-                    </div>
+                    <Input
+                        size = {[11, 11, 11, 12]}
+                        id = "inputFullname"
+                        label = "Full Name"
+                        placeholder = "Michael Dennis Stocks Something"
+                        msg = "Please input full name"
+                        handleChange = {this.getValue.bind(this)}
+                        reqiured = {true}
+                        type = "text"
+                        save = {this.state.save}
+                    />
                     <div class="form-row">
-                        <div class="form-group col-md-4 col-sm-7 col-xs-12">
-                        <label for="inputNic">NIC/Passport No</label>
-                        <input type="text" class="form-control" id="inputNic"/>
-                        </div>
+                        <Input
+                            size = {[4, 4, 4, 12]}
+                            id = "inputNic"
+                            label = "NIC/Passport No"
+                            placeholder = ""
+                            msg = "Please input nic/passport No"
+                            handleChange = {this.getValue.bind(this)}
+                            reqiured = {true}
+                            type = "text"
+                            save = {this.state.save}
+                        />
                         <div class="form-group col-md-4 col-sm-7 col-xs-12">
                         <label for="inputGender">Gender</label>
                         <select id="inputGender" class="form-control">
@@ -130,28 +144,62 @@ export default class CreateForm extends Component{
                             <option>Female</option>
                         </select>
                         </div>
-                        <div class="form-group col-md-3 col-sm-7 col-xs-12">
-                        <label for="inputOccupation">Occupation</label>
-                        <input type="text" class="form-control" id="inputOccupation"/>
-                        </div>
+                        <Input
+                            size = {[3, 3, 3, 12]}
+                            id = "inputOccupatio"
+                            label = "Occupation"
+                            placeholder = ""
+                            msg = "Please input occupation"
+                            handleChange = {this.getValue.bind(this)}
+                            reqiured = {true}
+                            type = "text"
+                            save = {this.state.save}
+                        />
                     </div>
-                    <div class="form-group col-md-11 col-sm-7 col-xs-12">
-                        <label for="inputAddress">Address</label>
-                        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St"/>
-                    </div>
-                    <div class="form-group col-md-11 col-sm-7 col-xs-12">
-                        <label for="inputAddress2">Address 2</label>
-                        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor"/>
-                    </div>
+                    <Input
+                            size = {[11, 11, 11, 12]}
+                            id = "inputAddress"
+                            label = "Address"
+                            placeholder = "1234 Main St"
+                            msg = "Please input address"
+                            handleChange = {this.getValue.bind(this)}
+                            reqiured = {true}
+                            type = "text"
+                            save = {this.state.save}
+                        />
+                       <Input
+                            size = {[11, 11, 11, 12]}
+                            id = "inputAddress2"
+                            label = "Address 2"
+                            placeholder = "Apartment, studio, or floor"
+                            msg = "Please input address 2"
+                            handleChange = {this.getValue.bind(this)}
+                            type = "text"
+                            save = {this.state.save}
+                        />  
                     <div class="form-row">
-                        <div class="form-group col-md-4 col-sm-7 col-xs-12">
-                        <label for="inputCity">City</label>
-                        <input type="text" class="form-control" id="inputCity"/>
-                        </div>
-                        <div class="form-group col-md-4 col-sm-7 col-xs-12">
-                        <label for="inputState">State</label>
-                        <input type="text" class="form-control" id="inputState"/>
-                        </div>
+                        <Input
+                            size = {[4, 4, 4, 12]}
+                            id = "inputCity"
+                            label = "City 2"
+                            placeholder = ""
+                            msg = "Please input city 2"
+                            handleChange = {this.getValue.bind(this)}
+                            reqiured = {true}
+                            type = "text"
+                            save = {this.state.save}
+                        /> 
+                        <Input
+                            size = {[4, 4, 4, 12]}
+                            id = "inputState"
+                            label = "State"
+                            placeholder = ""
+                            msg = "Please input state"
+                            handleChange = {this.getValue.bind(this)}
+                            reqiured = {true}
+                            type = "text"
+                            save = {this.state.save}
+                        />  
                         <div class="form-group col-md-3 col-sm-7 col-xs-12">
                         <label for="inputCountry">Country</label>
                         <select id="inputCountry" class="form-control">
@@ -160,14 +208,28 @@ export default class CreateForm extends Component{
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-6 col-sm-7 col-xs-12">
-                        <label for="inputEmail">Email</label>
-                        <input type="text" class="form-control" id="inputEmail"/>
-                        </div>
-                        <div class="form-group col-md-5 col-sm-7 col-xs-12">
-                        <label for="inputMobile">Mobile No</label>
-                        <input type="text" class="form-control" id="inputMobile"/>
-                        </div>
+                    <Input
+                            size = {[5, 5, 5, 12]}
+                            id = "inputEmail"
+                            label = "Email"
+                            placeholder = ""
+                            msg = "Please input email"
+                            handleChange = {this.getValue.bind(this)}
+                            reqiured = {true}
+                            type = "text"
+                            save = {this.state.save}
+                        /> 
+                        <Input
+                            size = {[4, 4, 4, 12]}
+                            id = "inputMobile"
+                            label = "Mobile No"
+                            placeholder = ""
+                            msg = "Please input mobile no"
+                            handleChange = {this.getValue.bind(this)}
+                            reqiured = {true}
+                            type = "text"
+                            save = {this.state.save}
+                        /> 
                     </div>
                     <div class="form-group col-sm-6 col-md-4 row">
                         <div class='col-sm-3 col-xs-6'>
