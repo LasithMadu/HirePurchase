@@ -30,6 +30,13 @@ body{
   display: none;
 }
 
+.slideIcon{
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  padding: 0;
+}
+
 .divider{
   border: 1px solid #106BA3;
 }
@@ -42,6 +49,14 @@ body{
 
 .slideItem{
   padding-left: 15px;
+}
+
+.menu-title{
+  padding-left: 8px;
+}
+
+.glyphicon{
+  color: red;
 }
 
 .fullWidth{

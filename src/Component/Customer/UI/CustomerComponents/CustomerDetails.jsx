@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios'
 import $ from 'jquery'
-import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
+import cogoToast from 'cogo-toast';
 
 import Table from './CustomerTable'
 import Search from '../../../Main/UI/SingleComponent/Search'
@@ -16,6 +16,10 @@ import ratingIcon from '../../../../Assests/images/gjoiconset/user rating.png'
 
   function handleShow() {
     $('.modal').show('slow');
+  }
+
+  const options = {
+    position: 'top-center'
   }
 
 export default class CustomerDetails extends Component {
@@ -43,12 +47,14 @@ export default class CustomerDetails extends Component {
       window.location.href = "/create";
     }
 
-    searchCustomer(nic){
+    searchCustomer(event){
+      event.preventDefault();
+      var nic = $('#inputName').val();
       var self = this;
       if(nic === ''){
-        ToastsStore.warning("Enter Customer NIC or Passport No")
+        //ToastsStore.warning("Enter Customer NIC or Passport No")
       }else if(nic.length < 9){
-        ToastsStore.warning("Invalid NIC No")
+        //ToastsStore.warning("Invalid NIC No")
       }else{
         axios.post('http://localhost:8080/Agreement/getAgree', {
           data: nic.toUpperCase()
@@ -56,18 +62,18 @@ export default class CustomerDetails extends Component {
         .then(function (response) {
           if(response.data.msg){
               self.setState({values: response.data.table.rows})
-              ToastsStore.success("Sucessfuly Load Customer Data")
+              cogoToast.success('Sucessfuly load customer data.', options);
           }else{
             if(response.data.alert === 'fail'){
-              ToastsStore.warning("This Customer Is Not Registered Yet")
+              cogoToast.warning('Customer is not register yet.', options);
               handleShow();
             }else{
-              ToastsStore.error("Fail To Load Customer Data")
+              cogoToast.error('Fail to load customer data.', options);
             }
           }
         })
         .catch(function (error) {
-          console.log(error)
+          cogoToast.error('Connection error', options);
         });
       }
     }
@@ -76,9 +82,7 @@ export default class CustomerDetails extends Component {
       let data = this.state.values;
 
       return (
-            <div className="page-content">
-              <ToastsContainer store={ToastsStore} position={ToastsContainerPosition.BOTTOM_RIGHT} />
-                
+            <div className="page-content">               
                 <div className="modal" role="dialog" style={{borderRadius: '50px'}}>
                   <div className="modal-dialog" role="document">
                     <div className="modal-content">
@@ -106,6 +110,7 @@ export default class CustomerDetails extends Component {
                   icon = "fa fa-user"
                   placeholder = "Search by NIC/Passport No"
                   btnId = "searchBtn"
+                  msg = "Please input nic or passport no"
                   handleChange = {this.searchCustomer.bind(this)}
                 />
               <div className="col-lg-12">

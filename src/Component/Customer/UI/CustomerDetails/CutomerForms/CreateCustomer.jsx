@@ -4,10 +4,15 @@ import $ from 'jquery'
 import uuidv4 from 'uuid/v4'
 import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
 
+import Input from '../../../../Main/UI/SingleComponent/InputField'
+
 export default class CreateForm extends Component{
 
     constructor(props){
         super(props)
+        this.state = {
+            save: false
+        }
         this.getCountries();
     }
 
@@ -28,6 +33,7 @@ export default class CreateForm extends Component{
 
     saveCustomer(){
         var valid;
+        this.setState({save: true});
         var title = $('#inputTitle').val();
         var gender = $('#inputGender').val();
         var country = $('#inputCountry').val();
@@ -75,6 +81,10 @@ export default class CreateForm extends Component{
         }
     }
 
+    getValue(){
+
+    }
+
     render(){
         return(
             <div className='container'>
@@ -92,10 +102,17 @@ export default class CreateForm extends Component{
                             <option value="Ma'am. ">Ma'am. </option>
                         </select>
                     </div>
-                    <div class="form-group col-md-11 col-sm-7 col-xs-12">
-                        <label for="inputInitials">Name With Initials</label>
-                        <input type="text" class="form-control" id="inputInitials" placeholder="M.D.S Something"/>
-                    </div>
+                    <Input
+                        size = {[11, 11, 11, 12]}
+                        id = "inputInitials"
+                        label = "Name With Initials"
+                        placeholder = "M.D.S Something"
+                        msg = "Please input name with initials"
+                        handleChange = {this.getValue.bind(this)}
+                        reqiured = {true}
+                        type = "text"
+                        save = {this.state.save}
+                    />
                     <div class="form-group col-md-11 col-sm-7 col-xs-12">
                         <label for="inputFullname">Full Name</label>
                         <input type="text" class="form-control" id="inputFullname" placeholder="Michael Dennis Stocks Something"/>

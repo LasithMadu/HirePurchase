@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
+import cogoToast from 'cogo-toast'
 
 import DataRow from '../../../../Main/UI/SingleComponent/DataCell'
 
@@ -11,17 +12,23 @@ import modalIcon from '../../../../../Assests/images/gjoiconset/Model.png'
 import fuelIcon from '../../../../../Assests/images/gjoiconset/Fuel type.png'
 import yearIcon from '../../../../../Assests/images/gjoiconset/Year.png'
 
+const options = {
+    position: 'top-right'
+}
+
 export default class CustomerDetails extends Component{
 
     state = {
         values: [],
         reuslt: true,
-        vehicles: []
+        vehicles: [],
+        loading: true,
+        vehiId: ''
     }
 
     componentDidMount(){
         if(this.props.nic === ''){
-            alert('choose customer first')
+            cogoToast.warn('Please choose customer and try again.', options);
         }else{
             var that = this;
             axios.post('http://localhost:8080/Vehicals/getByNicVehical',{
@@ -32,7 +39,7 @@ export default class CustomerDetails extends Component{
                     that.setState({vehicles: response.data.table.rows, loading: false});
                 }
                 else{
-                    console.log("Did");
+                    cogoToast.warn('No vehicle registered under this customer.', options);
                 }
             })
         }
@@ -41,33 +48,27 @@ export default class CustomerDetails extends Component{
     searchVehicle(id){
         var data = this.state.vehicles;
         var self = this;
-        for(var i=0; i<data.length; i++){
-            if (data[i].agreeId == id) {
-                axios.post('http://localhost:8080/Vehicals/searchVehical', {
-                    data: data[i].vehiNo
-                })
-                .then(function (response) {
-                    if(response.data.msg){
-                        self.props.changeVehicle(response.data.table.rows[0])
-                        self.setState({values: response.data.table.rows[0], reuslt: false})
-                    }else{
-                        
-                    }
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
+        for(var i=0; i<data.length; i++){ 
+            console.log(data[i].id);
+            console.log(id);
+                      
+            if(data[i].id === id){
+                self.setState({vehiId: i,  reuslt: false})
+                break;
             }
-          }
-        
+        }        
     }
 
-    render(){
-        var data = this.state.values;
+    render(){  
+        var data = this.state.vehicles[this.state.vehiId];
         var vehicles = this.state.vehicles;
         return(
             <div className="bodyLogo">
                 <div className="container">
+                {
+                    this.state.loading ?
+                    <h3>Loading</h3> :
+                    (
                     <div className="row ml-5">
                         {
                             this.state.reuslt ? 
@@ -84,13 +85,13 @@ export default class CustomerDetails extends Component{
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {vehicles.map(vehicle =><tr scope="row" key={vehicle.agreeId}>
+                                        {vehicles.map(vehicle =><tr scope="row" key={vehicle.id}>
                                             <td>{vehicle.nameInitials}</td>
                                             <td>{vehicle.vehiNo}</td>
                                             <td>{vehicle.chassis}</td>
                                             <td>{vehicle.capacity}</td>
                                             <td>{vehicle.make+' '+vehicle.modal}</td>
-                                            <button className="btn btn-success" onClick={()=>this.searchVehicle(vehicle.agreeId)}>Details</button>
+                                            <button className="btn btn-success" onClick={()=>this.searchVehicle(vehicle.id)}>Details</button>
                                         </tr>
                                         )}
                                     </tbody>
@@ -147,6 +148,8 @@ export default class CustomerDetails extends Component{
                             </div>)
                         }
                     </div>
+                )
+                }
                 </div>
             </div>
         )

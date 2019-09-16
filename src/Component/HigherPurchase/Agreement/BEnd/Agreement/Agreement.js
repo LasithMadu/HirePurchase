@@ -142,6 +142,8 @@ module.exports = {
         var values = request.body.data;
         var isNot = true;
 
+        console.log(values)
+
         dbconfg.connect((err, db, done) =>{
             if(err){
                 console.log('Conection Error'+err);

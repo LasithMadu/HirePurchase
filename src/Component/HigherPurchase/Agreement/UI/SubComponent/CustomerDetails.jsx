@@ -17,19 +17,20 @@ import occupationIcon from '../../../../../Assests/images/gjoiconset/Occupation.
 
 export default class CustomerDetails extends Component{
 
-    searchCustomer(){
+    searchCustomer(event){
+        event.preventDefault();
         var self = this;
         axios.post('http://localhost:8080/Customer/searchCutomer', {
             data: $('#cusNic').val().toUpperCase()
         })
         .then(function (response) {
-        if(response.data.msg){
-            self.props.changeCustomer(response.data.table.rows[0])
-            self.props.setNic($('#cusNic').val().toUpperCase());
-            self.setState({values: response.data.table.rows[0]})          
-        }else{
-            
-        }
+            if(response.data.msg){
+                self.props.changeCustomer(response.data.table.rows[0])
+                self.props.setNic($('#cusNic').val().toUpperCase());
+                self.setState({values: response.data.table.rows[0]})          
+            }else{
+                
+            }
         })
         .catch(function (error) {
             console.log(error);
@@ -51,6 +52,7 @@ export default class CustomerDetails extends Component{
                             icon = "fa fa-user"
                             placeholder = "Search by NIC/Passport No"
                             btnId = "searchBtn"
+                            msg = "Please input nic or passport no"
                             handleChange = {this.searchCustomer.bind(this)}
                         />
                     </div>

@@ -18,7 +18,6 @@ export default class Viewagreement extends Component{
 
   render(){
     let agreementData = this.props.agrrement;
-    console.log();
     
     return (
       <div>

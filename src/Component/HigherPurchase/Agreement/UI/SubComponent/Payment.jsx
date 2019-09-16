@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import $ from 'jquery'
 import axios from 'axios'
 import date from 'date-and-time';
+import cogoToast from 'cogo-toast';
 
 import Input from '../../../../Main/UI/SingleComponent/InputField'
 import DatePicker from '../../../../Main/UI/SingleComponent/DatePicker'
@@ -15,6 +16,10 @@ const now = new Date();
 const fdate = new Date()
 fdate.setMonth(month + 1);
 
+const options = {
+    position: 'top-right'
+}
+
 export default class CustomerDetails extends Component{
 
     state = {
@@ -24,7 +29,8 @@ export default class CustomerDetails extends Component{
         endDate: null,
         showDate: false,
         created: day + '-' + ++month + '-' + year,
-        intrest: "3"
+        intrest: "3",
+        save: false
     }
 
     getPeriod(value){
@@ -58,6 +64,7 @@ export default class CustomerDetails extends Component{
     saveAgreement(){
         var valid;
         var self = this;
+        self.setState({save: true});
         var values = [this.props.agreeId, this.state.created, $('#InputCapital').val(), $('#InputPeriod').val(), this.state.intrest, $('#InputRepayment').val(), $('#InputFRental').val(), $('#InputLRental').val()]
         for(var i=0; i<values.length; i++){
             if(values[i] === ''){
@@ -75,16 +82,17 @@ export default class CustomerDetails extends Component{
             .then(function (response) {
                 if(response.data.msg){
                     self.props.changePayment(values)
+                    cogoToast.success('Sucessfuly insert payment data.', options);
                     localStorage.setItem('agreeId', this.props.agreeId);
                 }else{
-                    console.log('Payment has a error');
+                    cogoToast.error('Fail to insert payment data. Try again.', options);
                 }
             })
             .catch(function (error) {
-                console.log(error);
+                cogoToast.error('Connection error', options);
             });
         }else{
-            alert('Empty fields')
+            //alert('Empty fields')
         }
     }
       
@@ -103,6 +111,7 @@ export default class CustomerDetails extends Component{
                                 label = "Agreement ID"
                                 placeholder = {this.props.agreeId}
                                 disable = {true}
+                                save = {false}
                             />
                             <Input
                                 size = {[6, 6, 6, 12]}
@@ -110,6 +119,7 @@ export default class CustomerDetails extends Component{
                                 label = "Created Date"
                                 placeholder = {this.state.created}
                                 disable = {true}
+                                save = {false}
                             />
                         </div>
                         <div class="form-row">
@@ -120,6 +130,9 @@ export default class CustomerDetails extends Component{
                                 placeholder = "Capital Amount"
                                 msg = "Please Input capital amount"
                                 handleChange = {this.getValue.bind(this)}
+                                reqiured = {true}
+                                type = "number"
+                                save = {this.state.save}
                             />
                             <Input
                                 size = {[6, 6, 6, 12]}
@@ -128,6 +141,9 @@ export default class CustomerDetails extends Component{
                                 placeholder = "Period"
                                 msg = "Please Input period"
                                 handleChange = {this.getPeriod.bind(this)}
+                                reqiured = {true}
+                                type = "number"
+                                save = {this.state.save}
                             />
                         </div>
                         <div class="form-row">
@@ -139,8 +155,10 @@ export default class CustomerDetails extends Component{
                                 disable = {true}
                                 editBtn = {true}
                                 btnText = "Edit"
+                                type = "number"
                                 msg = "Please Input intrest"
                                 handleChange = {this.getIntrest.bind(this)}
+                                reqiured = {true}
                             />
                             <Input
                                 size = {[6, 6, 6, 12]}
@@ -149,6 +167,9 @@ export default class CustomerDetails extends Component{
                                 placeholder = "Repayment Period"
                                 msg = "Please Input repayment period"
                                 handleChange = {this.getValue.bind(this)}
+                                reqiured = {true}
+                                type = "number"
+                                save = {this.state.save}
                             />
                         </div>
                         <div class="form-row">
@@ -178,6 +199,8 @@ export default class CustomerDetails extends Component{
                                     placeholder = "Last Rentaldate"
                                     msg = "Please Input last rental date"
                                     handleChange = {this.getValue.bind(this)}
+                                    reqiured = {true}
+                                    save = {this.state.save}
                                 />
                             }
                             

@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import { NavLink } from 'react-router-dom'
 
+import Customer from '../../../../Assests/images/menuicons/Customer.png'
+import Items from '../../../../Assests/images/menuicons/Items.png'
+
 const styleSheet = {
     sideNav: {
         minHeight: 'calc(100% - 50px)',
@@ -15,8 +18,7 @@ const styleSheet = {
         'a :active': {
             color: ' #fff000',
             background: "#fff000"
-        },
-
+        }
     }
 }
 
@@ -158,9 +160,9 @@ export default class SlideBar extends Component {
         const dropMenu = (
             <ul className="nav sidehigh">
                 <div className="clearfix"></div>
-                <li style={styleSheet.themColor} className={this.state.activeItem === "5" ? "" : ""} onClick={this.toggle("5")}><NavLink to="/higher/items" style={{paddingLeft: '35px'}}  onClick={()=>this.props.setLocation('VEHICLE')}><i className="fa fa-edit fa-fw">
-                    <div className="icon-bg bg-violet"></div>
-                    </i><span className="menu-title">Items</span></NavLink>
+                <li style={styleSheet.themColor} className={this.state.activeItem === "5" ? "" : ""} onClick={this.toggle("5")}><NavLink to="/higher/items" style={{paddingLeft: '35px'}}  onClick={()=>this.props.setLocation('VEHICLE')}>
+                    <div className="icon-bg"><img src={Items} className="slideIcon" alt="items" /></div>
+                    <span className="menu-title">Items</span></NavLink>
                     { this.state.items ? subMenu : ""}
                 </li>
                 <li style={styleSheet.themColor} className={this.state.activeItem === "6" ? "active" : ""} onClick={this.toggle("6")}><NavLink to="/higher/agreement" style={{paddingLeft: '35px'}} activeStyle={{ background: localStorage.getItem('bgColor') }}  onClick={()=>this.props.setLocation('AGREEMENT')}><i className="fa fa-edit fa-fw">
@@ -191,9 +193,9 @@ export default class SlideBar extends Component {
                     <ul id="side-menu" className="nav">
                         
                         <div className="clearfix"></div>
-                        <li style={styleSheet.themColor} className={this.state.activeItem === "1" ? "active" : ""} onClick={this.toggle("1")}><NavLink to="/customer" activeStyle={{ background: localStorage.getItem('bgColor') }} onClick={()=>this.props.setLocation('CUSTOMER')}><i className="fa fa-tachometer fa-fw">
-                            <div className="icon-bg bg-orange"></div>
-                        </i><span className="menu-title">Customer</span></NavLink></li>
+                        <li style={styleSheet.themColor} className={this.state.activeItem === "1" ? "active" : ""} onClick={this.toggle("1")}><NavLink to="/customer" activeStyle={{ background: localStorage.getItem('bgColor') }} onClick={()=>this.props.setLocation('CUSTOMER')}>
+                            <div className="icon-bg"><img src={Customer} className="slideIcon" alt="customer" /></div>
+                        <span className="menu-title">Customer</span></NavLink></li>
                         {/* <li  style={styleSheet.themColor} className={this.state.activeItem === "2" ? "active" : ""} onClick={this.toggle("2")} ><NavLink to="/fixed" onClick={()=>this.props.setLocation('Fixed Deposit')}><i className="fa fa-desktop fa-fw">
                             <div className="icon-bg bg-pink"></div>
                         </i><span className="menu-title">Fixed Deposit</span></NavLink>

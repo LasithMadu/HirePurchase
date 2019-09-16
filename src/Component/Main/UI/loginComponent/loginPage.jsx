@@ -51,7 +51,8 @@ export default class LoginPage extends Component {
         this.setState = { bgColor: '#2ecc71' }
     }
 
-    signin(){
+    signin(event){
+        event.preventDefault();
         reset();
         let path = 'http://localhost:8080/signin';
         var locked = false;
@@ -179,65 +180,65 @@ export default class LoginPage extends Component {
             <div className="page-form" >
                 <div className="panel panel-blue col-md-12">
                     <div className="panel-body pan" >
-                        <form action="#" className="form-horizontal">
-                        <div className="form-body pal">
-                            <div className="col-md-12 col-sm-12 text-center panel-title">
-                                <div className="col-md-8 col-sm-8">
-                                    <img src={logo} style={{marginTop: '-180px', marginLeft: '90px'}} className="img-responsive"/>
+                        <form className="form-horizontal" onSubmit={this.signin.bind(this)}>
+                            <div className="form-body pal">
+                                <div className="col-md-12 col-sm-12 text-center panel-title">
+                                    <div className="col-md-8 col-sm-8">
+                                        <img src={logo} style={{marginTop: '-180px', marginLeft: '90px'}} className="img-responsive"/>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="form-group">
-                                <div className="col-md-3 col-sm-3 mt-sm-5">
-                                    <img src={logo} className="img-responsive"/>
+                                <div className="form-group">
+                                    <div className="col-md-3 col-sm-3 mt-sm-5">
+                                        <img src={logo} className="img-responsive"/>
+                                    </div>
+                                    <div className="col-md-9 text-left">
+                                        <h1>Login</h1>
+                                        <br />
+                                    </div>
                                 </div>
-                                <div className="col-md-9 text-left">
-                                    <h1>Login</h1>
-                                    <br />
+                                <div className="form-group">
+                                    <label htmlFor="inputName" className="col-md-3 control-label">
+                                        Username:</label>
+                                    <div className="col-md-9">
+                                        <div className="input-icon left">
+                                            <i className="fa fa-user"></i>
+                                            <input id="inputName" type="text" placeholder="" className="form-control" />
+                                            <span className="text-danger msgu"></span></div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="inputName" className="col-md-3 control-label">
-                                    Username:</label>
-                                <div className="col-md-9">
-                                    <div className="input-icon left">
-                                        <i className="fa fa-user"></i>
-                                        <input id="inputName" type="text" placeholder="" className="form-control" />
-                                        <span className="text-danger msgu"></span></div>
+                                <div className="form-group">
+                                    <label htmlFor="inputPassword" className="col-md-3 control-label">
+                                        Password:</label>
+                                    <div className="col-md-9">
+                                        <div className="input-icon left">
+                                            <i className="fa fa-lock"></i>
+                                            {!this.state.show
+                                            ? <i className="fa fa-eye-slash passicon" onClick={this.showPass.bind(this)} style={{right: '8px'}} aria-hidden="true"></i>
+                                            : <i className="fa fa-eye passicon" onClick={this.showPass.bind(this)} style={{right: '8px'}} aria-hidden="true"></i>
+                                            }
+                                            <input id="inputPassword" type="password" placeholder="" className="form-control" />
+                                            <span className="text-danger msgp"></span></div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="inputPassword" className="col-md-3 control-label">
-                                    Password:</label>
-                                <div className="col-md-9">
-                                    <div className="input-icon left">
-                                        <i className="fa fa-lock"></i>
-                                        {!this.state.show
-                                        ? <i className="fa fa-eye-slash passicon" onClick={this.showPass.bind(this)} style={{right: '8px'}} aria-hidden="true"></i>
-                                        : <i className="fa fa-eye passicon" onClick={this.showPass.bind(this)} style={{right: '8px'}} aria-hidden="true"></i>
-                                        }
-                                        <input id="inputPassword" type="password" placeholder="" className="form-control" />
-                                        <span className="text-danger msgp"></span></div>
+                                <div className="col-lg-12 text-right">
+                                    <p className="forgetpass" onClick={this.forgetPass.bind(this)}>
+                                        Forgot Password ?
+                                    </p>
                                 </div>
-                            </div>
-                            <div className="col-lg-12 text-right">
-                                <p className="forgetpass" onClick={this.forgetPass.bind(this)}>
-                                    Forgot Password ?
-                                </p>
-                            </div>
-                            <div className="form-group mbn">
-                                <div className="col-lg-12" align="right">
-                                    <div className="form-group mbn">
-                                        <div className="col-lg-3">
-                                            &nbsp;
-                                        </div>
-                                        <div className="col-lg-9">
-                                            <button onClick={this.signin} type="submit" className="btn btn-default">
-                                                Login</button>
+                                <div className="form-group mbn">
+                                    <div className="col-lg-12" align="right">
+                                        <div className="form-group mbn">
+                                            <div className="col-lg-3">
+                                                &nbsp;
+                                            </div>
+                                            <div className="col-lg-9">
+                                                <input type="submit" className="btn btn-default" value="Login"/>
+                                                
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            </div>`
                         </form>
                     </div>
                 </div>
