@@ -64,7 +64,7 @@ export default class CustomerDetails extends Component{
         var vehicles = this.state.vehicles;
         return(
             <div className="bodyLogo">
-                <div className="container">
+                <div className="container col-lg-12 col-md-12 col-sm-11 col-xs-12">
                 {
                     this.state.loading ?
                     <h3>Loading</h3> :
@@ -72,7 +72,7 @@ export default class CustomerDetails extends Component{
                     <div className="row ml-5">
                         {
                             this.state.reuslt ? 
-                            (<div>
+                            (<div className="">
                                 <table className="table">
                                     <thead className="thead-light">
                                         <tr>
