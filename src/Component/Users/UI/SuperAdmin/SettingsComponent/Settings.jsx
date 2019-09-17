@@ -37,7 +37,7 @@ export default class Settings extends Component {
             company = $("#inputCompany").val();
         }
         var values = [company, $('#color').val()];
-        var path = 'http://localhost:8080/setColor';
+        var path = 'https://hire-purchase-server.herokuapp.com/setColor';
 
         if(values[1] === ''){
             alert("Color Not Set")
@@ -78,7 +78,7 @@ export default class Settings extends Component {
     changeColor(bgColor){
         this.setState({bgColor: bgColor.hex});
         if(bgColor.hex !== ''){
-            axios.post('http://localhost:8080/saveBackground', {
+            axios.post('https://hire-purchase-server.herokuapp.com/saveBackground', {
                 backColor: bgColor.hex,
                 company: localStorage.getItem('company')
             })
@@ -96,7 +96,7 @@ export default class Settings extends Component {
             });
         }
         // if(this.state.font !== ''){
-        //     axios.post('http://localhost:8080/saveFont', {
+        //     axios.post('https://hire-purchase-server.herokuapp.com/saveFont', {
         //         fontColor: this.state.font,
         //         company: localStorage.getItem('company')
         //     })
@@ -113,7 +113,7 @@ export default class Settings extends Component {
         // }
 
         // if(self.state.bgColor !== '' || self.state.font != ''){
-        //     axios.post('http://localhost:8080/getColor', {
+        //     axios.post('https://hire-purchase-server.herokuapp.com/getColor', {
         //         company: localStorage.getItem('company')
         //     })
         //     .then(function (response) {

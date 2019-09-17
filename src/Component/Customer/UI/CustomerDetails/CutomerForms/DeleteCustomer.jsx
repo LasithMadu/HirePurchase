@@ -58,7 +58,7 @@ export default class CreateForm extends Component{
     }
 
     searchCustomer(){
-        var path = 'http://localhost:8080/Customer/searchCutomer';
+        var path = 'https://hire-purchase-server.herokuapp.com/Customer/searchCutomer';
 
         axios.post(path, {
             data: $('#inputDNIC').val().toUpperCase()
@@ -80,7 +80,7 @@ export default class CreateForm extends Component{
     }
 
     deleteCustomer(){
-        var path = 'http://localhost:8080/Customer/deleteCutomer';
+        var path = 'https://hire-purchase-server.herokuapp.com/Customer/deleteCutomer';
 
         axios.post(path, {
             data: cusid

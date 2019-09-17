@@ -19,7 +19,7 @@ export default class ForgetPassword extends Component {
 
     componentDidMount(){
         var self = this;
-        axios.post('http://localhost:8080/getSecurity',{
+        axios.post('https://hire-purchase-server.herokuapp.com/getSecurity',{
             username: localStorage.getItem('username')
         })
         .then(function (response) {

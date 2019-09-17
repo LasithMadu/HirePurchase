@@ -31,7 +31,7 @@ export default class CustomerDetails extends Component{
             cogoToast.warn('Please choose customer and try again.', options);
         }else{
             var that = this;
-            axios.post('http://localhost:8080/Vehicals/getByNicVehical',{
+            axios.post('https://hire-purchase-server.herokuapp.com/Vehicals/getByNicVehical',{
                 nic: this.props.nic
             })
             .then((response) => {

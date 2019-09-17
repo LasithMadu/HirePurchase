@@ -16,7 +16,7 @@ export default class ViewUser extends Component {
     getUsers(){
       var that = this;
       var values = [];
-      axios.get('http://localhost:8080/Admin/getUsers',{
+      axios.get('https://hire-purchase-server.herokuapp.com/Admin/getUsers',{
       })
       .then((response) => {
         if(response.data.msg){
@@ -36,7 +36,7 @@ export default class ViewUser extends Component {
     changeState(value, state){
       this.setState({isSet: false});
       var values = [];
-      axios.post('http://localhost:8080/Admin/changeStatus',{
+      axios.post('https://hire-purchase-server.herokuapp.com/Admin/changeStatus',{
         uid: value,
         state: state
       })

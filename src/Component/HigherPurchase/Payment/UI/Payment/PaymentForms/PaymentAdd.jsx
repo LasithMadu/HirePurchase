@@ -47,7 +47,7 @@ export default class VehicalAdd extends Component{
         var agreeid = value;
         
         if(agreeid.length > 5){
-            var path = 'http://localhost:8080/Agreement/getAgreeData';
+            var path = 'https://hire-purchase-server.herokuapp.com/Agreement/getAgreeData';
 
             axios.post(path, {
                 data: agreeid

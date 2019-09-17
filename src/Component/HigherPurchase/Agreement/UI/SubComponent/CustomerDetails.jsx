@@ -20,7 +20,7 @@ export default class CustomerDetails extends Component{
     searchCustomer(event){
         event.preventDefault();
         var self = this;
-        axios.post('http://localhost:8080/Customer/searchCutomer', {
+        axios.post('https://hire-purchase-server.herokuapp.com/Customer/searchCutomer', {
             data: $('#cusNic').val().toUpperCase()
         })
         .then(function (response) {

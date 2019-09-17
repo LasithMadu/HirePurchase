@@ -76,6 +76,7 @@
     "concurrently": "^4.1.1",
     "uniqueid": "^1.0.0"
   },
+  "proxy": "https://hire-purchase-server.herokuapp.com",
   "routes": {
     "/**": "public/index.html"
   }

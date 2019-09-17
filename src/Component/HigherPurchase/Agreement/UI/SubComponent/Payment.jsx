@@ -76,7 +76,7 @@ export default class CustomerDetails extends Component{
         }
 
         if(valid){
-            axios.post('http://localhost:8080/Agreement/savePayment', {
+            axios.post('https://hire-purchase-server.herokuapp.com/Agreement/savePayment', {
                 data: values
             })
             .then(function (response) {

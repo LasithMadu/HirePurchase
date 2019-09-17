@@ -97,7 +97,7 @@ export default class ForgetPassword extends Component {
             });
 
             if(strength === 6){
-                axios.post('http://localhost:8080/savePassword',{
+                axios.post('https://hire-purchase-server.herokuapp.com/savePassword',{
                     username: localStorage.getItem('username'),
                     password: newPass
                 })

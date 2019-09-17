@@ -22,7 +22,7 @@ export default class VehicalAdd extends Component{
         var nic = $('#inputSeNic').val().toUpperCase();
 
         if(nic.length > 9){
-            var path = 'http://localhost:8080/Customer/searchCutomer';
+            var path = 'https://hire-purchase-server.herokuapp.com/Customer/searchCutomer';
 
             axios.post(path, {
                 data: nic
@@ -73,7 +73,7 @@ export default class VehicalAdd extends Component{
         }else if(!valid){
             ToastsStore.warning("Some Fields Are Empty")
         }else{
-            var path = 'http://localhost:8080/Vehicals/saveVehicals';
+            var path = 'https://hire-purchase-server.herokuapp.com/Vehicals/saveVehicals';
 
             axios.post(path, {
                 nic: $('#inputSeNic').val(),

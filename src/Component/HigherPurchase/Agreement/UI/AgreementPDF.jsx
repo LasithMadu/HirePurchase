@@ -12,7 +12,7 @@ export default class AgreementPDF extends Component {
 
     componentDidMount(){
         var self = this;
-        axios.post('http://localhost:8080/Agreement/getData', {
+        axios.post('https://hire-purchase-server.herokuapp.com/Agreement/getData', {
             data: localStorage.getItem('agreeId')
         })
         .then(function (response) {

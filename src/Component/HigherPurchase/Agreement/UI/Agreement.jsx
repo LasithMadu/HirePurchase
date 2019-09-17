@@ -53,7 +53,7 @@ export default class Agreement extends Component{
 
     componentDidMount(){
         var self = this;
-        axios.get('http://localhost:8080/Agreement/getPayement')
+        axios.get('https://hire-purchase-server.herokuapp.com/Agreement/getPayement')
         .then(function (response) {
             if(response.data.msg){
                 self.setState({agreeId: response.data.table.rows[0].agreeId});
@@ -79,7 +79,7 @@ export default class Agreement extends Component{
         }else if(this.state.payDetails === null){
             alert('Please add payment plan');
         }else{
-            axios.post('http://localhost:8080/Agreement/saveData', {
+            axios.post('https://hire-purchase-server.herokuapp.com/Agreement/saveData', {
                 cusDetails: self.state.cusDetails,
                 vehiDetails: self.state.vehiDetails,
                 payDetails: self.state.payDetails,

@@ -33,7 +33,7 @@ export default class LoginPage extends Component {
             //window.location.href = '/customer'
         }
 
-        axios.get('http://localhost:8080/getTheme')
+        axios.get('https://hire-purchase-server.herokuapp.com/getTheme')
         .then(function (response) {
             if(response.data.msg){
                 localStorage.setItem('bgColor', response.data.table.rows[0].backColor);
@@ -54,7 +54,7 @@ export default class LoginPage extends Component {
     signin(event){
         event.preventDefault();
         reset();
-        let path = 'http://localhost:8080/signin';
+        let path = 'https://hire-purchase-server.herokuapp.com/signin';
         var locked = false;
 
         if($('#inputName').val().toLowerCase() === ''){
@@ -78,7 +78,7 @@ export default class LoginPage extends Component {
                     }else if(!response.data.pass){
                             localStorage.setItem('atempts', atempts++);
                             if((4-atempts) <= -1){
-                                axios.post('http://localhost:8080/lock',{
+                                axios.post('https://hire-purchase-server.herokuapp.com/lock',{
                                     data: response.data.table.userId
                                 })
                                 .then(function (response) {
@@ -104,7 +104,7 @@ export default class LoginPage extends Component {
                             localStorage.setItem('company', response.data.table.company);
                             isLog = response.data.table.isLog;
                             try{
-                                axios.post('http://localhost:8080/getColor', {
+                                axios.post('https://hire-purchase-server.herokuapp.com/getColor', {
                                     company: localStorage.getItem('company')
                                 })
                                 .then(function (response) {
@@ -153,7 +153,7 @@ export default class LoginPage extends Component {
         if(username == ''){
             $('.msgu').text('Please enter username');
         }else{
-            axios.post('http://localhost:8080/getUsername',{
+            axios.post('https://hire-purchase-server.herokuapp.com/getUsername',{
                 username: username
             })
             .then(function (response) {

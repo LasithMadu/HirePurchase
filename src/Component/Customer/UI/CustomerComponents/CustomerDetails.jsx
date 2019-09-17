@@ -56,7 +56,7 @@ export default class CustomerDetails extends Component {
       }else if(nic.length < 9){
         //ToastsStore.warning("Invalid NIC No")
       }else{
-        axios.post('http://localhost:8080/Agreement/getAgree', {
+        axios.post('https://hire-purchase-server.herokuapp.com/Agreement/getAgree', {
           data: nic.toUpperCase()
         })
         .then(function (response) {
