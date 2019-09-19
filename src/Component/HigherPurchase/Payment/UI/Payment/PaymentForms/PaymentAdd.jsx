@@ -42,7 +42,7 @@ export default class VehicalAdd extends Component{
     componentDidMount(){
           $('#paymentid').val(uuidv4());
           $('#inputDate').val();
-        axios.get("sessionStorage.getItem('url')+/Payment/getPaymentTypes")
+        axios.get(sessionStorage.getItem('url')+"/Payment/getPaymentTypes")
         .then(function (response) {
             if(response.data.msg){
                 console.log(response.data.values)
