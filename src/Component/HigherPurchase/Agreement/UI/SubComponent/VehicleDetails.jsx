@@ -54,6 +54,7 @@ export default class CustomerDetails extends Component{
                       
             if(data[i].id === id){
                 self.setState({vehiId: i,  reuslt: false})
+                self.props.changeVehicle(this.state.vehicles[i]);
                 break;
             }
         }        
