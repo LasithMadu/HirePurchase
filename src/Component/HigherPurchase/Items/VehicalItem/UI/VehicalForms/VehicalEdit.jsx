@@ -33,7 +33,7 @@ export default class VehicalAdd extends Component{
         var vehi = $('#inputVehiNo').val().toUpperCase();
 
         if(vehi.length > 9){
-            var path = 'https://hire-purchase-server.herokuapp.com/Vehicals/searchVehical';
+            var path = sessionStorage.getItem('url')+'/Vehicals/searchVehical';
 
             axios.post(path, {
                 data: vehi
@@ -72,7 +72,7 @@ export default class VehicalAdd extends Component{
         if(!valid){
             ToastsStore.warning("Some Fields Are Empty")
         }else{
-            var path = 'https://hire-purchase-server.herokuapp.com/Vehicals/updateVehicals';
+            var path = sessionStorage.getItem('url')+'/Vehicals/updateVehicals';
 
             axios.post(path, {
                 vehiNo: $('#inputVehiNo').val().toUpperCase(),

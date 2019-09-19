@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import $ from 'jquery'
+import axios from 'axios'
 
 import Input from '../../SingleComponent/InputField'
 
@@ -10,6 +11,26 @@ export default class CustomerDetails extends Component{
 
         this.answe1 = this.answe1.bind(this);
         this.answe2 = this.answe2.bind(this);
+    }
+
+    componentDidMount(){
+        axios.get(sessionStorage.getItem('url')+"/getSecurityQuestion")
+        .then(function (response) {
+            if(response.data.msg){
+                console.log(response.data.values)
+                $(function () { 
+                    var sq1 = $("#sq1");
+                    var sq2 = $("#sq2");
+                    for(var i=0; i<response.data.values.length; i++){
+                        sq1.append("<option value="+response.data.values[i]+">" + response.data.values[i] + "</option>");
+                        sq2.append("<option value="+response.data.values[i]+">" + response.data.values[i] + "</option>");
+                    }
+                });
+            }
+        })
+        .catch(function (error) {
+            console.log(error)
+        });
     }
 
     answe1(value){
@@ -28,11 +49,7 @@ export default class CustomerDetails extends Component{
                 <div className="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <label htmlFor="sq1">Security Question 1</label>
                     <select className="form-control" id="sq1">
-                        <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
-                        <option value="What is the name of your first pet?">What is the name of your first pet?</option>
-                        <option value="What was your first car?">What was your first car?</option>
-                        <option value="What elementary school did you attend?">What elementary school did you attend?</option>
-                        <option value="What is the name of the town where you were born?">What is the name of the town where you were born?</option>
+                        
                     </select>
                 </div>
                 <Input
@@ -47,11 +64,7 @@ export default class CustomerDetails extends Component{
                 <div className="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <label htmlFor="sq1">Security Question 2</label>
                     <select className="form-control" id="sq2">
-                        <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
-                        <option value="What is the name of your first pet?">What is the name of your first pet?</option>
-                        <option value="What was your first car?">What was your first car?</option>
-                        <option value="What elementary school did you attend?">What elementary school did you attend?</option>
-                        <option value="What is the name of the town where you were born?">What is the name of the town where you were born?</option>
+                        
                     </select>
                 </div>
                 <Input

@@ -6,6 +6,7 @@ import cogoToast from 'cogo-toast';
 import Table from './CustomerTable'
 import Search from '../../../Main/UI/SingleComponent/Search'
 import DataRow from '../../../Main/UI/SingleComponent/DataCell'
+import Separation from '../../../Main/UI/SingleComponent/Separation'
 
 import nameIcon from '../../../../Assests/images/gjoiconset/name.png'
 import emailIcon from '../../../../Assests/images/gjoiconset/email.png'
@@ -56,7 +57,7 @@ export default class CustomerDetails extends Component {
       }else if(nic.length < 9){
         //ToastsStore.warning("Invalid NIC No")
       }else{
-        axios.post('https://hire-purchase-server.herokuapp.com/Agreement/getAgree', {
+        axios.post(sessionStorage.getItem('url')+'/Agreement/getAgree', {
           data: nic.toUpperCase()
         })
         .then(function (response) {
@@ -80,6 +81,43 @@ export default class CustomerDetails extends Component {
 
     render () {
       let data = this.state.values;
+
+      const profileTable = (
+        <table className="proTable">
+          <tbody>
+          <DataRow 
+              icon = {nameIcon}
+              label = "Name"
+              value = {data.length === 0 ? "Not Specified" : data[0].nameInitials}
+          />
+          <DataRow 
+              icon = {emailIcon}
+              label = "Email"
+              value = {data.length === 0 ? "Not Specified" : data[0].email}
+          />
+          <DataRow 
+              icon = {addressIcon}
+              label = "Address"
+              value = {data.length === 0 ? "Not Specified" : data[0].address}
+          />
+          <DataRow 
+              icon = {nicIcon}
+              label = "NIC/Passport No"
+              value = {data.length === 0 ? "Not Specified" : data[0].nic}
+          />
+          <DataRow 
+              icon = {statusIcon}
+              label = "Status"
+              value = {data.length === 0 ? "Not Specified" : <span className="label label-success">Active</span>}
+          />
+          <DataRow 
+              icon = {ratingIcon}
+              label = "User Rating"
+              value = {data.length === 0 ? "Not Specified" : "Not Specified"}
+          />
+          </tbody>
+        </table>
+    );
 
       return (
             <div className="page-content">               
@@ -112,65 +150,25 @@ export default class CustomerDetails extends Component {
                   btnId = "searchBtn"
                   msg = "Please input nic or passport no"
                   handleChange = {this.searchCustomer.bind(this)}
+                  width = "92.5%"
                 />
               <div className="col-lg-12">
                 <div className="row">
                     <div className="col-md-11">
                         <div className="row mtl">
-                            <div className="col-lg-3 col-md-3 col-sm-3 col-xs-12 border" style={{border: '2px solid '+localStorage.getItem('bgColor')}}>
-                              <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 titlediv">
-                                <span className="align-middle title">PROFILE</span>
-                              </div>
-                              <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 item row" >
-                                <table className="proTable">
-                                  <tbody>
-                                  <DataRow 
-                                      icon = {nameIcon}
-                                      label = "Name"
-                                      value = {data.length === 0 ? "Not Specified" : data[0].nameInitials}
-                                  />
-                                  <DataRow 
-                                      icon = {emailIcon}
-                                      label = "Email"
-                                      value = {data.length === 0 ? "Not Specified" : data[0].email}
-                                  />
-                                  <DataRow 
-                                      icon = {addressIcon}
-                                      label = "Address"
-                                      value = {data.length === 0 ? "Not Specified" : data[0].address}
-                                  />
-                                  <DataRow 
-                                      icon = {nicIcon}
-                                      label = "NIC/Passport No"
-                                      value = {data.length === 0 ? "Not Specified" : data[0].nic}
-                                  />
-                                  <DataRow 
-                                      icon = {statusIcon}
-                                      label = "Status"
-                                      value = {data.length === 0 ? "Not Specified" : <span className="label label-success">Active</span>}
-                                  />
-                                  <DataRow 
-                                      icon = {ratingIcon}
-                                      label = "User Rating"
-                                      value = {data.length === 0 ? "Not Specified" : "Not Specified"}
-                                  />
-                                  </tbody>
-                                </table>
-                              </div>
-                              
-                            </div>
+                              <Separation
+                                size = {[3, 3, 3, 12]}
+                                title = "Profile"
+                                component = {profileTable}
+                              /> 
                             <div className="col-md-9">
-                              <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 border" style={{border: '2px solid '+localStorage.getItem('bgColor')}}>
-                                <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 titlediv">
-                                  <span className="align-middle title">AGREEMENT</span>
-                                </div>
-                                <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 item row agreeTable" >
-                                  <Table agrrement = {this.state.values}/>
-                                </div>
-                              </div>
-                                  
-                                </div>
-                              </div>
+                              <Separation
+                                  size = {[12, 12, 12, 12]}
+                                  title = "AGREEMENT"
+                                  component = {<Table agrrement = {this.state.values}/>}
+                              />  
+                            </div>
+                          </div>
                     </div>
                 </div>
             </div>

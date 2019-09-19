@@ -27,17 +27,17 @@ export default class LoginPage extends Component {
 
     componentDidMount(){ 
 
-        if(localStorage.getItem('userId') === null){
+        if(sessionStorage.getItem('userId') === null){
         }else{
             window.history.go(-1);
             //window.location.href = '/customer'
         }
 
-        axios.get('https://hire-purchase-server.herokuapp.com/getTheme')
+        axios.get(sessionStorage.getItem('url')+'/getTheme')
         .then(function (response) {
             if(response.data.msg){
-                localStorage.setItem('bgColor', response.data.table.rows[0].backColor);
-                localStorage.setItem('fontColor', response.data.table.rows[0].fontColor);
+                sessionStorage.setItem('bgColor', response.data.table.rows[0].backColor);
+                sessionStorage.setItem('fontColor', response.data.table.rows[0].fontColor);
             }else{
                 ToastsStore.error("Color Not Loaded")
             }
@@ -54,7 +54,7 @@ export default class LoginPage extends Component {
     signin(event){
         event.preventDefault();
         reset();
-        let path = 'https://hire-purchase-server.herokuapp.com/signin';
+        let path = sessionStorage.getItem('url')+'/signin';
         var locked = false;
 
         if($('#inputName').val().toLowerCase() === ''){
@@ -76,9 +76,9 @@ export default class LoginPage extends Component {
                     }else if(!response.data.user){
                         $('.msgu').text('Invalid user name, try again');
                     }else if(!response.data.pass){
-                            localStorage.setItem('atempts', atempts++);
+                            sessionStorage.setItem('atempts', atempts++);
                             if((4-atempts) <= -1){
-                                axios.post('https://hire-purchase-server.herokuapp.com/lock',{
+                                axios.post(sessionStorage.getItem('url')+'/lock',{
                                     data: response.data.table.userId
                                 })
                                 .then(function (response) {
@@ -88,7 +88,7 @@ export default class LoginPage extends Component {
                                     console.log(error)
                                 });
                             }else{
-                                $('.msgp').text('Invalid password, try again. You have '+ (4 - parseInt(localStorage.getItem('atempts'))) +' atempts.');
+                                $('.msgp').text('Invalid password, try again. You have '+ (4 - parseInt(sessionStorage.getItem('atempts'))) +' atempts.');
                             }
                     }else if(response.data.user && response.data.pass){
                         var isLog;
@@ -96,21 +96,21 @@ export default class LoginPage extends Component {
                             $('.msgp').text('Your account is locked.');
                         }else{
                             atempts = 1;
-                            localStorage.setItem('userId', response.data.table.userId);
-                            localStorage.setItem('userLevel', response.data.table.userLevel);
-                            localStorage.setItem('username', response.data.table.userName);
-                            localStorage.setItem('firstname', response.data.table.firstName);
-                            localStorage.setItem('lastname', response.data.table.lastName);
-                            localStorage.setItem('company', response.data.table.company);
+                            sessionStorage.setItem('userId', response.data.table.userId);
+                            sessionStorage.setItem('userLevel', response.data.table.userLevel);
+                            sessionStorage.setItem('username', response.data.table.userName);
+                            sessionStorage.setItem('firstname', response.data.table.firstName);
+                            sessionStorage.setItem('lastname', response.data.table.lastName);
+                            sessionStorage.setItem('company', response.data.table.company);
                             isLog = response.data.table.isLog;
                             try{
-                                axios.post('https://hire-purchase-server.herokuapp.com/getColor', {
-                                    company: localStorage.getItem('company')
+                                axios.post(sessionStorage.getItem('url')+'/getColor', {
+                                    company: sessionStorage.getItem('company')
                                 })
                                 .then(function (response) {
                                     if(response.data.msg){
-                                        localStorage.setItem('bgColor', response.data.table.rows[0].backColor);
-                                        localStorage.setItem('fontColor', response.data.table.rows[0].fontColor);
+                                        sessionStorage.setItem('bgColor', response.data.table.rows[0].backColor);
+                                        sessionStorage.setItem('fontColor', response.data.table.rows[0].fontColor);
                                         if(isLog || isLog !== null){
                                             window.location.replace('/customer');
                                         }else{
@@ -153,7 +153,7 @@ export default class LoginPage extends Component {
         if(username == ''){
             $('.msgu').text('Please enter username');
         }else{
-            axios.post('https://hire-purchase-server.herokuapp.com/getUsername',{
+            axios.post(sessionStorage.getItem('url')+'/getUsername',{
                 username: username
             })
             .then(function (response) {
@@ -163,7 +163,7 @@ export default class LoginPage extends Component {
                     if(response.data.username.length == 0){
                         $('.msgu').text('Invalid user name. Type the right username to change password');
                     }else{
-                        localStorage.setItem('username', response.data.username[0]);
+                        sessionStorage.setItem('username', response.data.username[0]);
                         window.location.href = "/fogetpass";
                     }
                 }

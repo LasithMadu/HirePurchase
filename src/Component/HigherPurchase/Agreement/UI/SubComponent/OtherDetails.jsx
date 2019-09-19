@@ -44,7 +44,7 @@ export default class CustomerDetails extends Component{
         }
         
         if(valid){
-            axios.post('https://hire-purchase-server.herokuapp.com/Agreement/saveOther', {
+            axios.post(sessionStorage.getItem('url')+'/Agreement/saveOther', {
                 data: values
             })
             .then(function (response) {
@@ -66,7 +66,7 @@ export default class CustomerDetails extends Component{
         var self = this;
         var values = [this.props.agreeId, '', '', ''];
 
-        axios.post('https://hire-purchase-server.herokuapp.com/Agreement/saveOther', {
+        axios.post(sessionStorage.getItem('url')+'/Agreement/saveOther', {
             data: values
         })
         .then(function (response) {

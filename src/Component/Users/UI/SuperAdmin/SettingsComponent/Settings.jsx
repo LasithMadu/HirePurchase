@@ -13,7 +13,7 @@ export default class Settings extends Component {
         this.state = {
             logo: false,
             background: false,
-            bgColor: localStorage.getItem('bgColor'),
+            bgColor: sessionStorage.getItem('bgColor'),
             font: '#0072bb',
             saveIcon: [false, false],
             expArr: [false, false],
@@ -37,7 +37,7 @@ export default class Settings extends Component {
             company = $("#inputCompany").val();
         }
         var values = [company, $('#color').val()];
-        var path = 'https://hire-purchase-server.herokuapp.com/setColor';
+        var path = sessionStorage.getItem('url')+'/setColor';
 
         if(values[1] === ''){
             alert("Color Not Set")
@@ -48,7 +48,7 @@ export default class Settings extends Component {
               .then(function (response) {
                 if(response.data.msg){
                     alert("Theme Color Changed")
-                    localStorage.setItem('bgColor', values[1]);
+                    sessionStorage.setItem('bgColor', values[1]);
 
                     window.location.href = "/settings";
                 }else{
@@ -78,14 +78,14 @@ export default class Settings extends Component {
     changeColor(bgColor){
         this.setState({bgColor: bgColor.hex});
         if(bgColor.hex !== ''){
-            axios.post('https://hire-purchase-server.herokuapp.com/saveBackground', {
+            axios.post(sessionStorage.getItem('url')+'/saveBackground', {
                 backColor: bgColor.hex,
-                company: localStorage.getItem('company')
+                company: sessionStorage.getItem('company')
             })
             .then(function (response) {
                 if(response.data.msg){
                     console.log(response);
-                    localStorage.setItem('bgColor', bgColor.hex);
+                    sessionStorage.setItem('bgColor', bgColor.hex);
                     window.location.replace('/settings');
                 }else{
                     //ToastsStore.error("Update Fail")
@@ -96,13 +96,13 @@ export default class Settings extends Component {
             });
         }
         // if(this.state.font !== ''){
-        //     axios.post('https://hire-purchase-server.herokuapp.com/saveFont', {
+        //     axios.post(sessionStorage.getItem('url')+'/saveFont', {
         //         fontColor: this.state.font,
-        //         company: localStorage.getItem('company')
+        //         company: sessionStorage.getItem('company')
         //     })
         //     .then(function (response) {
         //         if(response.data.msg){
-        //             localStorage.setItem('fontColor', this.state.fontColor);
+        //             sessionStorage.setItem('fontColor', this.state.fontColor);
         //         }else{
         //             //ToastsStore.error("Update Fail")
         //         }
@@ -113,13 +113,13 @@ export default class Settings extends Component {
         // }
 
         // if(self.state.bgColor !== '' || self.state.font != ''){
-        //     axios.post('https://hire-purchase-server.herokuapp.com/getColor', {
-        //         company: localStorage.getItem('company')
+        //     axios.post('sessionStorage.getItem('url')+/getColor', {
+        //         company: sessionStorage.getItem('company')
         //     })
         //     .then(function (response) {
         //         if(response.data.msg){
-        //             localStorage.setItem('bgColor', response.data.table.rows[0].backColor);
-        //             localStorage.setItem('fontColor', response.data.table.rows[0].fontColor);
+        //             sessionStorage.setItem('bgColor', response.data.table.rows[0].backColor);
+        //             sessionStorage.setItem('fontColor', response.data.table.rows[0].fontColor);
         //             window.location.replace('/settings');
         //             //window.location.href = "";
         //         }else{
@@ -135,7 +135,7 @@ export default class Settings extends Component {
     render(){
         return(
             <div className="container" style={{marginTop: '20px'}}>
-                <div className="col-md-12 col-sm-12 col-xs-12 topItem" style={{border: '2px solid '+localStorage.getItem('bgColor')}}>
+                <div className="col-md-12 col-sm-12 col-xs-12 topItem" style={{border: '2px solid '+sessionStorage.getItem('bgColor')}}>
                     <div className="itemTitle" onClick={() => this.logoShow(1)}>
                         <div className="row">
                             <div className="col-md-10 col-sm-10 col-xs-10">
@@ -162,7 +162,7 @@ export default class Settings extends Component {
                         }
                 </div>
                 <br/>
-                <div className="col-md-12 col-sm-12 col-xs-12 topItem" style={{border: '2px solid '+localStorage.getItem('bgColor')}}>
+                <div className="col-md-12 col-sm-12 col-xs-12 topItem" style={{border: '2px solid '+sessionStorage.getItem('bgColor')}}>
                     <div className="itemTitle" onClick={() => this.logoShow(2)}>
                         <div className="row">
                             <div className="col-md-10 col-sm-10 col-xs-10">

@@ -20,7 +20,7 @@ export default class CustomerDetails extends Component{
     searchCustomer(event){
         event.preventDefault();
         var self = this;
-        axios.post('https://hire-purchase-server.herokuapp.com/Customer/searchCutomer', {
+        axios.post(sessionStorage.getItem('url')+'/Customer/searchCutomer', {
             data: $('#cusNic').val().toUpperCase()
         })
         .then(function (response) {
@@ -54,6 +54,7 @@ export default class CustomerDetails extends Component{
                             btnId = "searchBtn"
                             msg = "Please input nic or passport no"
                             handleChange = {this.searchCustomer.bind(this)}
+                            width="92.5%"
                         />
                     </div>
                     

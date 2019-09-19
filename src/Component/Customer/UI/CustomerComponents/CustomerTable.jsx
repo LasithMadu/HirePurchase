@@ -10,7 +10,7 @@ export default class Viewagreement extends Component{
     var data = this.props.agrrement;
     for(var i=0; i<data.length; i++){
       if (data[i].agreeId == id) {
-        localStorage.setItem('agreeId', data[i].agreeId);
+        sessionStorage.setItem('agreeId', data[i].agreeId);
         window.location.href = '/agreementPDF'
       }
     }

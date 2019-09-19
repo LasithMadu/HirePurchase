@@ -97,8 +97,8 @@ export default class ForgetPassword extends Component {
             });
 
             if(strength === 6){
-                axios.post('https://hire-purchase-server.herokuapp.com/savePassword',{
-                    username: localStorage.getItem('username'),
+                axios.post(sessionStorage.getItem('url')+'/savePassword',{
+                    username: sessionStorage.getItem('username'),
                     password: newPass
                 })
                 .then(function (response) {

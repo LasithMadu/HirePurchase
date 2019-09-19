@@ -72,7 +72,7 @@ export default class CreateForm extends Component{
         }else if(!valid){
             ToastsStore.warning("Some Fields Are Empty")
         }else{
-            var path = 'https://hire-purchase-server.herokuapp.com/Customer/updateCustomer';
+            var path = sessionStorage.getItem('url')+'/Customer/updateCustomer';
 
             axios.post(path, {
                 cusid: cusid,
@@ -92,7 +92,7 @@ export default class CreateForm extends Component{
     }
 
     searchCustomer(){
-        var path = 'https://hire-purchase-server.herokuapp.com/Customer/searchCutomer';
+        var path = sessionStorage.getItem('url')+'/Customer/searchCutomer';
 
         axios.post(path, {
             data: $('#inputENIC').val().toUpperCase()

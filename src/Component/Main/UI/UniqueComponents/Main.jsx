@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom"
 import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
 import { Scrollbars } from 'react-custom-scrollbars';
+import axios from 'axios'
 
 import Customer from '../../../Customer/UI/CustomerComponents/CustomerDetails'
 import CDetails from '../../../Customer/UI/CustomerDetails/CustomerDetail'
@@ -26,13 +27,29 @@ export default class Main extends Component {
     super(props)
     this.state = {
       currentLocation: 'CUSTOMER',
-      agreementData: []
+      vehicles: []
     }
+    if (sessionStorage.getItem('username') === null || sessionStorage.getItem('username') === '') {
+      window.location.replace('/');
+    }
+    sessionStorage.setItem('url', 'https://hire-purchase-server.herokuapp.com');
   }
 
   setLocation(current){
     this.setState({
       currentLocation: current
+    })
+  }
+
+  componentDidMount(){
+    axios.get(sessionStorage.getItem('url')+'/Vehicals/getVehicals')
+    .then((response) => {
+      if(response.data.msg){
+        this.setState({vehicles: response.data.table.rows});
+      }
+      else{
+        console.log("Did");
+      }
     })
   }
 
@@ -52,9 +69,8 @@ export default class Main extends Component {
                     <Scrollbars visibility-x={false} style={{height: 'calc(100vh - 120px)', display: 'inline-block', overflowX: 'hidden'}}>
                       <Switch>
                           <Route exact path="/customer" component={Customer} />
-                          <Route exact path="/higher" component={Customer} />
-                          <Route exact path="/higher/items" component={Vehicle} />
-                          <Route exact path="/higher/agreement" render={()=><Agreement/>} />
+                          <Route exact path="/higher/items" render={() => <Vehicle vehicles={this.state.vehicles} />} />
+                          <Route exact path="/higher/agreement" component={Agreement} />
                           <Route exact path="/create" component={CDetails} />
                           <Route exact path="/profile" component={Profile} />
                           <Route exact path="/higher/payment" component={Payment} />
@@ -62,7 +78,7 @@ export default class Main extends Component {
                           <Route exact path="/users" component={Users} />
                           <Route exact path="/settings" component={Settings} />
                           <Route exact path="/caccount" component={CAccount} />
-                          <Route exact path="/agreementPDF" render={()=><AgreementPDF agreementData={this.state.agreementData}/>} />
+                          <Route exact path="/agreementPDF" component={AgreementPDF} />
                           <Route component={NotFound} />
                       </Switch>
                     </Scrollbars>

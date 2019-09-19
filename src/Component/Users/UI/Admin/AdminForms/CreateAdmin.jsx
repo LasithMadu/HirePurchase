@@ -9,7 +9,7 @@ export default class CreateAdmin extends Component{
     createAdmin(){
         var valid;
         let values= [uuidv4(), $('#inputFirst').val(), $('#inputLast').val(), $('#inputUser').val().toLowerCase(), $('#inputPass').val(), $('#inputEmail').val(), $('#inputNic').val().toUpperCase(), $('#inputCompany').val(), $('#inputAddress').val(), $('#inputCity').val(), $('#inputState').val(), $('#inputZip').val(), 'Admin'];
-        let path = 'https://hire-purchase-server.herokuapp.com/superAdmin/create';
+        let path = sessionStorage.getItem('url')+'/superAdmin/create';
 
         for(var i = 0; i<13; i++){
             if(values[i] === ''){

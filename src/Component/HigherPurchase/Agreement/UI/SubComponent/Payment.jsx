@@ -76,14 +76,14 @@ export default class CustomerDetails extends Component{
         }
 
         if(valid){
-            axios.post('https://hire-purchase-server.herokuapp.com/Agreement/savePayment', {
+            axios.post(sessionStorage.getItem('url')+'/Agreement/savePayment', {
                 data: values
             })
             .then(function (response) {
                 if(response.data.msg){
                     self.props.changePayment(values)
                     cogoToast.success('Sucessfuly insert payment data.', options);
-                    localStorage.setItem('agreeId', this.props.agreeId);
+                    sessionStorage.setItem('agreeId', this.props.agreeId);
                 }else{
                     cogoToast.error('Fail to insert payment data. Try again.', options);
                 }

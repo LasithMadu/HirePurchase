@@ -53,7 +53,7 @@ export default class Agreement extends Component{
 
     componentDidMount(){
         var self = this;
-        axios.get('https://hire-purchase-server.herokuapp.com/Agreement/getPayement')
+        axios.get(sessionStorage.getItem('url')+'/Agreement/getPayement')
         .then(function (response) {
             if(response.data.msg){
                 self.setState({agreeId: response.data.table.rows[0].agreeId});
@@ -79,7 +79,7 @@ export default class Agreement extends Component{
         }else if(this.state.payDetails === null){
             alert('Please add payment plan');
         }else{
-            axios.post('https://hire-purchase-server.herokuapp.com/Agreement/saveData', {
+            axios.post(sessionStorage.getItem('url')+'/Agreement/saveData', {
                 cusDetails: self.state.cusDetails,
                 vehiDetails: self.state.vehiDetails,
                 payDetails: self.state.payDetails,
@@ -116,7 +116,7 @@ export default class Agreement extends Component{
         return(
             <div className="page-content" style={{paddingBottom: '100px'}}>
                 
-                <div className="col-md-12 col-sm-12 col-xs-12 topItem" style={{border: '2px solid '+localStorage.getItem('bgColor')}}>
+                <div className="col-md-12 col-sm-12 col-xs-12 topItem" style={{border: '2px solid '+sessionStorage.getItem('bgColor')}}>
                     <div className="itemTitle" onClick={() => this.logoShow(1)}>
                         <div className="row">
                             <div className="col-md-10 col-sm-10 col-xs-10">
@@ -143,7 +143,7 @@ export default class Agreement extends Component{
                         }
                 </div>
                 <br/>
-                <div className="col-md-12 col-sm-12 col-xs-12 topItem" style={{border: '2px solid '+localStorage.getItem('bgColor')}}>
+                <div className="col-md-12 col-sm-12 col-xs-12 topItem" style={{border: '2px solid '+sessionStorage.getItem('bgColor')}}>
                     <div className="itemTitle" onClick={() => this.logoShow(2)}>
                         <div className="row">
                             <div className="col-md-10 col-sm-10 col-xs-10">
@@ -169,7 +169,7 @@ export default class Agreement extends Component{
                             : ""
                         }
                 </div>
-                <div className="col-md-12 col-sm-12 col-xs-12 topItem" style={{border: '2px solid '+localStorage.getItem('bgColor')}}>
+                <div className="col-md-12 col-sm-12 col-xs-12 topItem" style={{border: '2px solid '+sessionStorage.getItem('bgColor')}}>
                     <div className="itemTitle" onClick={() => this.logoShow(4)}>
                         <div className="row">
                             <div className="col-md-10 col-sm-10 col-xs-10">
@@ -195,7 +195,7 @@ export default class Agreement extends Component{
                             : ""
                         }
                 </div>
-                <div className="col-md-12 col-sm-12 col-xs-12 topItem" style={{border: '2px solid '+localStorage.getItem('bgColor')}}>
+                <div className="col-md-12 col-sm-12 col-xs-12 topItem" style={{border: '2px solid '+sessionStorage.getItem('bgColor')}}>
                     <div className="itemTitle" onClick={() => this.logoShow(3)}>
                         <div className="row">
                             <div className="col-md-10 col-sm-10 col-xs-10">

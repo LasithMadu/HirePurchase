@@ -50,7 +50,7 @@ export default class LogoUpload extends Component {
             );
             // var file = [this.state.imageUrl];
 
-            // axios.post('https://hire-purchase-server.herokuapp.com/uploadimage',{
+            // axios.post(sessionStorage.getItem('url')+'/uploadimage',{
             //     url: file
             // })
             // .then(function (response) {

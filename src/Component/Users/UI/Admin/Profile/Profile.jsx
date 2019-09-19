@@ -34,11 +34,11 @@ export default class Profile extends Component {
 
     getProfileData(){
         var self = this;
-        var path = 'https://hire-purchase-server.herokuapp.com/Admin/profileData';
+        var path = sessionStorage.getItem('url')+'/Admin/profileData';
 
-        if(localStorage.getItem('userId') !== ''){
+        if(sessionStorage.getItem('userId') !== ''){
             axios.post(path, {
-                data: localStorage.getItem('userId')
+                data: sessionStorage.getItem('userId')
               })
               .then(function (response) {
                 if(response.data.msg){
@@ -84,8 +84,8 @@ export default class Profile extends Component {
         }else if(newPass === pass){
             ToastsStore.warning("You Can't Use Previous Password As A New Password")
         }else{
-            var path = 'https://hire-purchase-server.herokuapp.com/Admin/changePass';
-            var values = [localStorage.getItem('userId'), newPass]
+            var path = sessionStorage.getItem('url')+'/Admin/changePass';
+            var values = [sessionStorage.getItem('userId'), newPass]
 
             axios.post(path, {
                 data: values
@@ -108,7 +108,7 @@ export default class Profile extends Component {
 
     updateData(){
         var valid;
-        var values = [localStorage.getItem('userId'), $('#inputFirst').val(), $('#inputLast').val(), $('#inputEmail').val(), $('#inputUser').val().toLowerCase()];
+        var values = [sessionStorage.getItem('userId'), $('#inputFirst').val(), $('#inputLast').val(), $('#inputEmail').val(), $('#inputUser').val().toLowerCase()];
 
         for(var i=0; i<values.length; i++){
             if(values[i] === ''){
@@ -119,7 +119,7 @@ export default class Profile extends Component {
         }
 
         if(valid){
-            var path = 'https://hire-purchase-server.herokuapp.com/Admin/updateData';
+            var path = sessionStorage.getItem('url')+'/Admin/updateData';
 
             axios.post(path, {
                 data: values
@@ -127,9 +127,9 @@ export default class Profile extends Component {
               .then(function (response) {
                 if(response.data.msg){
                     window.location.href = "/profile";
-                    localStorage.setItem('username', $('#inputUser').val());
-                    localStorage.setItem('firstname', $('#inputFirst').val());
-                    localStorage.setItem('lastname', $('#inputLast').val());
+                    sessionStorage.setItem('username', $('#inputUser').val());
+                    sessionStorage.setItem('firstname', $('#inputFirst').val());
+                    sessionStorage.setItem('lastname', $('#inputLast').val());
                     ToastsStore.success("Sucessfuly Update Your Profile")
                 }else{
                     ToastsStore.error("Update Fail")
@@ -165,7 +165,7 @@ export default class Profile extends Component {
 
 
                               <div className="row">
-                    <div className="col-md-12 col-sm-12 col-xs-12"><h2>Profile :- {localStorage.getItem('firstname')+" "+localStorage.getItem('lastname')}</h2>
+                    <div className="col-md-12 col-sm-12 col-xs-12"><h2>Profile :- {sessionStorage.getItem('firstname')+" "+sessionStorage.getItem('lastname')}</h2>
 
                         <div className="row mtl">
                             <div className="col-md-3 col-sm-6 col-xs-6 pofimage">

@@ -11,7 +11,7 @@ export default class Vehical extends Component {
     render() {
 
         const title = ['Add New Vehicle', 'Edit Vehicle', 'Delete Vehicle', 'View Vehicle'];
-        const com = [<VehicalAdd/>, <VehicalEdit/>, <VehicalDelete/>, <VehicalView/>];
+        const com = [<VehicalAdd/>, <VehicalEdit/>, <VehicalDelete/>, <VehicalView vehicles={this.props.vehicles}/>];
 
       return (
         <div style={{margin: 0, padding: 0}}>

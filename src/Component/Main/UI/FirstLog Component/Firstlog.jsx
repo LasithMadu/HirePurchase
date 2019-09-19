@@ -41,8 +41,8 @@ export default class Firstlog extends Component {
         }else if(this.state.pass === ''){
             alert('Please add new password')
         }else{
-            axios.post('http://localhost:8080/changePass',{
-                userId: localStorage.getItem('userId'),
+            axios.post(sessionStorage.getItem('url')+'/changePass',{
+                userId: sessionStorage.getItem('userId'),
                 q1: this.state.q1,
                 q2: this.state.q2,
                 an1: this.state.an1.toLocaleLowerCase(),

@@ -4,32 +4,39 @@ import uuidv4 from 'uuid/v4'
 import axios from 'axios'
 import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
 
-function loadData(data){
-    setValue('#user', data.nameInitials)
-    setValue('#email', data.email)
-    setValue('#address', data.address)
-    setValue('#gender', data.gender)
-    setValue('#mobile', data.mobile)
-}
+import Input from '../../../../../Main/UI/SingleComponent/InputField'
+import Separation from '../../../../../Main/UI/SingleComponent/Separation'
+import DataRow from '../../../../../Main/UI/SingleComponent/DataCell'
+import Search from '../../../../../Main/UI/SingleComponent/Search'
 
-function setValue(id, value){
-    $(id).html(value);
-}
+import nameIcon from '../../../../../../Assests/images/gjoiconset/name.png'
+import emailIcon from '../../../../../../Assests/images/gjoiconset/email.png'
+import addressIcon from '../../../../../../Assests/images/gjoiconset/address.png'
+import nicIcon from '../../../../../../Assests/images/gjoiconset/NIC.png'
+import statusIcon from '../../../../../../Assests/images/gjoiconset/status.png'
+import mobile from '../../../../../../Assests/images/gjoiconset/mobile.png'
 
 export default class VehicalAdd extends Component{
 
-    searchCustomer(){
+    state = {
+        save: false,
+        values: []
+    }
+
+    searchCustomer(e){
+        e.preventDefault();
+        var self = this;
         var nic = $('#inputSeNic').val().toUpperCase();
 
         if(nic.length > 9){
-            var path = 'https://hire-purchase-server.herokuapp.com/Customer/searchCutomer';
+            var path = sessionStorage.getItem('url')+'/Customer/searchCutomer';
 
             axios.post(path, {
                 data: nic
               })
               .then(function (response) {
                 if(response.data.msg){
-                    loadData(response.data.table.rows[0]);
+                    self.setState({ values: response.data.table.rows[0]})
                     ToastsStore.success("Sucessfuly Load Customer Data")
                 }else{
                   if(response.data.alert === 'fail'){
@@ -47,6 +54,7 @@ export default class VehicalAdd extends Component{
 
     saveVehicals(){
         var valid, cus = true;
+        this.setState({ save: true });
         var customer = [$('#inputSeNic').val().toUpperCase(), $('#user').text(), $('#email').text(), $('#address').text(), $('#gender').text(), $('#mobile').text()];
 
         for(var i=0; i<customer.length; i++){
@@ -73,7 +81,7 @@ export default class VehicalAdd extends Component{
         }else if(!valid){
             ToastsStore.warning("Some Fields Are Empty")
         }else{
-            var path = 'https://hire-purchase-server.herokuapp.com/Vehicals/saveVehicals';
+            var path = sessionStorage.getItem('url')+'/Vehicals/saveVehicals';
 
             axios.post(path, {
                 nic: $('#inputSeNic').val(),
@@ -92,97 +100,187 @@ export default class VehicalAdd extends Component{
         }
     }
 
+    getValue(){
+
+    }
+
     render(){
+        var data = this.state.values;
+        console.log(data);
+        
+
+        const vehiForm = (
+            <form>
+                <div class="form-row">
+                    <Input
+                        size={[6, 6, 6, 12]}
+                        id="inputRegistration"
+                        label="Registration No"
+                        placeholder="Registration No"
+                        msg="Please input register no"
+                        handleChange={this.getValue.bind(this)}
+                        reqiured={true}
+                        type="text"
+                        save={this.state.save}
+                    />
+                    <Input
+                        size={[6, 6, 6, 12]}
+                        id="inputCassis"
+                        label="Chassis No"
+                        placeholder="Chassis No"
+                        msg="Please input chassis no"
+                        handleChange={this.getValue.bind(this)}
+                        reqiured={true}
+                        type="text"
+                        save={this.state.save}
+                    />
+                </div>
+                <div class="form-row">
+                    <Input
+                        size={[6, 6, 6, 12]}
+                        id="inputEngine"
+                        label="Engine No"
+                        placeholder="Engine No"
+                        msg="Please input engine no"
+                        handleChange={this.getValue.bind(this)}
+                        reqiured={true}
+                        type="text"
+                        save={this.state.save}
+                    />
+                    <Input
+                        size={[6, 6, 6, 12]}
+                        id="inputCapacity"
+                        label="Cylinder Capacity"
+                        placeholder="Cylinder Capacity"
+                        msg="Please input cylinder capacity"
+                        handleChange={this.getValue.bind(this)}
+                        reqiured={true}
+                        type="text"
+                        save={this.state.save}
+                    />
+                </div>
+                <div class="form-row">
+                    <Input
+                        size={[6, 6, 6, 12]}
+                        id="inputMake"
+                        label="Make"
+                        placeholder="Make"
+                        msg="Please input make"
+                        handleChange={this.getValue.bind(this)}
+                        reqiured={true}
+                        type="text"
+                        save={this.state.save}
+                    />
+                    <Input
+                        size={[6, 6, 6, 12]}
+                        id="inputModal"
+                        label="Model"
+                        placeholder="Model"
+                        msg="Please input model"
+                        handleChange={this.getValue.bind(this)}
+                        reqiured={true}
+                        type="text"
+                        save={this.state.save}
+                    />
+                </div>
+                <div class="form-row">
+                    <Input
+                        size={[6, 6, 6, 12]}
+                        id="inputFuel"
+                        label="Fuel Type"
+                        placeholder="Fuel Type"
+                        msg="Please input fuel type"
+                        handleChange={this.getValue.bind(this)}
+                        reqiured={true}
+                        type="text"
+                        save={this.state.save}
+                    />
+                    <Input
+                        size={[6, 6, 6, 12]}
+                        id="inputYear"
+                        label="Year Of Manifacturing"
+                        placeholder="Year Of Manifacturing"
+                        msg="Please input year of manifacturing"
+                        handleChange={this.getValue.bind(this)}
+                        reqiured={true}
+                        type="text"
+                        save={this.state.save}
+                    />
+                </div>
+                <div class="form-group col-sm-6 row">
+                    <div class='col-xs-6 col-md-3'>
+                        <button type="button" class="btn btn-primary" onClick={this.saveVehicals.bind(this)}>Save</button>
+                    </div>
+                    <div class='col-xs-6 col-md-3'>
+                        <button type="button" class="btn btn-light">Cancel</button>
+                    </div>
+                </div>
+
+            </form>
+        )
+
+        const profileTable = (
+            <div>
+                <Search
+                    id="inputSeNic"
+                    label=""
+                    icon="fa fa-user"
+                    placeholder="NIC/Passport No"
+                    msg="Please Input nic or passport no"
+                    handleChange={this.searchCustomer.bind(this)}
+                />
+                <table className="proTable">
+                    <tbody>
+                        <DataRow
+                            icon={nameIcon}
+                            label="Name"
+                            value={data.length === 0 ? "Not Specified" : data.nameInitials}
+                        />
+                        <DataRow
+                            icon={emailIcon}
+                            label="Email"
+                            value={data.length === 0 ? "Not Specified" : data.email}
+                        />
+                        <DataRow
+                            icon={addressIcon}
+                            label="Address"
+                            value={data.length === 0 ? "Not Specified" : data.address}
+                        />
+                        <DataRow
+                            icon={nicIcon}
+                            label="NIC/Passport No"
+                            value={data.length === 0 ? "Not Specified" : data.nic}
+                        />
+                        <DataRow
+                            icon={statusIcon}
+                            label="Gender"
+                            value={data.length === 0 ? "Not Specified" : data.gender}
+                        />
+                        <DataRow
+                            icon={mobile}
+                            label="Mobile"
+                            value={data.length === 0 ? "Not Specified" : data.mobile}
+                        />
+                    </tbody>
+                </table>
+            </div>
+        );
+        
         return(
             <div>
                 <div className='col-md-12 col-sm-7'>
-                    <div className="col-sm-12 col-md-3">
-                        <div class="form-group col-xs-12">
-                            <label for="inputSeNic">Search</label>
-                            <input type="text" class="form-control" id="inputSeNic" onChange={this.searchCustomer} placeholder="NIC/Passport No"/>
-                        </div>
-                        <br/>
-                        <table className="table table-striped table-hover">
-                            <tbody>
-                                <tr>
-                                    <td>Name</td>
-                                    <td id='user'></td>
-                                </tr>
-                                <tr>
-                                    <td>Email</td>
-                                    <td id='email'></td>
-                                </tr>
-                                <tr>
-                                    <td>Address</td>
-                                    <td id='address'></td>
-                                </tr>
-                                <tr>
-                                    <td>Gender</td>
-                                    <td id='gender'></td>
-                                </tr>
-                                <tr>
-                                    <td>Mobile No</td>
-                                    <td id='mobile'></td>
-                                </tr>
-                                <tr>
-                                    <td>Member Since</td>
-                                    <td>Jun 03, 2014</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <Separation
+                            size={[3, 3, 3, 12]}
+                            title="Customer"
+                            component={profileTable}
+                        />
+                    <div className='col-md-9 col-sm-9 col-lg-9 col-xs-12'>
+                        <Separation
+                            size={[12, 12,12, 12]}
+                            title="Vehicle"
+                            component={vehiForm}
+                        />
                     </div>
-                    <form className='col-sm-12 col-md-9'>
-
-                        <div class="form-row">
-                            <div class="form-group col-sm-6">
-                            <label for="inputRegistration">Registration No</label>
-                            <input type="text" class="form-control" id="inputRegistration" placeholder="Registration No"/>
-                            </div>
-                            <div class="form-group col-sm-5">
-                            <label for="inputCassis">Chassis No</label>
-                            <input type="text" class="form-control" id="inputCassis" placeholder="Chassis No"/>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-sm-6">
-                            <label for="inputEngine">Engine No</label>
-                            <input type="text" class="form-control" id="inputEngine" placeholder="Engine No"/>
-                            </div>
-                            <div class="form-group col-sm-5">
-                            <label for="inputCapacity">Cylinder Capacity</label>
-                            <input type="text" class="form-control" id="inputCapacity" placeholder="Cylinder Capacity"/>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-sm-6">
-                            <label for="inputMake">Make</label>
-                            <input type="text" class="form-control" id="inputMake" placeholder='Make'/>
-                            </div>
-                            <div class="form-group col-sm-5">
-                            <label for="inputModal">Modal</label>
-                            <input type="text" class="form-control" id="inputModal" placeholder='Modal'/>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-sm-6">
-                                <label for="inputFuel">Fuel Type</label>
-                                <input type="text" class="form-control" id="inputFuel" placeholder="Fuel Type"/>
-                            </div>
-                            <div class="form-group col-sm-5">
-                                <label for="inputYear">Year Of Manifacturing</label>
-                                <input type="text" class="form-control" id="inputYear" placeholder="Year Of Manifacturing"/>
-                            </div>
-                        </div>
-                        <div class="form-group col-sm-6 row">
-                            <div class='col-xs-6 col-md-3'>
-                                <button type="button" class="btn btn-primary" onClick={this.saveVehicals}>Save</button>
-                            </div>
-                            <div class='col-xs-6 col-md-3'>
-                                <button type="button" class="btn btn-light">Cancel</button>
-                            </div>
-                        </div>
-
-                    </form>
                 </div>
             </div>
         )

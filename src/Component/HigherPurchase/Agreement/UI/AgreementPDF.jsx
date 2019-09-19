@@ -12,8 +12,8 @@ export default class AgreementPDF extends Component {
 
     componentDidMount(){
         var self = this;
-        axios.post('https://hire-purchase-server.herokuapp.com/Agreement/getData', {
-            data: localStorage.getItem('agreeId')
+        axios.post(sessionStorage.getItem('url')+'/Agreement/getData', {
+            data: sessionStorage.getItem('agreeId')
         })
         .then(function (response) {
             if(response.data.msg){
@@ -45,7 +45,7 @@ export default class AgreementPDF extends Component {
                             <div className="col-md-11 col-sm-11 col-xs-11" style={{marginLeft: '4%', marginTop: '2%'}}>
                                 <div className='col-md-12 col-sm-12 col-xs-12 container' style={{backgroundColor: '#ffffff', float: 'center'}}>
                                         <div className="text-center">
-                                            <h4 className="text-dark mt-5">{localStorage.getItem('company')} Agreement</h4>
+                                            <h4 className="text-dark mt-5">{sessionStorage.getItem('company')} Agreement</h4>
                                         </div>
                                         <div className="mt-5">
                                         <h5 className="text-dark">Agreement Details</h5>

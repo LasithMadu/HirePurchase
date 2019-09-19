@@ -33,7 +33,7 @@ export default class VehicalAdd extends Component{
         var vehi = $('#inputDVehiNo').val().toUpperCase();
 
         if(vehi.length > 9){
-            var path = 'https://hire-purchase-server.herokuapp.com/Vehicals/searchVehical';
+            var path = sessionStorage.getItem('url')+'/Vehicals/searchVehical';
 
             axios.post(path, {
                 data: vehi
@@ -72,7 +72,7 @@ export default class VehicalAdd extends Component{
         if(!valid){
             ToastsStore.warning("Vehical Details Are Not Found")
         }else{
-            var path = 'https://hire-purchase-server.herokuapp.com/Vehicals/deleteVehicals';
+            var path = sessionStorage.getItem('url')+'/Vehicals/deleteVehicals';
 
             axios.post(path, {
                 vehiNo: $('#inputDVehiNo').val().toUpperCase()
