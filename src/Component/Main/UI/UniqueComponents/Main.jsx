@@ -32,7 +32,6 @@ export default class Main extends Component {
     if (sessionStorage.getItem('username') === null || sessionStorage.getItem('username') === '') {
       window.location.replace('/');
     }
-    sessionStorage.setItem('url', 'https://hire-purchase-server.herokuapp.com');
   }
 
   setLocation(current){
