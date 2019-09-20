@@ -7,10 +7,6 @@ const InputField = ({size, id, classN, label, placeholder, disable, msg, handleC
     const [empty, setEmpty] = useState(false);
     const [enable, setEnable] = useState(disable);
 
-    useEffect(() => {
-        $("#" + id).val(value)
-    })
-
     function msgChange(){
         if($("#"+id).val() === '' && reqiured){
             setEmpty(true); 
