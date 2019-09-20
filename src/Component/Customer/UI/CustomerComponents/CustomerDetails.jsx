@@ -66,7 +66,7 @@ export default class CustomerDetails extends Component {
               cogoToast.success('Sucessfuly load customer data.', options);
           }else{
             if(response.data.alert === 'fail'){
-              cogoToast.warning('Customer is not register yet.', options);
+              cogoToast.warn('Customer is not register yet.', options);
               handleShow();
             }else{
               cogoToast.error('Fail to load customer data.', options);

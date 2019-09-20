@@ -5,6 +5,7 @@ import 'simplebar'; // or "import SimpleBar from 'simplebar';" if you want to us
 
 import LogoUpload from './SubSettings/LogoUpload'
 import ChangeTheme from './SubSettings/ChangeTheme'
+import Configure from './SubSettings/Configure'
 
 export default class Settings extends Component {
 
@@ -15,10 +16,25 @@ export default class Settings extends Component {
             background: false,
             bgColor: sessionStorage.getItem('bgColor'),
             font: '#0072bb',
-            saveIcon: [false, false],
-            expArr: [false, false],
+            saveIcon: [false, false, false],
+            expArr: [false, false, false],
+            countAdmin: 0,
+            countOparator: 0
         }
         this.handleBackground = this.handleBackground.bind(this)
+    }
+
+    componentDidMount(){
+        var self = this;
+        axios.get(sessionStorage.getItem('url') + '/getConfigure')
+        .then(function (response) {
+            if (response.data.msg) {
+                self.setState({ countAdmin: response.data.values[0], countOparator: response.data.values[1]})
+            }
+        })
+        .catch(function (error) {
+            console.log("Connection Error");
+        });
     }
 
     handleBackground(color){
@@ -194,6 +210,36 @@ export default class Settings extends Component {
                             />
                             : ""
                         }
+                </div>
+                <br />
+                <div className="col-md-12 col-sm-12 col-xs-12 topItem" style={{ border: '2px solid ' + sessionStorage.getItem('bgColor') }}>
+                    <div className="itemTitle" onClick={() => this.logoShow(3)}>
+                        <div className="row">
+                            <div className="col-md-10 col-sm-10 col-xs-10">
+                                {this.state.expArr[2]
+                                    ? <i class="fa fa-angle-down arrowicon" style={{ fontSize: '20px' }}></i>
+                                    : <i class="fa fa-angle-right arrowicon" style={{ fontSize: '20px' }}></i>
+                                }
+                                <h4 className="uploadTitle">Configure</h4>
+                            </div>
+                            <div className="col-md-1 col-sm-1 col-xs-1">
+
+                            </div>
+                            <div className="col-md-1 col-sm-1 col-xs-1">
+                                {this.state.saveIcon[2] && this.state.expArr[2]
+                                    ? <i className="fa fa-save saveicon" style={{ fontSize: '20px' }}></i>
+                                    : ""
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    {this.state.expArr[2]
+                        ? <Configure
+                            countAdmin = {this.state.countAdmin}
+                            countOparator={this.state.countOparator}
+                        />
+                        : ""
+                    }
                 </div>
             </div>
         )

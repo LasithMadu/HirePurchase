@@ -3,6 +3,18 @@ import $ from 'jquery'
 import axios from 'axios'
 import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
 
+import Search from '../../../../../Main/UI/SingleComponent/Search'
+import DataRow from '../../../../../Main/UI/SingleComponent/DataCell'
+import Input from '../../../../../Main/UI/SingleComponent/InputField'
+import Separation from '../../../../../Main/UI/SingleComponent/Separation'
+
+import nameIcon from '../../../../../../Assests/images/gjoiconset/name.png'
+import emailIcon from '../../../../../../Assests/images/gjoiconset/email.png'
+import addressIcon from '../../../../../../Assests/images/gjoiconset/address.png'
+import nicIcon from '../../../../../../Assests/images/gjoiconset/NIC.png'
+import statusIcon from '../../../../../../Assests/images/gjoiconset/status.png'
+import mobile from '../../../../../../Assests/images/gjoiconset/mobile.png'
+
 function loadData(data){
     setValue('#Euser', data.nameInitials)
     setValue('#Eemail', data.email)
@@ -29,18 +41,24 @@ function setInput(id, value){
 
 export default class VehicalAdd extends Component{
 
-    searchVehical(){
+    state = {
+        values: [],
+        save: false
+    }
+
+    searchVehical(e){
+        e.preventDefault();
+        var self = this;
         var vehi = $('#inputVehiNo').val().toUpperCase();
 
         if(vehi.length > 9){
-            var path = sessionStorage.getItem('url')+'/Vehicals/searchVehical';
 
-            axios.post(path, {
+            axios.post(sessionStorage.getItem('url') + '/Vehicals/searchVehical', {
                 data: vehi
               })
               .then(function (response) {
                 if(response.data.msg){
-                    loadData(response.data.table.rows[0]);
+                    self.setState({values: response.data.table.rows[0]})
                     ToastsStore.success("Sucessfuly Load Customer Data")
                 }else{
                   if(response.data.alert === 'fail'){
@@ -58,7 +76,7 @@ export default class VehicalAdd extends Component{
 
     updateVehicals(){
         var valid;
-
+        this.setState({ save: true });
         var vehicals = [$('#inputERegistration').val(), $('#inputECassis').val(), $('#inputEEngine').val(), $('#inputECapacity').val(), $('#inputEMake').val(), $('#inputEModal').val(), $('#inputEFuel').val(), $('#inputEYear').val()];
 
         for(var i=0; i<vehicals.length; i++){
@@ -91,109 +109,195 @@ export default class VehicalAdd extends Component{
         }
     }
 
+    getValue() {
+
+    }
+
     render(){
+        var data = this.state.values;
+        const vehino = data.vehiNo;
+
+        const profileTable = (
+            <div>
+                <table className="proTable">
+                    <tbody>
+                        <DataRow
+                            icon={nameIcon}
+                            label="Name"
+                            value={data.length === 0 ? "Not Specified" : data.nameInitials}
+                        />
+                        <DataRow
+                            icon={emailIcon}
+                            label="Email"
+                            value={data.length === 0 ? "Not Specified" : data.email}
+                        />
+                        <DataRow
+                            icon={addressIcon}
+                            label="Address"
+                            value={data.length === 0 ? "Not Specified" : data.address}
+                        />
+                        <DataRow
+                            icon={nicIcon}
+                            label="NIC/Passport No"
+                            value={data.length === 0 ? "Not Specified" : data.nic}
+                        />
+                        <DataRow
+                            icon={statusIcon}
+                            label="Gender"
+                            value={data.length === 0 ? "Not Specified" : data.gender}
+                        />
+                        <DataRow
+                            icon={mobile}
+                            label="Mobile"
+                            value={data.length === 0 ? "Not Specified" : data.mobile}
+                        />
+                    </tbody>
+                </table>
+            </div>
+        ); 
+
+        const vehicleEdit = (
+            <form>
+                <div class="form-row">
+                    <Input
+                        size={[6, 6, 6, 12]}
+                        id="inputERegistration"
+                        label="Registration No"
+                        placeholder="Registration No"
+                        msg="Please input register no"
+                        handleChange={this.getValue.bind(this)}
+                        reqiured={true}
+                        type="text"
+                        save={this.state.save}
+                        value={vehino}
+                    />
+                    <Input
+                        size={[6, 6, 6, 12]}
+                        id="inputECassis"
+                        label="Chassis No"
+                        placeholder="Chassis No"
+                        msg="Please input chassis no"
+                        handleChange={this.getValue.bind(this)}
+                        reqiured={true}
+                        type="text"
+                        save={this.state.save}
+                        value={data.chassis}
+                    />
+                </div>
+                <div class="form-row">
+                    <Input
+                        size={[6, 6, 6, 12]}
+                        id="inputEEngine"
+                        label="Engine No"
+                        placeholder="Engine No"
+                        msg="Please input engine no"
+                        handleChange={this.getValue.bind(this)}
+                        reqiured={true}
+                        type="text"
+                        save={this.state.save}
+                        value={data.engineNo}
+                    />
+                    <Input
+                        size={[6, 6, 6, 12]}
+                        id="inputECapacity"
+                        label="Cylinder Capacity"
+                        placeholder="Cylinder Capacity"
+                        msg="Please input cylinder capacity"
+                        handleChange={this.getValue.bind(this)}
+                        reqiured={true}
+                        type="text"
+                        save={this.state.save}
+                        value={data.capacity}
+                    />
+                </div>
+                <div class="form-row">
+                    <Input
+                        size={[6, 6, 6, 12]}
+                        id="inputEMake"
+                        label="Make"
+                        placeholder="Make"
+                        msg="Please input make"
+                        handleChange={this.getValue.bind(this)}
+                        reqiured={true}
+                        type="text"
+                        save={this.state.save}
+                        value={data.make}
+                    />
+                    <Input
+                        size={[6, 6, 6, 12]}
+                        id="inputEModal"
+                        label="Model"
+                        placeholder="Model"
+                        msg="Please input model"
+                        handleChange={this.getValue.bind(this)}
+                        reqiured={true}
+                        type="text"
+                        save={this.state.save}
+                        value={data.modal}
+                    />
+                </div>
+                <div class="form-row">
+                    <Input
+                        size={[6, 6, 6, 12]}
+                        id="inputEFuel"
+                        label="Fuel Type"
+                        placeholder="Fuel Type"
+                        msg="Please input fuel type"
+                        handleChange={this.getValue.bind(this)}
+                        reqiured={true}
+                        type="text"
+                        save={this.state.save}
+                        value={data.fuel}
+                    />
+                    <Input
+                        size={[6, 6, 6, 12]}
+                        id="inputEYear"
+                        label="Year Of Manifacturing"
+                        placeholder="Year Of Manifacturing"
+                        msg="Please input year of manifacturing"
+                        handleChange={this.getValue.bind(this)}
+                        reqiured={true}
+                        type="text"
+                        save={this.state.save}
+                        value={data.year}
+                    />
+                </div>
+                <div class="form-group col-sm-6 row">
+                    <div class='col-xs-6 col-md-3'>
+                        <button type="button" class="btn btn-primary" onClick={this.updateVehicals.bind(this)}>Update</button>
+                    </div>
+                    <div class='col-xs-6 col-md-3'>
+                        <button type="button" class="btn btn-light">Cancel</button>
+                    </div>
+                </div>
+
+            </form>
+        );
+
         return(
             <div>
                 <div className='col-md-12 col-sm-7'>
-                <form action="#" className="form-horizontal">
-                        <div className="form-body pal">
-                            <div className="form-group">
-                                <div className='row'>
-                                    <label htmlFor="inputVehiNo" className="col-xs-3 control-label">
-                                    Search :- </label>
-                                    <div className="input-icon col-xs-5" style={{display: 'inline-block' }}>
-                                        <i className="fa fa-car"></i>
-                                        <input id="inputVehiNo" type="text" placeholder="Vehical No" className="form-control" />
-                                    </div>
-                                    <div className='col-xs-2' style={{ height: '30px', paddingTop: '-50px'}}>
-                                        <a href="#" className="btn btn-primary ml-5" id="searchBtn" onClick={this.searchVehical}>Search</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                    <div className="col-sm-12 col-md-3">
-                        <table className="table table-striped table-hover">
-                            <tbody>
-                                <tr>
-                                    <td>Name</td>
-                                    <td id='Euser'></td>
-                                </tr>
-                                <tr>
-                                    <td>Email</td>
-                                    <td id='Eemail'></td>
-                                </tr>
-                                <tr>
-                                    <td>Address</td>
-                                    <td id='Eaddress'></td>
-                                </tr>
-                                <tr>
-                                    <td>Gender</td>
-                                    <td id='Egender'></td>
-                                </tr>
-                                <tr>
-                                    <td>Mobile No</td>
-                                    <td id='Emobile'></td>
-                                </tr>
-                                <tr>
-                                    <td>Member Since</td>
-                                    <td>Jun 03, 2014</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <Search
+                        id="inputVehiNo"
+                        icon="fa fa-car"
+                        placeholder="Vehical No"
+                        btnId="searchBtn"
+                        msg="Please input vehicle no"
+                        handleChange={this.searchVehical.bind(this)}
+                        width="92.5%"
+                    />
+                    <Separation
+                        size={[3, 3, 3, 12]}
+                        title="Customer"
+                        component={profileTable}
+                    />
+                    <div className='col-md-9 col-sm-9 col-lg-9 col-xs-12'>
+                        <Separation
+                            size={[12, 12, 12, 12]}
+                            title="Vehicle"
+                            component={vehicleEdit}
+                        />
                     </div>
-                    <form className='col-sm-12 col-md-9'>
-
-                        <div class="form-row">
-                            <div class="form-group col-sm-6">
-                            <label for="inputERegistration">Registration No</label>
-                            <input type="text" class="form-control" id="inputERegistration" placeholder="Registration No"/>
-                            </div>
-                            <div class="form-group col-sm-5">
-                            <label for="inputECassis">Chassis No</label>
-                            <input type="text" class="form-control" id="inputECassis" placeholder="Chassis No"/>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-sm-6">
-                            <label for="inputEEngine">Engine No</label>
-                            <input type="text" class="form-control" id="inputEEngine" placeholder="Engine No"/>
-                            </div>
-                            <div class="form-group col-sm-5">
-                            <label for="inputECapacity">Cylinder Capacity</label>
-                            <input type="text" class="form-control" id="inputECapacity" placeholder="Cylinder Capacity"/>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-sm-6">
-                            <label for="inputEMake">Make</label>
-                            <input type="text" class="form-control" id="inputEMake" placeholder='Make'/>
-                            </div>
-                            <div class="form-group col-sm-5">
-                            <label for="inputEModal">Modal</label>
-                            <input type="text" class="form-control" id="inputEModal" placeholder='Modal'/>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-sm-6">
-                                <label for="inputEFuel">Fuel Type</label>
-                                <input type="text" class="form-control" id="inputEFuel" placeholder="Fuel Type"/>
-                            </div>
-                            <div class="form-group col-sm-5">
-                                <label for="inputEYear">Year Of Manifacturing</label>
-                                <input type="text" class="form-control" id="inputEYear" placeholder="Year Of Manifacturing"/>
-                            </div>
-                        </div>
-                        <div class="form-group col-sm-6 row">
-                            <div class='col-xs-6 col-md-3'>
-                                <button type="button" class="btn btn-primary" onClick={this.updateVehicals}>Update</button>
-                            </div>
-                            <div class='col-xs-6 col-md-3'>
-                                <button type="button" class="btn btn-light">Cancel</button>
-                            </div>
-                        </div>
-
-                    </form>
                 </div>
             </div>
         )

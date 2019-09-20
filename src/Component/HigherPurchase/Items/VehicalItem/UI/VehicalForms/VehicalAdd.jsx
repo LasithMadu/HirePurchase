@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import $ from 'jquery'
 import uuidv4 from 'uuid/v4'
 import axios from 'axios'
-import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
+import cogoToast from 'cogo-toast';
 
 import Input from '../../../../../Main/UI/SingleComponent/InputField'
 import Separation from '../../../../../Main/UI/SingleComponent/Separation'
@@ -15,6 +15,10 @@ import addressIcon from '../../../../../../Assests/images/gjoiconset/address.png
 import nicIcon from '../../../../../../Assests/images/gjoiconset/NIC.png'
 import statusIcon from '../../../../../../Assests/images/gjoiconset/status.png'
 import mobile from '../../../../../../Assests/images/gjoiconset/mobile.png'
+
+const options = {
+    position: 'top-center'
+}
 
 export default class VehicalAdd extends Component{
 
@@ -37,12 +41,12 @@ export default class VehicalAdd extends Component{
               .then(function (response) {
                 if(response.data.msg){
                     self.setState({ values: response.data.table.rows[0]})
-                    ToastsStore.success("Sucessfuly Load Customer Data")
+                    cogoToast.success("Sucessfuly Load Customer Data", options)
                 }else{
                   if(response.data.alert === 'fail'){
-                    ToastsStore.warning("This Customer Is Not Registered Yet")
+                      cogoToast.warning("This Customer Is Not Registered Yet", options)
                   }else{
-                    ToastsStore.error("Fail To Load Customer Data")
+                      cogoToast.error("Fail To Load Customer Data", options)
                   }
                 }
               })
@@ -52,19 +56,20 @@ export default class VehicalAdd extends Component{
         }
     }
 
-    saveVehicals(){
+    saveVehicals(e){
+        e.preventDefault();
         var valid, cus = true;
+        var data = this.state.values
         this.setState({ save: true });
-        var customer = [$('#inputSeNic').val().toUpperCase(), $('#user').text(), $('#email').text(), $('#address').text(), $('#gender').text(), $('#mobile').text()];
+        var customer = '';
 
-        for(var i=0; i<customer.length; i++){
-            if(customer[i] === ''){
-                cus = false;
-                ToastsStore.error("Customer Details Not Filed")
-            }
+        if(data.length !== 0){
+            customer = [data.nic, data.nameInitials, data.email, data.address, data.gender, data.mobile];
+        }else{
+            cus = false;
         }
 
-        var vehicals = [uuidv4(), $('#inputRegistration').val().toUpperCase(), $('#inputCassis').val(), $('#inputEngine').val(), $('#inputCapacity').val(), $('#inputMake').val(), $('#inputModal').val(), $('#inputFuel').val(), $('#inputYear').val()];
+        var vehicals = [uuidv4(), $('#inputProvince').val()+" "+$('#inputRegistration').val().toUpperCase(), $('#inputCassis').val(), $('#inputEngine').val(), $('#inputCapacity').val(), $('#inputMake').val(), $('#inputModal').val(), $('#inputFuel').val(), $('#inputYear').val()];
 
         for(var i=0; i<vehicals.length; i++){
             if(vehicals[i] === ''){
@@ -74,13 +79,9 @@ export default class VehicalAdd extends Component{
             }
         }
 
-        if($('#inputRegistration').val().length < 10){
-            ToastsStore.warning("Vehical Number Is Invalid. Put Like This.\n Ex :- WP VS-1439")
-        }else if(!cus){
-            ToastsStore.error("Customer Details Not Filed")
-        }else if(!valid){
-            ToastsStore.warning("Some Fields Are Empty")
-        }else{
+        if(!cus){
+            cogoToast.warn("Customer Details Not Filed", options)
+        }else if (valid){
             var path = sessionStorage.getItem('url')+'/Vehicals/saveVehicals';
 
             axios.post(path, {
@@ -89,9 +90,9 @@ export default class VehicalAdd extends Component{
               })
               .then(function (response) {
                 if(response.data.msg){
-                    ToastsStore.success("Sucessfuly Vehical Register")
+                    cogoToast.success("Sucessfuly Vehical Register", options)
                 }else{
-                    ToastsStore.error("Vehical Registeration Fail")
+                    cogoToast.error("Vehical Registeration Fail", options)
                 }
               })
               .catch(function (error) {
@@ -106,23 +107,34 @@ export default class VehicalAdd extends Component{
 
     render(){
         var data = this.state.values;
-        console.log(data);
-        
 
         const vehiForm = (
             <form>
                 <div class="form-row">
                     <Input
                         size={[6, 6, 6, 12]}
-                        id="inputRegistration"
-                        label="Registration No"
-                        placeholder="Registration No"
-                        msg="Please input register no"
+                        id="inputProvince"
+                        label="Province Letters"
+                        placeholder="Province Letters"
+                        msg="Please input province letters"
                         handleChange={this.getValue.bind(this)}
                         reqiured={true}
                         type="text"
                         save={this.state.save}
                     />
+                    <Input
+                        size={[6, 6, 6, 12]}
+                        id="inputRegistration"
+                        label="Vehicle No"
+                        placeholder="Vehicle No"
+                        msg="Please input vehicle no"
+                        handleChange={this.getValue.bind(this)}
+                        reqiured={true}
+                        type="text"
+                        save={this.state.save}
+                    />
+                </div>
+                <div class="form-row">
                     <Input
                         size={[6, 6, 6, 12]}
                         id="inputCassis"
@@ -134,8 +146,6 @@ export default class VehicalAdd extends Component{
                         type="text"
                         save={this.state.save}
                     />
-                </div>
-                <div class="form-row">
                     <Input
                         size={[6, 6, 6, 12]}
                         id="inputEngine"
@@ -147,6 +157,8 @@ export default class VehicalAdd extends Component{
                         type="text"
                         save={this.state.save}
                     />
+                </div>
+                <div class="form-row">
                     <Input
                         size={[6, 6, 6, 12]}
                         id="inputCapacity"
@@ -158,8 +170,6 @@ export default class VehicalAdd extends Component{
                         type="text"
                         save={this.state.save}
                     />
-                </div>
-                <div class="form-row">
                     <Input
                         size={[6, 6, 6, 12]}
                         id="inputMake"
@@ -171,8 +181,10 @@ export default class VehicalAdd extends Component{
                         type="text"
                         save={this.state.save}
                     />
+                </div>
+                <div c>
                     <Input
-                        size={[6, 6, 6, 12]}
+                        size={[4, 4, 4, 12]}
                         id="inputModal"
                         label="Model"
                         placeholder="Model"
@@ -182,10 +194,8 @@ export default class VehicalAdd extends Component{
                         type="text"
                         save={this.state.save}
                     />
-                </div>
-                <div class="form-row">
                     <Input
-                        size={[6, 6, 6, 12]}
+                        size={[4, 4, 4, 12]}
                         id="inputFuel"
                         label="Fuel Type"
                         placeholder="Fuel Type"
@@ -196,7 +206,7 @@ export default class VehicalAdd extends Component{
                         save={this.state.save}
                     />
                     <Input
-                        size={[6, 6, 6, 12]}
+                        size={[4, 4, 4, 12]}
                         id="inputYear"
                         label="Year Of Manifacturing"
                         placeholder="Year Of Manifacturing"
