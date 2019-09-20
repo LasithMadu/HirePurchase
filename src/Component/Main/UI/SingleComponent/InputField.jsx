@@ -8,7 +8,7 @@ const InputField = ({size, id, classN, label, placeholder, disable, msg, handleC
     const [enable, setEnable] = useState(disable);
 
     useEffect(() => {
-        $("#" + id).val(value.vehiNo)
+        $("#" + id).val(value)
     })
 
     function msgChange(){

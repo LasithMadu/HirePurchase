@@ -115,7 +115,6 @@ export default class VehicalAdd extends Component{
 
     render(){
         var data = this.state.values;
-        const vehino = data.vehiNo;
 
         const profileTable = (
             <div>
@@ -169,7 +168,7 @@ export default class VehicalAdd extends Component{
                         reqiured={true}
                         type="text"
                         save={this.state.save}
-                        value={vehino}
+                        value={data.vehiNo}
                     />
                     <Input
                         size={[6, 6, 6, 12]}
