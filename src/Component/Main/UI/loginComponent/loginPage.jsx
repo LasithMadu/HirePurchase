@@ -29,7 +29,7 @@ export default class LoginPage extends Component {
     }
 
     componentDidMount(){ 
-        sessionStorage.setItem('url', 'http://localhost:8080');
+        sessionStorage.setItem('url', 'https://hire-purchase-server.herokuapp.com');
         if(sessionStorage.getItem('userId') === null){
         }else{
             window.history.go(-1);
