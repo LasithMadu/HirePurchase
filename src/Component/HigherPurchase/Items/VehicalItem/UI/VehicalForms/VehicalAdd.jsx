@@ -61,15 +61,12 @@ export default class VehicalAdd extends Component{
         var valid, cus = true;
         var data = this.state.values
         this.setState({ save: true });
-        var customer = '';
 
-        if(data.length !== 0){
-            customer = [data.nic, data.nameInitials, data.email, data.address, data.gender, data.mobile];
-        }else{
+        if(data.length === 0){
             cus = false;
         }
 
-        var vehicals = [uuidv4(), $('#inputProvince').val()+" "+$('#inputRegistration').val().toUpperCase(), $('#inputCassis').val(), $('#inputEngine').val(), $('#inputCapacity').val(), $('#inputMake').val(), $('#inputModal').val(), $('#inputFuel').val(), $('#inputYear').val()];
+        var vehicals = [uuidv4(), $('#inputProvince').val().toUpperCase()+" "+$('#inputRegistration').val().toUpperCase(), $('#inputCassis').val(), $('#inputEngine').val(), $('#inputCapacity').val(), $('#inputMake').val(), $('#inputModal').val(), $('#inputFuel').val(), $('#inputYear').val()];
 
         for(var i=0; i<vehicals.length; i++){
             if(vehicals[i] === ''){

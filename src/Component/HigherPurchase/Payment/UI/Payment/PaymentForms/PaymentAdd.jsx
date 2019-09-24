@@ -3,7 +3,7 @@ import $ from 'jquery'
 import uuidv4 from 'uuid/v4'
 import axios from 'axios'
 import date from 'date-and-time';
-import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
+import {ToastsStore} from 'react-toasts';
 
 import DataRow from '../../../../../Main/UI/SingleComponent/DataCell'
 import Search from '../../../../../Main/UI/SingleComponent/Search'
@@ -20,18 +20,6 @@ import haveIcon from '../../../../../../Assests/images/gjoiconset/have to pay.pn
 import dateIcon from '../../../../../../Assests/images/gjoiconset/Year.png'
 
 const now = new Date();
-
-function loadData(data){
-    setValue('#user', data.nameInitials)
-    setValue('#email', data.email)
-    setValue('#address', data.address)
-    setValue('#gender', data.gender)
-    setValue('#mobile', data.mobile)
-}
-
-function setValue(id, value){
-    $(id).html(value);
-}
 
 export default class VehicalAdd extends Component{
 
@@ -103,7 +91,7 @@ export default class VehicalAdd extends Component{
 
         var vehicals = [uuidv4(), $('#inputRegistration').val().toUpperCase(), $('#inputCassis').val(), $('#inputEngine').val(), $('#inputCapacity').val(), $('#inputMake').val(), $('#inputModal').val(), $('#inputFuel').val(), $('#inputYear').val()];
 
-        for(var i=0; i<vehicals.length; i++){
+        for(i=0; i<vehicals.length; i++){
             if(vehicals[i] === ''){
                 valid = false
             }else{

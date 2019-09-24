@@ -12,7 +12,7 @@ export default class ChangePass extends Component{
 
     newPass(value){
         var strength = 1;
-        var regex = new Array();
+        var regex = [];
         regex.push(".{8,}"); //For length
         regex.push("[A-Z]"); //For Uppercase Alphabet
         regex.push("[a-z]"); //For Lowercase Alphabet

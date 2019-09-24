@@ -117,28 +117,6 @@ export default class SlideBar extends Component {
 
     render () {
 
-        const reminders = (
-            <ul className="nav sidehigh">
-                <div className="clearfix"></div>
-                <li style={styleSheet.themColor} className={this.state.activeItem === "14" ? "active" : ""} onClick={this.toggle("14")}><NavLink to="/higher/firstr" style={{paddingLeft: '70px'}}  onClick={()=>this.props.setLocation('First Reminder')}><i className="fa fa-edit fa-fw">
-                    <div className="icon-bg bg-violet"></div>
-                    </i><span className="menu-title">First Reminder</span></NavLink>
-                </li>
-                <li style={styleSheet.themColor} className={this.state.activeItem === "15" ? "active" : ""} onClick={this.toggle("15")}><NavLink to="/higher/finalr" style={{paddingLeft: '70px'}} activeStyle={{ background: sessionStorage.getItem('bgColor') }}  onClick={()=>this.props.setLocation('Final Reminder')}><i className="fa fa-edit fa-fw">
-                    <div className="icon-bg bg-violet"></div>
-                    </i><span className="menu-title">Final Reminder</span></NavLink>
-                </li>
-                <li style={styleSheet.themColor} className={this.state.activeItem === "16" ? "active" : ""} onClick={this.toggle("16")}><NavLink to="/higher/notist" style={{paddingLeft: '70px'}} activeStyle={{ background: sessionStorage.getItem('bgColor') }}  onClick={()=>this.props.setLocation('Notice Of Termination')}><i className="fa fa-edit fa-fw">
-                    <div className="icon-bg bg-violet"></div>
-                    </i><span className="menu-title">Notice Of Termination</span></NavLink>
-                </li>
-                <li style={styleSheet.themColor} className={this.state.activeItem === "16" ? "active" : ""} onClick={this.toggle("16")}><NavLink to="/higher/terml" style={{paddingLeft: '70px'}} activeStyle={{ background: sessionStorage.getItem('bgColor') }}  onClick={()=>this.props.setLocation('Termination Letter')}><i className="fa fa-edit fa-fw">
-                    <div className="icon-bg bg-violet"></div>
-                    </i><span className="menu-title">Termination Letter</span></NavLink>
-                </li>
-            </ul>
-        )
-
         const subMenu = (
             <ul className="nav sidehigh">
                 <div className="clearfix"></div>

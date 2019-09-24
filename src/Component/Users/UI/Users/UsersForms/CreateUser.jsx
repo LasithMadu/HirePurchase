@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import $ from 'jquery'
 import uuidv4 from 'uuid/v4'
 import axios from 'axios'
-import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
+import {ToastsStore} from 'react-toasts';
 
 export default class CreateAdmin extends Component{
 

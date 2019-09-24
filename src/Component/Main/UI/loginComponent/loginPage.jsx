@@ -1,18 +1,21 @@
 import React, {Component} from 'react';
 import $ from 'jquery';
 import axios from 'axios'
-import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
+import cogoToast from 'cogo-toast'
 import 'simplebar'; // or "import SimpleBar from 'simplebar';" if you want to use it manually.
 import 'simplebar/dist/simplebar.css';
 
 import logo from '../../../../Assests/images/logo/hire logo.png'
-import company from '../../../../Assests/images/logo/logo.png'
 
 let atempts = 1;
 
 function reset(){
     $('.msgu').text('');
     $('.msgp').text('');
+}
+
+const options = {
+    position: 'top-center'
 }
 
 export default class LoginPage extends Component {
@@ -26,7 +29,7 @@ export default class LoginPage extends Component {
     }
 
     componentDidMount(){ 
-        sessionStorage.setItem('url', 'https://hire-purchase-server.herokuapp.com');
+        sessionStorage.setItem('url', 'http://localhost:8080');
         if(sessionStorage.getItem('userId') === null){
         }else{
             window.history.go(-1);
@@ -39,11 +42,11 @@ export default class LoginPage extends Component {
                 sessionStorage.setItem('bgColor', response.data.table.rows[0].backColor);
                 sessionStorage.setItem('fontColor', response.data.table.rows[0].fontColor);
             }else{
-                ToastsStore.error("Color Not Loaded")
+                cogoToast.error("Color Not Loaded", options)
             }
         })
         .catch(function (error) {
-            ToastsStore.error(error)
+            cogoToast.error(error, options)
         });
     }
 
@@ -117,19 +120,19 @@ export default class LoginPage extends Component {
                                             window.location.replace('/firstLog');
                                         }
                                     }else{
-                                        ToastsStore.error("Color Not Loaded")
+                                        cogoToast.error("Color Not Loaded", options)
                                     }
                                 })
                                 .catch(function (error) {
-                                    ToastsStore.error(error)
+                                    cogoToast.error(error, options)
                                 });
                             }catch(e){
-                                ToastsStore.error("Some Error")
+                                cogoToast.error("Some Error", options)
                             }
                         }
                     }
                 }else{
-                    ToastsStore.error("Username or Password Incorrect")
+                    cogoToast.error("Username or Password Incorrect", options)
                 }
               })
               .catch(function (error) {
@@ -150,7 +153,7 @@ export default class LoginPage extends Component {
     forgetPass(){
         reset();
         var username = $('#inputName').val();
-        if(username == ''){
+        if(username === ''){
             $('.msgu').text('Please enter username');
         }else{
             axios.post(sessionStorage.getItem('url')+'/getUsername',{
@@ -160,7 +163,7 @@ export default class LoginPage extends Component {
                 if(response.data.username[1]){
                     $('.msgp').text('Your account is locked.');
                 }else{
-                    if(response.data.username.length == 0){
+                    if(response.data.username.length === 0){
                         $('.msgu').text('Invalid user name. Type the right username to change password');
                     }else{
                         sessionStorage.setItem('username', response.data.username[0]);
@@ -184,12 +187,12 @@ export default class LoginPage extends Component {
                             <div className="form-body pal">
                                 <div className="col-md-12 col-sm-12 text-center panel-title">
                                     <div className="col-md-8 col-sm-8">
-                                        <img src={logo} style={{marginTop: '-180px', marginLeft: '90px'}} className="img-responsive"/>
+                                        <img src={logo} alt="logo" style={{marginTop: '-180px', marginLeft: '90px'}} className="img-responsive"/>
                                     </div>
                                 </div>
                                 <div className="form-group">
                                     <div className="col-md-3 col-sm-3 mt-sm-5">
-                                        <img src={logo} className="img-responsive"/>
+                                          <img src={logo} alt="logo" className="img-responsive"/>
                                     </div>
                                     <div className="col-md-9 text-left">
                                         <h1>Login</h1>

@@ -74,7 +74,7 @@ export default class ViewUser extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      {users.map(user =><tr scope="row" key={user.userId}>
+                      {users.map(user =><tr key={user.userId}>
                           <td>{user.firstName}</td>
                           <td>{user.lastName}</td>
                           <td>{user.email}</td>

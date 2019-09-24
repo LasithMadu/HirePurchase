@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
 import $ from 'jquery'
-import { func } from 'prop-types';
 
 const Search = ({id, classN, btnId, icon, placeholder, msg, handleChange, width}) => {
 

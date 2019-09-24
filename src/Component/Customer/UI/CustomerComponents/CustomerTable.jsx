@@ -9,7 +9,7 @@ export default class Viewagreement extends Component{
   rowSelected(id){
     var data = this.props.agrrement;
     for(var i=0; i<data.length; i++){
-      if (data[i].agreeId == id) {
+      if (data[i].agreeId === id) {
         sessionStorage.setItem('agreeId', data[i].agreeId);
         window.location.href = '/agreementPDF'
       }
@@ -37,7 +37,7 @@ export default class Viewagreement extends Component{
                   </tr>
                 </thead>
                 <tbody>
-                  {agreementData.map(agreement =><tr scope="row" key={agreement.agreeId}>
+                  {agreementData.map(agreement =><tr key={agreement.agreeId}>
                       <td>{agreement.agreeId}</td>
                       <td>{agreement.vehiNo}</td>
                       <td>{agreement.chassis}</td>

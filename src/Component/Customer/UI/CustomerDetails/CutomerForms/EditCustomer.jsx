@@ -1,9 +1,17 @@
 import React, {Component} from 'react';
 import axios from 'axios'
 import $ from 'jquery'
-import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
+import cogoToast from 'cogo-toast';
+
+import Search from '../../../../Main/UI/SingleComponent/Search'
+import Input from '../../../../Main/UI/SingleComponent/InputField'
+import Dropdown from '../../../../Main/UI/SingleComponent/Dropdown'
 
 let cusid;
+
+const options = {
+    position: 'top-center'
+}
 
 function loadData(data){
     setValue('#inputETitle', data.title)
@@ -29,30 +37,57 @@ export default class CreateForm extends Component{
 
     constructor(props){
         super(props)
+        this.state = {
+            save: false,
+            title: [],
+            country: []
+        }
         this.getCountries();
     }
 
+    componentDidMount() {
+        var items = [];
+        var self = this;
+        axios.get(sessionStorage.getItem('url') + "/Customer/getTitles")
+        .then(function (response) {
+            if (response.data.msg) {
+                $(function () {
+                    items.push('Choose Title');
+                    for (var i = 0; i < response.data.values.length; i++) {
+                        items.push(response.data.values[i]);
+                    }
+                    self.setState({ title: items })
+                });
+            }
+        })
+        .catch(function (error) {
+            cogoToast.error("Titles not loading", options)
+        });
+    }
+
     getCountries(){
-        var country;
+        var country = [];
+        var self = this;
         axios.get('https://restcountries.eu/rest/v2/all')
         .then(response => {
-            country = '<option selected>Choose Country</option>';
-            for(var i=0; i<response.data.length; i++){
-                country += '<option value='+response.data[i].name+'>'+response.data[i].name+'</option>'
+            country.push('Choose Country');
+            for (var i = 0; i < response.data.length; i++) {
+                country.push(response.data[i].name);
             }
-            $("#inputECountry").html(country);
+            self.setState({ country: country })
         })
         .catch(error => {
-            ToastsStore.error("Countries Loaded Fail Please Refreash Page")
+            cogoToast.error("Countries Loaded Fail Please Refreash Page", options)
         });
     }
 
     updateCustomer(){
+        this.setState({ save: true });
         var valid;
         var title = $('#inputETitle').val();
         var gender = $('#inputEGender').val();
         var country = $('#inputECountry').val();
-        var values = [title, $('#inputEInitials').val(), $('#inputEFullname').val(), gender, $('#inputEOccupation').val(), $('#inputEAddress').val(), $('#inputEAddress2').val(), $('#inputECity').val(), $('#inputEState').val(), country, $('#inputEEmail').val(), $('#inputEMobile').val()];
+        var values = [title, $('#inputEInitials').val(), $('#inputEFullname').val(), $('#inputNic').val(), gender, $('#inputEOccupation').val(), $('#inputEAddress').val(), $('#inputEAddress2').val(), $('#inputECity').val(), $('#inputEState').val(), country, $('#inputEEmail').val(), $('#inputEMobile').val()];
 
         for(var i=0; i<values.length; i++){
             if(values[i] === ''){
@@ -64,13 +99,13 @@ export default class CreateForm extends Component{
         }
 
         if(title === 'Choose Title'){
-            ToastsStore.warning("Title Not Select")
+            cogoToast.warn("Title Not Select", options)
         }else if(gender === 'Choose Gender'){
-            ToastsStore.warning("Gender Not Select")
+            cogoToast.warn("Gender Not Select", options)
         }else if(country === 'Choose Country'){
-            ToastsStore.warning("Country Not Select")
+            cogoToast.warn("Country Not Select", options)
         }else if(!valid){
-            ToastsStore.warning("Some Fields Are Empty")
+            
         }else{
             var path = sessionStorage.getItem('url')+'/Customer/updateCustomer';
 
@@ -80,9 +115,9 @@ export default class CreateForm extends Component{
               })
               .then(function (response) {
                 if(response.data.msg){
-                    ToastsStore.success("Customer Is Updated")
+                    cogoToast.success("Customer is updated", options)
                 }else{
-                    ToastsStore.error("Customer Update Is Fail")
+                    cogoToast.error("Customer update fail", options)
                 }
               })
               .catch(function (error) {
@@ -91,117 +126,185 @@ export default class CreateForm extends Component{
         }
     }
 
-    searchCustomer(){
-        var path = sessionStorage.getItem('url')+'/Customer/searchCutomer';
-
-        axios.post(path, {
+    searchCustomer(e){
+        e.preventDefault();
+        axios.post(sessionStorage.getItem('url') + '/Customer/searchCutomer', {
             data: $('#inputENIC').val().toUpperCase()
-          })
-          .then(function (response) {
-            if(response.data.msg){
-                loadData(response.data.table.rows[0])
+        })
+        .then(function (response) {
+        if(response.data.msg){
+            loadData(response.data.table.rows[0])
+        }else{
+            if(response.data.alert === 'fail'){
+                cogoToast.warn("This customer is not registered yet", options)
             }else{
-                if(response.data.alert === 'fail'){
-                    ToastsStore.warning("This Customer Is Not Registered")
-                }else{
-                    ToastsStore.error("Customer Data Not Found")
-                }
+                cogoToast.error("Customer data not found", options)
             }
-          })
-          .catch(function (error) {
-            console.log(error)
-          });
+        }
+        })
+        .catch(function (error) {
+        console.log(error)
+        });
+    }
+
+    getValue(){
+
     }
 
     render(){
         return(
             <div className='container'>
-                    <form action="#" className="form-horizontal">
-                        <div className="form-body pal">
-                            <div className="form-group">
-                                <div className='row'>
-                                    <label htmlFor="inputENIC" className="col-md-3 col-sm-2 col-xs-3 control-label">
-                                    Search :- </label>
-                                    <div className="input-icon col-md-6 col-sm-4 col-xs-6 " style={{display: 'inline-block' }}>
-                                        <i className="fa fa-user"></i>
-                                        <input id="inputENIC" type="text" placeholder="Search by NIC/Passport No" className="form-control" />
-                                    </div>
-                                    <div className='col-md-2 col-sm-1 col-xs-2' style={{ height: '30px', paddingTop: '-50px'}}>
-                                        <button className="btn btn-primary ml-5" id="searchBtn" onClick={this.searchCustomer}>Search</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                <Search
+                    id="inputENIC"
+                    icon="fa fa-user"
+                    placeholder="Search by NIC/Passport No"
+                    btnId="searchBtn"
+                    msg="Please input nic or passport no"
+                    handleChange={this.searchCustomer.bind(this)}
+                    width="92.5%"
+                />
                 <form className='col-sm-12 col-xs-12'>
-                    <div class="form-group col-md-11 col-sm-7 col-xs-12">
-                        <label for="inputETitle">Title</label>
-                        <select id="inputETitle" class="form-control">
-                            <option selected>Choose Title</option>
-                            <option value="Mr. ">Mr. </option>
-                            <option value="Miss. ">Miss. </option>
-                            <option value="Mrs. ">Mrs. </option>
-                            <option value="Ms. ">Ms. </option>
-                            <option value="Dr. ">Dr. </option>
-                            <option value="Sir. ">Sir. </option>
-                            <option value="Ma'am. ">Ma'am. </option>
-                        </select>
+                    <Dropdown
+                        size={[11, 11, 11, 12]}
+                        id="inputTitle"
+                        label="Title"
+                        reqiured={true}
+                        save={this.state.save}
+                        msg="Please choose title"
+                        value={this.state.title}
+                    />
+                    <Input
+                        size={[11, 11, 11, 12]}
+                        id="inputEInitials"
+                        label="Name With Initials"
+                        placeholder="M.D.S Something"
+                        msg="Please input name with initials"
+                        handleChange={this.getValue.bind(this)}
+                        reqiured={true}
+                        type="text"
+                        save={this.state.save}
+                    />
+                    <Input
+                        size={[11, 11, 11, 12]}
+                        id="inputEFullname"
+                        label="Full Name"
+                        placeholder="Michael Dennis Stocks Something"
+                        msg="Please input full name"
+                        handleChange={this.getValue.bind(this)}
+                        reqiured={true}
+                        type="text"
+                        save={this.state.save}
+                    />
+                    <div class="form-row">
+                        <Input
+                            size={[4, 4, 4, 12]}
+                            id="inputNic"
+                            label="NIC/Passport No"
+                            placeholder="NIC/Passport No"
+                            msg="Please input nic/passport No"
+                            handleChange={this.getValue.bind(this)}
+                            reqiured={true}
+                            type="text"
+                            save={this.state.save}
+                        />
+                        <Dropdown
+                            size={[4, 4, 4, 12]}
+                            id="inputGender"
+                            label="Gender"
+                            reqiured={true}
+                            save={this.state.save}
+                            msg="Please choose gender"
+                            value={['Choose Gender', 'Male', 'Female']}
+                        />
+                        <Input
+                            size={[3, 3, 3, 12]}
+                            id="inputEOccupation"
+                            label="Occupation"
+                            placeholder="Job role"
+                            msg="Please input occupation"
+                            handleChange={this.getValue.bind(this)}
+                            reqiured={true}
+                            type="text"
+                            save={this.state.save}
+                        />
                     </div>
-                    <div class="form-group col-md-11 col-sm-7 col-xs-12">
-                        <label for="inputEInitials">Name With Initials</label>
-                        <input type="text" class="form-control" id="inputEInitials" placeholder="M.D.S Something"/>
-                    </div>
-                    <div class="form-group col-md-11 col-sm-7 col-xs-12">
-                        <label for="inputEFullname">Full Name</label>
-                        <input type="text" class="form-control" id="inputEFullname" placeholder="Michael Dennis Stocks Something"/>
+                    <Input
+                        size={[11, 11, 11, 12]}
+                        id="inputEAddress"
+                        label="Address"
+                        placeholder="1234 Main St"
+                        msg="Please input address"
+                        handleChange={this.getValue.bind(this)}
+                        reqiured={true}
+                        type="text"
+                        save={this.state.save}
+                    />
+                    <Input
+                        size={[11, 11, 11, 12]}
+                        id="inputEAddress2"
+                        label="Address 2"
+                        placeholder="Apartment, studio, or floor"
+                        msg="Please input address 2"
+                        handleChange={this.getValue.bind(this)}
+                        type="text"
+                        save={this.state.save}
+                    />
+                    <div class="form-row">
+                        <Input
+                            size={[4, 4, 4, 12]}
+                            id="inputECity"
+                            label="City"
+                            placeholder=""
+                            msg="Please input city"
+                            handleChange={this.getValue.bind(this)}
+                            reqiured={true}
+                            type="text"
+                            save={this.state.save}
+                        />
+                        <Input
+                            size={[4, 4, 4, 12]}
+                            id="inputEState"
+                            label="State"
+                            placeholder=""
+                            msg="Please input state"
+                            handleChange={this.getValue.bind(this)}
+                            reqiured={true}
+                            type="text"
+                            save={this.state.save}
+                        />
+                        <Dropdown
+                            size={[3, 3, 3, 12]}
+                            id="inputCountry"
+                            label="Country"
+                            reqiured={true}
+                            save={this.state.save}
+                            msg="Please choose country"
+                            value={this.state.country}
+                        />
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-5 col-sm-7 col-xs-12">
-                        <label for="inputEGender">Gender</label>
-                        <select id="inputEGender" class="form-control">
-                            <option selected>Choose Gender</option>
-                            <option>Male</option>
-                            <option>Female</option>
-                        </select>
-                        </div>
-                        <div class="form-group col-md-6 col-sm-7 col-xs-12">
-                        <label for="inputEOccupation">Occupation</label>
-                        <input type="text" class="form-control" id="inputEOccupation"/>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-11 col-sm-7 col-xs-12">
-                        <label for="inputEAddress">Address</label>
-                        <input type="text" class="form-control" id="inputEAddress" placeholder="1234 Main St"/>
-                    </div>
-                    <div class="form-group col-md-11 col-sm-7 col-xs-12">
-                        <label for="inputEAddress2">Address 2</label>
-                        <input type="text" class="form-control" id="inputEAddress2" placeholder="Apartment, studio, or floor"/>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-4 col-sm-7 col-xs-12">
-                        <label for="inputECity">City</label>
-                        <input type="text" class="form-control" id="inputECity"/>
-                        </div>
-                        <div class="form-group col-md-4 col-sm-7 col-xs-12">
-                        <label for="inputEState">State</label>
-                        <input type="text" class="form-control" id="inputEState"/>
-                        </div>
-                        <div class="form-group col-md-3 col-sm-7 col-xs-12">
-                        <label for="inputECountry">Country</label>
-                        <select id="inputECountry" class="form-control">
-                            <option selected>Choose Country</option>
-                        </select>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6 col-sm-7 col-xs-12">
-                        <label for="inputEEmail">Email</label>
-                        <input type="text" class="form-control" id="inputEEmail"/>
-                        </div>
-                        <div class="form-group col-md-5 col-sm-7 col-xs-12">
-                        <label for="inputEMobile">Mobile No</label>
-                        <input type="text" class="form-control" id="inputEMobile"/>
-                        </div>
+                        <Input
+                            size={[6, 6, 6, 12]}
+                            id="inputEEmail"
+                            label="Email"
+                            placeholder=""
+                            msg="Please input email"
+                            handleChange={this.getValue.bind(this)}
+                            reqiured={true}
+                            type="text"
+                            save={this.state.save}
+                        />
+                        <Input
+                            size={[5, 5, 5, 12]}
+                            id="inputEMobile"
+                            label="Mobile No"
+                            placeholder=""
+                            msg="Please input mobile no"
+                            handleChange={this.getValue.bind(this)}
+                            reqiured={true}
+                            type="text"
+                            save={this.state.save}
+                        />
                     </div>
                     <div class="form-group col-sm-6 col-md-4 row">
                         <div class='col-sm-3 col-xs-6'>

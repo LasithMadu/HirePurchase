@@ -1,5 +1,4 @@
-import React, {useState} from 'react'
-import $ from 'jquery'
+import React from 'react'
 
 const Separation = ({size, title, component}) => {
     return(

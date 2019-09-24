@@ -62,15 +62,15 @@ export default class CustomerDetails extends Component {
         })
         .then(function (response) {
           if(response.data.msg){
-              self.setState({values: response.data.table.rows})
+            if (response.data.table.rowCount > 0){
+              self.setState({ values: response.data.table.rows })
               cogoToast.success('Sucessfuly load customer data.', options);
-          }else{
-            if(response.data.alert === 'fail'){
-              cogoToast.warn('Customer is not register yet.', options);
-              handleShow();
             }else{
-              cogoToast.error('Fail to load customer data.', options);
+              handleShow();
+              cogoToast.warn('Customer is not register yet.', options);
             }
+          }else{
+            cogoToast.error('Server error.', options);
           }
         })
         .catch(function (error) {

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import $ from 'jquery'
 import axios from 'axios'
-import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
+import cogoToast from 'cogo-toast';
 
 import Search from '../../../../../Main/UI/SingleComponent/Search'
 import DataRow from '../../../../../Main/UI/SingleComponent/DataCell'
@@ -16,11 +16,6 @@ import statusIcon from '../../../../../../Assests/images/gjoiconset/status.png'
 import mobile from '../../../../../../Assests/images/gjoiconset/mobile.png'
 
 function loadData(data){
-    setValue('#Euser', data.nameInitials)
-    setValue('#Eemail', data.email)
-    setValue('#Eaddress', data.address)
-    setValue('#Egender', data.gender)
-    setValue('#Emobile', data.mobile)
     setInput('#inputERegistration', data.vehiNo)
     setInput('#inputECassis', data.chassis)
     setInput('#inputEEngine', data.engineNo)
@@ -31,12 +26,12 @@ function loadData(data){
     setInput('#inputEYear', data.year)
 }
 
-function setValue(id, value){
-    $(id).html(value);
-}
-
 function setInput(id, value){
     $(id).val(value);
+}
+
+const options = {
+    position: 'top-center'
 }
 
 export default class VehicalAdd extends Component{
@@ -52,19 +47,18 @@ export default class VehicalAdd extends Component{
         var vehi = $('#inputVehiNo').val().toUpperCase();
 
         if(vehi.length > 9){
-
             axios.post(sessionStorage.getItem('url') + '/Vehicals/searchVehical', {
                 data: vehi
               })
               .then(function (response) {
                 if(response.data.msg){
-                    self.setState({values: response.data.table.rows[0]})
-                    ToastsStore.success("Sucessfuly Load Customer Data")
+                    loadData(response.data.table.rows[0])
+                    self.setState({ values: response.data.table.rows[0]})
                 }else{
                   if(response.data.alert === 'fail'){
-                    ToastsStore.warning("This Customer Is Not Registered Yet")
+                    cogoToast.warn("This Customer Is Not Registered Yet", options)
                   }else{
-                    ToastsStore.error("Fail To Load Customer Data")
+                    cogoToast.error("Fail To Load Customer Data", options)
                   }
                 }
               })
@@ -82,30 +76,27 @@ export default class VehicalAdd extends Component{
         for(var i=0; i<vehicals.length; i++){
             if(vehicals[i] === ''){
                 valid = false
+                break;
             }else{
                 valid = true
             }
         }
 
-        if(!valid){
-            ToastsStore.warning("Some Fields Are Empty")
-        }else{
-            var path = sessionStorage.getItem('url')+'/Vehicals/updateVehicals';
-
-            axios.post(path, {
-                vehiNo: $('#inputVehiNo').val().toUpperCase(),
+        if(valid){
+            axios.post(sessionStorage.getItem('url') + '/Vehicals/updateVehicals', {
+                vehiNo: this.state.values.vehiNo,
                 Data: vehicals
-              })
-              .then(function (response) {
-                if(response.data.msg){
-                    ToastsStore.success("Sucessfuly Vehical Updated")
-                }else{
-                    ToastsStore.error("Vehical Updated Fail")
+            })
+            .then(function (response) {
+                if (response.data.msg) {
+                    cogoToast.success("Sucessfuly Vehical Updated", options)
+                } else {
+                    cogoToast.error("Vehical Updated Fail", options)
                 }
-              })
-              .catch(function (error) {
+            })
+            .catch(function (error) {
                 console.log(error)
-              });
+            });
         }
     }
 
@@ -168,7 +159,6 @@ export default class VehicalAdd extends Component{
                         reqiured={true}
                         type="text"
                         save={this.state.save}
-                        value={data.vehiNo}
                     />
                     <Input
                         size={[6, 6, 6, 12]}
@@ -180,7 +170,6 @@ export default class VehicalAdd extends Component{
                         reqiured={true}
                         type="text"
                         save={this.state.save}
-                        value={data.chassis}
                     />
                 </div>
                 <div class="form-row">
@@ -194,7 +183,6 @@ export default class VehicalAdd extends Component{
                         reqiured={true}
                         type="text"
                         save={this.state.save}
-                        value={data.engineNo}
                     />
                     <Input
                         size={[6, 6, 6, 12]}
@@ -206,7 +194,6 @@ export default class VehicalAdd extends Component{
                         reqiured={true}
                         type="text"
                         save={this.state.save}
-                        value={data.capacity}
                     />
                 </div>
                 <div class="form-row">
@@ -220,7 +207,6 @@ export default class VehicalAdd extends Component{
                         reqiured={true}
                         type="text"
                         save={this.state.save}
-                        value={data.make}
                     />
                     <Input
                         size={[6, 6, 6, 12]}
@@ -232,7 +218,6 @@ export default class VehicalAdd extends Component{
                         reqiured={true}
                         type="text"
                         save={this.state.save}
-                        value={data.modal}
                     />
                 </div>
                 <div class="form-row">
@@ -246,7 +231,6 @@ export default class VehicalAdd extends Component{
                         reqiured={true}
                         type="text"
                         save={this.state.save}
-                        value={data.fuel}
                     />
                     <Input
                         size={[6, 6, 6, 12]}
@@ -258,7 +242,6 @@ export default class VehicalAdd extends Component{
                         reqiured={true}
                         type="text"
                         save={this.state.save}
-                        value={data.year}
                     />
                 </div>
                 <div class="form-group col-sm-6 row">

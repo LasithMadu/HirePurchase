@@ -17,7 +17,6 @@ export default class CustomerDetails extends Component{
         axios.get(sessionStorage.getItem('url')+"/getSecurityQuestion")
         .then(function (response) {
             if(response.data.msg){
-                console.log(response.data.values)
                 $(function () { 
                     var sq1 = $("#sq1");
                     var sq2 = $("#sq2");

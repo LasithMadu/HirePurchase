@@ -3,14 +3,6 @@ import ImgCrop from "antd-img-crop";
 import { Upload, Icon, message } from "antd";
 import "antd/dist/antd.css";
 
-const styleSheet = {
-    dropzone: {
-        backgroundColor: '#fcfcfc',
-        height: '200px',
-        color: '#000000',
-    }
-}
-
 function getBase64(img, callback) {
     const reader = new FileReader();
     reader.addEventListener('load', () => callback(reader.result));

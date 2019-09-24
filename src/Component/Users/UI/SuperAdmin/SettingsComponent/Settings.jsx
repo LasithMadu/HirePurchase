@@ -79,12 +79,10 @@ export default class Settings extends Component {
 
     logoShow(value){
         if(this.state.expArr[value-1]){
-           this.state.expArr[value-1] = false;
-            this.forceUpdate()
+            this.setState({ expArr: { [value - 1]: false}})
         }else{
-            this.state.expArr[value-1] = true;
-            this.forceUpdate()
-        }        
+            this.setState({ expArr: { [value - 1]: true } })
+        }  
     }
 
     backgroundShow(){
@@ -206,7 +204,6 @@ export default class Settings extends Component {
                                 handleBackground = {this.handleBackground}
                                 handleFont = {this.handleFont}
                                 changeColor = {this.changeColor}
-                                handleBackground = {this.handleBackground}
                             />
                             : ""
                         }

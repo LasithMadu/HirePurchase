@@ -29,7 +29,7 @@ export default class CustomerDetails extends Component{
         self.setState({save: true});
         const other = {}
 
-        for (let entry of data.entries()) {
+        for (var entry of data.entries()) {
             other[entry[0]] = entry[1]
         }
 

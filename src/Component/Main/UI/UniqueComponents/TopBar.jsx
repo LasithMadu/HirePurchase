@@ -76,7 +76,7 @@ export default class TopBar extends Component {
                         <div id="mydiv" className="navbar-toggle" onClick={this.mouse}><i className="fa fa-bars"></i></div>
                     <div className="topbar-main">
                         <ul className="nav navbar navbar-top-links navbar-right mbn mobileDrop">
-                            <li className="dropdown topbar-user"><a data-hover="dropdown" className="dropdown-toggle"><span className="hidden-xs username">{sessionStorage.getItem('username').toUpperCase()}</span>&nbsp;<span className="caret"></span></a>
+                              <li className="dropdown topbar-user"><MDBNavLink data-hover="dropdown" className="dropdown-toggle"><span className="hidden-xs username">{sessionStorage.getItem('username').toUpperCase()}</span>&nbsp;<span className="caret"></span></MDBNavLink>
                             <div>
                                 { this.state.userLevel === 'Super Admin' ? superadmin : ""}
                                 { this.state.userLevel === 'Admin' ? admin : ""}

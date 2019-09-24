@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios'
 import $ from 'jquery'
+import { NavLink } from 'react-router-dom'
 import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
 import 'simplebar'; // or "import SimpleBar from 'simplebar';" if you want to use it manually.
 import 'simplebar/dist/simplebar.css';
@@ -76,9 +77,9 @@ export default class Profile extends Component {
             ToastsStore.warning("New Password Is Required")
         }else if(confirmPass === ''){
             ToastsStore.warning("Confirm Password Is Required")
-        }else if(newPass != confirmPass){
+        }else if(newPass !== confirmPass){
             ToastsStore.warning("Confirm Password Is Miss Match")
-        }else if(pass != this.state.currentPass){
+        }else if(pass !== this.state.currentPass){
             ToastsStore.warning("Current Password Is Miss Match")
         }else if(newPass.length <=5){
             ToastsStore.warning("New Password Must More Than 5 Letters")
@@ -255,14 +256,12 @@ export default class Profile extends Component {
                             <div className="col-md-3 col-sm-6 col-xs-6 pofimage">
                                 <div className="form-group">
                                     <div className="text-center mbl"><img src="http://lorempixel.com/640/480/business/1/" alt="" className="img-responsive"/></div>
-                                    <div className="text-center mbl"><a href="#" className="btn btn-green"><i className="fa fa-upload"></i>&nbsp;
-                                        Upload</a></div>
                                 </div>
                             </div>
                             <div className="col-md-9 col-sm-12 col-xs-12">
                                 <div id="generalTabContent" className="tab-content">
                                     <div id="tab-edit" className="tab-pane fade in active">
-                                        <form action="#" className="form-horizontal"><h3>Account Setting   <a onClick={this.showModel} style={{fontSize: '12px', color: '#006ae2', cursor: 'pointer'}}>  Edit</a></h3>
+                                                            <form action="#" className="form-horizontal"><h3>Account Setting   <NavLink onClick={this.showModel} style={{ fontSize: '12px', color: '#006ae2', cursor: 'pointer' }}>  Edit</NavLink></h3>
 
                                             <div className="form-group"><label className="col-sm-3 control-label">First Name</label>
 

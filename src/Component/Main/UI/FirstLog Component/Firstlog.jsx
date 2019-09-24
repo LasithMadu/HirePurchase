@@ -4,7 +4,6 @@ import { Scrollbars } from 'react-custom-scrollbars';
 
 import Security from './SubComponent/Security'
 import ChangePass from './SubComponent/ChangePass'
-import company from '../../../../Assests/images/logo/logo.png'
 
 export default class Firstlog extends Component {
 

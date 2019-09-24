@@ -1,35 +1,33 @@
 import React, {Component} from 'react';
 import $ from 'jquery'
 import axios from 'axios'
-import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
+import cogoToast from 'cogo-toast';
 
-function loadData(data){
-    setValue('#Duser', data.nameInitials)
-    setValue('#Demail', data.email)
-    setValue('#Daddress', data.address)
-    setValue('#Dgender', data.gender)
-    setValue('#Dmobile', data.mobile)
-    setInput('#inputDRegistration', data.vehiNo)
-    setInput('#inputDCassis', data.chassis)
-    setInput('#inputDEngine', data.engineNo)
-    setInput('#inputDCapacity', data.capacity)
-    setInput('#inputDMake', data.make)
-    setInput('#inputDModal', data.modal)
-    setInput('#inputDFuel', data.fuel)
-    setInput('#inputDYear', data.year)
-}
+import Search from '../../../../../Main/UI/SingleComponent/Search'
+import DataRow from '../../../../../Main/UI/SingleComponent/DataCell'
+import Input from '../../../../../Main/UI/SingleComponent/InputField'
+import Separation from '../../../../../Main/UI/SingleComponent/Separation'
 
-function setValue(id, value){
-    $(id).html(value);
-}
+import nameIcon from '../../../../../../Assests/images/gjoiconset/name.png'
+import emailIcon from '../../../../../../Assests/images/gjoiconset/email.png'
+import addressIcon from '../../../../../../Assests/images/gjoiconset/address.png'
+import nicIcon from '../../../../../../Assests/images/gjoiconset/NIC.png'
+import statusIcon from '../../../../../../Assests/images/gjoiconset/status.png'
+import mobile from '../../../../../../Assests/images/gjoiconset/mobile.png'
 
-function setInput(id, value){
-    $(id).val(value);
+const options = {
+    position: 'top-center'
 }
 
 export default class VehicalAdd extends Component{
 
-    searchVehical(){
+    state = {
+        values: []
+    }
+
+    searchVehical(e){
+        e.preventDefault();
+        var self = this;
         var vehi = $('#inputDVehiNo').val().toUpperCase();
 
         if(vehi.length > 9){
@@ -40,13 +38,12 @@ export default class VehicalAdd extends Component{
               })
               .then(function (response) {
                 if(response.data.msg){
-                    loadData(response.data.table.rows[0]);
-                    ToastsStore.success("Sucessfuly Load Customer Data")
+                    self.setState({ values: response.data.table.rows[0] })
                 }else{
                   if(response.data.alert === 'fail'){
-                    ToastsStore.warning("This Customer Is Not Registered Yet")
+                      cogoToast.warn("This vehicle is not registered yet", options)
                   }else{
-                    ToastsStore.error("Fail To Load Customer Data")
+                      cogoToast.error("Fail to load vehicle data.", options)
                   }
                 }
               })
@@ -58,7 +55,6 @@ export default class VehicalAdd extends Component{
 
     deleteVehical(){
         var valid;
-
         var vehicals = [$('#inputDRegistration').val(), $('#inputDCassis').val(), $('#inputDEngine').val(), $('#inputDCapacity').val(), $('#inputDMake').val(), $('#inputDModal').val(), $('#inputDFuel').val(), $('#inputDYear').val()];
 
         for(var i=0; i<vehicals.length; i++){
@@ -70,7 +66,7 @@ export default class VehicalAdd extends Component{
         }
 
         if(!valid){
-            ToastsStore.warning("Vehical Details Are Not Found")
+            cogoToast.warning("Vehical Details Are Not Found")
         }else{
             var path = sessionStorage.getItem('url')+'/Vehicals/deleteVehicals';
 
@@ -79,9 +75,9 @@ export default class VehicalAdd extends Component{
               })
               .then(function (response) {
                 if(response.data.msg){
-                    ToastsStore.success("Sucessfuly Vehical Deleted")
+                    cogoToast.success("Sucessfuly vehical deleted", options)
                 }else{
-                    ToastsStore.error("Vehical Deleted Fail")
+                    cogoToast.error("Vehical deleted fail", options)
                 }
               })
               .catch(function (error) {
@@ -91,7 +87,7 @@ export default class VehicalAdd extends Component{
     }
 
     showModel(){
-        if($('#inputDTitle').val() != 'Choose Title' || $('#inputDInitials').val() != '' || $('#inputDFullname').val() != ''){
+        if($('#inputDTitle').val() !== 'Choose Title' || $('#inputDInitials').val() !== '' || $('#inputDFullname').val() !== ''){
             $('.modal').show();
         }
     }
@@ -100,7 +96,178 @@ export default class VehicalAdd extends Component{
         $('.modal').hide();
     }
 
+    getValue() {
+
+    }
+
     render(){
+        var data = this.state.values;
+
+        const profileTable = (
+            <div>
+                <table className="proTable">
+                    <tbody>
+                        <DataRow
+                            icon={nameIcon}
+                            label="Name"
+                            value={data.length === 0 ? "Not Specified" : data.nameInitials}
+                        />
+                        <DataRow
+                            icon={emailIcon}
+                            label="Email"
+                            value={data.length === 0 ? "Not Specified" : data.email}
+                        />
+                        <DataRow
+                            icon={addressIcon}
+                            label="Address"
+                            value={data.length === 0 ? "Not Specified" : data.address}
+                        />
+                        <DataRow
+                            icon={nicIcon}
+                            label="NIC/Passport No"
+                            value={data.length === 0 ? "Not Specified" : data.nic}
+                        />
+                        <DataRow
+                            icon={statusIcon}
+                            label="Gender"
+                            value={data.length === 0 ? "Not Specified" : data.gender}
+                        />
+                        <DataRow
+                            icon={mobile}
+                            label="Mobile"
+                            value={data.length === 0 ? "Not Specified" : data.mobile}
+                        />
+                    </tbody>
+                </table>
+            </div>
+        );
+
+        const vehicleDelete = (
+            <form>
+                <div class="form-row">
+                    <Input
+                        size={[6, 6, 6, 12]}
+                        id="inputERegistration"
+                        label="Registration No"
+                        placeholder={data.vehiNo}
+                        disable={true}
+                        msg="Please input register no"
+                        handleChange={this.getValue.bind(this)}
+                        reqiured={true}
+                        type="text"
+                        save={this.state.save}
+                        value={data.vehiNo}
+                    />
+                    <Input
+                        size={[6, 6, 6, 12]}
+                        id="inputECassis"
+                        label="Chassis No"
+                        placeholder={data.chassis}
+                        disable={true}
+                        msg="Please input chassis no"
+                        handleChange={this.getValue.bind(this)}
+                        reqiured={true}
+                        type="text"
+                        save={this.state.save}
+                        value={data.chassis}
+                    />
+                </div>
+                <div class="form-row">
+                    <Input
+                        size={[6, 6, 6, 12]}
+                        id="inputEEngine"
+                        label="Engine No"
+                        placeholder={data.engineNo}
+                        disable={true}
+                        msg="Please input engine no"
+                        handleChange={this.getValue.bind(this)}
+                        reqiured={true}
+                        type="text"
+                        save={this.state.save}
+                        value={data.engineNo}
+                    />
+                    <Input
+                        size={[6, 6, 6, 12]}
+                        id="inputECapacity"
+                        label="Cylinder Capacity"
+                        placeholder={data.capacity}
+                        disable={true}
+                        msg="Please input cylinder capacity"
+                        handleChange={this.getValue.bind(this)}
+                        reqiured={true}
+                        type="text"
+                        save={this.state.save}
+                        value={data.capacity}
+                    />
+                </div>
+                <div class="form-row">
+                    <Input
+                        size={[6, 6, 6, 12]}
+                        id="inputEMake"
+                        label="Make"
+                        placeholder={data.make}
+                        disable={true}
+                        msg="Please input make"
+                        handleChange={this.getValue.bind(this)}
+                        reqiured={true}
+                        type="text"
+                        save={this.state.save}
+                        value={data.make}
+                    />
+                    <Input
+                        size={[6, 6, 6, 12]}
+                        id="inputEModal"
+                        label="Model"
+                        placeholder={data.modal}
+                        disable={true}
+                        msg="Please input model"
+                        handleChange={this.getValue.bind(this)}
+                        reqiured={true}
+                        type="text"
+                        save={this.state.save}
+                        value={data.modal}
+                    />
+                </div>
+                <div class="form-row">
+                    <Input
+                        size={[6, 6, 6, 12]}
+                        id="inputEFuel"
+                        label="Fuel Type"
+                        placeholder={data.fuel}
+                        disable={true}
+                        msg="Please input fuel type"
+                        handleChange={this.getValue.bind(this)}
+                        reqiured={true}
+                        type="text"
+                        save={this.state.save}
+                        value={data.fuel}
+                    />
+                    <Input
+                        size={[6, 6, 6, 12]}
+                        id="inputEYear"
+                        label="Year Of Manifacturing"
+                        placeholder={data.year}
+                        disable={true}
+                        msg="Please input year of manifacturing"
+                        handleChange={this.getValue.bind(this)}
+                        reqiured={true}
+                        type="text"
+                        save={this.state.save}
+                        value={data.year}
+                    />
+                </div>
+                <div class="form-group col-sm-6 row">
+                    <div class='col-xs-6 col-md-3'>
+                        <button type="button" class="btn btn-danger" onClick={this.deleteVehical}>Delete</button>
+                    </div>
+                    <div class='col-xs-6 col-md-3'>
+                        <button type="button" class="btn btn-light">Cancel</button>
+                    </div>
+                </div>
+
+            </form>
+        );
+
         return(
             <div>
                 <div className="modal" role="dialog" style={{borderRadius: '50px', marginTop: '75px'}}>
@@ -123,105 +290,27 @@ export default class VehicalAdd extends Component{
                     </div>
                   </div>
                 <div className='col-md-12 col-sm-7'>
-                <form action="#" className="form-horizontal">
-                        <div className="form-body pal">
-                            <div className="form-group">
-                                <div className='row'>
-                                    <label htmlFor="inputDVehiNo" className="col-xs-3 control-label">
-                                    Search :- </label>
-                                    <div className="input-icon col-xs-5" style={{display: 'inline-block' }}>
-                                        <i className="fa fa-car"></i>
-                                        <input id="inputDVehiNo" type="text" placeholder="Vehical No" className="form-control" />
-                                    </div>
-                                    <div className='col-xs-2' style={{ height: '30px', paddingTop: '-50px'}}>
-                                        <a href="#" className="btn btn-primary ml-5" id="searchBtn" onClick={this.searchVehical}>Search</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                    <div className="col-sm-12 col-md-3">
-                        <table className="table table-striped table-hover">
-                            <tbody>
-                                <tr>
-                                    <td>Name</td>
-                                    <td id='Duser'></td>
-                                </tr>
-                                <tr>
-                                    <td>Dmail</td>
-                                    <td id='Demail'></td>
-                                </tr>
-                                <tr>
-                                    <td>Address</td>
-                                    <td id='Daddress'></td>
-                                </tr>
-                                <tr>
-                                    <td>Gender</td>
-                                    <td id='Dgender'></td>
-                                </tr>
-                                <tr>
-                                    <td>Mobile No</td>
-                                    <td id='Dmobile'></td>
-                                </tr>
-                                <tr>
-                                    <td>Member Since</td>
-                                    <td>Jun 03, 2014</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <Search
+                        id="inputDVehiNo"
+                        icon="fa fa-car"
+                        placeholder="Vehical No"
+                        btnId="searchBtn"
+                        msg="Please input vehicle no"
+                        handleChange={this.searchVehical.bind(this)}
+                        width="92.5%"
+                    />
+                    <Separation
+                        size={[3, 3, 3, 12]}
+                        title="Customer"
+                        component={profileTable}
+                    />
+                    <div className='col-md-9 col-sm-9 col-lg-9 col-xs-12'>
+                        <Separation
+                            size={[12, 12, 12, 12]}
+                            title="Vehicle"
+                            component={vehicleDelete}
+                        />
                     </div>
-                    <form className='col-sm-12 col-md-9'>
-
-                        <div class="form-row">
-                            <div class="form-group col-sm-6">
-                            <label for="inputDRegistration">Registration No</label>
-                            <input type="text" class="form-control" id="inputDRegistration" disabled placeholder="Registration No"/>
-                            </div>
-                            <div class="form-group col-sm-5">
-                            <label for="inputDCassis">Chassis No</label>
-                            <input type="text" class="form-control" id="inputDCassis" disabled placeholder="Chassis No"/>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-sm-6">
-                            <label for="inputDDngine">Dngine No</label>
-                            <input type="text" class="form-control" id="inputDEngine" disabled placeholder="Dngine No"/>
-                            </div>
-                            <div class="form-group col-sm-5">
-                            <label for="inputDCapacity">Cylinder Capacity</label>
-                            <input type="text" class="form-control" id="inputDCapacity" disabled placeholder="Cylinder Capacity"/>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-sm-6">
-                            <label for="inputDMake">Make</label>
-                            <input type="text" class="form-control" id="inputDMake" disabled placeholder='Make'/>
-                            </div>
-                            <div class="form-group col-sm-5">
-                            <label for="inputDModal">Modal</label>
-                            <input type="text" class="form-control" id="inputDModal" disabled placeholder='Modal'/>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-sm-6">
-                                <label for="inputDFuel">Fuel Type</label>
-                                <input type="text" class="form-control" id="inputDFuel" disabled placeholder="Fuel Type"/>
-                            </div>
-                            <div class="form-group col-sm-5">
-                                <label for="inputDYear">Year Of Manifacturing</label>
-                                <input type="text" class="form-control" id="inputDYear" disabled placeholder="Year Of Manifacturing"/>
-                            </div>
-                        </div>
-                        <div class="form-group col-sm-6 row">
-                            <div class='col-xs-6 col-md-3'>
-                                <button type="button" class="btn btn-danger" onClick={this.showModel.bind(this)}>Delete</button>
-                            </div>
-                            <div class='col-xs-6 col-md-3'>
-                                <button type="button" class="btn btn-light">Cancel</button>
-                            </div>
-                        </div>
-
-                    </form>
                 </div>
             </div>
         )

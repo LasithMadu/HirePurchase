@@ -17,6 +17,10 @@ import occupationIcon from '../../../../../Assests/images/gjoiconset/Occupation.
 
 export default class CustomerDetails extends Component{
 
+    state = {
+        values: []
+    }
+
     searchCustomer(event){
         event.preventDefault();
         var self = this;
@@ -28,17 +32,11 @@ export default class CustomerDetails extends Component{
                 self.props.changeCustomer(response.data.table.rows[0])
                 self.props.setNic($('#cusNic').val().toUpperCase());
                 self.setState({values: response.data.table.rows[0]})          
-            }else{
-                
             }
         })
         .catch(function (error) {
             console.log(error);
         });
-    }
-
-    state = {
-        values: []
     }
 
     render(){
@@ -66,27 +64,27 @@ export default class CustomerDetails extends Component{
                                 <DataRow 
                                     icon = {nameIcon}
                                     label = "Name"
-                                    value = {data.length == 0 ? "Not Specified" : data.nameInitials}
+                                    value = {data.length === 0 ? "Not Specified" : data.nameInitials}
                                 />
                                 <DataRow 
                                     icon = {addressIcon}
                                     label = "Address"
-                                    value = {data.length == 0 ? "Not Specified" : data.address+" "+data.address_2}
+                                    value = {data.length === 0 ? "Not Specified" : data.address+" "+data.address_2}
                                 />
                                 <DataRow 
                                     icon = {cityIcon}
                                     label = "City"
-                                    value = {data.length == 0 ? "Not Specified" : data.city}
+                                    value = {data.length === 0 ? "Not Specified" : data.city}
                                 />
                                 <DataRow 
                                     icon = {countryIcon}
                                     label = "Country"
-                                    value = {data.length == 0 ? "Not Specified" : data.country}
+                                    value = {data.length === 0 ? "Not Specified" : data.country}
                                 />
                                 <DataRow 
                                     icon = {mobileIcon}
                                     label = "Mobile"
-                                    value = {data.length == 0 ? "Not Specified" : data.mobile}
+                                    value = {data.length === 0 ? "Not Specified" : data.mobile}
                                 />
                                 </tbody>
                             </table>
@@ -97,22 +95,22 @@ export default class CustomerDetails extends Component{
                                 <DataRow 
                                     icon = {nicIcon}
                                     label = "NIC"
-                                    value = {data.length == 0 ? "Not Specified" : data.nic}
+                                    value = {data.length === 0 ? "Not Specified" : data.nic}
                                 />
                                 <DataRow 
                                     icon = {occupationIcon}
                                     label = "Occupation"
-                                    value = {data.length == 0 ? "Not Specified" : data.occupation}
+                                    value = {data.length === 0 ? "Not Specified" : data.occupation}
                                 />
                                 <DataRow 
                                     icon = {statusIcon}
                                     label = "State"
-                                    value = {data.length == 0 ? "Not Specified" : data.state}
+                                    value = {data.length === 0 ? "Not Specified" : data.state}
                                 />
                                 <DataRow 
                                     icon = {emailIcon}
                                     label = "Email"
-                                    value = {data.length == 0 ? "Not Specified" : data.email}
+                                    value = {data.length === 0 ? "Not Specified" : data.email}
                                 />
                                 </tbody>
                             </table>

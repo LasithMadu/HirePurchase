@@ -1,15 +1,67 @@
 import React, {Component} from 'react';
 import $ from 'jquery'
-import uuidv4 from 'uuid/v4'
 import axios from 'axios'
-import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
+import cogoToast from 'cogo-toast';
+
+import Input from '../../../../Main/UI/SingleComponent/InputField'
+import Password from '../../../../Main/UI/SingleComponent/PasswordInput'
+import Search from '../../../../Main/UI/SingleComponent/Search'
+
+const options = {
+    position: 'top-center'
+}
+
+function loadData(data){
+    setInput('#inputFirst', data.firstName)
+    setInput('#inputLast', data.lastName)
+    setInput('#inputUser', data.userName)
+    setInput('#inputPass', data.password)
+    setInput('#inputEmail', data.email)
+    setInput('#inputNic', data.nic)
+    setInput('#inputAddress', data.address)
+    setInput('#inputCity', data.city)
+    setInput('#inputState', data.state)
+    setInput('#inputZip', data.zip)
+}
+
+function setInput(id, value) {
+    $(id).val(value);
+}
 
 export default class EditAdmin extends Component{
 
-    createAdmin(){
+    state = {
+        save: false,
+        id: ''
+    }
+
+    searchAdmin(e){
+        e.preventDefault();
+        var nic = $('#inputName').val();
+        var self = this;
+
+        if(nic !== ''){
+            axios.post(sessionStorage.getItem('url') + '/Admin/getUserByNic', {
+                nic: nic
+            })
+            .then(function (response) {
+                if (response.data.msg) {
+                    loadData(response.data.data.rows[0])
+                    self.setState({id: response.data.data.rows[0].userId})
+                } else {
+                    cogoToast.error("Admin created Fail", options)
+                }
+            })
+            .catch(function (error) {
+                cogoToast.error("Connection Error", options)
+            });
+        }
+    }
+
+    updateAdmin(){
         var valid;
-        let values= [uuidv4(), $('#inputFirst').val(), $('#inputLast').val(), $('#inputUser').val().toLowerCase(), $('#inputPass').val(), $('#inputEmail').val(), $('#inputNic').val().toUpperCase(), $('#inputCompany').val(), $('#inputAddress').val(), $('#inputCity').val(), $('#inputState').val(), $('#inputZip').val(), 'Admin'];
-        let path = sessionStorage.getItem('url')+'/superAdmin/create';
+        var self = this;
+        let values = [$('#inputFirst').val(), $('#inputLast').val(), $('#inputUser').val().toLowerCase(), $('#inputPass').val(), $('#inputEmail').val(), $('#inputNic').val().toUpperCase(), sessionStorage.getItem('company'), $('#inputAddress').val(), $('#inputCity').val(), $('#inputState').val(), $('#inputZip').val(), 'Admin'];
 
         for(var i = 0; i<13; i++){
             if(values[i] === ''){
@@ -20,104 +72,190 @@ export default class EditAdmin extends Component{
             }
         }
 
+        if (this.state.id === '') {
+            valid = false;
+        }
+
         if(valid){
-            axios.post(path, {
+            axios.post(sessionStorage.getItem('url') + '/Admin/updateUser', {
+                id: self.state.id,
                 data: values
               })
               .then(function (response) {
                 if(response.data.msg){
-                    if(response.data.alert === ''){
-                        ToastsStore.success('Admin Created Sucessfull')
-                    }else{
-                        ToastsStore.success(response.data.alert)
-                    }
+                    cogoToast.success('Admin update sucessfull', options)
                 }else{
-                    ToastsStore.error("Admin Created Fail")
+                    cogoToast.error("Admin update fail", options)
                 }
               })
               .catch(function (error) {
-                ToastsStore.error("Connection Error")
+                  cogoToast.error("Connection Error", options)
               });
-        }else{
-            ToastsStore.warning("Some Fields Are Empty")
         }
+    }
+
+    newPass(value) {
+        var strength = 1;
+        var regex = [];
+        regex.push(".{8,}"); //For length
+        regex.push("[A-Z]"); //For Uppercase Alphabet
+        regex.push("[a-z]"); //For Lowercase Alphabet
+        regex.push("[0-9]"); //For Numeric Digits
+        regex.push("[$@$!%*#?&]"); //For Special Characters
+        $.map(regex, function (regexp) {
+            if (value.match(regexp))
+                strength++;
+        });
+
+        if (value === '') {
+            this.setState({ err: 'Please input new password' })
+        } else if (strength === 6) {
+            this.setState({ err: '' })
+        } else {
+            this.setState({ err: 'Password should contain more than 8 characters and at least 1 upper case character, 1 lower case character, 1 number and 1 special character' })
+        }
+    }
+
+    getValue(){
+
     }
 
     render(){
         return(
-            <div>
-                    <form action="#" className="form-horizontal">
-                        <div className="form-body pal">
-                            <div className="form-group">
-                                <div className='row'>
-                                    <label htmlFor="inputName" className="col-md-3 col-sm-2 col-xs-3 control-label">
-                                    Search :- </label>
-                                    <div className="input-icon col-md-6 col-sm-4 col-xs-6" style={{display: 'inline-block' }}>
-                                        <i className="fa fa-user"></i>
-                                        <input id="inputName" type="text" placeholder="Search by NIC/Passport No" className="form-control" />
-                                    </div>
-                                    <div className='col-md-2 col-sm-1 col-xs-2' style={{ height: '30px', paddingTop: '-50px'}}>
-                                        <a href="#" className="btn btn-primary ml-3" id="searchBtn" >Search</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+            <div className="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <div className="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                    <div className="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                        <Search
+                            id="inputName"
+                            icon="fa fa-user"
+                            placeholder="Search by NIC/Passport No"
+                            btnId="searchBtn"
+                            msg="Please input nic or passport no"
+                            handleChange={this.searchAdmin.bind(this)}
+                            width="96%"
+                        />
+                    </div>
+                </div>
                 <form className='col-md-12 col-sm-12'>
                     <div class="form-row">
-                        <div class="form-group col-md-6 col-sm-7">
-                        <label for="inputFirst">First Name</label>
-                        <input type="text" class="form-control" id="inputFirst" placeholder="First Name"/>
-                        </div>
-                        <div class="form-group col-md-5 col-sm-7">
-                        <label for="inputLast">Last Name</label>
-                        <input type="text" class="form-control" id="inputLast" placeholder="Last Name"/>
-                        </div>
+                        <Input
+                            size={[6, 6, 6, 12]}
+                            id="inputFirst"
+                            label="First Name"
+                            placeholder="First Name"
+                            msg="Please input first name"
+                            handleChange={this.getValue.bind(this)}
+                            reqiured={true}
+                            type="text"
+                            save={this.state.save}
+                        />
+                        <Input
+                            size={[6, 6, 6, 12]}
+                            id="inputLast"
+                            label="Last Name"
+                            placeholder="Last Name"
+                            msg="Please input last name"
+                            handleChange={this.getValue.bind(this)}
+                            reqiured={true}
+                            type="text"
+                            save={this.state.save}
+                        />
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-6 col-sm-7">
-                        <label for="inputFirst">Username</label>
-                        <input type="text" class="form-control" id="inputUser" placeholder="Username"/>
-                        </div>
-                        <div class="form-group col-md-5 col-sm-7">
-                        <label for="inputLast">Password</label>
-                        <input type="password" class="form-control" id="inputPass" placeholder="Password"/>
-                        </div>
+                        <Input
+                            size={[6, 6, 6, 12]}
+                            id="inputUser"
+                            label="Username"
+                            placeholder="Username"
+                            msg="Please input username"
+                            handleChange={this.getValue.bind(this)}
+                            reqiured={true}
+                            type="text"
+                            save={this.state.save}
+                        />
+                        <Password
+                            size={[6, 6, 6, 12]}
+                            id="inputPass"
+                            label="Password"
+                            placeholder="password"
+                            msg="Please Input password"
+                            handleChange={this.newPass.bind(this)}
+                            err={this.state.err}
+                        />
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-11 col-sm-7">
-                        <label for="inputEmail">Email</label>
-                        <input type="email" class="form-control" id="inputEmail" placeholder='Email Address'/>
-                        </div>
+                        <Input
+                            size={[6, 6, 6, 12]}
+                            id="inputEmail"
+                            label="Email"
+                            placeholder="Email"
+                            msg="Please input email"
+                            handleChange={this.getValue.bind(this)}
+                            reqiured={true}
+                            type="text"
+                            save={this.state.save}
+                        />
+                        <Input
+                            size={[6, 6, 6, 12]}
+                            id="inputNic"
+                            label="NIC/Passport No"
+                            placeholder="NIC/Passport No"
+                            msg="Please input nic or passport no"
+                            handleChange={this.getValue.bind(this)}
+                            reqiured={true}
+                            type="text"
+                            save={this.state.save}
+                        />
                     </div>
-                    <div class="form-group col-md-11 col-sm-7">
-                        <label for="inputCompany">Company Name</label>
-                        <input type="text" class="form-control" id="inputCompany" placeholder="Company Name"/>
-                    </div>
-                    <div class="form-group col-md-11 col-sm-7">
-                        <label for="inputAddress">Company Address</label>
-                        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St, Apartment, studio, or floor"/>
-                    </div>
+                    <Input
+                        size={[12, 12, 12, 12]}
+                        id="inputAddress"
+                        label="Company Address"
+                        placeholder="Company Address"
+                        msg="Please input company address"
+                        handleChange={this.getValue.bind(this)}
+                        reqiured={true}
+                        type="text"
+                        save={this.state.save}
+                    />
                     <div class="form-row">
-                        <div class="form-group col-md-5 col-sm-7">
-                        <label for="inputCity">City</label>
-                        <input type="text" class="form-control" id="inputCity"/>
-                        </div>
-                        <div class="form-group col-md-4 col-sm-7">
-                        <label for="inputState">State</label>
-                        <select id="inputState" class="form-control">
-                            <option selected>Choose...</option>
-                            <option>...</option>
-                        </select>
-                        </div>
-                        <div class="form-group col-md-2 col-sm-7">
-                        <label for="inputZip">Zip</label>
-                        <input type="text" class="form-control" id="inputZip"/>
-                        </div>
+                        <Input
+                            size={[4, 4, 4, 12]}
+                            id="inputCity"
+                            label="City"
+                            placeholder="City"
+                            msg="Please input city"
+                            handleChange={this.getValue.bind(this)}
+                            reqiured={true}
+                            type="text"
+                            save={this.state.save}
+                        />
+                        <Input
+                            size={[4, 4, 4, 12]}
+                            id="inputState"
+                            label="State"
+                            placeholder="State"
+                            msg="Please input state"
+                            handleChange={this.getValue.bind(this)}
+                            reqiured={true}
+                            type="text"
+                            save={this.state.save}
+                        />
+                        <Input
+                            size={[4, 4, 4, 12]}
+                            id="inputZip"
+                            label="Postal Code"
+                            placeholder="Postal Code"
+                            msg="Please input postal code"
+                            handleChange={this.getValue.bind(this)}
+                            reqiured={true}
+                            type="text"
+                            save={this.state.save}
+                        />
                     </div>
                     <div class="form-group col-sm-6 col-md-4 row">
                         <div class='col-sm-3 col-xs-6'>
-                            <button type="button" class="btn btn-primary" onClick={this.createAdmin.bind(this)}>Update</button>
+                            <button type="button" class="btn btn-primary" onClick={this.updateAdmin.bind(this)}>Update</button>
                         </div>
                         <div class='col-sm-3 col-xs-6'>
                             <button type="button" class="btn btn-light">Cancel</button>

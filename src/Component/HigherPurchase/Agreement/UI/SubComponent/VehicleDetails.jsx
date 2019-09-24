@@ -13,7 +13,7 @@ import fuelIcon from '../../../../../Assests/images/gjoiconset/Fuel type.png'
 import yearIcon from '../../../../../Assests/images/gjoiconset/Year.png'
 
 const options = {
-    position: 'top-right'
+    position: 'top-center'
 }
 
 export default class CustomerDetails extends Component{
@@ -86,7 +86,7 @@ export default class CustomerDetails extends Component{
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {vehicles.map(vehicle =><tr scope="row" key={vehicle.id}>
+                                        {vehicles.map(vehicle =><tr key={vehicle.id}>
                                             <td>{vehicle.nameInitials}</td>
                                             <td>{vehicle.vehiNo}</td>
                                             <td>{vehicle.chassis}</td>
@@ -105,22 +105,22 @@ export default class CustomerDetails extends Component{
                                     <DataRow 
                                         icon = {vehiIcon}
                                         label = "Vehicle No"
-                                        value = {data.length == 0 ? "Not Specified" : data.vehiNo}
+                                        value = {data.length === 0 ? "Not Specified" : data.vehiNo}
                                     />
                                     <DataRow 
                                         icon = {engineIcon}
                                         label = "Engine No"
-                                        value = {data.length == 0 ? "Not Specified" : data.engineNo}
+                                        value = {data.length === 0 ? "Not Specified" : data.engineNo}
                                     />
                                     <DataRow 
                                         icon = {modalIcon}
                                         label = "Model"
-                                        value = {data.length == 0 ? "Not Specified" : data.make+" "+data.modal}
+                                        value = {data.length === 0 ? "Not Specified" : data.make+" "+data.modal}
                                     />
                                     <DataRow 
                                         icon = {yearIcon}
                                         label = "Year"
-                                        value = {data.length == 0 ? "Not Specified" : data.year}
+                                        value = {data.length === 0 ? "Not Specified" : data.year}
                                     />
                                     </tbody>
                                 </table>
@@ -131,17 +131,17 @@ export default class CustomerDetails extends Component{
                                     <DataRow 
                                         icon = {cassisIcon}
                                         label = "Chassis No"
-                                        value = {data.length == 0 ? "Not Specified" : data.chassis}
+                                        value = {data.length === 0 ? "Not Specified" : data.chassis}
                                     />
                                     <DataRow 
                                         icon = {capacityIcon}
                                         label = "Capacity"
-                                        value = {data.length == 0 ? "Not Specified" : data.capacity}
+                                        value = {data.length === 0 ? "Not Specified" : data.capacity}
                                     />
                                     <DataRow 
                                         icon = {fuelIcon}
                                         label = "Fuel type"
-                                        value = {data.length == 0 ? "Not Specified" : data.fuel}
+                                        value = {data.length === 0 ? "Not Specified" : data.fuel}
                                     />
                                     </tbody>
                                 </table>

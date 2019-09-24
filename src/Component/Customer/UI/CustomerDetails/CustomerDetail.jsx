@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 import '@zendeskgarden/react-tabs/dist/styles.css';
 
-import { ThemeProvider } from '@zendeskgarden/react-theming';
-import { Tabs, TabPanel } from '@zendeskgarden/react-tabs';
-import 'simplebar'; // or "import SimpleBar from 'simplebar';" if you want to use it manually.
-import 'simplebar/dist/simplebar.css';
 
 import CreateForm from './CutomerForms/CreateCustomer'
 import EditCustomer from './CutomerForms/EditCustomer'

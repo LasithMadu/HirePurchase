@@ -3,7 +3,6 @@ import $ from 'jquery';
 import axios from 'axios'
 
 import logo from '../../../../Assests/images/logo/hire logo.png'
-import company from '../../../../Assests/images/logo/logo.png'
 
 export default class ForgetPassword extends Component {
 
@@ -47,7 +46,7 @@ export default class ForgetPassword extends Component {
         }else if(ans2 === ''){
             $('.msgans2').text('Please answer the question');
         }else{
-            if(ans1 !== this.state.ans1 && ans2 != this.state.ans2){
+            if(ans1 !== this.state.ans1 && ans2 !== this.state.ans2){
                 $('.msgans2').text('Both answers are wrong. try again');
             }else if(ans1 !== this.state.ans1){
                 $('.msgans1').text('This is wrong answer. try again');
@@ -68,7 +67,7 @@ export default class ForgetPassword extends Component {
                             <form action="#" class="form-horizontal sec">
                                 <div class="col-md-12 col-sm-12 text-center panel-title">
                                     <div class="col-md-8 col-sm-8">
-                                        <img src={logo} style={{marginTop: '-220px', marginLeft: '90px'}} class="img-responsive"/>
+                                        <img src={logo} alt="logo" style={{marginTop: '-220px', marginLeft: '90px'}} class="img-responsive"/>
                                     </div>
                                     <h4 style={{marginTop: '-90px', fontSize: '32px'}}>
                                         Recovery your password</h4>
@@ -77,7 +76,7 @@ export default class ForgetPassword extends Component {
                                 <div class="form-group">
                                     <div className="row">
                                         <div class="col-md-12">
-                                            <h5>{this.state.que1 == '' ? "Security Question 1" : this.state.que1}</h5>
+                                            <h5>{this.state.que1 === '' ? "Security Question 1" : this.state.que1}</h5>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="input-icon right">
@@ -89,7 +88,7 @@ export default class ForgetPassword extends Component {
                                     <br/>
                                     <div className="row">
                                         <div class="col-md-12">
-                                            <h5>{this.state.que2 == '' ? "Security Question 1" : this.state.que2}</h5>
+                                            <h5>{this.state.que2 === '' ? "Security Question 1" : this.state.que2}</h5>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="input-icon right">

@@ -9,7 +9,7 @@ export default class Configure extends Component {
         for (var i = 1; i <= this.props.countAdmin; i++) {
             countAdmin.append("<option value=" + i + ">" + i + "</option>");
         }
-        for (var i = 1; i <= this.props.countOparator; i++) {
+        for (i = 1; i <= this.props.countOparator; i++) {
             countOparator.append("<option value=" + i + ">" + i + "</option>");
         }
     }
