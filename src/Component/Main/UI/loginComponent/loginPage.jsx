@@ -28,8 +28,8 @@ export default class LoginPage extends Component {
         }
     }
 
-    componentDidMount(){ 
-        sessionStorage.setItem('url', 'http://localhost:8080');
+    componentDidMount(){
+        sessionStorage.setItem('url', 'https://hire-purchase-server.herokuapp.com');
         if(sessionStorage.getItem('userId') === null){
         }else{
             window.history.go(-1);
@@ -236,7 +236,7 @@ export default class LoginPage extends Component {
                                             </div>
                                             <div className="col-lg-9">
                                                 <input type="submit" className="btn btn-default" value="Login"/>
-                                                
+
                                             </div>
                                         </div>
                                     </div>
