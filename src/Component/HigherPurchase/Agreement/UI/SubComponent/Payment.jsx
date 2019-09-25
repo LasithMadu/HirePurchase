@@ -17,7 +17,7 @@ const fdate = new Date()
 fdate.setMonth(month + 1);
 
 const options = {
-    position: 'top-right'
+    position: 'top-center'
 }
 
 export default class CustomerDetails extends Component{
@@ -83,12 +83,13 @@ export default class CustomerDetails extends Component{
                 if(response.data.msg){
                     self.props.changePayment(values)
                     cogoToast.success('Sucessfuly insert payment data.', options);
-                    sessionStorage.setItem('agreeId', this.props.agreeId);
+                    sessionStorage.setItem('agreeId', self.props.agreeId);
                 }else{
                     cogoToast.error('Fail to insert payment data. Try again.', options);
                 }
             })
             .catch(function (error) {
+                console.log(error);
                 cogoToast.error('Connection error', options);
             });
         }else{
