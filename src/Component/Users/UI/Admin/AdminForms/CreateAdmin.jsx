@@ -38,9 +38,9 @@ export default class CreateAdmin extends Component{
               .then(function (response) {
                 if(response.data.msg){
                     if(response.data.alert === ''){
-                        cogoToast.success('Admin created sucessfull', options)
+                        cogoToast.success("Admin created sucessfull", options)
                     }else{
-                        cogoToast.success(response.data.alert, options)
+                        cogoToast.warn(response.data.alert, options)
                     }
                 }else{
                     cogoToast.error("Admin created fail", options)
@@ -49,6 +49,8 @@ export default class CreateAdmin extends Component{
               .catch(function (error) {
                   cogoToast.error("Server error", options)
               });
+        }else{
+            cogoToast.error("Some Fields Are Empty")
         }
     }
 
@@ -125,6 +127,7 @@ export default class CreateAdmin extends Component{
                             placeholder="password"
                             msg="Please Input password"
                             handleChange={this.newPass.bind(this)}
+                            reqiured={true}
                             err={this.state.err}
                         />
                     </div>

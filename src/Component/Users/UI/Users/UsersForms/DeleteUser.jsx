@@ -1,130 +1,231 @@
 import React, {Component} from 'react';
+import cogoToast from 'cogo-toast';
 import $ from 'jquery'
-import uuidv4 from 'uuid/v4'
 import axios from 'axios'
-import {ToastsStore} from 'react-toasts';
 
-export default class CreateAdmin extends Component{
+import Input from '../../../../Main/UI/SingleComponent/InputField'
+import Search from '../../../../Main/UI/SingleComponent/Search'
 
-    createUser(){
-        var valid;
-        let values= [uuidv4(), $('#inputFirst').val(), $('#inputLast').val(), $('#inputUser').val().toLowerCase(), $('#inputPass').val(), $('#inputEmail').val(), $('#inputNic').val(), sessionStorage.getItem('company'), $('#inputAddress').val(), $('#inputCity').val(), $('#inputState').val(), $('#inputZip').val(), $('#inputLevel').val()];
-        let path = sessionStorage.getItem('url')+'/Admin/create';
+const options = {
+    position: 'top-center'
+}
 
-        for(var i = 0; i<values.length; i++){
-            if(values[i] === ''){
-                valid = false;
-                break;
-            }else{
-                valid = true;
-            }
-        }
+export default class DeleteUser extends Component{
 
-        if(valid){
-            axios.post(path, {
-                data: values
-              })
-              .then(function (response) {
-                if(response.data.msg){
-                    if(response.data.alert === ''){
-                        ToastsStore.success('Admin Created Sucessfull')
-                    }else{
-                        ToastsStore.success(response.data.alert)
-                    }
-                }else{
-                    ToastsStore.error("Admin Created Fail")
+    state = {
+        save: false,
+        id: '',
+        values: []
+    }
+
+    getValue() {
+
+    }
+
+    searchUser(e) {
+        e.preventDefault();
+        var nic = $('#inputName').val();
+        var self = this;
+
+        if (nic !== '') {
+            axios.post(sessionStorage.getItem('url') + '/Admin/getUserByNic', {
+                nic: nic
+            })
+            .then(function (response) {
+                if (response.data.msg) {
+                    self.setState({ id: response.data.data.rows[0].userId, values: response.data.data.rows[0]})
+                } else {
+                    cogoToast.error("Invalid nic or passport number", options)
                 }
-              })
-              .catch(function (error) {
-                ToastsStore.error("Connection Error")
-              });
-        }else{
-            ToastsStore.warning("Some Fields Are Empty")
+            })
+            .catch(function (error) {
+                cogoToast.error("Connection Error", options)
+            });
+        }
+    }
+
+    deleteUser(){
+        this.setState({save: true})
+        var nic = $('#inputNic').val();
+
+        if (nic !== '') {
+            axios.post(sessionStorage.getItem('url') + '/Admin/deleteUser', {
+                id: this.state.id
+            })
+            .then(function (response) {
+                if (response.data.msg) {
+                    cogoToast.success("User account delete sucessful", options)
+                } else {
+                    cogoToast.error("User account delete fail", options)
+                }
+            })
+            .catch(function (error) {
+                cogoToast.error("Connection Error", options)
+            });
         }
     }
 
     render(){
+        var data = this.state.values;
         return(
-            <div>
-                    <form action="#" className="form-horizontal">
-                        <div className="form-body pal">
-                            <div className="form-group">
-                                <div className='row'>
-                                    <label htmlFor="inputName" className="col-md-3 col-sm-2 col-xs-3 control-label">
-                                    Search :- </label>
-                                    <div className="input-icon col-md-6 col-sm-4 col-xs-6" style={{display: 'inline-block' }}>
-                                        <i className="fa fa-user"></i>
-                                        <input id="inputName" type="text" placeholder="Search by NIC/Passport No" className="form-control" />
-                                    </div>
-                                    <div className='col-md-2 col-sm-1 col-xs-2' style={{ height: '30px', paddingTop: '-50px'}}>
-                                        <input type="button" className="btn btn-primary ml-5" id="searchBtn" value="Search"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                <form className='col-md-12 col-xs-12'>
+            <div className="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <div className="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                    <div className="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                        <Search
+                            id="inputName"
+                            icon="fa fa-user"
+                            placeholder="Search by NIC/Passport No"
+                            btnId="searchBtn"
+                            msg="Please input nic or passport no"
+                            handleChange={this.searchUser.bind(this)}
+                            width="96%"
+                        />
+                    </div>
+                </div>
+                <form className='col-md-12 col-sm-12'>
                     <div class="form-row">
-                        <div class="form-group col-md-6 col-sm-7 col-xs-12">
-                        <label for="inputFirst">First Name</label>
-                        <input type="text" class="form-control" id="inputFirst" placeholder="First Name"/>
-                        </div>
-                        <div class="form-group col-md-5 col-sm-7 col-xs-12">
-                        <label for="inputLast">Last Name</label>
-                        <input type="text" class="form-control" id="inputLast" placeholder="Last Name"/>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6 col-sm-7 col-xs-12">
-                        <label for="inputFirst">Username</label>
-                        <input type="text" class="form-control" id="inputUser" placeholder="Username"/>
-                        </div>
-                        <div class="form-group col-md-5 col-sm-7 col-xs-12">
-                        <label for="inputLast">Password</label>
-                        <input type="password" class="form-control" id="inputPass" placeholder="Password"/>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6 col-sm-7 col-xs-12">
-                        <label for="inputEmail">Email</label>
-                        <input type="email" class="form-control" id="inputEmail" placeholder='Email Address'/>
-                        </div>
-                        <div class="form-group col-md-5 col-sm-7 col-xs-12">
-                        <label for="inputNic">NIC/Passport No</label>
-                        <input type="text" class="form-control" id="inputNic" placeholder='NIC No'/>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-11 col-sm-7 col-xs-12">
-                        <label for="inputLevel">User Level</label>
-                        <select id="inputLevel" class="form-control">
-                            <option value='Admin' selected>Admin</option>
-                            <option value='Oparator'>Oparator</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-11 col-sm-7 col-xs-12">
-                        <label for="inputAddress">Company Address</label>
-                        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St, Apartment, studio, or floor"/>
+                        <Input
+                            size={[6, 6, 6, 12]}
+                            id="inputFirst"
+                            label="First Name"
+                            disable={true}
+                            placeholder= {data.firstName}
+                            msg="Please input first name"
+                            handleChange={this.getValue.bind(this)}
+                            reqiured={true}
+                            type="text"
+                            save={this.state.save}
+                        />
+                        <Input
+                            size={[6, 6, 6, 12]}
+                            id="inputLast"
+                            label="Last Name"
+                            disable={true}
+                            placeholder={data.lastName}
+                            msg="Please input last name"
+                            handleChange={this.getValue.bind(this)}
+                            reqiured={true}
+                            type="text"
+                            save={this.state.save}
+                        />
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-5 col-sm-7 col-xs-12">
-                        <label for="inputCity">City</label>
-                        <input type="text" class="form-control" id="inputCity"/>
-                        </div>
-                        <div class="form-group col-md-4 col-sm-7 col-xs-12">
-                        <label for="inputState">State</label>
-                        <select id="inputState" class="form-control">
-                            <option selected>Choose...</option>
-                            <option>...</option>
-                        </select>
-                        </div>
-                        <div class="form-group col-md-2">
-                        <label for="inputZip">Zip</label>
-                        <input type="text" class="form-control" id="inputZip"/>
-                        </div>
+                        <Input
+                            size={[6, 6, 6, 12]}
+                            id="inputUser"
+                            label="Username"
+                            disable={true}
+                            placeholder={data.userName}
+                            msg="Please input username"
+                            handleChange={this.getValue.bind(this)}
+                            reqiured={true}
+                            type="text"
+                            save={this.state.save}
+                        />
+                        <Input
+                            size={[6, 6, 6, 12]}
+                            id="inputPass"
+                            label="Password"
+                            disable={true}
+                            placeholder={data.password}
+                            msg="Please input password"
+                            handleChange={this.getValue.bind(this)}
+                            reqiured={true}
+                            type="password"
+                            save={this.state.save}
+                        />
+                    </div>
+                    <div class="form-row">
+                        <Input
+                            size={[6, 6, 6, 12]}
+                            id="inputEmail"
+                            label="Email"
+                            disable={true}
+                            placeholder={data.email}
+                            msg="Please input email"
+                            handleChange={this.getValue.bind(this)}
+                            reqiured={true}
+                            type="text"
+                            save={this.state.save}
+                        />
+                        <Input
+                            size={[6, 6, 6, 12]}
+                            id="inputNic"
+                            label="NIC/Passport No"
+                            disable={true}
+                            placeholder={data.nic}
+                            msg="Please input nic or passport no"
+                            handleChange={this.getValue.bind(this)}
+                            reqiured={true}
+                            type="text"
+                            save={this.state.save}
+                        />
+                    </div>
+                    <Input
+                        size={[12, 12, 12, 12]}
+                        id="inputLevel"
+                        label="User Level"
+                        disable={true}
+                        placeholder={data.userLevel}
+                        msg="Please input user level"
+                        handleChange={this.getValue.bind(this)}
+                        reqiured={true}
+                        type="text"
+                        save={this.state.save}
+                    />
+                    <Input
+                        size={[12, 12, 12, 12]}
+                        id="inputAddress"
+                        label="Company Address"
+                        disable={true}
+                        placeholder={data.address}
+                        msg="Please input company address"
+                        handleChange={this.getValue.bind(this)}
+                        reqiured={true}
+                        type="text"
+                        save={this.state.save}
+                    />
+                    <div class="form-row">
+                        <Input
+                            size={[4, 4, 4, 12]}
+                            id="inputCity"
+                            label="City"
+                            placeholder={data.city}
+                            disable={true}
+                            msg="Please input city"
+                            handleChange={this.getValue.bind(this)}
+                            reqiured={true}
+                            type="text"
+                            save={this.state.save}
+                        />
+                        <Input
+                            size={[4, 4, 4, 12]}
+                            id="inputState"
+                            label="State"
+                            disable={true}
+                            placeholder={data.state}
+                            msg="Please input state"
+                            handleChange={this.getValue.bind(this)}
+                            reqiured={true}
+                            type="text"
+                            save={this.state.save}
+                        />
+                        <Input
+                            size={[4, 4, 4, 12]}
+                            id="inputZip"
+                            label="Postal Code"
+                            disable={true}
+                            placeholder={data.zip}
+                            msg="Please input postal code"
+                            handleChange={this.getValue.bind(this)}
+                            reqiured={true}
+                            type="text"
+                            save={this.state.save}
+                        />
                     </div>
                     <div class="form-group col-sm-6 col-md-4 row">
                         <div class='col-sm-3 col-xs-6'>
-                            <button type="button" class="btn btn-danger" onClick={this.createUser.bind(this)}>Delete</button>
+                            <button type="button" class="btn btn-danger" onClick={this.deleteUser.bind(this)}>Delete</button>
                         </div>
                         <div class='col-sm-3 col-xs-6'>
                             <button type="button" class="btn btn-light">Cancel</button>
@@ -132,7 +233,7 @@ export default class CreateAdmin extends Component{
                     </div>
 
                 </form>
-                </div>
+         </div>
         )
     }
 }

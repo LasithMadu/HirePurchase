@@ -2,9 +2,22 @@ import React, {Component} from 'react';
 import $ from 'jquery'
 import uuidv4 from 'uuid/v4'
 import axios from 'axios'
-import {ToastsStore} from 'react-toasts';
+import cogoToast from 'cogo-toast';
 
-export default class CreateAdmin extends Component{
+import Input from '../../../../Main/UI/SingleComponent/InputField'
+import Password from '../../../../Main/UI/SingleComponent/PasswordInput'
+
+const options = {
+    position: 'top-center'
+}
+
+export default class CreateUser extends Component{
+
+
+    state = {
+        save: false,
+        err: '',
+    }
 
     createUser(){
         var valid;
@@ -27,54 +40,122 @@ export default class CreateAdmin extends Component{
               .then(function (response) {
                 if(response.data.msg){
                     if(response.data.alert === ''){
-                        ToastsStore.success('Admin Created Sucessfull')
+                        cogoToast.success("User created sucessfull",options)
                     }else{
-                        ToastsStore.success(response.data.alert)
+                        cogoToast.warn(response.data.alert,options)
                     }
                 }else{
-                    ToastsStore.error("Admin Created Fail")
+                    cogoToast.error("User Created Fail",options)
                 }
               })
               .catch(function (error) {
-                ToastsStore.error("Connection Error")
+                cogoToast.error("Connection Error",options)
               });
         }else{
-            ToastsStore.warning("Some Fields Are Empty")
+            cogoToast.error("Some Fields Are Empty",options)
         }
+    }
+
+    newPass(value) {
+        var strength = 1;
+        var regex = [];
+        regex.push(".{8,}"); //For length
+        regex.push("[A-Z]"); //For Uppercase Alphabet
+        regex.push("[a-z]"); //For Lowercase Alphabet
+        regex.push("[0-9]"); //For Numeric Digits
+        regex.push("[$@$!%*#?&]"); //For Special Characters
+        $.map(regex, function (regexp) {
+            if (value.match(regexp))
+                strength++;
+        });
+
+        if (value === '') {
+            this.setState({ err: 'Please input new password' })
+        } else if (strength === 6) {
+            this.setState({ err: '' })
+        } else {
+            this.setState({ err: 'Password should contain more than 8 characters and at least 1 upper case character, 1 lower case character, 1 number and 1 special character' })
+        }
+    }
+
+    getValue(){
+
     }
 
     render(){
         return(
                 <form className='col-md-12 col-sm-12 col-xs-12'>
                     <div class="form-row">
-                        <div class="form-group col-md-6 col-sm-7 col-xs-12">
-                        <label for="inputFirst">First Name</label>
-                        <input type="text" class="form-control" id="inputFirst" placeholder="First Name"/>
-                        </div>
-                        <div class="form-group col-md-5 col-sm-7 col-xs-12">
-                        <label for="inputLast">Last Name</label>
-                        <input type="text" class="form-control" id="inputLast" placeholder="Last Name"/>
-                        </div>
+                        
+                        <Input
+                            size={[6, 6, 6, 12]}
+                            id="inputFirst"
+                            label="First Name"
+                            placeholder="First Name"
+                            handleChange={this.getValue.bind(this)}
+                            msg="Please input first name"
+                            reqiured={true}
+                            type="text"
+                            save={this.state.save}
+                        />
+                        <Input
+                            size={[6, 6, 6, 12]}
+                            id="inputLast"
+                            label="Last Name"
+                            placeholder="Last Name"
+                            handleChange={this.getValue.bind(this)}
+                            msg="Please input last name"
+                            reqiured={true}
+                            type="text"
+                            save={this.state.save}
+                        />
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-6 col-sm-7 col-xs-12">
-                        <label for="inputFirst">Username</label>
-                        <input type="text" class="form-control" id="inputUser" placeholder="Username"/>
-                        </div>
-                        <div class="form-group col-md-5 col-sm-7 col-xs-12">
-                        <label for="inputLast">Password</label>
-                        <input type="password" class="form-control" id="inputPass" placeholder="Password"/>
-                        </div>
+                    <Input
+                            size={[6, 6, 6, 12]}
+                            id="inputUser"
+                            label="Username"
+                            handleChange={this.getValue.bind(this)}
+                            placeholder="Username"
+                            msg="Please input username"
+                            reqiured={true}
+                            type="text"
+                            save={this.state.save}
+                        />
+                        <Password
+                            size={[6, 6, 6, 12]}
+                            id="inputPass"
+                            label="Password"
+                            placeholder="password"
+                            handleChange={this.newPass.bind(this)}
+                            msg="Please Input password"
+                            reqiured={true}
+                            err={this.state.err}
+                        />
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-6 col-sm-7 col-xs-12 ">
-                        <label for="inputEmail">Email</label>
-                        <input type="email" class="form-control" id="inputEmail" placeholder='Email Address'/>
-                        </div>
-                        <div class="form-group col-md-5 col-sm-7 col-xs-12">
-                        <label for="inputNic">NIC/Passport No</label>
-                        <input type="text" class="form-control" id="inputNic" placeholder='NIC No'/>
-                        </div>
+                    <Input
+                            size={[6, 6, 6, 12]}
+                            id="inputEmail"
+                            label="Email"
+                            placeholder="Email"
+                            handleChange={this.getValue.bind(this)}
+                            msg="Please input email"
+                            reqiured={true}
+                            type="text"
+                            save={this.state.save}
+                        />
+                        <Input
+                            size={[6, 6, 6, 12]}
+                            id="inputNic"
+                            label="NIC/Passport No"
+                            placeholder="NIC/Passport No"
+                            handleChange={this.getValue.bind(this)}
+                            msg="Please input nic or passport no"
+                            reqiured={true}
+                            type="text"
+                            save={this.state.save}
+                        />
                     </div>
                     <div class="form-group col-md-11 col-sm-7 col-xs-12">
                         <label for="inputLevel">User Level</label>
@@ -83,23 +164,53 @@ export default class CreateAdmin extends Component{
                             <option value='Oparator'>Oparator</option>
                         </select>
                     </div>
-                    <div class="form-group col-md-11 col-sm-7 col-xs-12">
-                        <label for="inputAddress">Company Address</label>
-                        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St, Apartment, studio, or floor"/>
+                    <div class="form-raw">
+                        <Input
+                            size={[12, 12, 12, 12]}
+                            id="inputAddress"
+                            label="Company Address"
+                            placeholder="Company Address"
+                            handleChange={this.getValue.bind(this)}
+                            msg="Please input company address"
+                            reqiured={true}
+                            type="text"
+                            save={this.state.save}
+                        />
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-5 col-sm-7 col-xs-12">
-                        <label for="inputCity">City</label>
-                        <input type="text" class="form-control" id="inputCity"/>
-                        </div>
-                        <div class="form-group col-md-4 col-sm-7 col-xs-12">
-                        <label for="inputState">State</label>
-                        <input type="text" class="form-control" id="inputState"/>
-                        </div>
-                        <div class="form-group col-md-2 col-sm-7 col-xs-12s">
-                        <label for="inputZip">Zip</label>
-                        <input type="text" class="form-control" id="inputZip"/>
-                        </div>
+                    <Input
+                            size={[4, 4, 4, 12]}
+                            id="inputCity"
+                            label="City"
+                            placeholder="City"
+                            handleChange={this.getValue.bind(this)}
+                            msg="Please input city"
+                            reqiured={true}
+                            type="text"
+                            save={this.state.save}
+                        />
+                        <Input
+                            size={[4, 4, 4, 12]}
+                            id="inputState"
+                            label="State"
+                            placeholder="State"
+                            handleChange={this.getValue.bind(this)}
+                            msg="Please input state"
+                            reqiured={true}
+                            type="text"
+                            save={this.state.save}
+                        />
+                        <Input
+                            size={[4, 4, 4, 12]}
+                            id="inputZip"
+                            label="Postal Code"
+                            placeholder="Postal Code"
+                            handleChange={this.getValue.bind(this)}
+                            msg="Please input postal code"
+                            reqiured={true}
+                            type="text"
+                            save={this.state.save}
+                        />
                     </div>
                     <div class="form-group col-sm-6 col-md-4 row">
                         <div class='col-sm-3 col-xs-6'>

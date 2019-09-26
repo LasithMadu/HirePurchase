@@ -60,6 +60,7 @@ export default class EditAdmin extends Component{
 
     updateAdmin(){
         var valid;
+        this.setState({save:true})
         var self = this;
         let values = [$('#inputFirst').val(), $('#inputLast').val(), $('#inputUser').val().toLowerCase(), $('#inputPass').val(), $('#inputEmail').val(), $('#inputNic').val().toUpperCase(), sessionStorage.getItem('company'), $('#inputAddress').val(), $('#inputCity').val(), $('#inputState').val(), $('#inputZip').val(), 'Admin'];
 
@@ -178,6 +179,7 @@ export default class EditAdmin extends Component{
                             id="inputPass"
                             label="Password"
                             placeholder="password"
+                            reqiured={true}
                             msg="Please Input password"
                             handleChange={this.newPass.bind(this)}
                             err={this.state.err}

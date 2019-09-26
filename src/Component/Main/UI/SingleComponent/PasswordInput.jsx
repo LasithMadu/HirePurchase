@@ -18,7 +18,7 @@ const PasswordInput = ({size, id, classN, label, placeholder, disable, handleCha
                 <br/>
                     <input className={"bp3-input bp3-fill modifier sInput"+classN} onChange={(e) => {handleChange($("#"+id).val());}} id={id} style={{ border: '1px solid black', borderRadius: '0px'}} type="password" placeholder={placeholder} dir="auto" />
                 <div>
-                    <span className="text-danger">{err}</span>
+                    <span className="text-danger" style={{fontSize: '9px'}}>{err}</span>
                 </div>
             </div>
         </div>
