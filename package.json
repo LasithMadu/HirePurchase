@@ -20,7 +20,7 @@
     "date-and-time": "^0.9.0",
     "filepond": "^4.4.11",
     "generate-unique-id": "^2.0.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "jspdf": "^1.5.3",
     "mdbreact": "^4.18.0",
     "pdfmake": "^0.1.58",
