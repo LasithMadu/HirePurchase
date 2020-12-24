@@ -17,7 +17,7 @@
     "bootstrap": "^4.3.1",
     "cogo-toast": "^3.2.2",
     "datatables.net": "^1.10.19",
-    "date-and-time": "^0.9.0",
+    "date-and-time": "^0.14.2",
     "filepond": "^4.4.11",
     "generate-unique-id": "^2.0.0",
     "jquery": "^3.4.1",
