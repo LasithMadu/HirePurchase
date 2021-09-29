@@ -16,7 +16,7 @@
     "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
     "cogo-toast": "^3.2.2",
-    "datatables.net": "^1.10.19",
+    "datatables.net": "^1.11.3",
     "date-and-time": "^0.9.0",
     "filepond": "^4.4.11",
     "generate-unique-id": "^2.0.0",
