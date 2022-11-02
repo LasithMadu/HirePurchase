@@ -21,7 +21,7 @@
     "filepond": "^4.4.11",
     "generate-unique-id": "^2.0.0",
     "jquery": "^3.4.1",
-    "jspdf": "^1.5.3",
+    "jspdf": "^2.5.1",
     "mdbreact": "^4.18.0",
     "pdfmake": "^0.1.58",
     "prop-types": "^15.7.2",
